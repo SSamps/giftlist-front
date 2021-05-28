@@ -1,0 +1,66 @@
+{
+    "name": "template-frontend-react-typescript",
+    "version": "0.1.0",
+    "private": true,
+    "homepage": ".",
+    "dependencies": {
+        "@testing-library/jest-dom": "^5.12.0",
+        "@testing-library/react": "^11.2.6",
+        "@testing-library/user-event": "^12.8.3",
+        "@types/jest": "^26.0.23",
+        "@types/node": "^12.20.10",
+        "@types/react": "^17.0.4",
+        "@types/react-dom": "^17.0.3",
+        "@types/react-router-dom": "^5.1.7",
+        "axios": "^0.21.1",
+        "react": "^17.0.2",
+        "react-dom": "^17.0.2",
+        "react-redux": "^7.2.4",
+        "react-router-dom": "^5.2.0",
+        "react-scripts": "4.0.3",
+        "redux": "^4.1.0",
+        "redux-devtools-extension": "^2.13.9",
+        "redux-thunk": "^2.3.0",
+        "typescript": "^4.2.4"
+    },
+    "scripts": {
+        "devLocal": "react-scripts start",
+        "dev": "nodemon -e '*' -w docker/dev -w package.json --exec npm run exportDev",
+        "build": "react-scripts build",
+        "test": "react-scripts test",
+        "eject": "react-scripts eject",
+        "dockerRemoveContainerDev": "docker rm listapp-frontend-dev -f",
+        "dockerRemoveImageDev": "docker rmi listapp-frontend:dev -f",
+        "dockerBuildImageDev": "docker build -t listapp-frontend:dev -f docker/dev/Dockerfile .",
+        "dockerBuildContainerDev": "docker run --name listapp-frontend-dev -v $(pwd):/app -d -p 3000:3000 --network test_network listapp-frontend:dev",
+        "dockerRemoveContainer": "docker rm listapp-frontend-prod --force",
+        "dockerRemoveImage": "docker image rm listapp-frontend-prod:latest --force",
+        "dockerBuildImage": "docker build --build-arg REACT_APP_BACKEND_BASE_URL=http://localhost:5000 -t listapp-frontend-prod:latest --file docker/prod/Dockerfile .",
+        "dockerBuildContainer": "docker run --name listapp-frontend-prod -d -p 3100:3100 -e PORT=3100 --network test_network listapp-frontend-prod:latest",
+        "dockerRemoveImageGcp": "docker image rm eu.gcr.io/gift-list-2021/listapp-frontend --force",
+        "dockerBuildImageGcp": "docker build --build-arg REACT_APP_BACKEND_BASE_URL=https://gift-list-back-lxl73kqsia-ew.a.run.app/ -t eu.gcr.io/gift-list-2021/listapp-frontend --file docker/prod/Dockerfile .",
+        "dockerPushGcp": "docker push eu.gcr.io/gift-list-2021/listapp-frontend",
+        "exportDev": "npm run dockerRemoveContainerDev && npm run dockerRemoveImageDev && npm run dockerBuildImageDev && npm run dockerBuildContainerDev",
+        "export": "npm run dockerRemoveContainer && npm run dockerRemoveImage && npm run dockerBuildImage && npm run dockerBuildContainer",
+        "push": "npm run dockerRemoveImageGcp && npm run dockerBuildImageGcp && npm run dockerPushGcp"
+    },
+    "eslintConfig": {
+        "extends": [
+            "react-app",
+            "react-app/jest"
+        ]
+    },
+    "browserslist": {
+        "production": [
+            ">0.2%",
+            "not dead",
+            "not op_mini all"
+        ],
+        "development": [
+            "last 1 chrome version",
+            "last 1 firefox version",
+            "last 1 safari version"
+        ]
+    },
+    "proxy": "http://listapp-backend:5000"
+}
