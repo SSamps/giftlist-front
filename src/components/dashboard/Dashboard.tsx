@@ -2,7 +2,7 @@ import { Fragment } from 'react';
 import { connect } from 'react-redux';
 import { IrootState } from '../../redux/reducers/root/rootReducer';
 import { IUser } from '../../types/models/User';
-import TestData from './testData/TestData';
+import YourLists from './yourLists/YourLists';
 
 interface Props {
     user: IUser | null;
@@ -18,8 +18,7 @@ const Dashboard: React.FC<Props> = ({ user, authLoading }): JSX.Element => {
                 user && (
                     <Fragment>
                         <div>Hello {user.displayName}</div>
-                        <h2>TestData:</h2>
-                        <TestData></TestData>
+                        <YourLists></YourLists>
                     </Fragment>
                 )
             )}

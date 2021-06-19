@@ -41,7 +41,7 @@ const Navbar: React.FC<Props> = ({ logoutActionCreator, loading, isAuthenticated
         <nav className='navbar bg-dark'>
             <h1>
                 <Link to='/'>
-                    <i className='fas fa-code'></i> App Name
+                    <i className='fas fa-code'></i> Gift List
                 </Link>
             </h1>
             {!loading && <Fragment>{isAuthenticated ? authedLinks : guestLinks}</Fragment>}
