@@ -1,5 +1,10 @@
 FROM node:current-alpine3.13
 WORKDIR /app
 COPY package*.json ./
-RUN npm install
+RUN apk --no-cache --virtual build-dependencies add \
+    python3 \
+    make \
+    g++ \
+    && npm install \
+    && apk del build-dependencies
 CMD npm run devLocal

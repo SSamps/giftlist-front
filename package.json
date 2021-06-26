@@ -25,7 +25,8 @@
     },
     "scripts": {
         "devLocal": "react-scripts start",
-        "dev": "nodemon -e '*' -w docker/dev -w package.json --exec npm run exportDev",
+        "compileSass": "node-sass src/styles/sass/main.scss src/styles/css/App.css -w",
+        "dev": "concurrently \"npm run compileSass\" \"nodemon -e '*' -w docker/dev -w package.json --exec npm run exportDev\"",
         "build": "react-scripts build",
         "test": "react-scripts test",
         "eject": "react-scripts eject",
@@ -64,6 +65,7 @@
     },
     "proxy": "http://listapp-backend:5000",
     "devDependencies": {
+        "concurrently": "^6.2.0",
         "node-sass": "^6.0.1"
     }
 }

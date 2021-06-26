@@ -1,6 +1,6 @@
 import { Fragment, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import './styles/App.css';
+import './styles/css/App.css';
 // Components
 import Navbar from './components/layout/Navbar';
 import Landing from './components/layout/Landing';
