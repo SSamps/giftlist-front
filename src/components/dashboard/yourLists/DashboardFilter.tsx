@@ -1,9 +1,8 @@
 import React from 'react';
 
-export const YourListsHeader: React.FC = () => {
+export const DashboardFilter: React.FC = () => {
     return (
-        <div className={'smallContainer'}>
-            <span>Your Lists </span>
+        <div className={'dashboardFilterContainer'}>
             <span>Ownership filter </span>
             <span>Type filter </span>
             <span>Sorting method </span>

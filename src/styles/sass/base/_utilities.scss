@@ -1,17 +1,31 @@
-.container {
-    max-width: 1100px;
-    margin: auto;
-    overflow: hidden;
-    padding: 0 2rem;
-    margin-top: 6rem;
-    margin-bottom: 3rem;
+.mainBodyContainer {
+    height: 100%;
 }
 
-.smallContainer {
-    max-width: 1100px;
+.mainContentContainerOuter {
+    max-width: calc(max(75rem, 66%));
     margin: auto;
-    overflow: hidden;
-    padding: 0 2rem;
-    margin-top: 3rem;
-    margin-bottom: 3rem;
+    grid-template-columns: 1fr 2fr 1fr;
+    background-color: $content-background-color;
+    height: 100%;
+    padding-bottom: 1rem;
+}
+
+.mainContentContainerInner {
+    max-width: calc(min(62.5rem, 90%));
+    height: 100%;
+    margin: auto auto;
+    grid-template-columns: 1fr 2fr 1fr;
+    background-color: $content-background-color;
+}
+
+.mainFooterContainer {
+    display: grid;
+    max-width: calc(max(75rem, 66%));
+    margin: auto auto;
+    background-color: $content-background-color;
+    height: 2.5rem;
+    justify-content: center;
+    align-items: center;
+    border-top: 2px solid $dark-color;
 }

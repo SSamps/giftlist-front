@@ -6,9 +6,10 @@
   padding: 0; }
 
 html {
-  box-sizing: border-box; }
+  box-sizing: border-box;
+  overflow: auto; }
 
-body {
+#root {
   background-color: #fff; }
 
 a {
@@ -40,21 +41,33 @@ body {
 .text-primary {
   color: #17a2b8; }
 
-.container {
-  max-width: 1100px;
-  margin: auto;
-  overflow: hidden;
-  padding: 0 2rem;
-  margin-top: 6rem;
-  margin-bottom: 3rem; }
+.mainBodyContainer {
+  height: 100%; }
 
-.smallContainer {
-  max-width: 1100px;
+.mainContentContainerOuter {
+  max-width: calc(max(75rem, 66%));
   margin: auto;
-  overflow: hidden;
-  padding: 0 2rem;
-  margin-top: 3rem;
-  margin-bottom: 3rem; }
+  grid-template-columns: 1fr 2fr 1fr;
+  background-color: #edf7fd;
+  height: 100%;
+  padding-bottom: 1rem; }
+
+.mainContentContainerInner {
+  max-width: calc(min(62.5rem, 90%));
+  height: 100%;
+  margin: auto auto;
+  grid-template-columns: 1fr 2fr 1fr;
+  background-color: #edf7fd; }
+
+.mainFooterContainer {
+  display: grid;
+  max-width: calc(max(75rem, 66%));
+  margin: auto auto;
+  background-color: #edf7fd;
+  height: 2.5rem;
+  justify-content: center;
+  align-items: center;
+  border-top: 2px solid #343a40; }
 
 .btn {
   display: inline-block;
@@ -119,7 +132,6 @@ body {
   justify-content: space-between;
   align-items: center;
   padding: 0.7rem 2rem;
-  position: fixed;
   z-index: 1;
   width: 100%;
   top: 0;
@@ -157,3 +169,21 @@ body {
   left: 0;
   width: 100%;
   height: 100%; }
+
+.dashboardFilterContainer {
+  margin-top: 3rem;
+  margin-bottom: 3rem; }
+
+.dashboardListContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, calc(min(20rem, 95%)));
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+  gap: 1rem;
+  justify-content: center; }
+
+.dashboardListCard {
+  height: 24rem;
+  display: block;
+  border: black;
+  border-style: solid; }

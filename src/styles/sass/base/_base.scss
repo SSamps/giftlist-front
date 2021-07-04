@@ -8,10 +8,14 @@
 
 html {
     box-sizing: border-box;
+    overflow: auto;
 }
 
 body {
-    background-color: $background-color;
+}
+
+#root {
+    background-color: $page-background-color;
 }
 
 a {

@@ -8,7 +8,7 @@ import {
 } from '../../../redux/actions/dashboardActions';
 import { IlistGroupState } from '../../../redux/reducers/listGroupReducer';
 import { ListCard } from './ListCard';
-import { YourListsHeader } from './YourListsHeader';
+import { DashboardFilter } from './DashboardFilter';
 
 interface Props extends IlistGroupState {
     user: IUser;
@@ -22,13 +22,12 @@ export const YourLists: React.FC<Props> = ({ listGroups, getDashboardListDataAct
 
     return (
         <Fragment>
-            <YourListsHeader></YourListsHeader>
-            <div>
-                <div className={'smallContainer'}>
-                    {listGroups.map((group) => (
-                        <ListCard key={group._id} group={group}></ListCard>
-                    ))}
-                </div>
+            <DashboardFilter></DashboardFilter>
+
+            <div className={'dashboardListContainer'}>
+                {listGroups.map((group) => (
+                    <ListCard key={group._id} group={group}></ListCard>
+                ))}
             </div>
         </Fragment>
     );

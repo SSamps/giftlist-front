@@ -7,7 +7,7 @@ interface Props {
 
 export const ListCard: React.FC<Props> = ({ group }: Props) => {
     return (
-        <div>
+        <div className='dashboardListCard'>
             <div>{group.groupName}</div>
         </div>
     );

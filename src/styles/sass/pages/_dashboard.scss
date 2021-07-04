@@ -1,0 +1,20 @@
+.dashboardFilterContainer {
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+}
+
+.dashboardListContainer {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, calc(min(20rem, 95%)));
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+    gap: 1rem;
+    justify-content: center;
+}
+
+.dashboardListCard {
+    height: 24rem;
+    display: block;
+    border: black;
+    border-style: solid;
+}
