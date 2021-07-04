@@ -1,0 +1,33 @@
+.form {
+    &-group {
+        margin: 1.2rem 0;
+    }
+
+    &-error-message {
+        color: $danger-color;
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+    }
+
+    &-error-field {
+        border-color: $danger-color !important;
+    }
+
+    input[type='text'],
+    input[type='email'],
+    input[type='password'],
+    input[type='date'],
+    select,
+    textarea {
+        display: block;
+        width: 100%;
+        padding: 0.4rem;
+        font-size: 1.2rem;
+        border: 1px solid #ccc;
+    }
+
+    input[type='submit'],
+    button {
+        font: inherit;
+    }
+}
