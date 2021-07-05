@@ -26,12 +26,14 @@ body {
 
 .lead {
   font-size: 1.5rem;
-  margin-bottom: 1rem; }
+  margin-bottom: 1rem;
+  color: #777; }
 
-.x-large {
+.title {
   font-size: 4rem;
   line-height: 1.2;
-  margin-bottom: 1rem; }
+  margin-bottom: 1rem;
+  color: orange; }
 
 .large {
   font-size: 3rem;
@@ -40,6 +42,11 @@ body {
 
 .text-primary {
   color: #17a2b8; }
+
+.pageContainer {
+  display: flex;
+  flex-direction: column;
+  height: 100vh; }
 
 .mainBodyContainer {
   height: 100%; }
@@ -50,7 +57,7 @@ body {
   grid-template-columns: 1fr 2fr 1fr;
   background-color: #edf7fd;
   height: 100%;
-  padding-bottom: 1rem; }
+  padding-bottom: 4rem; }
 
 .mainContentContainerInner {
   max-width: calc(min(62.5rem, 90%));
@@ -59,15 +66,19 @@ body {
   grid-template-columns: 1fr 2fr 1fr;
   background-color: #edf7fd; }
 
-.mainFooterContainer {
-  display: grid;
-  max-width: calc(max(75rem, 66%));
+.footerContainerOuter {
   margin: auto auto;
+  display: block;
+  max-width: calc(max(75rem, 66%));
   background-color: #edf7fd;
-  height: 2.5rem;
-  justify-content: center;
-  align-items: center;
+  height: 5rem;
   border-top: 2px solid #343a40; }
+
+.footerContainerInner {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center; }
 
 .btn {
   display: inline-block;
@@ -160,15 +171,6 @@ body {
   align-items: center;
   justify-content: center;
   text-align: center; }
-
-/* Overlay */
-.dark-overlay {
-  background-color: rgba(0, 0, 0, 0.7);
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%; }
 
 .dashboardFilterContainer {
   margin-top: 3rem;

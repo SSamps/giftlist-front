@@ -1,3 +1,9 @@
+.pageContainer {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
 .mainBodyContainer {
     height: 100%;
 }
@@ -8,7 +14,7 @@
     grid-template-columns: 1fr 2fr 1fr;
     background-color: $content-background-color;
     height: 100%;
-    padding-bottom: 1rem;
+    padding-bottom: 4rem;
 }
 
 .mainContentContainerInner {
@@ -19,13 +25,18 @@
     background-color: $content-background-color;
 }
 
-.mainFooterContainer {
-    display: grid;
-    max-width: calc(max(75rem, 66%));
+.footerContainerOuter {
     margin: auto auto;
+    display: block;
+    max-width: calc(max(75rem, 66%));
     background-color: $content-background-color;
-    height: 2.5rem;
+    height: 5rem;
+    border-top: 2px solid $dark-color;
+}
+
+.footerContainerInner {
+    height: 100%;
+    display: flex;
     justify-content: center;
     align-items: center;
-    border-top: 2px solid $dark-color;
 }
