@@ -9,6 +9,7 @@ export const ListCard: React.FC<Props> = ({ group }: Props) => {
     return (
         <div className='dashboardListCard'>
             <div>{group.groupName}</div>
+            <div>List Preview</div>
         </div>
     );
 };

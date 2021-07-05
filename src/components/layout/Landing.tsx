@@ -12,7 +12,7 @@ const landing: React.FC<Props> = ({ isAuthenticated }) => {
     }
 
     return (
-        <section className='landing'>
+        <section>
             <div className='landing-inner'>
                 <h1 className='title'>Header</h1>
                 <p className='lead'>Headline goes here</p>
