@@ -11,7 +11,7 @@
 }
 
 .mainContentContainerOuter {
-    max-width: calc(max(75rem, 66%));
+    max-width: calc(min(75rem, 100%));
     margin: 0 auto;
     grid-template-columns: 1fr 2fr 1fr;
     background-color: $content-background-color;
@@ -22,7 +22,7 @@
 }
 
 .mainContentContainerInner {
-    max-width: calc(min(62.5rem, 90%));
+    max-width: calc(min(62.5rem, 100%));
     height: 100%;
     margin: auto auto;
     grid-template-columns: 1fr 2fr 1fr;
@@ -35,7 +35,7 @@
 .footerContainerOuter {
     margin: auto auto;
     display: block;
-    max-width: calc(max(75rem, 66%));
+    max-width: calc(min(75rem, 100%));
     background-color: $content-background-color;
     height: 5rem;
     border-top: 2px solid $dark-color;

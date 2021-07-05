@@ -57,7 +57,7 @@ body {
   display: flex; }
 
 .mainContentContainerOuter {
-  max-width: calc(max(75rem, 66%));
+  max-width: calc(min(75rem, 100%));
   margin: 0 auto;
   grid-template-columns: 1fr 2fr 1fr;
   background-color: #edf7fd;
@@ -67,7 +67,7 @@ body {
   flex-grow: 1; }
 
 .mainContentContainerInner {
-  max-width: calc(min(62.5rem, 90%));
+  max-width: calc(min(62.5rem, 100%));
   height: 100%;
   margin: auto auto;
   grid-template-columns: 1fr 2fr 1fr;
@@ -79,7 +79,7 @@ body {
 .footerContainerOuter {
   margin: auto auto;
   display: block;
-  max-width: calc(max(75rem, 66%));
+  max-width: calc(min(75rem, 100%));
   background-color: #edf7fd;
   height: 5rem;
   border-top: 2px solid #343a40; }
