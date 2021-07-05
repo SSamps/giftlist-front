@@ -121,7 +121,7 @@ const Register: React.FC<Props> = ({ registerActionCreator, isAuthenticated }) =
                         />
                     </label>
                 </div>
-                {<p className='form-error-message'>{emailErrorMessage}</p>}
+                {emailErrorMessage && <p className='form-error-message'>{emailErrorMessage}</p>}
                 <div className='form-group'>
                     <label>
                         Password
@@ -152,9 +152,9 @@ const Register: React.FC<Props> = ({ registerActionCreator, isAuthenticated }) =
                         />
                     </label>
                 </div>
-                {<p className='form-error-message'>{!passwordsMatch ? 'Passwords do not match' : ''}</p>}
+                {!passwordsMatch && <p className='form-error-message'>Passwords do not match</p>}
                 <input type='submit' className='btn btn-primary' value='Register' />
-                {<p className='form-error-message'>{registerErrorMessage}</p>}
+                {registerErrorMessage && <p className='form-error-message'>{registerErrorMessage}</p>}
             </form>
             <p className='my-1'>
                 Already have an account? <Link to='/login'>Sign In</Link>
