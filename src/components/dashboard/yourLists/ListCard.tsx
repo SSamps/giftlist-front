@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { TListGroupAnyFields } from '../../../types/models/listGroups';
 
 interface Props {
@@ -7,9 +8,9 @@ interface Props {
 
 export const ListCard: React.FC<Props> = ({ group }: Props) => {
     return (
-        <div className='dashboardListCard'>
+        <Link to={`list/${group._id}`} className='dashboardListCard'>
             <div>{group.groupName}</div>
             <div>List Preview</div>
-        </div>
+        </Link>
     );
 };

@@ -92,8 +92,8 @@ body {
 
 .btn {
   display: inline-block;
-  background: var(--light-color);
-  color: #333;
+  background: #f4f4f4;
+  color: #343a40;
   padding: 0.4rem 1.3rem;
   font-size: 1rem;
   border: none;
@@ -202,5 +202,12 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  border: black;
-  border-style: solid; }
+  border-color: black;
+  border-style: solid;
+  cursor: pointer;
+  background-color: #f4f4f4;
+  color: #777; }
+  .dashboardListCard:hover {
+    color: #343a40;
+    opacity: 1;
+    border-color: orange; }

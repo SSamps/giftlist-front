@@ -19,6 +19,15 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    border: black;
+    border-color: black;
     border-style: solid;
+    cursor: pointer;
+    background-color: $light-color;
+    color: $h1-color;
+
+    &:hover {
+        color: $dark-color;
+        opacity: 1;
+        border-color: orange;
+    }
 }

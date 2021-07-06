@@ -38,6 +38,7 @@ const mapStateToProps = (state: IrootStateAuthed) => ({
     listGroups: state.listGroupReducer.listGroups,
     error: state.listGroupReducer.error,
     user: state.authReducer.user,
+    currentList: state.listGroupReducer.currentList,
 });
 
 export default connect(mapStateToProps, { getDashboardListDataActionCreator })(YourLists);

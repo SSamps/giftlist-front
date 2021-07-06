@@ -1,7 +1,7 @@
 .btn {
     display: inline-block;
-    background: var(--light-color);
-    color: #333;
+    background: $light-color;
+    color: $dark-color;
     padding: 0.4rem 1.3rem;
     font-size: 1rem;
     border: none;
