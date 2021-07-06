@@ -5,9 +5,7 @@ import { IrootState } from '../../redux/reducers/root/rootReducer';
 import Spinner from '../misc/spinner';
 
 interface Props {
-    match: {
-        params: { listid: string };
-    };
+    listid: string;
     listsLoading: boolean;
     currentList: null | { _id: string };
     getListActionCreator: TgetListActionCreator;
@@ -18,14 +16,7 @@ interface Props {
     If so render a component of the appropriate type
 */
 
-const List: React.FC<Props> = ({
-    match: {
-        params: { listid },
-    },
-    listsLoading,
-    currentList,
-    getListActionCreator,
-}): JSX.Element => {
+const List: React.FC<Props> = ({ listid, listsLoading, currentList, getListActionCreator }): JSX.Element => {
     // @ts-ignore
     useEffect(async () => {
         getListActionCreator(listid);
@@ -47,9 +38,8 @@ const List: React.FC<Props> = ({
 
 const mapStateToProps = (state: IrootState) => ({
     user: state.authReducer.user,
-    authLoading: state.authReducer.loading,
     currentList: state.listGroupReducer.currentList,
-    listsLoading: state.listGroupReducer.loading,
+    listsLoading: state.listGroupReducer.loadingCurrentList,
 });
 
 export default connect(mapStateToProps, { getListActionCreator })(List);

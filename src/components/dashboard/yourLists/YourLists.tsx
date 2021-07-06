@@ -6,11 +6,11 @@ import {
     getDashboardListDataActionCreator,
     TgetDashboardListDataActionCreator,
 } from '../../../redux/actions/dashboardActions';
-import { IlistGroupState } from '../../../redux/reducers/listGroupReducer';
+import { IdashboardState } from '../../../redux/reducers/listGroupReducer';
 import { ListCard } from './ListCard';
 import { DashboardFilter } from './DashboardFilter';
 
-interface Props extends IlistGroupState {
+interface Props extends IdashboardState {
     user: IUser;
     getDashboardListDataActionCreator: TgetDashboardListDataActionCreator;
 }
@@ -34,11 +34,10 @@ export const YourLists: React.FC<Props> = ({ listGroups, getDashboardListDataAct
 };
 
 const mapStateToProps = (state: IrootStateAuthed) => ({
-    loading: state.listGroupReducer.loading,
+    loadingDashboard: state.listGroupReducer.loadingDashboard,
     listGroups: state.listGroupReducer.listGroups,
     error: state.listGroupReducer.error,
     user: state.authReducer.user,
-    currentList: state.listGroupReducer.currentList,
 });
 
 export default connect(mapStateToProps, { getDashboardListDataActionCreator })(YourLists);

@@ -2,17 +2,25 @@ import { DASHBAORD_DATA_ERROR, DASHBOARD_LISTS_GET, LIST_DATA_ERROR, LIST_GET } 
 import { AnyAction } from 'redux';
 import { TListGroupAnyFields } from '../../types/models/listGroups';
 
+export interface IdashboardState {
+    loadingDashboard: boolean;
+    listGroups: TListGroupAnyFields[];
+    error: string | null;
+}
+
 export interface IlistGroupState {
-    loading: boolean;
+    loadingDashboard: boolean;
+    loadingCurrentList: boolean;
     listGroups: TListGroupAnyFields[];
     error: string | null;
     currentList: null | { _id: string };
 }
 
 const initialState: IlistGroupState = {
-    loading: true,
+    loadingDashboard: true,
     listGroups: [],
     error: null,
+    loadingCurrentList: true,
     currentList: null,
 };
 
@@ -24,7 +32,7 @@ export default function reducer(state: IlistGroupState = initialState, action: A
             return {
                 ...state,
                 listGroups: payload,
-                loading: false,
+                loadingDashboard: false,
                 error: null,
             };
         case DASHBAORD_DATA_ERROR:
@@ -33,9 +41,9 @@ export default function reducer(state: IlistGroupState = initialState, action: A
                 error: payload,
             };
         case LIST_GET:
-            return { ...state, currentList: payload };
+            return { ...state, currentList: payload, loadingCurrentList: false };
         case LIST_DATA_ERROR:
-            return { ...state, currentList: null };
+            return { ...state, currentList: null, loadingCurrentList: false };
         default:
             return {
                 ...state,
