@@ -1,18 +1,18 @@
 import { combineReducers } from 'redux';
 import authReducer, { IauthState, IauthStateAuthed } from '../authReducer';
-import listGroupReducer, { IlistGroupState } from '../listGroupReducer';
+import dashboardReducer, { IdashboardState } from '../dashboardReducer';
 import testDataReducer, { ItestDataState } from '../testDataReducer';
 
 export interface IrootState {
     authReducer: IauthState;
     testDataReducer: ItestDataState;
-    listGroupReducer: IlistGroupState;
+    dashboardReducer: IdashboardState;
 }
 
 export interface IrootStateAuthed {
     authReducer: IauthStateAuthed;
     testDataReducer: ItestDataState;
-    listGroupReducer: IlistGroupState;
+    dashboardReducer: IdashboardState;
 }
 
-export default combineReducers({ authReducer, testDataReducer, listGroupReducer });
+export default combineReducers({ authReducer, testDataReducer, dashboardReducer });

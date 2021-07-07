@@ -1,34 +1,54 @@
-import { Fragment, useEffect } from 'react';
+import axios from 'axios';
+import { Fragment, useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-import { getListActionCreator, TgetListActionCreator } from '../../redux/actions/listActions';
 import { IrootState } from '../../redux/reducers/root/rootReducer';
 import Spinner from '../misc/spinner';
 
 interface Props {
     listid: string;
-    listsLoading: boolean;
-    currentList: null | { _id: string };
-    getListActionCreator: TgetListActionCreator;
 }
 
-/* Verify if the user is a member or a owner of the group
-    If not show an unauthorised message
-    If so render a component of the appropriate type
-*/
+interface IgroupData {
+    groupLoading: boolean;
+    group: undefined | { _id: string };
+    groupError: undefined | { response: { status: number; data: string } };
+}
 
-const List: React.FC<Props> = ({ listid, listsLoading, currentList, getListActionCreator }): JSX.Element => {
-    // @ts-ignore
-    useEffect(async () => {
-        getListActionCreator(listid);
+const List: React.FC<Props> = ({ listid }): JSX.Element => {
+    const [groupData, setGroupData] = useState<IgroupData>({
+        groupLoading: true,
+        group: undefined,
+        groupError: undefined,
+    });
+
+    useEffect(() => {
+        const fetchGroup = async () => {
+            try {
+                setGroupData({ ...groupData, groupLoading: true });
+                const res = await axios.get(`/api/groups/${listid}`);
+                // @ts-ignore
+                setGroupData({ ...groupData, group: res.data, groupLoading: false });
+            } catch (err) {
+                setGroupData({ ...groupData, groupError: err, groupLoading: false });
+            }
+        };
+        fetchGroup();
     }, [listid]);
+
+    const { groupLoading, group, groupError } = groupData;
 
     return (
         <Fragment>
-            {listsLoading ? (
+            {groupLoading ? (
                 <Spinner className='spinner-tiny'></Spinner>
+            ) : groupError ? (
+                <div>
+                    {groupError.response?.status} {groupError.response?.data}
+                </div>
             ) : (
                 <div>
-                    <div>I am a list with id {currentList?._id}</div>
+                    <div>I am a list with id {group?._id}</div>
+                    {console.log(group)}
                     {/* <div>${data}</div> */}
                 </div>
             )}
@@ -38,8 +58,6 @@ const List: React.FC<Props> = ({ listid, listsLoading, currentList, getListActio
 
 const mapStateToProps = (state: IrootState) => ({
     user: state.authReducer.user,
-    currentList: state.listGroupReducer.currentList,
-    listsLoading: state.listGroupReducer.loadingCurrentList,
 });
 
-export default connect(mapStateToProps, { getListActionCreator })(List);
+export default connect(mapStateToProps)(List);

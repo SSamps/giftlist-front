@@ -1,6 +1,7 @@
 import { Fragment } from 'react';
 import { connect } from 'react-redux';
 import { IrootState } from '../../redux/reducers/root/rootReducer';
+import Spinner from '../misc/spinner';
 import List from './List';
 
 interface Props {
@@ -19,7 +20,7 @@ const ListPage: React.FC<Props> = ({
     return (
         <Fragment>
             {authLoading ? (
-                <div>Loading</div>
+                <Spinner className='spinner-tiny'></Spinner>
             ) : (
                 <Fragment>
                     <List listid={listid}></List>
