@@ -11,15 +11,6 @@ export const GiftListPreviewCard: React.FC<Props> = ({ group }: Props) => {
         <Link to={`list/${group._id}`} className='dashboardListCard'>
             <div>{group.groupVariant}</div>
             <div>{group.groupName}</div>
-            <div>
-                {group.children && (
-                    <div>
-                        {group.children.map((child) => {
-                            return child.groupName;
-                        })}
-                    </div>
-                )}
-            </div>
         </Link>
     );
 };
