@@ -1,12 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { TListGroupAnyFields } from '../../../types/models/listGroups';
+import { TListGroupAnyFields } from '../../../../types/models/listGroups';
 
 interface Props {
     group: TListGroupAnyFields;
 }
 
-export const ListCard: React.FC<Props> = ({ group }: Props) => {
+export const GiftListPreviewCard: React.FC<Props> = ({ group }: Props) => {
     return (
         <Link to={`list/${group._id}`} className='dashboardListCard'>
             <div>{group.groupVariant}</div>

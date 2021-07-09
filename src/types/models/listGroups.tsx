@@ -4,7 +4,7 @@ import {
     TYPE_PERM_GIFT_GROUP_ALL,
     TYPE_PERM_GIFT_GROUP_CHILD_ALL,
     TYPE_PERM_GIFT_LIST_ALL,
-} from './listGroupPermissions';
+} from '../listGroupPermissions';
 import { TListItem, TListItemCensored } from './listItems';
 
 // Shared
