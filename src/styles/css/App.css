@@ -196,7 +196,7 @@ body {
   gap: 1rem;
   justify-content: center; }
 
-.dashboardListCard {
+.dashboardListPreviewCard {
   height: 24rem;
   display: flex;
   flex-direction: column;
@@ -207,7 +207,23 @@ body {
   cursor: pointer;
   background-color: #f4f4f4;
   color: #777; }
-  .dashboardListCard:hover {
+  .dashboardListPreviewCard:hover {
+    color: #343a40;
+    opacity: 1;
+    border-color: orange; }
+
+.childListPreviewCard {
+  height: 24rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-color: black;
+  border-style: solid;
+  cursor: pointer;
+  background-color: #f4f4f4;
+  color: #777; }
+  .childListPreviewCard:hover {
     color: #343a40;
     opacity: 1;
     border-color: orange; }

@@ -8,7 +8,7 @@ interface Props {
 
 export const GiftGroupPreviewCard: React.FC<Props> = ({ group }: Props) => {
     return (
-        <Link to={`list/${group._id}`} className='dashboardListCard'>
+        <Link to={`list/${group._id}`} className='dashboardListPreviewCard'>
             <div>{group.groupVariant}</div>
             <div>{group.groupName}</div>
             <div>

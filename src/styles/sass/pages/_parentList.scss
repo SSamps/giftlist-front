@@ -1,19 +1,4 @@
-.dashboardFilterContainer {
-    margin-top: 2rem;
-    margin-bottom: 1rem;
-}
-
-.dashboardListContainer {
-    width: 100%;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, calc(min(20rem, 95%)));
-    margin-top: 1rem;
-    margin-bottom: 1rem;
-    gap: 1rem;
-    justify-content: center;
-}
-
-.dashboardListPreviewCard {
+.childListPreviewCard {
     height: 24rem;
     display: flex;
     flex-direction: column;
