@@ -49,7 +49,6 @@ const List: React.FC<Props> = ({ listid }): JSX.Element => {
                 <div>
                     <div>I am a list with id {group?._id}</div>
                     {console.log(group)}
-                    {/* <div>${data}</div> */}
                 </div>
             )}
         </Fragment>

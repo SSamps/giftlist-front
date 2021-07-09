@@ -107,4 +107,8 @@ export type TlistGroupAnyFieldsCensored = TbasicListFields &
     TgiftGroupFields &
     TgiftGroupChildFieldsCensored;
 
-export type TListGroupAnyFields = TlistGroupAnyFieldsUncensored & TlistGroupAnyFieldsCensored;
+type Tchildren = {
+    children?: TListGroupAnyFields[];
+};
+
+export type TListGroupAnyFields = TlistGroupAnyFieldsUncensored & TlistGroupAnyFieldsCensored & Tchildren;
