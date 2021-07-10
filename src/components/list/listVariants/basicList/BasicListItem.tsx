@@ -1,17 +1,16 @@
-import axios from 'axios';
 import React, { useState } from 'react';
+import { connect } from 'react-redux';
 import { TListItem } from '../../../../types/models/listItems';
 import Spinner from '../../../misc/spinner';
-import { IgroupData } from '../../ListLoader';
+import { deleteListItemActionCreator, TdeleteListItemActionCreator } from '../../../../redux/actions/listGroupActions';
 
 interface Props {
     basicListItem: TListItem;
     basicListId: string;
-    setGroupData: React.Dispatch<React.SetStateAction<IgroupData>>;
-    groupData: IgroupData;
+    deleteListItemActionCreator: TdeleteListItemActionCreator;
 }
 
-const BasicListItem: React.FC<Props> = ({ basicListItem, basicListId, setGroupData, groupData }) => {
+const BasicListItem: React.FC<Props> = ({ basicListItem, basicListId, deleteListItemActionCreator }) => {
     const [removalStatus, setRemovalStatus] = useState({
         waiting: false,
         error: '',
@@ -20,14 +19,8 @@ const BasicListItem: React.FC<Props> = ({ basicListItem, basicListId, setGroupDa
     const onClickDelete = async () => {
         setRemovalStatus({ waiting: true, error: '' });
         try {
-            await axios.delete(`/api/groups/${basicListId}/items/${basicListItem._id}`);
+            deleteListItemActionCreator(basicListId, basicListItem._id);
             setRemovalStatus({ waiting: false, error: '' });
-            //@ts-ignore
-            groupData.group.listItems = groupData.group?.listItems.filter((item) => {
-                return !(item._id === basicListItem._id);
-            });
-            setGroupData({ ...groupData });
-            console.log(basicListItem);
         } catch (err) {
             setRemovalStatus({ waiting: false, error: err.response.status });
         }
@@ -47,4 +40,4 @@ const BasicListItem: React.FC<Props> = ({ basicListItem, basicListId, setGroupDa
     );
 };
 
-export default BasicListItem;
+export default connect(null, { deleteListItemActionCreator })(BasicListItem);

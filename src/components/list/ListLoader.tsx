@@ -1,17 +1,19 @@
-import axios from 'axios';
-import { Fragment, useEffect, useState } from 'react';
+import { Fragment, useEffect } from 'react';
 import { connect } from 'react-redux';
-import { IrootState } from '../../redux/reducers/root/rootReducer';
+import { getListActionCreator, TgetListActionCreator } from '../../redux/actions/listGroupActions';
+import { IlistGroupData } from '../../redux/reducers/listGroupReducer';
+import { IrootStateAuthed } from '../../redux/reducers/root/rootReducer';
 import { BASIC_LIST, GIFT_GROUP, GIFT_GROUP_CHILD, GIFT_LIST } from '../../types/listVariants';
 import { TListGroupAnyFields } from '../../types/models/listGroups';
 import Spinner from '../misc/spinner';
-import { BasicListContainer } from './listVariants/basicList/BasicListContainer';
+import BasicListContainer from './listVariants/basicList/BasicListContainer';
 import GiftGroupChildContainer from './listVariants/GiftGroupChildContainer';
 import GiftGroupContainer from './listVariants/GiftGroupContainer';
 import GiftListContainer from './listVariants/GiftListContainer';
 
-interface Props {
+interface Props extends IlistGroupData {
     listid: string;
+    getListActionCreator: TgetListActionCreator;
 }
 
 export interface IgroupData {
@@ -20,45 +22,25 @@ export interface IgroupData {
     groupError: undefined | { response: { status: number; data: string } };
 }
 
-const ListLoader: React.FC<Props> = ({ listid }): JSX.Element => {
-    const [groupData, setGroupData] = useState<IgroupData>({
-        groupLoading: true,
-        group: undefined,
-        groupError: undefined,
-    });
-
+const ListLoader: React.FC<Props> = ({
+    listid,
+    listLoading,
+    currentList,
+    parentList,
+    listError,
+    getListActionCreator,
+}): JSX.Element => {
     useEffect(() => {
-        const fetchGroup = async () => {
-            try {
-                setGroupData({ ...groupData, groupLoading: true });
-                const res = await axios.get(`/api/groups/${listid}`);
-                setGroupData({ ...groupData, group: res.data, groupLoading: false });
-            } catch (err) {
-                setGroupData({ ...groupData, groupError: err, groupLoading: false });
-            }
-        };
-        fetchGroup();
+        getListActionCreator(listid);
     }, [listid]);
-
-    const { groupLoading, group, groupError } = groupData;
 
     function listSwitch(group: TListGroupAnyFields) {
         switch (group.groupVariant) {
             case BASIC_LIST: {
-                return (
-                    <BasicListContainer
-                        key={group._id}
-                        basicList={group}
-                        groupData={groupData}
-                        setGroupData={setGroupData}
-                    ></BasicListContainer>
-                );
+                return <BasicListContainer key={group._id}></BasicListContainer>;
             }
             case GIFT_LIST: {
                 return <GiftListContainer key={group._id} giftList={group}></GiftListContainer>;
-            }
-            case GIFT_GROUP: {
-                return <GiftGroupContainer key={group._id} giftGroup={group}></GiftGroupContainer>;
             }
             case GIFT_GROUP_CHILD: {
                 return <GiftGroupChildContainer key={group._id} giftGroupChild={group}></GiftGroupChildContainer>;
@@ -66,23 +48,37 @@ const ListLoader: React.FC<Props> = ({ listid }): JSX.Element => {
         }
     }
 
+    function parentListSwitch(group: TListGroupAnyFields) {
+        switch (group.groupVariant) {
+            case GIFT_GROUP: {
+                return <GiftGroupContainer key={group._id} giftGroup={group}></GiftGroupContainer>;
+            }
+        }
+    }
+
     return (
         <Fragment>
-            {groupLoading ? (
+            {listLoading ? (
                 <Spinner className='spinner-tiny'></Spinner>
-            ) : groupError ? (
+            ) : listError ? (
                 <div>
-                    {groupError.response?.status} {groupError.response?.data}
+                    {listError.response?.status} {listError.response?.data}
                 </div>
+            ) : parentList ? (
+                parentListSwitch(parentList)
             ) : (
-                group && listSwitch(group)
+                currentList && listSwitch(currentList)
             )}
         </Fragment>
     );
 };
 
-const mapStateToProps = (state: IrootState) => ({
+const mapStateToProps = (state: IrootStateAuthed) => ({
     user: state.authReducer.user,
+    listLoading: state.listGroupReducer.listLoading,
+    currentList: state.listGroupReducer.currentList,
+    parentList: state.listGroupReducer.parentList,
+    listError: state.listGroupReducer.listError,
 });
 
-export default connect(mapStateToProps)(ListLoader);
+export default connect(mapStateToProps, { getListActionCreator })(ListLoader);
