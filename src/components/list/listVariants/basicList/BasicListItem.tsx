@@ -2,26 +2,15 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { TListItem } from '../../../../types/models/listItems';
 import Spinner from '../../../misc/spinner';
-import {
-    deleteListItemActionCreator,
-    TdeleteListItemActionCreator,
-    TgetListActionCreator,
-    getListActionCreator,
-} from '../../../../redux/actions/listGroupActions';
+import { deleteListItemActionCreator, TdeleteListItemActionCreator } from '../../../../redux/actions/listGroupActions';
 
 interface Props {
     basicListItem: TListItem;
     basicListId: string;
     deleteListItemActionCreator: TdeleteListItemActionCreator;
-    getListActionCreator: TgetListActionCreator;
 }
 
-const BasicListItem: React.FC<Props> = ({
-    basicListItem,
-    basicListId,
-    deleteListItemActionCreator,
-    getListActionCreator,
-}) => {
+const BasicListItem: React.FC<Props> = ({ basicListItem, basicListId, deleteListItemActionCreator }) => {
     const [removalStatus, setRemovalStatus] = useState({
         waiting: false,
         error: '',
@@ -30,8 +19,7 @@ const BasicListItem: React.FC<Props> = ({
     const onClickDelete = async () => {
         setRemovalStatus({ waiting: true, error: '' });
         try {
-            await deleteListItemActionCreator(basicListId, basicListItem._id, getListActionCreator);
-            setRemovalStatus({ waiting: false, error: '' });
+            await deleteListItemActionCreator(basicListId, basicListItem._id);
         } catch (err) {
             setRemovalStatus({ waiting: false, error: err.response.status });
         }
@@ -51,4 +39,4 @@ const BasicListItem: React.FC<Props> = ({
     );
 };
 
-export default connect(null, { deleteListItemActionCreator, getListActionCreator })(BasicListItem);
+export default connect(null, { deleteListItemActionCreator })(BasicListItem);

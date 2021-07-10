@@ -1,4 +1,4 @@
-import { CURRENT_LIST_GET, PARENT_LIST_GET, LIST_ERROR } from './actionTypes';
+import { CURRENT_LIST_GET, PARENT_LIST_GET, LIST_ERROR, DELETE_LIST_ITEM } from './actionTypes';
 import { Dispatch } from 'redux';
 import axios, { AxiosResponse } from 'axios';
 import { TListGroupAnyFields } from '../../types/models/listGroups';
@@ -46,18 +46,22 @@ export const getListActionCreator =
         }
     };
 
-export type TdeleteListItemActionCreator = (
-    listId: string,
-    listItemId: string,
-    getListActionCreator: TgetListActionCreator
-) => void;
+interface IdeleteListItemActionSuccess {
+    type: typeof DELETE_LIST_ITEM;
+    payload?: TListGroupAnyFields;
+}
+
+export type TdeleteListItemActionCreator = (listId: string, listItemId: string) => void;
 
 export const deleteListItemActionCreator =
-    (listId: string, listItemId: string, getListActionCreator: TgetListActionCreator) =>
-    async (dispatch: Dispatch<IlistActionError>) => {
+    (listId: string, listItemId: string) =>
+    async (dispatch: Dispatch<IdeleteListItemActionSuccess | IlistActionError>) => {
         try {
-            await axios.delete(`/api/groups/${listId}/items/${listItemId}`);
-            getListActionCreator(listId);
+            let res = await axios.delete(`/api/groups/${listId}/items/${listItemId}`);
+            dispatch({
+                type: DELETE_LIST_ITEM,
+                payload: res.data,
+            });
         } catch (err) {
             dispatch({ type: LIST_ERROR, payload: { msg: err.response.data.msg, status: err.response.status } });
         }

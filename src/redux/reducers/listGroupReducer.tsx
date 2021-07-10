@@ -1,6 +1,6 @@
 import { AnyAction } from 'redux';
 import { TListGroupAnyFields } from '../../types/models/listGroups';
-import { CURRENT_LIST_GET, LIST_ERROR, PARENT_LIST_GET } from '../actions/actionTypes';
+import { CURRENT_LIST_GET, DELETE_LIST_ITEM, LIST_ERROR, PARENT_LIST_GET } from '../actions/actionTypes';
 
 export interface IlistGroupData {
     listLoading: boolean;
@@ -32,6 +32,13 @@ export default function reducer(state: IlistGroupData = initialState, action: An
                 ...state,
                 listLoading: false,
                 parentList: payload,
+                listError: undefined,
+            };
+        case DELETE_LIST_ITEM:
+            return {
+                ...state,
+                listLoading: false,
+                currentList: payload,
                 listError: undefined,
             };
         case LIST_ERROR:
