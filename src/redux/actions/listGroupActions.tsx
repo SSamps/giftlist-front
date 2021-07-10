@@ -46,10 +46,15 @@ export const getListActionCreator =
         }
     };
 
-export type TdeleteListItemActionCreator = (listId: string, listItemId: string) => void;
+export type TdeleteListItemActionCreator = (
+    listId: string,
+    listItemId: string,
+    getListActionCreator: TgetListActionCreator
+) => void;
 
 export const deleteListItemActionCreator =
-    (listId: string, listItemId: string) => async (dispatch: Dispatch<IlistActionError>) => {
+    (listId: string, listItemId: string, getListActionCreator: TgetListActionCreator) =>
+    async (dispatch: Dispatch<IlistActionError>) => {
         try {
             await axios.delete(`/api/groups/${listId}/items/${listItemId}`);
             getListActionCreator(listId);
