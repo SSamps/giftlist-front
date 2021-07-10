@@ -15,3 +15,4 @@ export const CURRENT_LIST_GET = 'CURRENT_LIST_GET';
 export const PARENT_LIST_GET = 'PARENT_LIST_GET';
 export const LIST_ERROR = 'LIST_ERROR';
 export const DELETE_LIST_ITEM = 'DELETE_LIST_ITEM';
+export const LIST_RESET = 'LIST_RESET';

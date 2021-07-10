@@ -1,6 +1,11 @@
 import { Fragment, useEffect } from 'react';
 import { connect } from 'react-redux';
-import { getListActionCreator, TgetListActionCreator } from '../../redux/actions/listGroupActions';
+import {
+    resetListActionCreator,
+    getListActionCreator,
+    TgetListActionCreator,
+    TresetListActionCreator,
+} from '../../redux/actions/listGroupActions';
 import { IlistGroupData } from '../../redux/reducers/listGroupReducer';
 import { IrootStateAuthed } from '../../redux/reducers/root/rootReducer';
 import { BASIC_LIST, GIFT_GROUP, GIFT_GROUP_CHILD, GIFT_LIST } from '../../types/listVariants';
@@ -14,12 +19,7 @@ import GiftListContainer from './listVariants/GiftListContainer';
 interface Props extends IlistGroupData {
     listid: string;
     getListActionCreator: TgetListActionCreator;
-}
-
-export interface IgroupData {
-    groupLoading: boolean;
-    group: undefined | TListGroupAnyFields;
-    groupError: undefined | { response: { status: number; data: string } };
+    resetListActionCreator: TresetListActionCreator;
 }
 
 const ListLoader: React.FC<Props> = ({
@@ -29,9 +29,14 @@ const ListLoader: React.FC<Props> = ({
     parentList,
     listError,
     getListActionCreator,
+    resetListActionCreator,
 }): JSX.Element => {
     useEffect(() => {
-        getListActionCreator(listid);
+        let init = () => {
+            resetListActionCreator();
+            getListActionCreator(listid);
+        };
+        init();
     }, [listid]);
 
     function listSwitch(group: TListGroupAnyFields) {
@@ -81,4 +86,6 @@ const mapStateToProps = (state: IrootStateAuthed) => ({
     listError: state.listGroupReducer.listError,
 });
 
-export default connect(mapStateToProps, { getListActionCreator })(ListLoader);
+export default connect(mapStateToProps, { getListActionCreator, resetListActionCreator: resetListActionCreator })(
+    ListLoader
+);

@@ -1,4 +1,4 @@
-import { CURRENT_LIST_GET, PARENT_LIST_GET, LIST_ERROR, DELETE_LIST_ITEM } from './actionTypes';
+import { CURRENT_LIST_GET, PARENT_LIST_GET, LIST_ERROR, DELETE_LIST_ITEM, LIST_RESET } from './actionTypes';
 import { Dispatch } from 'redux';
 import axios, { AxiosResponse } from 'axios';
 import { TListGroupAnyFields } from '../../types/models/listGroups';
@@ -66,6 +66,16 @@ export const deleteListItemActionCreator =
             dispatch({ type: LIST_ERROR, payload: { msg: err.response.data.msg, status: err.response.status } });
         }
     };
+
+interface IresetList {
+    type: typeof LIST_RESET;
+}
+
+export type TresetListActionCreator = () => void;
+
+export const resetListActionCreator = () => (dispatch: Dispatch<IresetList>) => {
+    dispatch({ type: LIST_RESET });
+};
 
 // interface IaddTestDataActionSuccess {
 //     type: typeof TEST_DATA_ADD;
