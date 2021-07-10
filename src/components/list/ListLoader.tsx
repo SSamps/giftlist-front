@@ -5,7 +5,7 @@ import { IrootState } from '../../redux/reducers/root/rootReducer';
 import { BASIC_LIST, GIFT_GROUP, GIFT_GROUP_CHILD, GIFT_LIST } from '../../types/listVariants';
 import { TListGroupAnyFields } from '../../types/models/listGroups';
 import Spinner from '../misc/spinner';
-import { BasicListContainer } from './listVariants/BasicListContainer';
+import { BasicListContainer } from './listVariants/basicList/BasicListContainer';
 import GiftGroupChildContainer from './listVariants/GiftGroupChildContainer';
 import GiftGroupContainer from './listVariants/GiftGroupContainer';
 import GiftListContainer from './listVariants/GiftListContainer';
@@ -14,7 +14,7 @@ interface Props {
     listid: string;
 }
 
-interface IgroupData {
+export interface IgroupData {
     groupLoading: boolean;
     group: undefined | TListGroupAnyFields;
     groupError: undefined | { response: { status: number; data: string } };
@@ -45,7 +45,14 @@ const ListLoader: React.FC<Props> = ({ listid }): JSX.Element => {
     function listSwitch(group: TListGroupAnyFields) {
         switch (group.groupVariant) {
             case BASIC_LIST: {
-                return <BasicListContainer key={group._id} basicList={group}></BasicListContainer>;
+                return (
+                    <BasicListContainer
+                        key={group._id}
+                        basicList={group}
+                        groupData={groupData}
+                        setGroupData={setGroupData}
+                    ></BasicListContainer>
+                );
             }
             case GIFT_LIST: {
                 return <GiftListContainer key={group._id} giftList={group}></GiftListContainer>;
