@@ -4,6 +4,7 @@ import { IrootStateAuthed } from '../../../../redux/reducers/root/rootReducer';
 import { TListGroupAnyFields } from '../../../../types/models/listGroups';
 
 import BasicListItem from './BasicListItem';
+import NewListItemField from './NewListItemField';
 
 interface Props {
     currentList: TListGroupAnyFields | undefined;
@@ -26,7 +27,9 @@ const BasicListContainer: React.FC<Props> = ({ currentList }) => {
                                 ></BasicListItem>
                             );
                         })}
-                        {currentList.listItems.length < currentList.maxListItems && <p>Add a new item</p>}
+                        {currentList.listItems.length < currentList.maxListItems && (
+                            <NewListItemField itemType='listItem' groupId={currentList._id}></NewListItemField>
+                        )}
                     </div>
                 </div>
             )}
