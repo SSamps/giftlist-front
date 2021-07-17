@@ -1,6 +1,33 @@
 .dashboardFilterContainer {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    grid-template-rows: 1fr;
     margin-top: 2rem;
     margin-bottom: 1rem;
+    width: 100%;
+    &-hr {
+        width: 100%;
+        grid-column: 1 / 3;
+        grid-row: 2;
+    }
+
+    &-newList {
+        margin: 0 auto;
+    }
+
+    &-filters {
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+
+    &-item {
+        margin: 0 auto;
+        color: $highlight-color;
+        &:hover {
+            color: black;
+        }
+    }
 }
 
 .dashboardListContainer {

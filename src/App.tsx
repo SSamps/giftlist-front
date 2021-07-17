@@ -21,6 +21,7 @@ import axios from 'axios';
 import setAuthToken from './utils/setAuthToken';
 import { LOGOUT } from './redux/actions/actionTypes';
 import ListPage from './components/list/ListPage';
+import ListVariants from './components/list/newList/ListVariants';
 
 // Defaults to localhost if not set. This is set in the prod container and is proxied using the proxy field in package.json when running the react dev server.
 axios.defaults.baseURL = process.env.REACT_APP_BACKEND_BASE_URL;
@@ -52,6 +53,7 @@ const App = () => {
                                         <Route exact path='/register' component={Register} />
                                         <Route exact path='/login' component={Login} />
                                         <PrivateRoute exact path='/dashboard' component={Dashboard} />
+                                        <PrivateRoute exact path='/list/variants' component={ListVariants} />
                                         <PrivateRoute exact path='/list/:listid' component={ListPage} />
                                     </Switch>
                                 </div>

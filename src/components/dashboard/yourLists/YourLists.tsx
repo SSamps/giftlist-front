@@ -7,7 +7,7 @@ import {
     TgetDashboardListDataActionCreator,
 } from '../../../redux/actions/dashboardActions';
 import { IdashboardState } from '../../../redux/reducers/dashboardReducer';
-import { DashboardFilter } from './DashboardFilter';
+import { YourListsToolbar } from './DashboardFilter';
 import { BASIC_LIST, GIFT_GROUP, GIFT_LIST } from '../../../types/listVariants';
 import { GiftListPreviewCard } from './previewCards/GiftListPreviewCard';
 import { BasicListPreviewCard } from './previewCards/BasicListPreviewCard';
@@ -25,8 +25,7 @@ export const YourLists: React.FC<Props> = ({ listGroups, getDashboardListDataAct
 
     return (
         <Fragment>
-            <DashboardFilter></DashboardFilter>
-
+            <YourListsToolbar></YourListsToolbar>
             <div className={'dashboardListContainer'}>
                 {listGroups.map((group) => {
                     switch (group.groupVariant) {
