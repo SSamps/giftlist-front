@@ -27,6 +27,8 @@
     &-item {
         margin: 0 auto;
         color: $highlight-color;
+        overflow: visible;
+        cursor: pointer;
         &:hover {
             color: $highlight-hover-color;
         }

@@ -90,6 +90,17 @@ body {
   justify-content: center;
   align-items: center; }
 
+.underlay {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  z-index: 1;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgba(255, 225, 169, 0.219); }
+
 .btn {
   display: inline-block;
   background: #f4f4f4;
@@ -159,11 +170,12 @@ body {
   border-style: solid;
   border-width: thin;
   overflow: visible;
-  z-index: 1; }
+  z-index: 2; }
 
 .dropDownItem {
   color: orange;
-  padding: 0 0.5rem; }
+  padding: 0 0.5rem;
+  cursor: pointer; }
   .dropDownItem:hover {
     background-color: #e6e6e6; }
   .dropDownItem-selected {
@@ -222,7 +234,9 @@ body {
     overflow: visible; }
   .dashboardFilterContainer-item {
     margin: 0 auto;
-    color: orange; }
+    color: orange;
+    overflow: visible;
+    cursor: pointer; }
     .dashboardFilterContainer-item:hover {
       color: #db8f00; }
     .dashboardFilterContainer-item-active {

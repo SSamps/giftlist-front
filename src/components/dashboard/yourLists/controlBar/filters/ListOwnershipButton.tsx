@@ -17,7 +17,7 @@ const ListOwnershipButton: React.FC<Props> = ({ listOwnershipFilter }) => {
             onClick={() => setOpen(!open)}
         >
             Owned by {listOwnershipFilter} <i className='fas fa-angle-down'></i>
-            {open && <ListOwnershipDrop></ListOwnershipDrop>}
+            {open && <ListOwnershipDrop setOpen={setOpen}></ListOwnershipDrop>}
         </span>
     );
 };

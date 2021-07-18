@@ -18,7 +18,7 @@ const ListTypeButton: React.FC<Props> = ({}) => {
             onClick={() => setOpen(!open)}
         >
             List types <i className='fas fa-angle-down'></i>
-            {open && <ListTypeDrop></ListTypeDrop>}
+            {open && <ListTypeDrop setOpen={setOpen}></ListTypeDrop>}
         </span>
     );
 };
