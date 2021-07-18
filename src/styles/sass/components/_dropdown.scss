@@ -1,13 +1,23 @@
 .dropDown {
     position: absolute;
-    top: 58px;
-    width: 30px;
-    transform: translateX(-10%);
-    background-color: rgb(9, 255, 0);
+    top: 1.5rem;
+    background-color: $content-background-color;
     border: black;
+    border-style: solid;
+    border-width: thin;
     overflow: visible;
+    z-index: 1;
 }
 
 .dropDownItem {
-    position: absolute;
+    color: $highlight-color;
+    padding: 0 0.5rem;
+
+    &:hover {
+        background-color: $test-color;
+    }
+
+    &-selected {
+        background-color: $test-color;
+    }
 }

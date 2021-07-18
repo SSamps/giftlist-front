@@ -153,15 +153,21 @@ body {
 
 .dropDown {
   position: absolute;
-  top: 58px;
-  width: 30px;
-  transform: translateX(-45%);
-  background-color: #09ff00;
+  top: 1.5rem;
+  background-color: #edf7fd;
   border: black;
-  overflow: visible; }
+  border-style: solid;
+  border-width: thin;
+  overflow: visible;
+  z-index: 1; }
 
 .dropDownItem {
-  position: absolute; }
+  color: orange;
+  padding: 0 0.5rem; }
+  .dropDownItem:hover {
+    background-color: #e6e6e6; }
+  .dropDownItem-selected {
+    background-color: #e6e6e6; }
 
 .navbar {
   display: flex;
@@ -201,7 +207,8 @@ body {
   grid-template-rows: 1fr;
   margin-top: 1rem;
   margin-bottom: 1rem;
-  width: 100%; }
+  width: 100%;
+  position: relative; }
   .dashboardFilterContainer-hr {
     width: 100%;
     grid-column: 1 / 3;
@@ -217,7 +224,9 @@ body {
     margin: 0 auto;
     color: orange; }
     .dashboardFilterContainer-item:hover {
-      color: black; }
+      color: #db8f00; }
+    .dashboardFilterContainer-item-active {
+      color: #db8f00; }
 
 .dashboardListContainer {
   width: 100%;

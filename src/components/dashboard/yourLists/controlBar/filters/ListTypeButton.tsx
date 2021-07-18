@@ -3,19 +3,22 @@ import { connect } from 'react-redux';
 import { setFiltersActionCreator } from '../../../../../redux/actions/dashboardActions';
 import { IrootStateAuthed } from '../../../../../redux/reducers/root/rootReducer';
 import { TYPE_LIST_GROUP_ALL_TOP_LEVEL_VARIANTS } from '../../../../../types/listVariants';
-import ListOwnershipDrop from './ListOwnershipDrop';
+import ListTypeDrop from './ListTypeDrop';
 
 interface Props {
     listVariantFilter: TYPE_LIST_GROUP_ALL_TOP_LEVEL_VARIANTS[];
 }
 
-const ListTypeFilter: React.FC<Props> = ({}) => {
+const ListTypeButton: React.FC<Props> = ({}) => {
     const [open, setOpen] = useState(false);
 
     return (
-        <span className='dashboardFilterContainer-item' onClick={() => setOpen(!open)}>
-            Type filter <i className='fas fa-angle-down'></i>
-            {open && <ListOwnershipDrop></ListOwnershipDrop>}
+        <span
+            className={`dashboardFilterContainer-item ${open && 'dashboardFilterContainer-item-active'}`}
+            onClick={() => setOpen(!open)}
+        >
+            List types <i className='fas fa-angle-down'></i>
+            {open && <ListTypeDrop></ListTypeDrop>}
         </span>
     );
 };
@@ -24,4 +27,4 @@ const mapStateToProps = (state: IrootStateAuthed) => ({
     listVariantFilter: state.dashboardReducer.listVariantFilter,
 });
 
-export default connect(mapStateToProps, { setFiltersActionCreator })(ListTypeFilter);
+export default connect(mapStateToProps, { setFiltersActionCreator })(ListTypeButton);

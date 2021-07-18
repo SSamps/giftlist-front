@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import NewListButton from './actions/NewListButton';
-import ListOwnershipFilter from './filters/ListOwnershipFilter';
-import ListTypeFilter from './filters/ListTypeFilter';
+import ListOwnershipButton from './filters/ListOwnershipButton';
+import ListTypeButton from './filters/ListTypeButton';
 
 export const YourListsToolbar: React.FC = () => {
     return (
@@ -9,8 +9,8 @@ export const YourListsToolbar: React.FC = () => {
             <div className='dashboardFilterContainer'>
                 <NewListButton></NewListButton>
                 <span className='dashboardFilterContainer-filters'>
-                    <ListOwnershipFilter></ListOwnershipFilter>
-                    <ListTypeFilter></ListTypeFilter>
+                    <ListOwnershipButton></ListOwnershipButton>
+                    <ListTypeButton></ListTypeButton>
                 </span>
                 <hr className='dashboardFilterContainer-hr'></hr>
             </div>
