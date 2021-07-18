@@ -63,7 +63,7 @@ body {
   background-color: #edf7fd;
   min-height: 100%;
   padding-bottom: 4rem;
-  padding-top: 2rem;
+  padding-top: 0rem;
   flex-grow: 1; }
 
 .mainContentContainerInner {
@@ -151,6 +151,18 @@ body {
     margin-top: 1rem;
     font: inherit; }
 
+.dropDown {
+  position: absolute;
+  top: 58px;
+  width: 30px;
+  transform: translateX(-45%);
+  background-color: #09ff00;
+  border: black;
+  overflow: visible; }
+
+.dropDownItem {
+  position: absolute; }
+
 .navbar {
   display: flex;
   justify-content: space-between;
@@ -187,7 +199,7 @@ body {
   display: grid;
   grid-template-columns: 1fr 2fr;
   grid-template-rows: 1fr;
-  margin-top: 2rem;
+  margin-top: 1rem;
   margin-bottom: 1rem;
   width: 100%; }
   .dashboardFilterContainer-hr {
@@ -199,7 +211,8 @@ body {
   .dashboardFilterContainer-filters {
     margin: 0 auto;
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr; }
+    grid-template-columns: 1fr 1fr;
+    overflow: visible; }
   .dashboardFilterContainer-item {
     margin: 0 auto;
     color: orange; }

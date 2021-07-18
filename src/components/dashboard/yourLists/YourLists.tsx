@@ -1,20 +1,18 @@
 import { connect } from 'react-redux';
 import React, { Fragment, useEffect } from 'react';
-import { IUser } from '../../../types/models/User';
 import { IrootStateAuthed } from '../../../redux/reducers/root/rootReducer';
 import {
     getDashboardListDataActionCreator,
     TgetDashboardListDataActionCreator,
 } from '../../../redux/actions/dashboardActions';
 import { IdashboardState } from '../../../redux/reducers/dashboardReducer';
-import { YourListsToolbar } from './DashboardFilter';
+import { YourListsToolbar } from './controlBar/DashboardFilter';
 import { BASIC_LIST, GIFT_GROUP, GIFT_LIST } from '../../../types/listVariants';
 import { GiftListPreviewCard } from './previewCards/GiftListPreviewCard';
 import { BasicListPreviewCard } from './previewCards/BasicListPreviewCard';
 import { GiftGroupPreviewCard } from './previewCards/GiftGroupPreviewCard';
 
 interface Props extends IdashboardState {
-    user: IUser;
     getDashboardListDataActionCreator: TgetDashboardListDataActionCreator;
 }
 
@@ -49,6 +47,8 @@ const mapStateToProps = (state: IrootStateAuthed) => ({
     loadingDashboard: state.dashboardReducer.loadingDashboard,
     listGroups: state.dashboardReducer.listGroups,
     error: state.dashboardReducer.error,
+    listOwnershipFilter: state.dashboardReducer.listOwnershipFilter,
+    listVariantFilter: state.dashboardReducer.listVariantFilter,
     user: state.authReducer.user,
 });
 

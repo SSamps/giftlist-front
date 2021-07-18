@@ -1,7 +1,8 @@
-import { DASHBAORD_DATA_ERROR, DASHBOARD_LISTS_GET } from '../actions/actionTypes';
+import { DASHBAORD_DATA_ERROR, DASHBOARD_LISTS_GET, DASHBOARD_SET_FILTERS } from '../actions/actionTypes';
 import { Dispatch } from 'redux';
 import axios from 'axios';
 import { TListGroupAnyFields } from '../../types/models/listGroups';
+import { TYPE_LIST_GROUP_ALL_TOP_LEVEL_VARIANTS } from '../../types/listVariants';
 
 // Common
 interface IGetListsError {
@@ -22,7 +23,6 @@ export const getDashboardListDataActionCreator =
     () => async (dispatch: Dispatch<IgetListsSuccess | IGetListsError>) => {
         try {
             const res = await axios.get(`/api/groups/user`);
-            console.log(res);
             dispatch({
                 type: DASHBOARD_LISTS_GET,
                 payload: res.data,
@@ -30,4 +30,22 @@ export const getDashboardListDataActionCreator =
         } catch (err) {
             dispatch({ type: DASHBAORD_DATA_ERROR, payload: 'error' });
         }
+    };
+
+interface IsetFilters {
+    type: typeof DASHBOARD_SET_FILTERS;
+    payload: {};
+}
+
+export type TsetFiltersActionCreator = (
+    filter: 'listOwnershipFilter' | 'listVariantFilter',
+    selected: 'anyone' | 'you' | 'others' | TYPE_LIST_GROUP_ALL_TOP_LEVEL_VARIANTS[]
+) => void;
+
+export const setFiltersActionCreator: TsetFiltersActionCreator =
+    (filter, selected) => async (dispatch: Dispatch<IsetFilters>) => {
+        dispatch({
+            type: DASHBOARD_SET_FILTERS,
+            payload: { filter: filter, selected: selected },
+        });
     };

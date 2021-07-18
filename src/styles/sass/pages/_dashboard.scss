@@ -2,7 +2,7 @@
     display: grid;
     grid-template-columns: 1fr 2fr;
     grid-template-rows: 1fr;
-    margin-top: 2rem;
+    margin-top: 1rem;
     margin-bottom: 1rem;
     width: 100%;
     &-hr {
@@ -18,7 +18,8 @@
     &-filters {
         margin: 0 auto;
         display: grid;
-        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-columns: 1fr 1fr;
+        overflow: visible;
     }
 
     &-item {

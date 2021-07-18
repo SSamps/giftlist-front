@@ -17,7 +17,6 @@ const Dashboard: React.FC<Props> = ({ user, authLoading }): JSX.Element => {
             ) : (
                 user && (
                     <Fragment>
-                        <div>Hello {user.displayName}</div>
                         <YourLists></YourLists>
                     </Fragment>
                 )
