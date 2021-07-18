@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import NewListButton from './actions/NewListButton';
-import ListOwnershipButton from './filters/ListOwnershipButton';
-import ListTypeButton from './filters/ListTypeButton';
+import ListOwnershipButton from './filters/listOwnership/ListOwnershipButton';
+import ListTypeButton from './filters/listType/ListTypeButton';
 
 export const YourListsToolbar: React.FC = () => {
     return (

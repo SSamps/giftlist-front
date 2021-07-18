@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { connect } from 'react-redux';
-import { setFiltersActionCreator } from '../../../../../redux/actions/dashboardActions';
-import { IrootStateAuthed } from '../../../../../redux/reducers/root/rootReducer';
+import { setFiltersActionCreator } from '../../../../../../redux/actions/dashboardActions';
+import { IrootStateAuthed } from '../../../../../../redux/reducers/root/rootReducer';
 import ListOwnershipDrop from './ListOwnershipDrop';
 
 interface Props {
@@ -12,11 +12,15 @@ const ListOwnershipButton: React.FC<Props> = ({ listOwnershipFilter }) => {
     const [open, setOpen] = useState(false);
 
     return (
-        <span
-            className={`dashboardFilterContainer-item ${open && 'dashboardFilterContainer-item-active'}`}
-            onClick={() => setOpen(!open)}
-        >
-            Owned by {listOwnershipFilter} <i className='fas fa-angle-down'></i>
+        <span className={`dashboardFilterContainer-item ${open && 'dashboardFilterContainer-item-active'}`}>
+            <div
+                onClick={() => {
+                    setOpen(!open);
+                }}
+            >
+                {' '}
+                Owned by {listOwnershipFilter} <i className='fas fa-angle-down'></i>
+            </div>
             {open && <ListOwnershipDrop setOpen={setOpen}></ListOwnershipDrop>}
         </span>
     );

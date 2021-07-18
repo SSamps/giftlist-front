@@ -2,7 +2,6 @@ import { DASHBAORD_DATA_ERROR, DASHBOARD_LISTS_GET, DASHBOARD_SET_FILTERS } from
 import { Dispatch } from 'redux';
 import axios from 'axios';
 import { TListGroupAnyFields } from '../../types/models/listGroups';
-import { TYPE_LIST_GROUP_ALL_TOP_LEVEL_VARIANTS } from '../../types/listVariants';
 
 // Common
 interface IGetListsError {
@@ -39,7 +38,11 @@ interface IsetFilters {
 
 export type TsetFiltersActionCreator = (
     filter: 'listOwnershipFilter' | 'listVariantFilter',
-    selected: 'anyone' | 'you' | 'others' | TYPE_LIST_GROUP_ALL_TOP_LEVEL_VARIANTS[]
+    selected:
+        | 'anyone'
+        | 'you'
+        | 'others'
+        | { basicListSelected: boolean; giftListSelected: boolean; giftGroupSelected: boolean }
 ) => void;
 
 export const setFiltersActionCreator: TsetFiltersActionCreator =

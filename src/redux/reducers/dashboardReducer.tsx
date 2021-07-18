@@ -1,14 +1,13 @@
 import { DASHBAORD_DATA_ERROR, DASHBOARD_LISTS_GET, DASHBOARD_SET_FILTERS } from '../actions/actionTypes';
 import { AnyAction } from 'redux';
 import { TListGroupAnyFields } from '../../types/models/listGroups';
-import { BASIC_LIST, GIFT_GROUP, GIFT_LIST, TYPE_LIST_GROUP_ALL_TOP_LEVEL_VARIANTS } from '../../types/listVariants';
 
 export interface IdashboardState {
     loadingDashboard: boolean;
     listGroups: TListGroupAnyFields[];
     error: string | undefined;
     listOwnershipFilter: 'anyone' | 'you' | 'others';
-    listVariantFilter: TYPE_LIST_GROUP_ALL_TOP_LEVEL_VARIANTS[];
+    listVariantFilter: { basicListSelected: boolean; giftListSelected: boolean; giftGroupSelected: boolean };
 }
 
 const initialState: IdashboardState = {
@@ -16,7 +15,7 @@ const initialState: IdashboardState = {
     listGroups: [],
     error: undefined,
     listOwnershipFilter: 'anyone',
-    listVariantFilter: [BASIC_LIST, GIFT_LIST, GIFT_GROUP],
+    listVariantFilter: { basicListSelected: true, giftListSelected: true, giftGroupSelected: true },
 };
 
 export default function reducer(state: IdashboardState = initialState, action: AnyAction): IdashboardState {

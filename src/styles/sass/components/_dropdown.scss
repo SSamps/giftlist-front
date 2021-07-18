@@ -21,4 +21,17 @@
     &-selected {
         background-color: $test-color;
     }
+
+    &-checkbox {
+        display: flex;
+        align-items: center;
+    }
+
+    &-name {
+        margin-right: auto;
+    }
+
+    &-icon {
+        margin-left: 0.5rem;
+    }
 }

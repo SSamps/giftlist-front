@@ -180,6 +180,13 @@ body {
     background-color: #e6e6e6; }
   .dropDownItem-selected {
     background-color: #e6e6e6; }
+  .dropDownItem-checkbox {
+    display: flex;
+    align-items: center; }
+  .dropDownItem-name {
+    margin-right: auto; }
+  .dropDownItem-icon {
+    margin-left: 0.5rem; }
 
 .navbar {
   display: flex;
