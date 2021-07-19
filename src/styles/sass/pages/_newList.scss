@@ -91,6 +91,11 @@
 .newListDescriptionContainer {
     background-color: chartreuse;
     width: 100%;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    margin: 1rem 0;
 
     @media (min-width: 1000px) {
         grid-row: 1;
@@ -101,6 +106,9 @@
         grid-row: 1;
         grid-column: 1;
     }
+}
+
+.newListDescription {
 }
 
 .newListFormContainer {
