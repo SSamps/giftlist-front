@@ -95,7 +95,6 @@
     justify-content: center;
     text-align: center;
     align-items: center;
-    margin: 1rem 0;
 
     @media (min-width: 1000px) {
         grid-row: 1;
@@ -108,12 +107,13 @@
     }
 }
 
-.newListDescription {
-}
-
 .newListFormContainer {
     background-color: cornflowerblue;
     width: 100%;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
 
     @media (min-width: 1000px) {
         grid-row: 2;
@@ -123,5 +123,44 @@
     @media (max-width: 1000px) {
         grid-row: 3;
         grid-column: 1;
+    }
+
+    &-inner {
+        width: calc(min(28rem, 70%));
+    }
+}
+
+.newListFormInviteeContainer {
+    background-color: rgb(237, 127, 100);
+    width: 100%;
+    margin: 0.5rem 0;
+    border-style: solid;
+    border-color: darkgrey;
+    border-radius: 0.2rem;
+    padding: 0.5rem;
+    display: flex;
+    // grid-auto-columns: min-content;
+    flex-wrap: wrap;
+    // justify-content: center;
+    // text-align: center;
+    // align-items: center;
+}
+
+.inviteeElement {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    margin: 0.5rem 0.5rem;
+
+    &-email {
+    }
+
+    &-remove {
+        color: $highlight-color;
+        margin-left: 0.25rem;
+        cursor: pointer;
+        &:hover {
+            color: $highlight-hover-color;
+        }
     }
 }
