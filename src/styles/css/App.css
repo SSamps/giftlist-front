@@ -220,7 +220,7 @@ body {
   justify-content: center;
   text-align: center; }
 
-.dashboardFilterContainer {
+.dashboardFilterControlBar {
   display: grid;
   grid-template-columns: 1fr 2fr;
   grid-template-rows: 1fr;
@@ -228,25 +228,25 @@ body {
   margin-bottom: 1rem;
   width: 100%;
   position: relative; }
-  .dashboardFilterContainer-hr {
+  .dashboardFilterControlBar-hr {
     width: 100%;
     grid-column: 1 / 3;
     grid-row: 2; }
-  .dashboardFilterContainer-newList {
+  .dashboardFilterControlBar-newList {
     margin: 0 auto; }
-  .dashboardFilterContainer-filters {
+  .dashboardFilterControlBar-filters {
     margin: 0 auto;
     display: grid;
     grid-template-columns: 1fr 1fr;
     overflow: visible; }
-  .dashboardFilterContainer-item {
+  .dashboardFilterControlBar-item {
     margin: 0 auto;
     color: orange;
     overflow: visible;
     cursor: pointer; }
-    .dashboardFilterContainer-item:hover {
+    .dashboardFilterControlBar-item:hover {
       color: #db8f00; }
-    .dashboardFilterContainer-item-active {
+    .dashboardFilterControlBar-item-active {
       color: #db8f00; }
 
 .dashboardListContainer {
@@ -289,3 +289,32 @@ body {
     color: #343a40;
     opacity: 1;
     border-color: orange; }
+
+.newListControls {
+  display: grid;
+  grid-template-columns: calc(min(30rem, 100%)) 2fr;
+  grid-template-rows: 1fr 1fr;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  width: 100%; }
+  .newListControls-hr {
+    width: 100%;
+    grid-column: 1 / 3;
+    grid-row: 2;
+    height: min-content; }
+  .newListControls-selectorContainer {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    height: 1.5rem;
+    grid-column: 1 / 2;
+    grid-row: 1;
+    width: 100%; }
+  .newListControls-button {
+    text-align: center;
+    color: orange;
+    height: 1.5rem;
+    width: 100%; }
+    .newListControls-button:hover {
+      background-color: #e6e6e6; }
+    .newListControls-button-active {
+      background-color: #e6e6e6; }

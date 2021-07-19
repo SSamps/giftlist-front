@@ -6,13 +6,13 @@ import ListTypeButton from './filters/listType/ListTypeButton';
 export const YourListsToolbar: React.FC = () => {
     return (
         <Fragment>
-            <div className='dashboardFilterContainer'>
+            <div className='dashboardFilterControlBar'>
                 <NewListButton></NewListButton>
-                <span className='dashboardFilterContainer-filters'>
+                <span className='dashboardFilterControlBar-filters'>
                     <ListOwnershipButton></ListOwnershipButton>
                     <ListTypeButton></ListTypeButton>
                 </span>
-                <hr className='dashboardFilterContainer-hr'></hr>
+                <hr className='dashboardFilterControlBar-hr'></hr>
             </div>
         </Fragment>
     );

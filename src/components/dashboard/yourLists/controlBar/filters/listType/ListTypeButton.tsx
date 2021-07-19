@@ -6,7 +6,7 @@ const ListTypeButton: React.FC = ({}) => {
 
     return (
         <Fragment>
-            <span className={`dashboardFilterContainer-item ${open && 'dashboardFilterContainer-item-active'}`}>
+            <span className={`dashboardFilterControlBar-item ${open && 'dashboardFilterControlBar-item-active'}`}>
                 <div onClick={() => setOpen(true)}>
                     {' '}
                     List types <i className='fas fa-angle-down'></i>

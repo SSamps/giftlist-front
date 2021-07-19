@@ -12,7 +12,7 @@ const ListOwnershipButton: React.FC<Props> = ({ listOwnershipFilter }) => {
     const [open, setOpen] = useState(false);
 
     return (
-        <span className={`dashboardFilterContainer-item ${open && 'dashboardFilterContainer-item-active'}`}>
+        <span className={`dashboardFilterControlBar-item ${open && 'dashboardFilterControlBar-item-active'}`}>
             <div
                 onClick={() => {
                     setOpen(!open);
