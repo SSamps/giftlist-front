@@ -5,7 +5,7 @@ interface Props {
 }
 
 const ListDescriptionContainer: React.FC<Props> = ({ controllerState }) => {
-    return <div className='newListDescription'>{controllerState} Description</div>;
+    return <div className='newListDescriptionContainer'>{controllerState} Description</div>;
 };
 
 export default ListDescriptionContainer;

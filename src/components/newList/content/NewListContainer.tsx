@@ -11,7 +11,7 @@ interface Props {
 const NewListContainer: React.FC<Props> = ({ controllerState }) => {
     return (
         <Fragment>
-            <div className='newListContent'>
+            <div className='newListContentContainer'>
                 <ListDescriptionContainer controllerState={controllerState}></ListDescriptionContainer>
                 <ListExampleContainer controllerState={controllerState}></ListExampleContainer>
                 <ListFormContainer controllerState={controllerState}></ListFormContainer>

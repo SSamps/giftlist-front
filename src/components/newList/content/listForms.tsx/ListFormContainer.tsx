@@ -5,7 +5,7 @@ interface Props {
 }
 
 const ListFormContainer: React.FC<Props> = ({ controllerState }) => {
-    return <div className='newListForm'>{controllerState} Form</div>;
+    return <div className='newListFormContainer'>{controllerState} Form</div>;
 };
 
 export default ListFormContainer;
