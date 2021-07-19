@@ -6,7 +6,7 @@ interface Props {
     group: TListGroupAnyFields;
 }
 
-export const GiftGroupChildPreviewCard: React.FC<Props> = ({ group }: Props) => {
+export const GiftGroupChildPreviewCard: React.FC<Props> = ({ group }) => {
     return (
         <Link to={`${group._id}`} className='childListPreviewCard'>
             <div>{group.groupVariant}</div>

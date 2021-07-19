@@ -13,10 +13,7 @@ const NewListPage: React.FC<Props> = (): JSX.Element => {
                 controllerState={controllerState}
                 setControllerState={setControllerState}
             ></NewListControls>
-            <NewListContainer
-                controllerState={controllerState}
-                setControllerState={setControllerState}
-            ></NewListContainer>
+            <NewListContainer controllerState={controllerState}></NewListContainer>
         </Fragment>
     );
 };
