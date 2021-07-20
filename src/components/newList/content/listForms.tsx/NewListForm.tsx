@@ -59,8 +59,12 @@ const NewListForm: React.FC<Props> = ({ controllerState }) => {
                     setFormData({ ...formData, inviteArray: inviteArray, invitee: '' });
                 }
             } else {
-                setFormErrorData({ ...formErrorData, invalidEmail: false, duplicateEmail: false });
-                createList();
+                if (listName.length <= 0) {
+                    setFormErrorData({ ...formErrorData, emptylistName: true });
+                } else {
+                    setFormErrorData({ ...formErrorData, invalidEmail: false, duplicateEmail: false });
+                    createList();
+                }
             }
         }
     };
@@ -102,12 +106,14 @@ const NewListForm: React.FC<Props> = ({ controllerState }) => {
         try {
             setFormSubmitStatus({ creatingList: true, invitingMembers: false, submitError: undefined });
             const listCreationRes = await axios.post('/api/groups', createListBody, config);
+            const newListId = listCreationRes.data._id;
             if (inviteArray.length > 0) {
+                const inviteBody = JSON.stringify({ invitedEmails: inviteArray });
+
                 setFormSubmitStatus({ creatingList: false, invitingMembers: true, submitError: undefined });
-                // await axios.post('/api/users', body, config);
+                await axios.post(`/api/groups/${newListId}/invite/send`, inviteBody, config);
             }
-            history.push(`/list/${listCreationRes.data._id}`);
-            // return <Redirect to={`list/${listCreationRes.data._id}`} />;
+            history.push(`/list/${newListId}`);
         } catch (err) {
             setFormSubmitStatus({ creatingList: false, invitingMembers: false, submitError: err.response.status });
         }
