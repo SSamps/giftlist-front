@@ -3,4 +3,5 @@ export interface IUser {
     email: string;
     registrationDate: Date;
     _id: string;
+    verified: boolean;
 }

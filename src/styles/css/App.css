@@ -115,11 +115,13 @@ body {
   .btn-primary {
     background: #17a2b8;
     color: #fff; }
+    .btn-primary:hover {
+      background: #148ea1; }
+    .btn-primary:active {
+      background: #117a8b; }
   .btn-light {
     background: #f4f4f4;
     color: #333; }
-  .btn:hover {
-    opacity: 0.8; }
 
 .buttons {
   margin: 1rem; }
@@ -272,6 +274,16 @@ body {
     color: #343a40;
     opacity: 1;
     border-color: orange; }
+
+.dashboardVerifyContainer {
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: center; }
+
+.dashboardVerifyBody {
+  margin: 1rem; }
 
 .childListPreviewCard {
   height: 24rem;

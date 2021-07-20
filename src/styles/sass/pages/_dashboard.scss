@@ -67,3 +67,15 @@
         border-color: orange;
     }
 }
+
+.dashboardVerifyContainer {
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+}
+
+.dashboardVerifyBody {
+    margin: 1rem;
+}
