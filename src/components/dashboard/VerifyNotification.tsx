@@ -2,7 +2,7 @@ import axios from 'axios';
 import { useState } from 'react';
 import Spinner from '../misc/spinner';
 
-export const Verify = () => {
+const VerifyNotification = () => {
     const [submitState, setSubmitState] = useState({ sending: false, sendingError: undefined, sent: false });
 
     const { sending, sendingError, sent } = submitState;
@@ -43,3 +43,5 @@ export const Verify = () => {
         </div>
     );
 };
+
+export default VerifyNotification;

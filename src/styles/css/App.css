@@ -137,6 +137,9 @@ body {
 .spinner-tiny {
   width: 20px; }
 
+.spinner-large {
+  width: 50px; }
+
 .form {
   margin: 1rem 0rem;
   display: flex;
@@ -428,3 +431,9 @@ body {
     cursor: pointer; }
     .inviteeElement-remove:hover {
       color: #db8f00; }
+
+.verifyContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center; }
