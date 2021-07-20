@@ -433,7 +433,9 @@ body {
       color: #db8f00; }
 
 .verifyContainer {
+  margin-top: 2rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-content: center; }
+  align-content: center;
+  text-align: center; }
