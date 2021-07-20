@@ -5,12 +5,13 @@
     margin-top: 1rem;
     margin-bottom: 1rem;
     width: 100%;
+    overflow: hidden;
 
     &-hr {
-        width: 100%;
+        border: 0;
+        border-top: 1px solid $border-color;
         grid-column: 1 / 3;
         grid-row: 2;
-        height: min-content;
     }
 
     &-selectorContainer {
@@ -39,14 +40,13 @@
 }
 
 .newListContentContainer {
-    background-color: darkgreen;
     width: 100%;
     height: auto;
     display: grid;
 
     @media (min-width: 1000px) {
         grid-template-columns: 1fr 1fr;
-        grid-template-rows: 1fr 2fr;
+        grid-template-rows: 1fr 1.5fr;
     }
 
     @media (max-width: 1000px) {
@@ -56,7 +56,6 @@
 }
 
 .newListExampleContainer {
-    background-color: brown;
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -81,15 +80,14 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    border-color: black;
+    border-color: $border-color;
     border-style: solid;
-    cursor: pointer;
     background-color: $light-color;
     color: $h1-color;
+    margin-top: 1rem;
 }
 
 .newListDescriptionContainer {
-    background-color: chartreuse;
     width: 100%;
     display: flex;
     justify-content: center;
@@ -97,6 +95,7 @@
     align-items: center;
 
     @media (min-width: 1000px) {
+        margin-top: 2rem;
         grid-row: 1;
         grid-column: 2;
     }
@@ -108,7 +107,6 @@
 }
 
 .newListFormContainer {
-    background-color: cornflowerblue;
     width: 100%;
     display: flex;
     justify-content: center;
@@ -116,6 +114,7 @@
     align-items: center;
 
     @media (min-width: 1000px) {
+        margin-bottom: 2rem;
         grid-row: 2;
         grid-column: 2;
     }
@@ -131,19 +130,15 @@
 }
 
 .newListFormInviteeContainer {
-    background-color: rgb(237, 127, 100);
     width: 100%;
     margin: 0.5rem 0;
     border-style: solid;
-    border-color: darkgrey;
+    border-color: $border-color;
+    border-width: thin;
     border-radius: 0.2rem;
     padding: 0.5rem;
     display: flex;
-    // grid-auto-columns: min-content;
     flex-wrap: wrap;
-    // justify-content: center;
-    // text-align: center;
-    // align-items: center;
 }
 
 .inviteeElement {

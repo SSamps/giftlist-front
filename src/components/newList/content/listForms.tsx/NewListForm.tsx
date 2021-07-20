@@ -90,7 +90,7 @@ const NewListForm: React.FC<Props> = () => {
                         List Name
                         <input
                             type='text'
-                            placeholder='List Name'
+                            placeholder='List name'
                             name='listName'
                             value={listName}
                             onChange={onChange}
@@ -118,7 +118,7 @@ const NewListForm: React.FC<Props> = () => {
                         )}
                         <input
                             type='text'
-                            placeholder='email'
+                            placeholder='Email'
                             name='invitee'
                             value={invitee}
                             onChange={onChange}
@@ -128,7 +128,7 @@ const NewListForm: React.FC<Props> = () => {
                     {invalidEmail && <div className='form-error-message'>Please supply a valid email</div>}
                     {duplicateEmail && <div className='form-error-message'>You have already added this person</div>}
                 </div>
-                <input type='button' className='btn btn-primary' value='Register' onClick={createList} />
+                <input type='button' className='btn btn-primary' value='Create group' onClick={createList} />
             </form>
         </div>
     );
