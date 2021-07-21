@@ -1,4 +1,12 @@
-import { INVITE_ACCEPTED, INVITE_ERROR, INVITE_PENDING, INVITE_RESET_ERROR } from './actionTypes';
+import {
+    INVITE_ACCEPTED,
+    INVITE_CLEAR,
+    INVITE_CONVERT_TOKEN_ERROR,
+    INVITE_ERROR,
+    INVITE_PENDING,
+    INVITE_RESET_ERROR,
+    INVITE_TOKEN_ERROR,
+} from './actionTypes';
 import { Dispatch } from 'redux';
 import axios from 'axios';
 
@@ -18,8 +26,20 @@ interface IinvitePending {
     payload: { inviteToken: string; groupName: string };
 }
 
-interface IinviteReset {
+interface IinviteErrorReset {
     type: typeof INVITE_RESET_ERROR;
+}
+
+interface IinviteTokenError {
+    type: typeof INVITE_TOKEN_ERROR;
+}
+
+interface IinviteTokenErrorConvert {
+    type: typeof INVITE_CONVERT_TOKEN_ERROR;
+}
+
+interface IinviteClear {
+    type: typeof INVITE_CLEAR;
 }
 
 export type TsetPendingInviteActionCreator = (inviteToken: string, groupName: string) => void;
@@ -51,10 +71,38 @@ export const acceptInviteActionCreator: TacceptInviteActionCreator =
         }
     };
 
-export type TresetInviteActionCreator = () => void;
+export type TresetInviteErrorActionCreator = () => void;
 
-export const resetInviteActionCreator: TresetInviteActionCreator = () => async (dispatch: Dispatch<IinviteReset>) => {
+export const resetInviteErrorActionCreator: TresetInviteErrorActionCreator =
+    () => async (dispatch: Dispatch<IinviteErrorReset>) => {
+        dispatch({
+            type: INVITE_RESET_ERROR,
+        });
+    };
+
+export type TInviteTokenErrorActionCreator = () => void;
+
+export const inviteTokenErrorActionCreator: TInviteTokenErrorActionCreator =
+    () => async (dispatch: Dispatch<IinviteTokenError>) => {
+        dispatch({
+            type: INVITE_TOKEN_ERROR,
+            payload: 'Invalid group invite token',
+        });
+    };
+
+export type TconvertInviteTokenErrorActionCreator = () => void;
+
+export const convertInviteTokenErrorActionCreator: TconvertInviteTokenErrorActionCreator =
+    () => async (dispatch: Dispatch<IinviteTokenErrorConvert>) => {
+        dispatch({
+            type: INVITE_CONVERT_TOKEN_ERROR,
+        });
+    };
+
+export type TclearInviteActionCreator = () => void;
+
+export const clearInviteActionCreator: TclearInviteActionCreator = () => async (dispatch: Dispatch<IinviteClear>) => {
     dispatch({
-        type: INVITE_RESET_ERROR,
+        type: INVITE_CLEAR,
     });
 };

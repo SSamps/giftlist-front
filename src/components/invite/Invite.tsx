@@ -5,7 +5,12 @@ import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import { IrootState } from '../../redux/reducers/root/rootReducer';
 import { connect } from 'react-redux';
-import { setPendingInviteActionCreator, TsetPendingInviteActionCreator } from '../../redux/actions/inviteActions';
+import {
+    inviteTokenErrorActionCreator,
+    setPendingInviteActionCreator,
+    TInviteTokenErrorActionCreator,
+    TsetPendingInviteActionCreator,
+} from '../../redux/actions/inviteActions';
 import jwt from 'jsonwebtoken';
 
 interface Props {
@@ -15,6 +20,7 @@ interface Props {
     isAuthenticated: boolean;
     authLoading: boolean;
     setPendingInviteActionCreator: TsetPendingInviteActionCreator;
+    inviteTokenErrorActionCreator: TInviteTokenErrorActionCreator;
 }
 
 const Invite: React.FC<Props> = ({
@@ -24,6 +30,7 @@ const Invite: React.FC<Props> = ({
     authLoading,
     isAuthenticated,
     setPendingInviteActionCreator,
+    inviteTokenErrorActionCreator,
 }) => {
     const [inviteError, setInviteError] = useState<undefined | string>(undefined);
     const history = useHistory();
@@ -54,9 +61,11 @@ const Invite: React.FC<Props> = ({
                 setPendingInviteActionCreator(token, decodedToken.groupName);
                 history.push(`/login`);
             } else {
+                inviteTokenErrorActionCreator();
                 history.push(`/login`);
             }
         } else {
+            inviteTokenErrorActionCreator();
             history.push(`/login`);
         }
     };
@@ -81,4 +90,4 @@ const mapStateToProps = (state: IrootState) => ({
     isAuthenticated: state.authReducer.isAuthenticated,
 });
 
-export default connect(mapStateToProps, { setPendingInviteActionCreator })(Invite);
+export default connect(mapStateToProps, { setPendingInviteActionCreator, inviteTokenErrorActionCreator })(Invite);

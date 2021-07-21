@@ -3,9 +3,13 @@ import { connect } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import {
     acceptInviteActionCreator,
-    resetInviteActionCreator,
+    clearInviteActionCreator,
+    convertInviteTokenErrorActionCreator,
+    resetInviteErrorActionCreator,
     TacceptInviteActionCreator,
-    TresetInviteActionCreator,
+    TclearInviteActionCreator,
+    TconvertInviteTokenErrorActionCreator,
+    TresetInviteErrorActionCreator,
 } from '../../redux/actions/inviteActions';
 import { IrootState } from '../../redux/reducers/root/rootReducer';
 import { IUser } from '../../types/models/User';
@@ -19,8 +23,11 @@ interface Props {
     invitePending: undefined | { inviteToken: string; groupName: string };
     inviteError: undefined | string;
     inviteAccepted: undefined | string;
+    inviteTokenError: undefined | string;
     acceptInviteActionCreator: TacceptInviteActionCreator;
-    resetInviteActionCreator: TresetInviteActionCreator;
+    resetInviteErrorActionCreator: TresetInviteErrorActionCreator;
+    convertInviteTokenErrorActionCreator: TconvertInviteTokenErrorActionCreator;
+    clearInviteActionCreator: TclearInviteActionCreator;
 }
 
 const Dashboard: React.FC<Props> = ({
@@ -29,18 +36,28 @@ const Dashboard: React.FC<Props> = ({
     invitePending,
     inviteError,
     inviteAccepted,
-    resetInviteActionCreator,
+    inviteTokenError,
+    resetInviteErrorActionCreator,
     acceptInviteActionCreator,
+    convertInviteTokenErrorActionCreator,
+    clearInviteActionCreator,
 }): JSX.Element => {
     const history = useHistory();
+
     useEffect(() => {
-        resetInviteActionCreator();
+        if (inviteError) {
+            resetInviteErrorActionCreator();
+        }
+        if (inviteTokenError) {
+            convertInviteTokenErrorActionCreator();
+        }
         if (invitePending) {
             acceptInviteActionCreator(invitePending.inviteToken, invitePending.groupName);
         } else if (inviteAccepted) {
             history.push(`/list/${inviteAccepted}`);
+            clearInviteActionCreator();
         }
-    }, []);
+    }, [inviteAccepted]);
 
     return (
         <Fragment>
@@ -64,9 +81,15 @@ const Dashboard: React.FC<Props> = ({
 const mapStateToProps = (state: IrootState) => ({
     user: state.authReducer.user,
     authLoading: state.authReducer.loading,
-    invitePending: state.inviteReducer.invitePending,
-    inviteError: state.inviteReducer.inviteError,
-    inviteAccepted: state.inviteReducer.inviteAccepted,
+    invitePending: state.pendingInviteReducer.invitePending,
+    inviteError: state.pendingInviteReducer.inviteError,
+    inviteTokenError: state.pendingInviteReducer.inviteTokenError,
+    inviteAccepted: state.pendingInviteReducer.inviteAccepted,
 });
 
-export default connect(mapStateToProps, { resetInviteActionCreator, acceptInviteActionCreator })(Dashboard);
+export default connect(mapStateToProps, {
+    resetInviteErrorActionCreator,
+    acceptInviteActionCreator,
+    convertInviteTokenErrorActionCreator,
+    clearInviteActionCreator,
+})(Dashboard);
