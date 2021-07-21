@@ -23,6 +23,7 @@ import { LOGOUT } from './redux/actions/actionTypes';
 import ListPage from './components/list/ListPage';
 import NewListPage from './components/newList/NewListPage';
 import Verify from './components/verify/Verify';
+import VerifiedRoute from './components/routing/VerifiedRoute';
 
 // Defaults to localhost if not set. This is set in the prod container and is proxied using the proxy field in package.json when running the react dev server.
 axios.defaults.baseURL = process.env.REACT_APP_BACKEND_BASE_URL;
@@ -53,10 +54,10 @@ const App = () => {
                                     <Switch>
                                         <Route exact path='/register' component={Register} />
                                         <Route exact path='/login' component={Login} />
-                                        <PrivateRoute exact path='/dashboard' component={Dashboard} />
-                                        <PrivateRoute exact path='/list/newlist' component={NewListPage} />
-                                        <PrivateRoute exact path='/list/:listid' component={ListPage} />
                                         <PrivateRoute exact path='/verify/:token' component={Verify} />
+                                        <PrivateRoute exact path='/dashboard' component={Dashboard} />
+                                        <VerifiedRoute exact path='/list/newlist' component={NewListPage} />
+                                        <VerifiedRoute exact path='/list/:listid' component={ListPage} />
                                     </Switch>
                                 </div>
                             </div>
