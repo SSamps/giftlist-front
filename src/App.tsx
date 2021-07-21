@@ -56,11 +56,12 @@ const App = () => {
                                         <Route exact path='/' component={Landing} />
                                         <Route exact path='/register' component={Register} />
                                         <Route exact path='/login' component={Login} />
+                                        <Route exact path='/invite/:token' component={Invite} />
                                         <PrivateRoute exact path='/verify/:token' component={Verify} />
                                         <PrivateRoute exact path='/dashboard' component={Dashboard} />
                                         <VerifiedRoute exact path='/list/newlist' component={NewListPage} />
                                         <VerifiedRoute exact path='/list/:listid' component={ListPage} />
-                                        <VerifiedRoute exact path='/invite/:token' component={Invite} />
+
                                         <Route component={NotFound} />
                                     </Switch>
                                 </div>

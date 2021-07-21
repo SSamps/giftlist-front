@@ -1,24 +1,61 @@
-import { Fragment } from 'react';
+import { Fragment, useEffect } from 'react';
 import { connect } from 'react-redux';
+import { useHistory } from 'react-router-dom';
+import {
+    acceptInviteActionCreator,
+    resetInviteActionCreator,
+    TacceptInviteActionCreator,
+    TresetInviteActionCreator,
+} from '../../redux/actions/inviteActions';
 import { IrootState } from '../../redux/reducers/root/rootReducer';
 import { IUser } from '../../types/models/User';
+import ErrorMessage from '../misc/ErrorMessage';
 import VerifyNotification from './VerifyNotification';
 import YourLists from './yourLists/YourLists';
 
 interface Props {
     user: IUser | null;
     authLoading: boolean;
+    invitePending: undefined | { inviteToken: string; groupName: string };
+    inviteError: undefined | string;
+    inviteAccepted: undefined | string;
+    acceptInviteActionCreator: TacceptInviteActionCreator;
+    resetInviteActionCreator: TresetInviteActionCreator;
 }
 
-const Dashboard: React.FC<Props> = ({ user, authLoading }): JSX.Element => {
+const Dashboard: React.FC<Props> = ({
+    user,
+    authLoading,
+    invitePending,
+    inviteError,
+    inviteAccepted,
+    resetInviteActionCreator,
+    acceptInviteActionCreator,
+}): JSX.Element => {
+    const history = useHistory();
+    useEffect(() => {
+        resetInviteActionCreator();
+        if (invitePending) {
+            acceptInviteActionCreator(invitePending.inviteToken, invitePending.groupName);
+        } else if (inviteAccepted) {
+            history.push(`/list/${inviteAccepted}`);
+        }
+    }, []);
+
     return (
         <Fragment>
             {authLoading ? (
                 <div>Loading</div>
             ) : user && user.verified ? (
-                <YourLists></YourLists>
+                <Fragment>
+                    {inviteError && <ErrorMessage>{inviteError}</ErrorMessage>}
+                    <YourLists></YourLists>
+                </Fragment>
             ) : (
-                <VerifyNotification></VerifyNotification>
+                <Fragment>
+                    {inviteError && <ErrorMessage>{inviteError}</ErrorMessage>}
+                    <VerifyNotification></VerifyNotification>
+                </Fragment>
             )}
         </Fragment>
     );
@@ -27,6 +64,9 @@ const Dashboard: React.FC<Props> = ({ user, authLoading }): JSX.Element => {
 const mapStateToProps = (state: IrootState) => ({
     user: state.authReducer.user,
     authLoading: state.authReducer.loading,
+    invitePending: state.inviteReducer.invitePending,
+    inviteError: state.inviteReducer.inviteError,
+    inviteAccepted: state.inviteReducer.inviteAccepted,
 });
 
-export default connect(mapStateToProps)(Dashboard);
+export default connect(mapStateToProps, { resetInviteActionCreator, acceptInviteActionCreator })(Dashboard);

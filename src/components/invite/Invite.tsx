@@ -3,31 +3,61 @@ import validator from 'validator';
 import { Fragment, useEffect, useState } from 'react';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
+import { IrootState } from '../../redux/reducers/root/rootReducer';
+import { connect } from 'react-redux';
+import { setPendingInviteActionCreator, TsetPendingInviteActionCreator } from '../../redux/actions/inviteActions';
+import jwt from 'jsonwebtoken';
 
 interface Props {
     match: {
         params: { token: string };
     };
+    isAuthenticated: boolean;
+    authLoading: boolean;
+    setPendingInviteActionCreator: TsetPendingInviteActionCreator;
 }
 
 const Invite: React.FC<Props> = ({
     match: {
         params: { token },
     },
+    authLoading,
+    isAuthenticated,
+    setPendingInviteActionCreator,
 }) => {
     const [inviteError, setInviteError] = useState<undefined | string>(undefined);
     const history = useHistory();
 
     useEffect(() => {
-        tryVerify();
-    }, []);
+        if (!authLoading) {
+            if (!isAuthenticated) {
+                setPendingInvite();
+            } else {
+                tryVerify();
+            }
+        }
+    }, [authLoading]);
 
     const tryVerify = async () => {
         try {
-            await axios.post(`/api/groups/invite/accept/${token}`);
-            history.push(`/test}`);
+            const res = await axios.post(`/api/groups/invite/accept/${token}`);
+            history.push(`/list/${res.data._id}`);
         } catch (err) {
             setInviteError('Error: ' + err.response.status + ' ' + err.response.statusText);
+        }
+    };
+
+    const setPendingInvite = () => {
+        if (validator.isJWT(token)) {
+            const decodedToken = jwt.decode(token) as jwt.JwtPayload;
+            if (decodedToken.groupName) {
+                setPendingInviteActionCreator(token, decodedToken.groupName);
+                history.push(`/login`);
+            } else {
+                history.push(`/login`);
+            }
+        } else {
+            history.push(`/login`);
         }
     };
 
@@ -35,7 +65,7 @@ const Invite: React.FC<Props> = ({
         <Fragment>
             <div className='verifyContainer'>
                 {!validator.isJWT(token) ? (
-                    <div className='form-error-message'>Invalid invite token</div>
+                    <div className='form-error-message'>Invalid invite</div>
                 ) : inviteError ? (
                     <div className='form-error-message'>{inviteError}</div>
                 ) : (
@@ -46,4 +76,9 @@ const Invite: React.FC<Props> = ({
     );
 };
 
-export default Invite;
+const mapStateToProps = (state: IrootState) => ({
+    authLoading: state.authReducer.loading,
+    isAuthenticated: state.authReducer.isAuthenticated,
+});
+
+export default connect(mapStateToProps, { setPendingInviteActionCreator })(Invite);
