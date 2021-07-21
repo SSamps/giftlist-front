@@ -25,6 +25,7 @@ import NewListPage from './components/newList/NewListPage';
 import Verify from './components/verify/Verify';
 import VerifiedRoute from './components/routing/VerifiedRoute';
 import NotFound from './components/routing/NotFound';
+import Invite from './components/invite/Invite';
 
 // Defaults to localhost if not set. This is set in the prod container and is proxied using the proxy field in package.json when running the react dev server.
 axios.defaults.baseURL = process.env.REACT_APP_BACKEND_BASE_URL;
@@ -51,14 +52,15 @@ const App = () => {
                         <div className='mainBodyContainer'>
                             <div className='mainContentContainerOuter'>
                                 <div className='mainContentContainerInner'>
-                                    <Route exact path='/' component={Landing} />
                                     <Switch>
+                                        <Route exact path='/' component={Landing} />
                                         <Route exact path='/register' component={Register} />
                                         <Route exact path='/login' component={Login} />
                                         <PrivateRoute exact path='/verify/:token' component={Verify} />
                                         <PrivateRoute exact path='/dashboard' component={Dashboard} />
                                         <VerifiedRoute exact path='/list/newlist' component={NewListPage} />
                                         <VerifiedRoute exact path='/list/:listid' component={ListPage} />
+                                        <VerifiedRoute exact path='/invite/:token' component={Invite} />
                                         <Route component={NotFound} />
                                     </Switch>
                                 </div>
