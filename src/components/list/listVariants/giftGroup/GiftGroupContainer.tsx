@@ -1,9 +1,8 @@
 import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
-import { IrootState } from '../../../redux/reducers/root/rootReducer';
-
-import { TListGroupAnyFields } from '../../../types/models/listGroups';
-import { GiftGroupChildPreviewCard } from '../../dashboard/yourLists/previewCards/GiftGroupChildPreviewCard';
+import { IrootState } from '../../../../redux/reducers/root/rootReducer';
+import { TListGroupAnyFields } from '../../../../types/models/listGroups';
+import { GiftGroupChildPreviewCard } from '../../../dashboard/yourLists/previewCards/GiftGroupChildPreviewCard';
 
 interface Props {
     giftGroup: TListGroupAnyFields;

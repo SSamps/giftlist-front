@@ -446,3 +446,37 @@ body {
   flex-direction: column;
   align-items: center;
   text-align: center; }
+
+.BasicListContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start; }
+
+.ListTitleBar {
+  margin-bottom: 1rem;
+  width: 100%;
+  display: grid;
+  grid-template-columns: calc(min(10%, 48px)) 1fr calc(min(10%, 48px));
+  grid-template-rows: 1fr 1px;
+  align-items: center; }
+  .ListTitleBar-title {
+    justify-self: center;
+    text-align: center;
+    grid-column: 2/3;
+    width: 100px; }
+  .ListTitleBar-controls {
+    color: orange;
+    font-size: 1.2rem;
+    justify-self: center;
+    grid-column: 3/4; }
+    .ListTitleBar-controls:hover {
+      color: #e69500; }
+    .ListTitleBar-controls:active {
+      color: #cc8400; }
+  .ListTitleBar-hr {
+    border: 0;
+    border-top: 1px solid #ccc;
+    grid-column: 1 / 4;
+    grid-row: 2; }

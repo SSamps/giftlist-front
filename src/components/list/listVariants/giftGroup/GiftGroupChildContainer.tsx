@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
-import { IrootState } from '../../../redux/reducers/root/rootReducer';
+import { IrootState } from '../../../../redux/reducers/root/rootReducer';
 
 interface Props {
     giftGroupChild: undefined | { _id: string };

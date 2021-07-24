@@ -4,6 +4,7 @@ import { IrootStateAuthed } from '../../../../redux/reducers/root/rootReducer';
 import { TListGroupAnyFields } from '../../../../types/models/listGroups';
 
 import BasicListItem from './BasicListItem';
+import ListTitleBar from './ListTitleBar';
 import NewListItemField from './NewListItemField';
 
 interface Props {
@@ -14,9 +15,8 @@ const BasicListContainer: React.FC<Props> = ({ currentList }) => {
     return (
         <Fragment>
             {currentList && (
-                <div>
-                    <div>{currentList.groupName}</div>
-                    <hr></hr>
+                <div className={'BasicListContainer'}>
+                    <ListTitleBar currentList={currentList}></ListTitleBar>
                     <div>
                         {currentList.listItems.map((item) => {
                             return (
