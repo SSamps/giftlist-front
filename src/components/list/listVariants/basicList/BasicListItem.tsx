@@ -28,13 +28,29 @@ const BasicListItem: React.FC<Props> = ({ basicListItem, basicListId, deleteList
     const { waiting } = removalStatus;
 
     return (
-        <div>
-            {basicListItem.body} {basicListItem.link}{' '}
-            {waiting ? (
-                <Spinner className='spinner-tiny'></Spinner>
-            ) : (
-                <button onClick={onClickDelete} className='fas fa-times'></button>
-            )}
+        <div className='basicListItem'>
+            <div className='basicListItem-main'>
+                <span className='basicListItem-main-body'>
+                    {basicListItem.body} {basicListItem.link}
+                </span>
+                <span className='basicListItem-main-selection'>Charlotte</span>
+                <span className='basicListItem-main-controlsContainer'>
+                    {waiting ? (
+                        <span>
+                            <Spinner className='spinner-tiny'></Spinner>
+                        </span>
+                    ) : (
+                        <span className='basicListItem-main-controlsContainer-controls'>
+                            <span className='fas fa-pen'></span>
+                            <span onClick={onClickDelete} className='fas fa-times'></span>
+                        </span>
+                    )}
+                </span>
+            </div>
+            <div className='basicListItem-links'>
+                <span className='basicListItem-links-link'>Link</span>
+                <span className='basicListItem-links-link'>Link2</span>
+            </div>
         </div>
     );
 };

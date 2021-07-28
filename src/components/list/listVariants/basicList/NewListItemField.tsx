@@ -38,6 +38,7 @@ const NewListItemField: React.FC<Props> = ({ itemType, groupId, newListItemActio
         <Fragment>
             <form onSubmit={onSubmit}>
                 <input
+                    className='basicListNewItemForm-input'
                     type='text'
                     placeholder={itemType === 'secretListItem' ? 'Add a gift idea' : 'Add an item'}
                     name='newItemBody'

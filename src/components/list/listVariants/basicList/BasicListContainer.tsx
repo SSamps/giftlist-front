@@ -17,7 +17,7 @@ const BasicListContainer: React.FC<Props> = ({ currentList }) => {
             {currentList && (
                 <div className={'BasicListContainer'}>
                     <ListTitleBar currentList={currentList}></ListTitleBar>
-                    <div>
+                    <div className='basicListItemContainer'>
                         {currentList.listItems.map((item) => {
                             return (
                                 <BasicListItem
@@ -27,6 +27,8 @@ const BasicListContainer: React.FC<Props> = ({ currentList }) => {
                                 ></BasicListItem>
                             );
                         })}
+                    </div>
+                    <div className='basicListNewItemContainer'>
                         {currentList.listItems.length < currentList.maxListItems && (
                             <NewListItemField itemType='listItem' groupId={currentList._id}></NewListItemField>
                         )}

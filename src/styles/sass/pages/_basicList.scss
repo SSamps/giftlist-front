@@ -10,7 +10,7 @@
     margin-bottom: 1rem;
     width: 100%;
     display: grid;
-    grid-template-columns: calc(min(10%, 48px)) 1fr calc(min(10%, 48px));
+    grid-template-columns: calc(min(10%, 3rem)) 1fr calc(min(10%, 3rem));
     grid-template-rows: 1fr 1px;
     align-items: center;
 
@@ -41,5 +41,81 @@
         border-top: 1px solid $border-color;
         grid-column: 1 / 4;
         grid-row: 2;
+    }
+}
+
+.basicListItemContainer {
+    width: calc(min(100%, 50rem));
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.basicListItem {
+    width: 100%;
+    padding: 0.25rem 0.5rem 0.25rem 0.5rem;
+    &:nth-child(n + 2) {
+        border-top: $border-color;
+        border-top-style: solid;
+        border-top-width: thin;
+    }
+}
+
+.basicListItem-main {
+    grid-row: 1/2;
+    grid-column: 1/4;
+    display: grid;
+    grid-template-columns: auto calc(max(26%, 6rem)) 3.2rem;
+    grid-template-rows: 1fr;
+
+    &-body {
+        word-wrap: break-word;
+        word-break: break-all;
+        hyphens: auto;
+    }
+
+    &-selection {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 0 0.5rem;
+        background-color: teal;
+    }
+
+    &-controlsContainer {
+        display: flex;
+        justify-content: center;
+
+        &-controls {
+            font-size: 1.2rem;
+            color: $highlight-color;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+    }
+}
+
+.basicListItem-links {
+    grid-row: 2/3;
+    grid-column: 1/4;
+    display: flex;
+    flex-direction: column;
+    padding-left: 1rem;
+
+    &-link {
+        color: $highlight-color;
+    }
+}
+
+.basicListNewItemContainer {
+    width: 100%;
+}
+
+.basicListNewItemForm {
+    &-input {
+        width: 100%;
     }
 }
