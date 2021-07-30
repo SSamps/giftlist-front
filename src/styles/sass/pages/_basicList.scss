@@ -18,7 +18,7 @@
         justify-self: center;
         text-align: center;
         grid-column: 2/3;
-        width: 100px;
+        width: 100%;
     }
 
     &-controls {
@@ -55,10 +55,15 @@
 .basicListItem {
     width: 100%;
     padding: 0.25rem 0.5rem 0.25rem 0.5rem;
-    &:nth-child(n + 2) {
-        border-top: $border-color;
+    border-color: $border-color;
+    border-width: thin;
+
+    &:nth-child(n + 1) {
+        border-bottom-style: solid;
+    }
+
+    &:nth-child(1) {
         border-top-style: solid;
-        border-top-width: thin;
     }
 }
 
@@ -80,7 +85,6 @@
         justify-content: center;
         align-items: center;
         padding: 0 0.5rem;
-        background-color: teal;
     }
 
     &-controlsContainer {
@@ -111,11 +115,23 @@
 }
 
 .basicListNewItemContainer {
+    margin: 1rem 0;
     width: 100%;
+    display: flex;
+    justify-content: center;
 }
 
-.basicListNewItemForm {
-    &-input {
-        width: 100%;
-    }
+.basicListNewItemButton {
+    // display: flex;
+    // justify-content: center;
+}
+
+.basicListNewItemFormContainer {
+    background-color: aqua;
+    width: calc(min(28rem, 100%));
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
 }

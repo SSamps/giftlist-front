@@ -99,7 +99,8 @@ body {
   position: fixed;
   top: 0;
   left: 0;
-  background-color: rgba(255, 225, 169, 0.219); }
+  background-color: rgba(255, 225, 169, 0.219);
+  cursor: default; }
 
 .btn {
   display: inline-block;
@@ -122,6 +123,15 @@ body {
   .btn-light {
     background: #f4f4f4;
     color: #333; }
+
+.btn-simple {
+  color: orange;
+  font-size: 1.3rem;
+  cursor: pointer; }
+  .btn-simple:hover {
+    color: #db8f00; }
+  .btn-simple:active {
+    color: #cc8500; }
 
 .buttons {
   margin: 1rem; }
@@ -165,6 +175,14 @@ body {
   .form button {
     margin-top: 1rem;
     font: inherit; }
+  .form-group {
+    display: flex;
+    flex-direction: column; }
+  .form-label {
+    align-self: flex-start; }
+  .form-removableField {
+    display: flex;
+    align-items: center; }
 
 .dropDown {
   position: absolute;
@@ -465,7 +483,7 @@ body {
     justify-self: center;
     text-align: center;
     grid-column: 2/3;
-    width: 100px; }
+    width: 100%; }
   .ListTitleBar-controls {
     color: orange;
     font-size: 1.2rem;
@@ -490,11 +508,13 @@ body {
 
 .basicListItem {
   width: 100%;
-  padding: 0.25rem 0.5rem 0.25rem 0.5rem; }
-  .basicListItem:nth-child(n + 2) {
-    border-top: #ccc;
-    border-top-style: solid;
-    border-top-width: thin; }
+  padding: 0.25rem 0.5rem 0.25rem 0.5rem;
+  border-color: #ccc;
+  border-width: thin; }
+  .basicListItem:nth-child(n + 1) {
+    border-bottom-style: solid; }
+  .basicListItem:nth-child(1) {
+    border-top-style: solid; }
 
 .basicListItem-main {
   grid-row: 1/2;
@@ -510,8 +530,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 0 0.5rem;
-    background-color: teal; }
+    padding: 0 0.5rem; }
   .basicListItem-main-controlsContainer {
     display: flex;
     justify-content: center; }
@@ -533,7 +552,16 @@ body {
     color: orange; }
 
 .basicListNewItemContainer {
-  width: 100%; }
+  margin: 1rem 0;
+  width: 100%;
+  display: flex;
+  justify-content: center; }
 
-.basicListNewItemForm-input {
-  width: 100%; }
+.basicListNewItemFormContainer {
+  background-color: aqua;
+  width: calc(min(28rem, 100%));
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  align-items: center; }

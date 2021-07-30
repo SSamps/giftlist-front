@@ -31,4 +31,18 @@
         margin-top: 1rem;
         font: inherit;
     }
+
+    &-group {
+        display: flex;
+        flex-direction: column;
+    }
+
+    &-label {
+        align-self: flex-start;
+    }
+
+    &-removableField {
+        display: flex;
+        align-items: center;
+    }
 }

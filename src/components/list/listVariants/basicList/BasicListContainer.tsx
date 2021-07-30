@@ -5,7 +5,7 @@ import { TListGroupAnyFields } from '../../../../types/models/listGroups';
 
 import BasicListItem from './BasicListItem';
 import ListTitleBar from './ListTitleBar';
-import NewListItemField from './NewListItemField';
+import NewListItem from './NewListItem';
 
 interface Props {
     currentList: TListGroupAnyFields | undefined;
@@ -30,7 +30,7 @@ const BasicListContainer: React.FC<Props> = ({ currentList }) => {
                     </div>
                     <div className='basicListNewItemContainer'>
                         {currentList.listItems.length < currentList.maxListItems && (
-                            <NewListItemField itemType='listItem' groupId={currentList._id}></NewListItemField>
+                            <NewListItem itemType='listItem' groupId={currentList._id}></NewListItem>
                         )}
                     </div>
                 </div>

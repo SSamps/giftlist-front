@@ -29,6 +29,20 @@
     }
 }
 
+.btn-simple {
+    color: $highlight-color;
+    font-size: 1.3rem;
+    cursor: pointer;
+
+    &:hover {
+        color: $highlight-hover-color;
+    }
+
+    &:active {
+        color: $highlight-active-color;
+    }
+}
+
 .buttons {
     margin: 1rem;
 }
