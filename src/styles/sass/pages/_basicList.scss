@@ -129,3 +129,14 @@
     text-align: center;
     align-items: center;
 }
+
+.basicListModifyItemOverlay {
+    position: absolute;
+    height: 30rem;
+    width: 30rem;
+    z-index: 2;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: salmon;
+}
