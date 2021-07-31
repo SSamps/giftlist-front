@@ -83,15 +83,15 @@ const NewListItem: React.FC<Props> = ({ itemType, groupId, newListItemActionCrea
         return (
             <div className='basicListNewItemFormContainer'>
                 <form className='form' onSubmit={onSubmit}>
-                    <div className='form-group'>
+                    <div className='form-groupWithSideControls'>
                         <label className='form-label'>Item</label>
-                        <div className='form-group-input'>
+                        <div className='form-group-inputContainerWithSideControls'>
                             <input type='text' name='newItemBody' value={newItemBody} onChange={onChange} required />
                         </div>
                     </div>
-                    <div className='form-group'>
+                    <div className='form-groupWithSideControls'>
                         <label className='form-label'>{'Link (optional)'}</label>
-                        <div className='form-group-input'>
+                        <div className='form-group-inputContainerWithSideControls'>
                             <input
                                 type='text'
                                 key='newItemLinks0'
@@ -104,7 +104,10 @@ const NewListItem: React.FC<Props> = ({ itemType, groupId, newListItemActionCrea
                         {newItemLinks.map((_, index) => {
                             if (index > 0) {
                                 return (
-                                    <div className='form-group-input' key={'newItemLinks' + index}>
+                                    <div
+                                        className='form-group-inputContainerWithSideControls'
+                                        key={'newItemLinks' + index}
+                                    >
                                         <input
                                             type='text'
                                             name={'newItemLinks' + index}
@@ -119,16 +122,16 @@ const NewListItem: React.FC<Props> = ({ itemType, groupId, newListItemActionCrea
                         })}
                         {newItemLinks.length < maxLinks && (
                             <label
-                                className=' form-label form-label-offset btn-simple form-group-input-button'
+                                className=' form-label form-label-offset btn-simple form-group-inputButtonBelow'
                                 onClick={addNewLinkField}
                             >
                                 <i className='fas fa-plus btn-simple'></i> Additional Link
                             </label>
                         )}
                     </div>
-                    <div>
-                        <input type='submit' className='btn btn-primary' value='Add item' />
-                        <input type='submit' className='btn btn-primary' value='Cancel' />
+                    <div className='form-controls'>
+                        <span className='btn btn-primary'>Add item</span>
+                        <span className='btn btn-primary'>Cancel</span>
                     </div>
                 </form>
 
