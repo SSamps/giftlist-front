@@ -126,7 +126,6 @@ body {
 
 .btn-simple {
   color: orange;
-  font-size: 1.3rem;
   cursor: pointer; }
   .btn-simple:hover {
     color: #db8f00; }
@@ -159,7 +158,7 @@ body {
     color: #dc3545;
     margin-top: 0.5rem; }
   .form-error-field {
-    border-color: #dc3545 !important; }
+    border-color: #dc3545; }
   .form input[type='text'],
   .form input[type='email'],
   .form input[type='password'],
@@ -175,14 +174,22 @@ body {
   .form button {
     margin-top: 1rem;
     font: inherit; }
-  .form-group {
-    display: flex;
-    flex-direction: column; }
   .form-label {
     align-self: flex-start; }
-  .form-removableField {
-    display: flex;
-    align-items: center; }
+    .form-label-offset {
+      margin-left: 0.5rem; }
+
+.form-group {
+  display: flex;
+  flex-direction: column; }
+  .form-group-input {
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-template-columns: 1fr 1.5rem;
+    align-items: center;
+    margin-top: 0.5rem; }
+    .form-group-input-button {
+      margin-top: 0.5rem; }
 
 .dropDown {
   position: absolute;

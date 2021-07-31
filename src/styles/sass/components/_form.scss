@@ -10,7 +10,7 @@
     }
 
     &-error-field {
-        border-color: $danger-color !important;
+        border-color: $danger-color;
     }
 
     input[type='text'],
@@ -23,7 +23,7 @@
         width: 100%;
         padding: 0.4rem;
         font-size: 1.2rem;
-        border: 1px solid #ccc;
+        border: 1px solid $border-color;
     }
 
     input[type='submit'],
@@ -32,17 +32,28 @@
         font: inherit;
     }
 
-    &-group {
-        display: flex;
-        flex-direction: column;
-    }
-
     &-label {
         align-self: flex-start;
-    }
 
-    &-removableField {
-        display: flex;
+        &-offset {
+            margin-left: 0.5rem;
+        }
+    }
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+
+    &-input {
+        display: grid;
+        grid-template-rows: 1fr;
+        grid-template-columns: 1fr 1.5rem;
         align-items: center;
+        margin-top: 0.5rem;
+
+        &-button {
+            margin-top: 0.5rem;
+        }
     }
 }

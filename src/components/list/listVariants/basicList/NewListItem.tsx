@@ -67,6 +67,11 @@ const NewListItem: React.FC<Props> = ({ itemType, groupId, newListItemActionCrea
         setNewItemState({ ...newItemState, newItemLinks: updatedNewItemLinks });
     };
 
+    const addNewLinkField = () => {
+        newItemLinks.push('');
+        setNewItemState({ ...newItemState, newItemLinks: newItemLinks });
+    };
+
     const returnNewItemButton = () => {
         return (
             <div className='basicListNewItemButton'>
@@ -80,40 +85,53 @@ const NewListItem: React.FC<Props> = ({ itemType, groupId, newListItemActionCrea
                 <form className='form' onSubmit={onSubmit}>
                     <div className='form-group'>
                         <label className='form-label'>Item</label>
-                        <input type='text' name='newItemBody' value={newItemBody} onChange={onChange} required />
+                        <div className='form-group-input'>
+                            <input type='text' name='newItemBody' value={newItemBody} onChange={onChange} required />
+                        </div>
                     </div>
                     <div className='form-group'>
                         <label className='form-label'>{'Link (optional)'}</label>
-                        <input
-                            type='text'
-                            key='newItemLinks0'
-                            name='newItemLinks0'
-                            placeholder='none'
-                            value={newItemLinks[0]}
-                            onChange={(e) => onChangeLinks(e, 0)}
-                        />
+                        <div className='form-group-input'>
+                            <input
+                                type='text'
+                                key='newItemLinks0'
+                                name='newItemLinks0'
+                                placeholder='none'
+                                value={newItemLinks[0]}
+                                onChange={(e) => onChangeLinks(e, 0)}
+                            />
+                        </div>
+                        {newItemLinks.map((_, index) => {
+                            if (index > 0) {
+                                return (
+                                    <div className='form-group-input' key={'newItemLinks' + index}>
+                                        <input
+                                            type='text'
+                                            name={'newItemLinks' + index}
+                                            placeholder='none'
+                                            value={newItemLinks[index]}
+                                            onChange={(e) => onChangeLinks(e, index)}
+                                        />
+                                        <i className='fas fa-minus btn-simple' onClick={() => onRemoveLink(index)}></i>
+                                    </div>
+                                );
+                            }
+                        })}
+                        {newItemLinks.length < maxLinks && (
+                            <label
+                                className=' form-label form-label-offset btn-simple form-group-input-button'
+                                onClick={addNewLinkField}
+                            >
+                                <i className='fas fa-plus btn-simple'></i> Additional Link
+                            </label>
+                        )}
                     </div>
-                    {newItemLinks.map((_, index) => {
-                        if (index > 0) {
-                            return (
-                                <div className='form-removableField' key={'newItemLinks' + index}>
-                                    <input
-                                        type='text'
-                                        name={'newItemLinks' + index}
-                                        placeholder='none'
-                                        value={newItemLinks[index]}
-                                        onChange={(e) => onChangeLinks(e, index)}
-                                    />
-                                    <i className='fas fa-minus btn-simple' onClick={() => onRemoveLink(index)}></i>
-                                </div>
-                            );
-                        }
-                    })}
+                    <div>
+                        <input type='submit' className='btn btn-primary' value='Add item' />
+                        <input type='submit' className='btn btn-primary' value='Cancel' />
+                    </div>
                 </form>
-                <div>
-                    <input type='submit' className='btn btn-primary' value='Add item' />
-                    <input type='submit' className='btn btn-primary' value='Cancel' />
-                </div>
+
                 {waiting && <Spinner className='spinner-tiny'></Spinner>}
             </div>
         );
