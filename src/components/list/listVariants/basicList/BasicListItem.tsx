@@ -38,14 +38,14 @@ const BasicListItem: React.FC<Props> = ({ basicListItem, basicListId, deleteList
                         </span>
                     ) : (
                         <span className='basicListItem-main-controlsContainer-controls'>
-                            <span className='fas fa-pen'></span>
-                            <span onClick={onClickDelete} className='fas fa-times'></span>
+                            <span className='fas fa-pen btn-simple'></span>
+                            <span onClick={onClickDelete} className='fas fa-times btn-simple'></span>
                         </span>
                     )}
                 </span>
             </div>
             <div className='basicListItem-links'>
-                {basicListItem.links.map((link) => {
+                {basicListItem.links.map((link, index) => {
                     let url;
                     if (link.startsWith('http://') || link.startsWith('https://')) {
                         url = link;
@@ -53,7 +53,13 @@ const BasicListItem: React.FC<Props> = ({ basicListItem, basicListId, deleteList
                         url = 'http://' + link;
                     }
                     return (
-                        <a href={url} target='_blank' rel='noreferrer noopener' className='btn-simple'>
+                        <a
+                            href={url}
+                            target='_blank'
+                            rel='noreferrer noopener'
+                            className='btn-simple'
+                            key={`${basicListItem._id}_${index}`}
+                        >
                             {link}
                         </a>
                     );

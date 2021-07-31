@@ -551,7 +551,6 @@ body {
     justify-content: center; }
     .basicListItem-main-controlsContainer-controls {
       font-size: 1.2rem;
-      color: orange;
       width: 100%;
       display: flex;
       justify-content: space-between;

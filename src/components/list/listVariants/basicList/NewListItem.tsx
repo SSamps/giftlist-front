@@ -28,7 +28,6 @@ const NewListItem: React.FC<Props> = ({ itemType, groupId, newListItemActionCrea
 
     const [newItemState, setNewItemState] = useState<InewItemState>(initialNewItemState);
 
-    console.log('render now');
     const { active, newItemBody, newItemLinks, waiting } = newItemState;
     const maxLinks = 3;
 
@@ -38,17 +37,23 @@ const NewListItem: React.FC<Props> = ({ itemType, groupId, newListItemActionCrea
 
     const onChangeLinks = (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
         let userAddedChars = e.target.value.length > newItemLinks[index].length;
-
-        newItemLinks[index] = e.target.value;
+        let updatedNewItemLinks = Array.from(newItemLinks);
+        updatedNewItemLinks[index] = e.target.value;
 
         if (userAddedChars && index === newItemLinks.length - 1 && newItemLinks.length < maxLinks) {
-            newItemLinks.push('');
+            updatedNewItemLinks.push('');
         }
 
-        setNewItemState({ ...newItemState, newItemLinks: newItemLinks });
+        setNewItemState({ ...newItemState, newItemLinks: updatedNewItemLinks });
     };
 
     const submitForm = async () => {
+        for (let i = newItemLinks.length - 1; i >= 0; i--) {
+            if (newItemLinks[i].length === 0) {
+                newItemLinks.splice(i, 1);
+            }
+        }
+
         setNewItemState({ ...newItemState, waiting: true, error: '' });
         try {
             await newListItemActionCreator(newItemBody, newItemLinks, itemType, groupId);
@@ -63,12 +68,13 @@ const NewListItem: React.FC<Props> = ({ itemType, groupId, newListItemActionCrea
     };
 
     const addNewLinkField = () => {
-        newItemLinks.push('');
-        setNewItemState({ ...newItemState, newItemLinks: newItemLinks });
+        let updatedNewItemLinks = Array.from(newItemLinks);
+        updatedNewItemLinks.push('');
+        setNewItemState({ ...newItemState, newItemLinks: updatedNewItemLinks });
     };
 
     const removeLink = (index: number) => {
-        let updatedNewItemLinks = newItemLinks;
+        let updatedNewItemLinks = Array.from(newItemLinks);
         updatedNewItemLinks.splice(index, 1);
         setNewItemState({ ...newItemState, newItemLinks: updatedNewItemLinks });
     };
