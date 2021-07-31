@@ -12,7 +12,6 @@ export const YourListsToolbar: React.FC = () => {
                     <ListOwnershipButton></ListOwnershipButton>
                     <ListTypeButton></ListTypeButton>
                 </span>
-                <hr className='dashboardFilterControlBar-hr'></hr>
             </div>
         </Fragment>
     );
