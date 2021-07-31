@@ -34,7 +34,6 @@ const VerifiedRoute: React.FC<TprotectedRouteProps> = ({
         } else if (!isVerified) {
             return <Redirect to='/dashboard'></Redirect>;
         } else {
-            console.log(props);
             return <Component {...props} />;
         }
     };

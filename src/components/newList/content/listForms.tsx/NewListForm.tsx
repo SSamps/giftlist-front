@@ -70,7 +70,6 @@ const NewListForm: React.FC<Props> = ({ controllerState }) => {
     };
 
     const removeInvitee = (index: number) => {
-        console.log(index);
         inviteArray.splice(index, 1);
         setFormData({ ...formData, inviteArray });
     };

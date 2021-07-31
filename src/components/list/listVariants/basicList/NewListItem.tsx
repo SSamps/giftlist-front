@@ -48,18 +48,24 @@ const NewListItem: React.FC<Props> = ({ itemType, groupId, newListItemActionCrea
     };
 
     const submitForm = async () => {
-        for (let i = newItemLinks.length - 1; i >= 0; i--) {
-            if (newItemLinks[i].length === 0) {
-                newItemLinks.splice(i, 1);
+        let updatedNewItemLinks = Array.from(newItemLinks);
+        for (let i = updatedNewItemLinks.length - 1; i >= 0; i--) {
+            if (updatedNewItemLinks[i].length === 0) {
+                updatedNewItemLinks.splice(i, 1);
             }
         }
 
-        setNewItemState({ ...newItemState, waiting: true, error: '' });
+        setNewItemState({ ...newItemState, newItemLinks: updatedNewItemLinks, waiting: true, error: '' });
         try {
-            await newListItemActionCreator(newItemBody, newItemLinks, itemType, groupId);
+            await newListItemActionCreator(newItemBody, updatedNewItemLinks, itemType, groupId);
             setNewItemState({ active: true, newItemBody: '', newItemLinks: [], waiting: false, error: '' });
         } catch (err) {
-            setNewItemState({ ...newItemState, waiting: false, error: err.response.status });
+            setNewItemState({
+                ...newItemState,
+                newItemLinks: updatedNewItemLinks,
+                waiting: false,
+                error: err.response.status,
+            });
         }
     };
 
@@ -129,6 +135,8 @@ const NewListItem: React.FC<Props> = ({ itemType, groupId, newListItemActionCrea
                                         <i className='fas fa-minus btn-simple' onClick={() => removeLink(index)}></i>
                                     </div>
                                 );
+                            } else {
+                                return null;
                             }
                         })}
                         {newItemLinks.length < maxLinks && (
