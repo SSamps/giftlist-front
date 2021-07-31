@@ -8,7 +8,7 @@ interface Props {
     shouldCloseAfterSubmit: boolean;
     submitButtonLabel: string;
     setItemFormHidden: () => void;
-    providedInitialFormState?: any;
+    providedInitialFormState?: { itemBody: string; itemLinks: string[] };
     maxLinks: number;
 }
 
@@ -29,7 +29,7 @@ const ListItemForm: React.FC<Props> = ({
 }) => {
     let initialFormState;
     if (providedInitialFormState) {
-        initialFormState = providedInitialFormState;
+        initialFormState = { ...providedInitialFormState, waiting: false, error: '' };
     } else {
         initialFormState = {
             itemBody: '',

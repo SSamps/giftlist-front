@@ -1,15 +1,32 @@
 import React, { Fragment } from 'react';
+import { TListItem } from '../../../../types/models/listItems';
 import DropdownUnderlay from '../../../dashboard/yourLists/controlBar/filters/DropdownUnderlay';
+import ListItemForm from './ListItemForm';
 
 interface Props {
-    setModifyOverlayStatus: React.Dispatch<React.SetStateAction<boolean>>;
+    hideModifyItemOverlay: () => void;
+    listItem: TListItem;
+    listId: string;
 }
 
-const ModifyListItem: React.FC<Props> = ({ setModifyOverlayStatus }) => {
+const ModifyListItem: React.FC<Props> = ({ hideModifyItemOverlay, listItem, listId }) => {
+    const submitForm = async () => {
+        console.log(listId);
+    };
+
     return (
         <Fragment>
-            <div className='basicListModifyItemOverlay'></div>
-            <DropdownUnderlay setOpen={setModifyOverlayStatus}></DropdownUnderlay>
+            <div className='basicListModifyItemOverlay'>
+                <ListItemForm
+                    submitFormData={submitForm}
+                    shouldCloseAfterSubmit={true}
+                    submitButtonLabel='Submit'
+                    setItemFormHidden={hideModifyItemOverlay}
+                    maxLinks={3}
+                    providedInitialFormState={{ itemBody: listItem.body, itemLinks: listItem.links }}
+                ></ListItemForm>
+            </div>
+            <DropdownUnderlay setOpen={hideModifyItemOverlay}></DropdownUnderlay>
         </Fragment>
     );
 };

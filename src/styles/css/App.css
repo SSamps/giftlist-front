@@ -582,10 +582,11 @@ body {
 
 .basicListModifyItemOverlay {
   position: absolute;
-  height: 30rem;
-  width: 30rem;
   z-index: 2;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: salmon; }
+  background-color: salmon;
+  border: #ccc;
+  border-style: solid;
+  border-width: thin; }

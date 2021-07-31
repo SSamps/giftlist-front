@@ -28,6 +28,10 @@ const BasicListItem: React.FC<Props> = ({ basicListItem, basicListId, deleteList
         }
     };
 
+    const hideModifyItemOverlay = () => {
+        setModifyOverlayStatus(false);
+    };
+
     const onClickModify = () => {
         setModifyOverlayStatus(true);
     };
@@ -35,7 +39,13 @@ const BasicListItem: React.FC<Props> = ({ basicListItem, basicListId, deleteList
     const { waiting } = removalStatus;
     return (
         <Fragment>
-            {modifyOverlayStatus && <ModifyListItem setModifyOverlayStatus={setModifyOverlayStatus}></ModifyListItem>}
+            {modifyOverlayStatus && (
+                <ModifyListItem
+                    hideModifyItemOverlay={hideModifyItemOverlay}
+                    listItem={basicListItem}
+                    listId={basicListId}
+                ></ModifyListItem>
+            )}
             <div className='basicListItem'>
                 <div className='basicListItem-main'>
                     <span className='basicListItem-main-body'>{basicListItem.body}</span>
