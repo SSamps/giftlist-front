@@ -18,13 +18,15 @@ interface InewItemState {
 }
 
 const NewListItem: React.FC<Props> = ({ itemType, groupId, newListItemActionCreator }) => {
-    const [newItemState, setNewItemState] = useState<InewItemState>({
+    const initialNewItemState = {
         active: false,
         newItemBody: '',
         newItemLinks: [''],
         waiting: false,
         error: '',
-    });
+    };
+
+    const [newItemState, setNewItemState] = useState<InewItemState>(initialNewItemState);
 
     console.log('render now');
     const { active, newItemBody, newItemLinks, waiting } = newItemState;
@@ -46,8 +48,7 @@ const NewListItem: React.FC<Props> = ({ itemType, groupId, newListItemActionCrea
         setNewItemState({ ...newItemState, newItemLinks: newItemLinks });
     };
 
-    const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
+    const submitForm = async () => {
         setNewItemState({ ...newItemState, waiting: true, error: '' });
         try {
             await newListItemActionCreator(newItemBody, 'newItemLinks', itemType, groupId);
@@ -57,14 +58,8 @@ const NewListItem: React.FC<Props> = ({ itemType, groupId, newListItemActionCrea
         }
     };
 
-    const onClickNew = () => {
+    const showNewItemForm = () => {
         setNewItemState({ ...newItemState, active: true });
-    };
-
-    const onRemoveLink = (index: number) => {
-        let updatedNewItemLinks = newItemLinks;
-        updatedNewItemLinks.splice(index, 1);
-        setNewItemState({ ...newItemState, newItemLinks: updatedNewItemLinks });
     };
 
     const addNewLinkField = () => {
@@ -72,17 +67,27 @@ const NewListItem: React.FC<Props> = ({ itemType, groupId, newListItemActionCrea
         setNewItemState({ ...newItemState, newItemLinks: newItemLinks });
     };
 
+    const removeLink = (index: number) => {
+        let updatedNewItemLinks = newItemLinks;
+        updatedNewItemLinks.splice(index, 1);
+        setNewItemState({ ...newItemState, newItemLinks: updatedNewItemLinks });
+    };
+
+    const hideNewItemForm = () => {
+        setNewItemState(initialNewItemState);
+    };
+
     const returnNewItemButton = () => {
         return (
             <div className='basicListNewItemButton'>
-                <i className='fas fa-plus btn-simple' onClick={onClickNew}></i>
+                <i className='fas fa-plus btn-simple' onClick={showNewItemForm}></i>
             </div>
         );
     };
     const returnNewItemForm = () => {
         return (
             <div className='basicListNewItemFormContainer'>
-                <form className='form' onSubmit={onSubmit}>
+                <form className='form'>
                     <div className='form-groupWithSideControls'>
                         <label className='form-label'>Item</label>
                         <div className='form-group-inputContainerWithSideControls'>
@@ -115,7 +120,7 @@ const NewListItem: React.FC<Props> = ({ itemType, groupId, newListItemActionCrea
                                             value={newItemLinks[index]}
                                             onChange={(e) => onChangeLinks(e, index)}
                                         />
-                                        <i className='fas fa-minus btn-simple' onClick={() => onRemoveLink(index)}></i>
+                                        <i className='fas fa-minus btn-simple' onClick={() => removeLink(index)}></i>
                                     </div>
                                 );
                             }
@@ -130,8 +135,12 @@ const NewListItem: React.FC<Props> = ({ itemType, groupId, newListItemActionCrea
                         )}
                     </div>
                     <div className='form-controls'>
-                        <span className='btn btn-primary'>Add item</span>
-                        <span className='btn btn-primary'>Cancel</span>
+                        <span className='btn btn-primary' onClick={submitForm}>
+                            Add item
+                        </span>
+                        <span className='btn btn-primary' onClick={hideNewItemForm}>
+                            Cancel
+                        </span>
                     </div>
                 </form>
 

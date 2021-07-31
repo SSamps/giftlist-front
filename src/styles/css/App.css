@@ -573,7 +573,6 @@ body {
   justify-content: center; }
 
 .basicListNewItemFormContainer {
-  background-color: aqua;
   width: calc(min(28rem, 100%));
   display: flex;
   flex-direction: column;
