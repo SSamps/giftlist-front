@@ -8,9 +8,10 @@ const DropdownUnderlay: React.FC<Props> = ({ setOpen, onSubmit }) => {
         <div
             className='underlay'
             onClick={() => {
-                {
-                    onSubmit && onSubmit();
+                if (onSubmit) {
+                    onSubmit();
                 }
+
                 setOpen(false);
             }}
         ></div>

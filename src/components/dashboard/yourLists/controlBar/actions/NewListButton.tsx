@@ -4,8 +4,7 @@ const NewListButton: React.FC = () => {
     return (
         <span className='dashboardFilterControlBar-newList'>
             <Link to='/list/newlist' className='dashboardFilterControlBar-item'>
-                {' '}
-                <i className='fas fa-plus'></i> Add a new list
+                <i className='fas fa-plus'></i> New list
             </Link>
         </span>
     );
