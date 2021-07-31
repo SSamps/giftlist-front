@@ -26,14 +26,11 @@ const BasicListItem: React.FC<Props> = ({ basicListItem, basicListId, deleteList
     };
 
     const { waiting } = removalStatus;
-
     return (
         <div className='basicListItem'>
             <div className='basicListItem-main'>
-                <span className='basicListItem-main-body'>
-                    {basicListItem.body} {basicListItem.link}
-                </span>
-                <span className='basicListItem-main-selection'>Charlotte</span>
+                <span className='basicListItem-main-body'>{basicListItem.body}</span>
+                <span className='basicListItem-main-selection'>{basicListItem.selectedBy}</span>
                 <span className='basicListItem-main-controlsContainer'>
                     {waiting ? (
                         <span>
@@ -48,8 +45,19 @@ const BasicListItem: React.FC<Props> = ({ basicListItem, basicListId, deleteList
                 </span>
             </div>
             <div className='basicListItem-links'>
-                <span className='basicListItem-links-link'>Link</span>
-                <span className='basicListItem-links-link'>Link2</span>
+                {basicListItem.links.map((link) => {
+                    let url;
+                    if (link.startsWith('http://') || link.startsWith('https://')) {
+                        url = link;
+                    } else {
+                        url = 'http://' + link;
+                    }
+                    return (
+                        <a href={url} target='_blank' rel='noreferrer noopener' className='btn-simple'>
+                            {link}
+                        </a>
+                    );
+                })}
             </div>
         </div>
     );

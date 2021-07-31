@@ -51,7 +51,7 @@ const NewListItem: React.FC<Props> = ({ itemType, groupId, newListItemActionCrea
     const submitForm = async () => {
         setNewItemState({ ...newItemState, waiting: true, error: '' });
         try {
-            await newListItemActionCreator(newItemBody, 'newItemLinks', itemType, groupId);
+            await newListItemActionCreator(newItemBody, newItemLinks, itemType, groupId);
             setNewItemState({ active: true, newItemBody: '', newItemLinks: [], waiting: false, error: '' });
         } catch (err) {
             setNewItemState({ ...newItemState, waiting: false, error: err.response.status });

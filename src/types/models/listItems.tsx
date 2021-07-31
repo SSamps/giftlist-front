@@ -1,8 +1,8 @@
 export type TListItem = {
     authorId: string;
     creationDate?: Date;
-    body: String;
-    link?: String;
+    body: string;
+    links: string[];
     selectedBy: string[];
     _id: string;
 };
@@ -10,8 +10,8 @@ export type TListItem = {
 export type TListItemCensored = {
     authorId: string;
     creationDate?: Date;
-    body: String;
-    link?: String;
+    body: string;
+    links: string[];
     _id: string;
 };
 

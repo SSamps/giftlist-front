@@ -86,13 +86,13 @@ interface InewListItemActionSuccess {
 
 export type TnewListItemActionCreator = (
     body: string,
-    link: string,
+    links: string[],
     type: 'listItem' | 'secretListItem',
     groupId: string
 ) => void;
 
 export const newListItemActionCreator =
-    (body: string, link: string, itemType: 'listItem' | 'secretListItem', groupId: string) =>
+    (body: string, links: string[], itemType: 'listItem' | 'secretListItem', groupId: string) =>
     async (dispatch: Dispatch<InewListItemActionSuccess | IlistActionError>) => {
         const config = {
             headers: {
@@ -100,7 +100,7 @@ export const newListItemActionCreator =
             },
         };
 
-        const reqBody = JSON.stringify({ [itemType]: { body, link } });
+        const reqBody = JSON.stringify({ [itemType]: { body, links } });
 
         try {
             const res = await axios.post(`/api/groups/${groupId}/items`, reqBody, config);

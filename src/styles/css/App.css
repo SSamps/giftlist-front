@@ -563,8 +563,6 @@ body {
   display: flex;
   flex-direction: column;
   padding-left: 1rem; }
-  .basicListItem-links-link {
-    color: orange; }
 
 .basicListNewItemContainer {
   margin: 1rem 0;
