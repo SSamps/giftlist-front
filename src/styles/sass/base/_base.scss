@@ -21,8 +21,17 @@ body {
 }
 
 a {
-    color: $primary-color;
     text-decoration: none;
+    color: $highlight-color;
+    cursor: pointer;
+
+    &:hover {
+        color: $highlight-hover-color;
+    }
+
+    &:active {
+        color: $highlight-active-color;
+    }
 }
 
 ul {

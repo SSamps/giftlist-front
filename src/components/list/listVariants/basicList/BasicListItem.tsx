@@ -36,6 +36,21 @@ const BasicListItem: React.FC<Props> = ({ basicListItem, basicListId, deleteList
         setModifyOverlayStatus(true);
     };
 
+    const shortenLink = (link: string) => {
+        if (link.startsWith('https://www.')) {
+            link = link.slice(12);
+        } else if (link.startsWith('http://www.')) {
+            link = link.slice(11);
+        } else if (link.startsWith('https://')) {
+            link = link.slice(8);
+        } else if (link.startsWith('http://')) {
+            link = link.slice(7);
+        } else if (link.startsWith('www.')) {
+            link = link.slice(4);
+        }
+        return link;
+    };
+
     const { waiting } = removalStatus;
     return (
         <Fragment>
@@ -71,16 +86,16 @@ const BasicListItem: React.FC<Props> = ({ basicListItem, basicListId, deleteList
                         } else {
                             url = 'http://' + link;
                         }
+                        const displayUrl = shortenLink(link);
                         return (
-                            <a
-                                href={url}
-                                target='_blank'
-                                rel='noreferrer noopener'
-                                className='btn-simple'
+                            <span
+                                className='basicListItem-links-linkContainer btn-simple'
                                 key={`${basicListItem._id}_${index}`}
                             >
-                                {link}
-                            </a>
+                                <a href={url} target='_blank' rel='noreferrer noopener'>
+                                    {displayUrl}
+                                </a>
+                            </span>
                         );
                     })}
                 </div>
