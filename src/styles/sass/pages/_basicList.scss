@@ -71,7 +71,7 @@
     grid-row: 1/2;
     grid-column: 1/4;
     display: grid;
-    grid-template-columns: 2rem auto calc(max(26%, 6rem)) 3.2rem;
+    grid-template-columns: 2rem auto 3.2rem;
     grid-template-rows: 1fr;
 
     &-select {
@@ -79,6 +79,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
+        grid-column: 1;
     }
 
     &-body {
@@ -88,18 +89,10 @@
         grid-column: 2;
     }
 
-    &-selected {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        padding: 0 0.5rem;
-        grid-column: 3;
-    }
-
     &-controlsContainer {
         display: flex;
         justify-content: center;
-        grid-column: 4;
+        grid-column: 3;
 
         &-controls {
             font-size: 1.2rem;
@@ -114,7 +107,7 @@
 .basicListItem-links {
     display: flex;
     flex-direction: column;
-    margin-left: 1rem;
+    margin-left: 2rem;
     margin-right: 3.5rem;
 
     &-linkContainer {
@@ -123,6 +116,14 @@
         white-space: nowrap;
         text-overflow: ellipsis;
     }
+}
+
+.basicListItem-selected {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 0.5rem;
+    color: $h1-color;
 }
 
 .basicListNewItemContainer {

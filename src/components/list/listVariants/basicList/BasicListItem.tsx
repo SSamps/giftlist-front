@@ -86,7 +86,6 @@ const BasicListItem: React.FC<Props> = ({ basicListItem, basicListId, deleteList
                         )}
                     </span>
                     <span className='basicListItem-main-body'>{basicListItem.body}</span>
-                    <span className='basicListItem-main-selected'>{basicListItem.selectedBy}Charlotte</span>
                     <span className='basicListItem-main-controlsContainer'>
                         {waitingRemoval ? (
                             <span>
@@ -121,6 +120,7 @@ const BasicListItem: React.FC<Props> = ({ basicListItem, basicListId, deleteList
                         );
                     })}
                 </div>
+                <div className='basicListItem-selected'>{basicListItem.selectedBy}Selected by Charlotte</div>
             </div>
         </Fragment>
     );
