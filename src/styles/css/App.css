@@ -545,20 +545,28 @@ body {
   grid-row: 1/2;
   grid-column: 1/4;
   display: grid;
-  grid-template-columns: auto calc(max(26%, 6rem)) 3.2rem;
+  grid-template-columns: 2rem auto calc(max(26%, 6rem)) 3.2rem;
   grid-template-rows: 1fr; }
+  .basicListItem-main-select {
+    color: chocolate;
+    display: flex;
+    justify-content: center;
+    align-items: center; }
   .basicListItem-main-body {
     word-wrap: break-word;
     word-break: break-all;
-    hyphens: auto; }
-  .basicListItem-main-selection {
+    hyphens: auto;
+    grid-column: 2; }
+  .basicListItem-main-selected {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 0 0.5rem; }
+    padding: 0 0.5rem;
+    grid-column: 3; }
   .basicListItem-main-controlsContainer {
     display: flex;
-    justify-content: center; }
+    justify-content: center;
+    grid-column: 4; }
     .basicListItem-main-controlsContainer-controls {
       font-size: 1.2rem;
       width: 100%;

@@ -31,6 +31,9 @@ const ListItemForm: React.FC<Props> = ({
 }) => {
     let initialFormState;
     if (providedInitialFormState) {
+        if (providedInitialFormState.itemLinks.length === 0) {
+            providedInitialFormState.itemLinks.push('');
+        }
         initialFormState = { ...providedInitialFormState, waiting: false, error: '' };
     } else {
         initialFormState = {

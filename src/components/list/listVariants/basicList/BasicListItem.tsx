@@ -13,18 +13,26 @@ interface Props {
 
 const BasicListItem: React.FC<Props> = ({ basicListItem, basicListId, deleteListItemActionCreator }) => {
     const [removalStatus, setRemovalStatus] = useState({
-        waiting: false,
+        waitingRemoval: false,
         error: '',
     });
+
+    const [selectionStatus, _] = useState({
+        selected: false,
+        waitingSelection: false,
+    });
+
+    const { waitingRemoval } = removalStatus;
+    const { selected, waitingSelection } = selectionStatus;
 
     const [modifyOverlayStatus, setModifyOverlayStatus] = useState(false);
 
     const onClickDelete = async () => {
-        setRemovalStatus({ waiting: true, error: '' });
+        setRemovalStatus({ waitingRemoval: true, error: '' });
         try {
             await deleteListItemActionCreator(basicListId, basicListItem._id);
         } catch (err) {
-            setRemovalStatus({ waiting: false, error: err.response.status });
+            setRemovalStatus({ waitingRemoval: false, error: err.response.status });
         }
     };
 
@@ -51,7 +59,6 @@ const BasicListItem: React.FC<Props> = ({ basicListItem, basicListId, deleteList
         return link;
     };
 
-    const { waiting } = removalStatus;
     return (
         <Fragment>
             {modifyOverlayStatus && (
@@ -63,10 +70,25 @@ const BasicListItem: React.FC<Props> = ({ basicListItem, basicListId, deleteList
             )}
             <div className='basicListItem'>
                 <div className='basicListItem-main'>
+                    <span className='basicListItem-main-select'>
+                        {waitingSelection ? (
+                            <span>
+                                <Spinner className='spinner-tiny'></Spinner>
+                            </span>
+                        ) : (
+                            <Fragment>
+                                {selected ? (
+                                    <i className='far fa-check-square btn-simple'></i>
+                                ) : (
+                                    <i className='far fa-square btn-simple'></i>
+                                )}
+                            </Fragment>
+                        )}
+                    </span>
                     <span className='basicListItem-main-body'>{basicListItem.body}</span>
-                    <span className='basicListItem-main-selection'>{basicListItem.selectedBy}</span>
+                    <span className='basicListItem-main-selected'>{basicListItem.selectedBy}Charlotte</span>
                     <span className='basicListItem-main-controlsContainer'>
-                        {waiting ? (
+                        {waitingRemoval ? (
                             <span>
                                 <Spinner className='spinner-tiny'></Spinner>
                             </span>
