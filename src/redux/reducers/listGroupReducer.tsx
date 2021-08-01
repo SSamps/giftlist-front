@@ -5,6 +5,7 @@ import {
     DELETE_LIST_ITEM,
     LIST_ERROR,
     LIST_RESET,
+    MODIFY_LIST_ITEM,
     NEW_LIST_ITEM,
     PARENT_LIST_GET,
 } from '../actions/actionTypes';
@@ -55,6 +56,13 @@ export default function reducer(state: IlistGroupData = initialState, action: An
                 listError: undefined,
             };
         case NEW_LIST_ITEM:
+            return {
+                ...state,
+                listLoading: false,
+                currentList: payload,
+                listError: undefined,
+            };
+        case MODIFY_LIST_ITEM:
             return {
                 ...state,
                 listLoading: false,

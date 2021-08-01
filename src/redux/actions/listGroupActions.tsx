@@ -5,6 +5,7 @@ import {
     DELETE_LIST_ITEM,
     LIST_RESET,
     NEW_LIST_ITEM,
+    MODIFY_LIST_ITEM,
 } from './actionTypes';
 import { Dispatch } from 'redux';
 import axios, { AxiosResponse } from 'axios';
@@ -106,6 +107,33 @@ export const newListItemActionCreator =
             const res = await axios.post(`/api/groups/${groupId}/items`, reqBody, config);
             dispatch({
                 type: NEW_LIST_ITEM,
+                payload: res.data,
+            });
+        } catch (err) {
+            dispatch({ type: LIST_ERROR, payload: { msg: err.response.data.msg, status: err.response.status } });
+        }
+    };
+
+interface ImodifyListItemActionSuccess {
+    type: typeof MODIFY_LIST_ITEM;
+}
+
+export type TmodifyListItemActionCreator = (body: string, links: string[], itemId: string, groupId: string) => void;
+
+export const modifyListItemActionCreator: TmodifyListItemActionCreator =
+    (body, links, itemId, groupId) => async (dispatch: Dispatch<ImodifyListItemActionSuccess | IlistActionError>) => {
+        const config = {
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        };
+
+        const reqBody = JSON.stringify({ body, links });
+
+        try {
+            const res = await axios.put(`/api/groups/${groupId}/items/${itemId}`, reqBody, config);
+            dispatch({
+                type: MODIFY_LIST_ITEM,
                 payload: res.data,
             });
         } catch (err) {

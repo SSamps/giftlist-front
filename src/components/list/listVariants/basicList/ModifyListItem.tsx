@@ -1,4 +1,6 @@
 import React, { Fragment } from 'react';
+import { connect } from 'react-redux';
+import { modifyListItemActionCreator, TmodifyListItemActionCreator } from '../../../../redux/actions/listGroupActions';
 import { TListItem } from '../../../../types/models/listItems';
 import DropdownUnderlay from '../../../dashboard/yourLists/controlBar/filters/DropdownUnderlay';
 import ListItemForm from './ListItemForm';
@@ -7,11 +9,12 @@ interface Props {
     hideModifyItemOverlay: () => void;
     listItem: TListItem;
     listId: string;
+    modifyListItemActionCreator: TmodifyListItemActionCreator;
 }
 
-const ModifyListItem: React.FC<Props> = ({ hideModifyItemOverlay, listItem, listId }) => {
-    const submitForm = async () => {
-        console.log(listId);
+const ModifyListItem: React.FC<Props> = ({ hideModifyItemOverlay, listItem, listId, modifyListItemActionCreator }) => {
+    const submitForm = async (itemBody: string, itemLinks: string[]) => {
+        await modifyListItemActionCreator(itemBody, itemLinks, listItem._id, listId);
     };
 
     return (
@@ -32,4 +35,4 @@ const ModifyListItem: React.FC<Props> = ({ hideModifyItemOverlay, listItem, list
     );
 };
 
-export default ModifyListItem;
+export default connect(null, { modifyListItemActionCreator })(ModifyListItem);
