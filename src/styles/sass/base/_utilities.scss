@@ -57,6 +57,8 @@
     position: fixed;
     top: 0;
     left: 0;
-    background-color: rgba(255, 225, 169, 0.219);
+    background-color: rgba(255, 236, 202, 0.8);
     cursor: default;
+    // The below only works on firefox but it's so much simpler than other implementations it makes the most sense for now
+    backdrop-filter: blur(0.2rem);
 }

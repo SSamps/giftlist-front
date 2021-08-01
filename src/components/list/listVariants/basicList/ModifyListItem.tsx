@@ -18,6 +18,7 @@ const ModifyListItem: React.FC<Props> = ({ hideModifyItemOverlay, listItem, list
         <Fragment>
             <div className='basicListModifyItemOverlay'>
                 <ListItemForm
+                    header={'Modify an item'}
                     submitFormData={submitForm}
                     shouldCloseAfterSubmit={true}
                     submitButtonLabel='Submit'

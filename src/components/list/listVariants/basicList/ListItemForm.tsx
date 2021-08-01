@@ -4,6 +4,7 @@ import { newListItemActionCreator } from '../../../../redux/actions/listGroupAct
 import Spinner from '../../../misc/spinner';
 
 interface Props {
+    header?: string;
     submitFormData: (itemBody: string, itemLinks: string[]) => Promise<void>;
     shouldCloseAfterSubmit: boolean;
     submitButtonLabel: string;
@@ -20,6 +21,7 @@ interface InewItemState {
 }
 
 const ListItemForm: React.FC<Props> = ({
+    header,
     submitFormData,
     shouldCloseAfterSubmit,
     submitButtonLabel,
@@ -98,7 +100,8 @@ const ListItemForm: React.FC<Props> = ({
     };
 
     return (
-        <div className='basicListNewItemFormContainer'>
+        <div className='newListItemFormContainer'>
+            {header && <span className='lead'>{header}</span>}
             <form className='form'>
                 <div className='form-groupWithSideControls'>
                     <label className='form-label'>Item</label>

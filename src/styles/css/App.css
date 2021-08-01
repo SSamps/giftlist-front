@@ -104,8 +104,9 @@ body {
   position: fixed;
   top: 0;
   left: 0;
-  background-color: rgba(255, 225, 169, 0.219);
-  cursor: default; }
+  background-color: rgba(255, 236, 202, 0.8);
+  cursor: default;
+  backdrop-filter: blur(0.2rem); }
 
 .btn {
   display: inline-block;
@@ -157,7 +158,8 @@ body {
   margin: 1rem 0rem;
   display: flex;
   flex-direction: column;
-  gap: 1rem; }
+  gap: 1rem;
+  width: 100%; }
   .form-error-message {
     color: #dc3545;
     margin-top: 0.5rem; }
@@ -581,7 +583,7 @@ body {
   display: flex;
   justify-content: center; }
 
-.basicListNewItemFormContainer {
+.newListItemFormContainer {
   width: calc(min(28rem, 100%));
   display: flex;
   flex-direction: column;
@@ -595,7 +597,8 @@ body {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: salmon;
+  width: calc(min(28rem, 100%));
+  background-color: #edf7fd;
   border: #ccc;
   border-style: solid;
   border-width: thin; }
