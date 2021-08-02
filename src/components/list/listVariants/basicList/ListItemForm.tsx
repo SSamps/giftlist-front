@@ -46,7 +46,11 @@ const ListItemForm: React.FC<Props> = ({
 
     const [itemFormState, setItemFormState] = useState<InewItemState>(initialFormState);
 
+    const initialFormErrorState = { itemError: '', linksError: '' };
+    const [formErrorState, setFormErrorState] = useState(initialFormErrorState);
+
     const { itemBody, itemLinks, waiting } = itemFormState;
+    const { itemError } = formErrorState;
 
     const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setItemFormState({ ...itemFormState, [e.target.name]: e.target.value });
@@ -76,7 +80,23 @@ const ListItemForm: React.FC<Props> = ({
         setItemFormState({ ...itemFormState, itemLinks: updatedItemLinks });
     };
 
+    const isValidFormInput = () => {
+        // revisit this later. Not handled well atm.
+
+        if (itemBody.length <= 0) {
+            setFormErrorState({ ...formErrorState, itemError: 'You must provide an item description' });
+            return false;
+        } else {
+            setFormErrorState(initialFormErrorState);
+            return true;
+        }
+    };
+
     const submitForm = async () => {
+        if (!isValidFormInput()) {
+            return;
+        }
+
         let updatedItemLinks = Array.from(itemLinks);
         for (let i = updatedItemLinks.length - 1; i >= 0; i--) {
             if (updatedItemLinks[i].length === 0) {
@@ -109,8 +129,9 @@ const ListItemForm: React.FC<Props> = ({
                 <div className='form-groupWithSideControls'>
                     <label className='form-label'>Item</label>
                     <div className='form-group-inputContainerWithSideControls'>
-                        <input type='text' name='itemBody' value={itemBody} onChange={onChange} required />
+                        <input type='text' name='itemBody' value={itemBody} onChange={onChange} />
                     </div>
+                    {itemError && <p className='form-error-message'>{itemError}</p>}
                 </div>
                 <div className='form-groupWithSideControls'>
                     <label className='form-label'>{'Link (optional)'}</label>

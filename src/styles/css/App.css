@@ -548,7 +548,6 @@ body {
   grid-template-columns: 2rem auto 3.2rem;
   grid-template-rows: 1fr; }
   .basicListItem-main-select {
-    color: chocolate;
     display: flex;
     justify-content: center;
     align-items: center;
