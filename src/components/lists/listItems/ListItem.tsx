@@ -128,6 +128,29 @@ const ListItem: React.FC<Props> = ({
         }
     };
 
+    const renderLinks = () => {
+        return (
+            <div className='basicListItem-links'>
+                {listItem.links.map((link, index) => {
+                    let url;
+                    if (link.startsWith('http://') || link.startsWith('https://')) {
+                        url = link;
+                    } else {
+                        url = 'http://' + link;
+                    }
+                    const displayUrl = shortenLink(link);
+                    return (
+                        <span className='basicListItem-links-linkContainer btn-simple' key={`${listItem._id}_${index}`}>
+                            <a href={url} target='_blank' rel='noreferrer noopener'>
+                                {displayUrl}
+                            </a>
+                        </span>
+                    );
+                })}
+            </div>
+        );
+    };
+
     return (
         <Fragment>
             {modifyOverlayStatus && (
@@ -154,27 +177,7 @@ const ListItem: React.FC<Props> = ({
                         )}
                     </span>
                 </div>
-                <div className='basicListItem-links'>
-                    {listItem.links.map((link, index) => {
-                        let url;
-                        if (link.startsWith('http://') || link.startsWith('https://')) {
-                            url = link;
-                        } else {
-                            url = 'http://' + link;
-                        }
-                        const displayUrl = shortenLink(link);
-                        return (
-                            <span
-                                className='basicListItem-links-linkContainer btn-simple'
-                                key={`${listItem._id}_${index}`}
-                            >
-                                <a href={url} target='_blank' rel='noreferrer noopener'>
-                                    {displayUrl}
-                                </a>
-                            </span>
-                        );
-                    })}
-                </div>
+                {renderLinks()}
                 {renderSelectedByElement()}
             </div>
         </Fragment>
