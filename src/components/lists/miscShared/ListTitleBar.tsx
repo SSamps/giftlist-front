@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { TbasicListFields, TgiftListFields } from '../../../../types/models/listGroups';
+import { TbasicListFields, TgiftListFields } from '../../../types/models/listGroups';
 
 interface Props {
     currentList: TgiftListFields | TbasicListFields;

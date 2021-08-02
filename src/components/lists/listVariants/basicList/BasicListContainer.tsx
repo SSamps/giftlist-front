@@ -3,9 +3,9 @@ import { connect } from 'react-redux';
 import { IrootStateAuthed } from '../../../../redux/reducers/root/rootReducer';
 import { TbasicListFields } from '../../../../types/models/listGroups';
 
-import BasicListItem from './BasicListItem';
-import ListTitleBar from './ListTitleBar';
-import NewListItem from './NewListItem';
+import ListTitleBar from '../../miscShared/ListTitleBar';
+import NewListItem from '../../listItems/NewListItem';
+import BasicListItem from '../../listItems/BasicListItem';
 
 interface Props {
     currentList: TbasicListFields | undefined;

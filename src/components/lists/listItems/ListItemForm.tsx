@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { newListItemActionCreator } from '../../../../redux/actions/listGroupActions';
-import Spinner from '../../../misc/spinner';
+import { newListItemActionCreator } from '../../../redux/actions/listGroupActions';
+import Spinner from '../../misc/spinner';
 
 interface Props {
     header?: string;

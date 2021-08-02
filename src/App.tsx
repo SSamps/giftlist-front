@@ -20,7 +20,7 @@ import { loadUserActionCreator } from './redux/actions/authActions';
 import axios from 'axios';
 import setAuthToken from './utils/setAuthToken';
 import { LOGOUT } from './redux/actions/actionTypes';
-import ListPage from './components/list/ListPage';
+import ListPage from './components/lists/ListPage';
 import NewListPage from './components/newList/NewListPage';
 import Verify from './components/verify/Verify';
 import VerifiedRoute from './components/routing/VerifiedRoute';

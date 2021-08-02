@@ -1,13 +1,14 @@
 import React, { Fragment, useState } from 'react';
 import { connect } from 'react-redux';
-import { TbasicListItem } from '../../../../types/models/listItems';
-import Spinner from '../../../misc/spinner';
+
 import {
     deleteListItemActionCreator,
     selectListItemActionCreator,
     TdeleteListItemActionCreator,
     TselectListItemActionCreator,
-} from '../../../../redux/actions/listGroupActions';
+} from '../../../redux/actions/listGroupActions';
+import { TbasicListItem } from '../../../types/models/listItems';
+import Spinner from '../../misc/spinner';
 import ModifyListItem from './ModifyListItem';
 
 interface Props {

@@ -13,7 +13,7 @@ import { TListGroupAnyFields } from '../../types/models/listGroups';
 import Spinner from '../misc/spinner';
 import BasicListContainer from './listVariants/basicList/BasicListContainer';
 import GiftGroupChildContainer from './listVariants/giftGroup/GiftGroupChildContainer';
-import GiftGroupContainer from './listVariants//giftGroup/GiftGroupContainer';
+import GiftGroupContainer from './listVariants/giftGroup/GiftGroupContainer';
 import GiftListContainer from './listVariants/giftList/GiftListContainer';
 
 interface Props extends IlistGroupData {

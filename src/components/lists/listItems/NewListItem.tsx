@@ -1,6 +1,6 @@
 import React, { Fragment, useState } from 'react';
 import { connect } from 'react-redux';
-import { newListItemActionCreator, TnewListItemActionCreator } from '../../../../redux/actions/listGroupActions';
+import { newListItemActionCreator, TnewListItemActionCreator } from '../../../redux/actions/listGroupActions';
 import ListItemForm from './ListItemForm';
 
 interface Props {
