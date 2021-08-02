@@ -104,9 +104,11 @@ const ListItemForm: React.FC<Props> = ({
             }
         }
 
-        setItemFormState({ ...itemFormState, itemLinks: updatedItemLinks, waiting: true, error: '' });
+        setItemFormState({ ...itemFormState, waiting: true });
+
         try {
             await submitFormData(itemBody, updatedItemLinks);
+
             if (shouldCloseAfterSubmit) {
                 setItemFormHidden();
             } else {
