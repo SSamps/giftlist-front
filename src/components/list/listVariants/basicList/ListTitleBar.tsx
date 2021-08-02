@@ -1,8 +1,8 @@
 import React, { Fragment } from 'react';
-import { TListGroupAnyFields } from '../../../../types/models/listGroups';
+import { TbasicListFields, TgiftListFields } from '../../../../types/models/listGroups';
 
 interface Props {
-    currentList: TListGroupAnyFields;
+    currentList: TgiftListFields | TbasicListFields;
 }
 
 const ListTitleBar: React.FC<Props> = ({ currentList }) => {

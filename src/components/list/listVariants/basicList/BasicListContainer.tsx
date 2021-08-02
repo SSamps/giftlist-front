@@ -1,14 +1,14 @@
 import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 import { IrootStateAuthed } from '../../../../redux/reducers/root/rootReducer';
-import { TListGroupAnyFields } from '../../../../types/models/listGroups';
+import { TbasicListFields } from '../../../../types/models/listGroups';
 
 import BasicListItem from './BasicListItem';
 import ListTitleBar from './ListTitleBar';
 import NewListItem from './NewListItem';
 
 interface Props {
-    currentList: TListGroupAnyFields | undefined;
+    currentList: TbasicListFields | undefined;
 }
 
 const BasicListContainer: React.FC<Props> = ({ currentList }) => {

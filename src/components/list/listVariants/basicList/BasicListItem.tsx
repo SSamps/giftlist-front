@@ -1,31 +1,41 @@
 import React, { Fragment, useState } from 'react';
 import { connect } from 'react-redux';
-import { TListItem } from '../../../../types/models/listItems';
+import { TbasicListItem } from '../../../../types/models/listItems';
 import Spinner from '../../../misc/spinner';
-import { deleteListItemActionCreator, TdeleteListItemActionCreator } from '../../../../redux/actions/listGroupActions';
+import {
+    deleteListItemActionCreator,
+    selectListItemActionCreator,
+    TdeleteListItemActionCreator,
+    TselectListItemActionCreator,
+} from '../../../../redux/actions/listGroupActions';
 import ModifyListItem from './ModifyListItem';
 
 interface Props {
-    basicListItem: TListItem;
+    basicListItem: TbasicListItem;
     basicListId: string;
     deleteListItemActionCreator: TdeleteListItemActionCreator;
+    selectListItemActionCreator: TselectListItemActionCreator;
 }
 
-const BasicListItem: React.FC<Props> = ({ basicListItem, basicListId, deleteListItemActionCreator }) => {
+const BasicListItem: React.FC<Props> = ({
+    basicListItem,
+    basicListId,
+    deleteListItemActionCreator,
+    selectListItemActionCreator,
+}) => {
     const [removalStatus, setRemovalStatus] = useState({
         waitingRemoval: false,
         error: '',
     });
 
-    const [selectionStatus, _] = useState({
-        selected: false,
+    const [selectionStatus, setSelectionStatus] = useState({
         waitingSelection: false,
     });
 
-    const { waitingRemoval } = removalStatus;
-    const { selected, waitingSelection } = selectionStatus;
-
     const [modifyOverlayStatus, setModifyOverlayStatus] = useState(false);
+
+    const { waitingRemoval } = removalStatus;
+    const { waitingSelection } = selectionStatus;
 
     const onClickDelete = async () => {
         setRemovalStatus({ waitingRemoval: true, error: '' });
@@ -59,6 +69,13 @@ const BasicListItem: React.FC<Props> = ({ basicListItem, basicListId, deleteList
         return link;
     };
 
+    const toggleSelected = async () => {
+        setSelectionStatus({ waitingSelection: true });
+        const action = basicListItem.selected ? 'DESELECT' : 'SELECT';
+        await selectListItemActionCreator(action, basicListItem._id, basicListId);
+        setSelectionStatus({ waitingSelection: false });
+    };
+
     return (
         <Fragment>
             {modifyOverlayStatus && (
@@ -77,10 +94,10 @@ const BasicListItem: React.FC<Props> = ({ basicListItem, basicListId, deleteList
                             </span>
                         ) : (
                             <Fragment>
-                                {selected ? (
-                                    <i className='far fa-check-square btn-simple'></i>
+                                {basicListItem.selected ? (
+                                    <i className='far fa-check-square btn-simple' onClick={toggleSelected}></i>
                                 ) : (
-                                    <i className='far fa-square btn-simple'></i>
+                                    <i className='far fa-square btn-simple' onClick={toggleSelected}></i>
                                 )}
                             </Fragment>
                         )}
@@ -120,10 +137,10 @@ const BasicListItem: React.FC<Props> = ({ basicListItem, basicListId, deleteList
                         );
                     })}
                 </div>
-                <div className='basicListItem-selected'>{basicListItem.selectedBy}Selected by Charlotte</div>
+                {/* <div className='basicListItem-selected'>{basicListItem.selectedBy}Selected by Charlotte</div> */}
             </div>
         </Fragment>
     );
 };
 
-export default connect(null, { deleteListItemActionCreator })(BasicListItem);
+export default connect(null, { deleteListItemActionCreator, selectListItemActionCreator })(BasicListItem);

@@ -6,6 +6,7 @@ import {
     LIST_RESET,
     NEW_LIST_ITEM,
     MODIFY_LIST_ITEM,
+    SELECT_LIST_ITEM,
 } from './actionTypes';
 import { Dispatch } from 'redux';
 import axios, { AxiosResponse } from 'axios';
@@ -134,6 +135,34 @@ export const modifyListItemActionCreator: TmodifyListItemActionCreator =
             const res = await axios.put(`/api/groups/${groupId}/items/${itemId}`, reqBody, config);
             dispatch({
                 type: MODIFY_LIST_ITEM,
+                payload: res.data,
+            });
+        } catch (err) {
+            dispatch({ type: LIST_ERROR, payload: { msg: err.response.data.msg, status: err.response.status } });
+        }
+    };
+
+interface IselectListItemActionSuccess {
+    type: typeof SELECT_LIST_ITEM;
+}
+
+export type TselectListItemActionCreator = (action: 'SELECT' | 'DESELECT', itemId: string, groupId: string) => void;
+
+export const selectListItemActionCreator: TselectListItemActionCreator =
+    (action, itemId, groupId) => async (dispatch: Dispatch<IselectListItemActionSuccess | IlistActionError>) => {
+        const config = {
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        };
+
+        const reqBody = JSON.stringify({ action: action });
+
+        try {
+            const res = await axios.put(`/api/groups/${groupId}/items/${itemId}/select`, reqBody, config);
+            console.log(res.data);
+            dispatch({
+                type: SELECT_LIST_ITEM,
                 payload: res.data,
             });
         } catch (err) {

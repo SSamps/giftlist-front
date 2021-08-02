@@ -1,4 +1,4 @@
-export type TListItem = {
+export type TgiftListItem = {
     authorId: string;
     creationDate?: Date;
     body: string;
@@ -7,11 +7,20 @@ export type TListItem = {
     _id: string;
 };
 
-export type TListItemCensored = {
+export type TgiftListItemCensored = {
     authorId: string;
     creationDate?: Date;
     body: string;
     links: string[];
+    _id: string;
+};
+
+export type TbasicListItem = {
+    authorId: string;
+    creationDate?: Date;
+    body: string;
+    links: string[];
+    selected: boolean;
     _id: string;
 };
 

@@ -8,6 +8,7 @@ import {
     MODIFY_LIST_ITEM,
     NEW_LIST_ITEM,
     PARENT_LIST_GET,
+    SELECT_LIST_ITEM,
 } from '../actions/actionTypes';
 
 export interface IlistGroupData {
@@ -63,6 +64,13 @@ export default function reducer(state: IlistGroupData = initialState, action: An
                 listError: undefined,
             };
         case MODIFY_LIST_ITEM:
+            return {
+                ...state,
+                listLoading: false,
+                currentList: payload,
+                listError: undefined,
+            };
+        case SELECT_LIST_ITEM:
             return {
                 ...state,
                 listLoading: false,

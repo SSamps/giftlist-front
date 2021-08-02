@@ -1,13 +1,13 @@
 import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 import { modifyListItemActionCreator, TmodifyListItemActionCreator } from '../../../../redux/actions/listGroupActions';
-import { TListItem } from '../../../../types/models/listItems';
+import { TbasicListItem, TgiftListItem } from '../../../../types/models/listItems';
 import DropdownUnderlay from '../../../dashboard/yourLists/controlBar/filters/DropdownUnderlay';
 import ListItemForm from './ListItemForm';
 
 interface Props {
     hideModifyItemOverlay: () => void;
-    listItem: TListItem;
+    listItem: TgiftListItem | TbasicListItem;
     listId: string;
     modifyListItemActionCreator: TmodifyListItemActionCreator;
 }
