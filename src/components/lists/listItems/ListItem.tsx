@@ -7,20 +7,24 @@ import {
     TdeleteListItemActionCreator,
     TselectListItemActionCreator,
 } from '../../../redux/actions/listGroupActions';
-import { TbasicListItem } from '../../../types/models/listItems';
+import { IbasicListItem, IgiftListItemCensored } from '../../../types/models/listItems';
 import Spinner from '../../misc/spinner';
 import ModifyListItem from './ModifyListItem';
 
 interface Props {
-    basicListItem: TbasicListItem;
-    basicListId: string;
+    userId: string;
+    listItem: IbasicListItem | IgiftListItemCensored;
+    listId: string;
+    allowSelection: boolean;
     deleteListItemActionCreator: TdeleteListItemActionCreator;
     selectListItemActionCreator: TselectListItemActionCreator;
 }
 
-const BasicListItem: React.FC<Props> = ({
-    basicListItem,
-    basicListId,
+const ListItem: React.FC<Props> = ({
+    userId,
+    listItem,
+    listId,
+    allowSelection,
     deleteListItemActionCreator,
     selectListItemActionCreator,
 }) => {
@@ -41,7 +45,7 @@ const BasicListItem: React.FC<Props> = ({
     const onClickDelete = async () => {
         setRemovalStatus({ waitingRemoval: true, error: '' });
         try {
-            await deleteListItemActionCreator(basicListId, basicListItem._id);
+            await deleteListItemActionCreator(listId, listItem._id);
         } catch (err) {
             setRemovalStatus({ waitingRemoval: false, error: err.response.status });
         }
@@ -70,11 +74,58 @@ const BasicListItem: React.FC<Props> = ({
         return link;
     };
 
+    const isSelected = () => {
+        if ('selected' in listItem) {
+            return listItem.selected;
+        } else {
+            return listItem.selectedBy?.includes(userId);
+        }
+    };
+
     const toggleSelected = async () => {
         setSelectionStatus({ waitingSelection: true });
-        const action = basicListItem.selected ? 'DESELECT' : 'SELECT';
-        await selectListItemActionCreator(action, basicListItem._id, basicListId);
+        const action = isSelected() ? 'DESELECT' : 'SELECT';
+        await selectListItemActionCreator(action, listItem._id, listId);
         setSelectionStatus({ waitingSelection: false });
+    };
+
+    const renderSelectionButton = () => {
+        return (
+            allowSelection && (
+                <span className='basicListItem-main-select'>
+                    {waitingSelection ? (
+                        <span>
+                            <Spinner className='spinner-tiny'></Spinner>
+                        </span>
+                    ) : (
+                        <Fragment>
+                            {isSelected() ? (
+                                <i className='far fa-check-square btn-simple' onClick={toggleSelected}></i>
+                            ) : (
+                                <i className='far fa-square btn-simple' onClick={toggleSelected}></i>
+                            )}
+                        </Fragment>
+                    )}
+                </span>
+            )
+        );
+    };
+
+    const renderSelectedByElement = () => {
+        if (!allowSelection || !('selectedBy' in listItem) || listItem.selectedBy === undefined) {
+            return null;
+        }
+
+        const numSelected = listItem.selectedBy.length;
+
+        // TODO also need to actually fetch the names - selectedBy is IDs at the moment.
+
+        if (numSelected === 1) {
+            return <div className='basicListItem-selected'>Selected by + {listItem.selectedBy[0]}</div>;
+        } else if (numSelected > 1) {
+            // TODO Make this clickable and show an overlay of the individuals
+            return <div className='basicListItem-selected'>Shared by + {numSelected} people</div>;
+        }
     };
 
     return (
@@ -82,28 +133,14 @@ const BasicListItem: React.FC<Props> = ({
             {modifyOverlayStatus && (
                 <ModifyListItem
                     hideModifyItemOverlay={hideModifyItemOverlay}
-                    listItem={basicListItem}
-                    listId={basicListId}
+                    listItem={listItem}
+                    listId={listId}
                 ></ModifyListItem>
             )}
             <div className='basicListItem'>
                 <div className='basicListItem-main'>
-                    <span className='basicListItem-main-select'>
-                        {waitingSelection ? (
-                            <span>
-                                <Spinner className='spinner-tiny'></Spinner>
-                            </span>
-                        ) : (
-                            <Fragment>
-                                {basicListItem.selected ? (
-                                    <i className='far fa-check-square btn-simple' onClick={toggleSelected}></i>
-                                ) : (
-                                    <i className='far fa-square btn-simple' onClick={toggleSelected}></i>
-                                )}
-                            </Fragment>
-                        )}
-                    </span>
-                    <span className='basicListItem-main-body'>{basicListItem.body}</span>
+                    {renderSelectionButton()}
+                    <span className='basicListItem-main-body'>{listItem.body}</span>
                     <span className='basicListItem-main-controlsContainer'>
                         {waitingRemoval ? (
                             <span>
@@ -118,7 +155,7 @@ const BasicListItem: React.FC<Props> = ({
                     </span>
                 </div>
                 <div className='basicListItem-links'>
-                    {basicListItem.links.map((link, index) => {
+                    {listItem.links.map((link, index) => {
                         let url;
                         if (link.startsWith('http://') || link.startsWith('https://')) {
                             url = link;
@@ -129,7 +166,7 @@ const BasicListItem: React.FC<Props> = ({
                         return (
                             <span
                                 className='basicListItem-links-linkContainer btn-simple'
-                                key={`${basicListItem._id}_${index}`}
+                                key={`${listItem._id}_${index}`}
                             >
                                 <a href={url} target='_blank' rel='noreferrer noopener'>
                                     {displayUrl}
@@ -138,10 +175,10 @@ const BasicListItem: React.FC<Props> = ({
                         );
                     })}
                 </div>
-                {/* <div className='basicListItem-selected'>{basicListItem.selectedBy}Selected by Charlotte</div> */}
+                {renderSelectedByElement()}
             </div>
         </Fragment>
     );
 };
 
-export default connect(null, { deleteListItemActionCreator, selectListItemActionCreator })(BasicListItem);
+export default connect(null, { deleteListItemActionCreator, selectListItemActionCreator })(ListItem);

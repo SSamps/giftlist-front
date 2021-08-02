@@ -1,27 +1,28 @@
-export type TgiftListItem = {
+export interface TgiftListItem {
     authorId: string;
     creationDate?: Date;
     body: string;
     links: string[];
     selectedBy: string[];
     _id: string;
-};
+}
 
-export type TgiftListItemCensored = {
+export interface IgiftListItemCensored {
     authorId: string;
     creationDate?: Date;
     body: string;
     links: string[];
+    selectedBy?: string[];
     _id: string;
-};
+}
 
-export type TbasicListItem = {
+export interface IbasicListItem {
     authorId: string;
     creationDate?: Date;
     body: string;
     links: string[];
     selected: boolean;
     _id: string;
-};
+}
 
 export type TitemTypes = 'listItem' | 'secretListItem';

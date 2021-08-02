@@ -5,13 +5,15 @@ import { TbasicListFields } from '../../../../types/models/listGroups';
 
 import ListTitleBar from '../../miscShared/ListTitleBar';
 import NewListItem from '../../listItems/NewListItem';
-import BasicListItem from '../../listItems/BasicListItem';
+import ListItem from '../../listItems/ListItem';
+import { IUser } from '../../../../types/models/User';
 
 interface Props {
     currentList: TbasicListFields | undefined;
+    user: IUser;
 }
 
-const BasicListContainer: React.FC<Props> = ({ currentList }) => {
+const BasicListContainer: React.FC<Props> = ({ currentList, user }) => {
     return (
         <Fragment>
             {currentList && (
@@ -20,11 +22,13 @@ const BasicListContainer: React.FC<Props> = ({ currentList }) => {
                     <div className='basicListItemContainer'>
                         {currentList.listItems.map((item) => {
                             return (
-                                <BasicListItem
+                                <ListItem
                                     key={item._id}
-                                    basicListItem={item}
-                                    basicListId={currentList._id}
-                                ></BasicListItem>
+                                    listItem={item}
+                                    listId={currentList._id}
+                                    userId={user._id}
+                                    allowSelection={true}
+                                ></ListItem>
                             );
                         })}
                     </div>

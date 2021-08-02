@@ -5,7 +5,7 @@ import {
     TYPE_PERM_GIFT_GROUP_CHILD_ALL,
     TYPE_PERM_GIFT_LIST_ALL,
 } from '../listGroupPermissions';
-import { TbasicListItem, TgiftListItem, TgiftListItemCensored } from './listItems';
+import { IbasicListItem, TgiftListItem, IgiftListItemCensored } from './listItems';
 
 // Shared
 type TlistGroupBaseFields = { groupName: string; creationDate?: Date; groupVariant: string; _id: string };
@@ -26,7 +26,7 @@ type TbasicListExtraFields = {
     owner: IbasicListMember;
     members: [IbasicListMember];
     maxListItems: Number;
-    listItems: TbasicListItem[];
+    listItems: IbasicListItem[];
 };
 
 export type TbasicListFields = TlistGroupBaseFields & TbasicListExtraFields;
@@ -49,7 +49,7 @@ type TgiftListExtraFieldsCensored = {
     owner: IgiftListMember;
     members: [IgiftListMember];
     maxListItems: Number;
-    listItems: TgiftListItemCensored[];
+    listItems: IgiftListItemCensored[];
     maxSecretListItemsEach: Number;
 };
 
@@ -89,7 +89,7 @@ type TgiftGroupChildExtraFieldsCensored = {
     members: [IgiftGroupChildMember];
     parentGroupId: string;
     maxListItems: Number;
-    listItems: TgiftListItemCensored[];
+    listItems: IgiftListItemCensored[];
     maxSecretListItemsEach: Number;
 };
 
