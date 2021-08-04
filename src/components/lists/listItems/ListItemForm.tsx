@@ -31,10 +31,10 @@ const ListItemForm: React.FC<Props> = ({
 }) => {
     let initialFormState;
     if (providedInitialFormState) {
-        if (providedInitialFormState.itemLinks.length === 0) {
-            providedInitialFormState.itemLinks.push('');
-        }
         initialFormState = { ...providedInitialFormState, waiting: false, error: '' };
+        if (initialFormState.itemLinks.length === 0) {
+            initialFormState.itemLinks = [''];
+        }
     } else {
         initialFormState = {
             itemBody: '',
@@ -115,6 +115,7 @@ const ListItemForm: React.FC<Props> = ({
                 setItemFormState({ itemBody: '', itemLinks: [''], waiting: false, error: '' });
             }
         } catch (err) {
+            console.log('error: ', err);
             setItemFormState({
                 ...itemFormState,
                 itemLinks: updatedItemLinks,

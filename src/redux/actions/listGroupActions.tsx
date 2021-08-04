@@ -106,7 +106,6 @@ export const newListItemActionCreator =
 
         try {
             const res = await axios.post(`/api/groups/${groupId}/items`, reqBody, config);
-            console.log('New item response: ', res.data);
 
             dispatch({
                 type: NEW_LIST_ITEM,
@@ -135,13 +134,13 @@ export const modifyListItemActionCreator: TmodifyListItemActionCreator =
 
         try {
             const res = await axios.put(`/api/groups/${groupId}/items/${itemId}`, reqBody, config);
-            console.log('Modified item response: ', res.data);
 
             dispatch({
                 type: MODIFY_LIST_ITEM,
                 payload: res.data,
             });
         } catch (err) {
+            console.error(err);
             dispatch({ type: LIST_ERROR, payload: { msg: err.response.data.msg, status: err.response.status } });
         }
     };
