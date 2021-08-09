@@ -611,3 +611,11 @@ body {
   border: #ccc;
   border-style: solid;
   border-width: thin; }
+
+.basicListDeleteItemsContainer {
+  margin-top: 2rem;
+  width: calc(min(20rem, 80%));
+  display: flex;
+  justify-content: space-between; }
+  .basicListDeleteItemsContainer-button {
+    width: 7rem; }

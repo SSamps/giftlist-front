@@ -7,6 +7,7 @@ import ListTitleBar from '../../miscShared/ListTitleBar';
 import NewListItem from '../../listItems/NewListItem';
 import ListItem from '../../listItems/ListItem';
 import { IUser } from '../../../../types/models/User';
+import BasicListDeleteItems from './BasicListDeleteItems';
 
 interface Props {
     currentList: TbasicListFields | undefined;
@@ -37,6 +38,7 @@ const BasicListContainer: React.FC<Props> = ({ currentList, user }) => {
                             <NewListItem itemType='listItem' groupId={currentList._id}></NewListItem>
                         )}
                     </div>
+                    <BasicListDeleteItems></BasicListDeleteItems>
                 </div>
             )}
         </Fragment>
