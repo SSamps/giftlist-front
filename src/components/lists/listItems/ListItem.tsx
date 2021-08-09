@@ -45,7 +45,7 @@ const ListItem: React.FC<Props> = ({
     const onClickDelete = async () => {
         setRemovalStatus({ waitingRemoval: true, error: '' });
         try {
-            await deleteListItemActionCreator(listId, listItem._id);
+            await deleteListItemActionCreator(listId, [listItem._id]);
         } catch (err) {
             setRemovalStatus({ waitingRemoval: false, error: err.response.status });
         }

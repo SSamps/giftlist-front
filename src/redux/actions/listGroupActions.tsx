@@ -56,13 +56,20 @@ interface IdeleteListItemActionSuccess {
     payload?: TListGroupAnyFields;
 }
 
-export type TdeleteListItemActionCreator = (listId: string, listItemId: string) => void;
+export type TdeleteListItemActionCreator = (listId: string, listItemIds: string[]) => void;
 
 export const deleteListItemActionCreator =
-    (listId: string, listItemId: string) =>
+    (listId: string, listItemIds: string[]) =>
     async (dispatch: Dispatch<IdeleteListItemActionSuccess | IlistActionError>) => {
+        const config = {
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            data: { itemsToDelete: listItemIds },
+        };
+
         try {
-            let res = await axios.delete(`/api/groups/${listId}/items/${listItemId}`);
+            let res = await axios.delete(`/api/groups/${listId}/items`, config);
             dispatch({
                 type: DELETE_LIST_ITEM,
                 payload: res.data,
