@@ -38,7 +38,7 @@ const BasicListContainer: React.FC<Props> = ({ currentList, user }) => {
                             <NewListItem itemType='listItem' groupId={currentList._id}></NewListItem>
                         )}
                     </div>
-                    <BasicListDeleteItems></BasicListDeleteItems>
+                    <BasicListDeleteItems currentList={currentList}></BasicListDeleteItems>
                 </div>
             )}
         </Fragment>

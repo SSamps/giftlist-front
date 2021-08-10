@@ -15,7 +15,7 @@ export interface IlistGroupData {
     listLoading: boolean;
     currentList: undefined | TListGroupAnyFields;
     parentList: undefined | TListGroupAnyFields;
-    listError: undefined | { response: { status: number; data: string } };
+    listError: undefined | { status: number; data: string };
 }
 
 const initialState = {

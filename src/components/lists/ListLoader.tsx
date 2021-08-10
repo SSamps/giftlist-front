@@ -67,7 +67,7 @@ const ListLoader: React.FC<Props> = ({
                 <Spinner className='spinner-tiny'></Spinner>
             ) : listError ? (
                 <div>
-                    {listError.response?.status} {listError.response?.data}
+                    {listError.status} {listError.data}
                 </div>
             ) : parentList ? (
                 parentListSwitch(parentList)
