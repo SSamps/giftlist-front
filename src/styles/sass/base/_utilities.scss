@@ -47,22 +47,3 @@
     justify-content: center;
     align-items: center;
 }
-
-.underlay {
-    height: 100%;
-    width: 100%;
-    margin: 0;
-    padding: 0;
-    z-index: 1;
-    position: fixed;
-    top: 0;
-    left: 0;
-
-    cursor: default;
-    // The below only works on firefox but it's so much simpler than other implementations it makes the most sense for now
-
-    &-focus {
-        backdrop-filter: blur(0.2rem);
-        background-color: rgba(255, 236, 202, 0.8);
-    }
-}

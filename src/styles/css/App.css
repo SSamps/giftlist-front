@@ -95,20 +95,6 @@ body {
   justify-content: center;
   align-items: center; }
 
-.underlay {
-  height: 100%;
-  width: 100%;
-  margin: 0;
-  padding: 0;
-  z-index: 1;
-  position: fixed;
-  top: 0;
-  left: 0;
-  cursor: default; }
-  .underlay-focus {
-    backdrop-filter: blur(0.2rem);
-    background-color: rgba(255, 236, 202, 0.8); }
-
 .btn {
   display: inline-block;
   background: #f4f4f4;
@@ -244,6 +230,44 @@ body {
     border-top-width: thin;
     margin-top: 1rem;
     padding-top: 0.5rem; }
+
+.overlay {
+  position: absolute;
+  z-index: 2;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: calc(min(28rem, 95%));
+  background-color: #edf7fd;
+  border: #ccc;
+  border-style: solid;
+  border-width: thin; }
+
+.overlayContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem 0rem;
+  gap: 1rem; }
+  .overlayContainer-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    width: 100%; }
+
+.underlay {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  z-index: 1;
+  position: fixed;
+  top: 0;
+  left: 0;
+  cursor: default; }
+  .underlay-focus {
+    backdrop-filter: blur(0.2rem);
+    background-color: rgba(255, 236, 202, 0.8); }
 
 .navbar {
   display: flex;
@@ -616,18 +640,6 @@ body {
   text-align: center;
   align-items: center; }
 
-.basicListOverlay {
-  position: absolute;
-  z-index: 2;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: calc(min(28rem, 95%));
-  background-color: #edf7fd;
-  border: #ccc;
-  border-style: solid;
-  border-width: thin; }
-
 .basicListDeleteItemsContainer {
   margin-top: 2rem;
   width: calc(min(20rem, 80%));
@@ -635,15 +647,3 @@ body {
   justify-content: space-between; }
   .basicListDeleteItemsContainer-button {
     width: 7rem; }
-
-.basicListDeleteItemsOverlayContainer {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 1rem 0rem;
-  gap: 1rem; }
-  .basicListDeleteItemsOverlayContainer-buttons {
-    display: flex;
-    justify-content: center;
-    gap: 2rem;
-    width: 100%; }

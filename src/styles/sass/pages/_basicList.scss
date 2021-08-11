@@ -151,19 +151,6 @@
     align-items: center;
 }
 
-.basicListOverlay {
-    position: absolute;
-    z-index: 2;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: calc(min(28rem, 95%));
-    background-color: $content-background-color;
-    border: $border-color;
-    border-style: solid;
-    border-width: thin;
-}
-
 .basicListDeleteItemsContainer {
     margin-top: 2rem;
     width: calc(min(20rem, 80%));
@@ -172,20 +159,5 @@
 
     &-button {
         width: 7rem;
-    }
-}
-
-.basicListDeleteItemsOverlayContainer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 1rem 0rem;
-    gap: 1rem;
-
-    &-buttons {
-        display: flex;
-        justify-content: center;
-        gap: 2rem;
-        width: 100%;
     }
 }

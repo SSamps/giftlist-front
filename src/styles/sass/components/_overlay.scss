@@ -1,0 +1,46 @@
+.overlay {
+    position: absolute;
+    z-index: 2;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: calc(min(28rem, 95%));
+    background-color: $content-background-color;
+    border: $border-color;
+    border-style: solid;
+    border-width: thin;
+}
+
+.overlayContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem 0rem;
+    gap: 1rem;
+
+    &-buttons {
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+        width: 100%;
+    }
+}
+
+.underlay {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    z-index: 1;
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    cursor: default;
+    // The below only works on firefox but it's so much simpler than other implementations it makes the most sense for now
+
+    &-focus {
+        backdrop-filter: blur(0.2rem);
+        background-color: rgba(255, 236, 202, 0.8);
+    }
+}

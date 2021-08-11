@@ -1,16 +1,9 @@
-import { Fragment, useEffect } from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { useEffect } from 'react';
+import { BrowserRouter as Router } from 'react-router-dom';
 import './styles/css/App.css';
 
 // Components
 import Navbar from './components/layout/Navbar';
-import Landing from './components/layout/Landing';
-import Login from './components/auth/Login';
-import Register from './components/auth/Register';
-import Dashboard from './components/dashboard/Dashboard';
-import PrivateRoute from './components/routing/PrivateRoute';
-
-//Utils
 
 //Redux
 import { Provider } from 'react-redux';
@@ -20,12 +13,9 @@ import { loadUserActionCreator } from './redux/actions/authActions';
 import axios from 'axios';
 import setAuthToken from './utils/setAuthToken';
 import { LOGOUT } from './redux/actions/actionTypes';
-import ListPage from './components/lists/ListPage';
-import NewListPage from './components/newList/NewListPage';
-import Verify from './components/verify/Verify';
-import VerifiedRoute from './components/routing/VerifiedRoute';
-import NotFound from './components/routing/NotFound';
-import Invite from './components/invite/Invite';
+
+import Footer from './components/layout/Footer';
+import Body from './components/layout/Body';
 
 // Defaults to localhost if not set. This is set in the prod container and is proxied using the proxy field in package.json when running the react dev server.
 axios.defaults.baseURL = process.env.REACT_APP_BACKEND_BASE_URL;
@@ -46,34 +36,11 @@ const App = () => {
     return (
         <Provider store={store}>
             <Router>
-                <Fragment>
-                    <div className='pageContainer'>
-                        <Navbar />
-                        <div className='mainBodyContainer'>
-                            <div className='mainContentContainerOuter'>
-                                <div className='mainContentContainerInner'>
-                                    <Switch>
-                                        <Route exact path='/' component={Landing} />
-                                        <Route exact path='/register' component={Register} />
-                                        <Route exact path='/login' component={Login} />
-                                        <Route exact path='/invite/:token' component={Invite} />
-                                        <PrivateRoute exact path='/verify/:token' component={Verify} />
-                                        <PrivateRoute exact path='/dashboard' component={Dashboard} />
-                                        <VerifiedRoute exact path='/list/newlist' component={NewListPage} />
-                                        <VerifiedRoute exact path='/list/:listid' component={ListPage} />
-
-                                        <Route component={NotFound} />
-                                    </Switch>
-                                </div>
-                            </div>
-                        </div>
-                        <div>
-                            <div className='footerContainerOuter'>
-                                <div className='footerContainerInner'>Footer</div>
-                            </div>
-                        </div>
-                    </div>
-                </Fragment>
+                <div className='pageContainer'>
+                    <Navbar />
+                    <Body></Body>
+                    <Footer></Footer>
+                </div>
             </Router>
         </Provider>
     );
