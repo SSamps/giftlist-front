@@ -3,22 +3,40 @@ import DropdownUnderlay from '../../dashboard/yourLists/controlBar/filters/Dropd
 
 interface Props {
     setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+    setRenameGroupOverlayStatus: React.Dispatch<React.SetStateAction<boolean>>;
+    setInviteMembersOverlayStatus: React.Dispatch<React.SetStateAction<boolean>>;
+    setDeleteGroupOverlayStatus: React.Dispatch<React.SetStateAction<boolean>>;
+    showOverlay: (overlayStatusSetter: React.Dispatch<React.SetStateAction<boolean>>) => void;
 }
 
-const ListOwnershipDrop: React.FC<Props> = ({ setOpen }) => {
-    const testFunc = () => {};
+const ListTitleBarMenuDropdown: React.FC<Props> = ({
+    setOpen,
+    setRenameGroupOverlayStatus,
+    setInviteMembersOverlayStatus,
+    setDeleteGroupOverlayStatus,
+    showOverlay,
+}) => {
+    const showRenameGroupOverlay = () => {
+        showOverlay(setRenameGroupOverlayStatus);
+    };
+    const showInviteMembersOverlay = () => {
+        showOverlay(setInviteMembersOverlayStatus);
+    };
+    const showDeleteGroupOverlay = () => {
+        showOverlay(setDeleteGroupOverlayStatus);
+    };
 
     return (
         <Fragment>
             <div className='dropDown dropDown-leftCover'>
-                <div className={`dropDownItem`} onClick={testFunc}>
+                <div className={`dropDownItem`} onClick={showRenameGroupOverlay}>
                     Rename Group
                 </div>
-                <div className={`dropDownItem`} onClick={testFunc}>
+                <div className={`dropDownItem`} onClick={showInviteMembersOverlay}>
                     Invite Members
                 </div>
                 <div className='dropDownItem-danger'>
-                    <div className='dropDownItem ' onClick={testFunc}>
+                    <div className='dropDownItem ' onClick={showDeleteGroupOverlay}>
                         Delete Group
                     </div>
                 </div>
@@ -28,4 +46,4 @@ const ListOwnershipDrop: React.FC<Props> = ({ setOpen }) => {
     );
 };
 
-export default ListOwnershipDrop;
+export default ListTitleBarMenuDropdown;

@@ -2,7 +2,7 @@ import React, { Fragment, useState } from 'react';
 import { connect } from 'react-redux';
 import { deleteListItemActionCreator, TdeleteListItemActionCreator } from '../../../../redux/actions/listGroupActions';
 import { TbasicListFields } from '../../../../types/models/listGroups';
-import BasicListDeletionOverlay from './BasicListDeletionOverlay';
+import ConfirmationOverlay from './ConfirmationOverlay';
 
 interface Props {
     currentList: TbasicListFields;
@@ -54,18 +54,18 @@ const BasicListDeleteItems: React.FC<Props> = ({ currentList, deleteListItemActi
         return (
             <Fragment>
                 {deleteAllOverlayStatus ? (
-                    <BasicListDeletionOverlay
+                    <ConfirmationOverlay
                         setOpen={setdeleteAllOverlayStatus}
                         submitForm={deleteAll}
                         description={'Delete all items?'}
-                    ></BasicListDeletionOverlay>
+                    ></ConfirmationOverlay>
                 ) : (
                     deleteSelectedOverlayStatus && (
-                        <BasicListDeletionOverlay
+                        <ConfirmationOverlay
                             setOpen={setdeleteSelectedOverlayStatus}
                             submitForm={deleteSelection}
                             description={'Delete all selected items?'}
-                        ></BasicListDeletionOverlay>
+                        ></ConfirmationOverlay>
                     )
                 )}
             </Fragment>

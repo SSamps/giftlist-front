@@ -7,7 +7,7 @@ interface Props {
     description: string;
 }
 
-const BasicListDeletionOverlay: React.FC<Props> = ({ setOpen, submitForm, description }) => {
+const ConfirmationOverlay: React.FC<Props> = ({ setOpen, submitForm, description }) => {
     return (
         <Fragment>
             <div className='basicListOverlay'>
@@ -28,4 +28,4 @@ const BasicListDeletionOverlay: React.FC<Props> = ({ setOpen, submitForm, descri
     );
 };
 
-export default BasicListDeletionOverlay;
+export default ConfirmationOverlay;

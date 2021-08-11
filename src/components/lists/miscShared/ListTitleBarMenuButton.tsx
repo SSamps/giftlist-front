@@ -1,21 +1,67 @@
-import { useState } from 'react';
+import { Fragment, useState } from 'react';
+import ConfirmationOverlay from '../listVariants/basicList/ConfirmationOverlay';
+import InviteMembersOverlay from './ListMenuOverlays.tsx/InviteMembersOverlay';
+import RenameListOverlay from './ListMenuOverlays.tsx/RenameListOverlay';
 import ListTitleBarMenuDropdown from './ListTitleBarMenuDropdown';
 
 const ListTitleBarMenuButton: React.FC = () => {
-    const [open, setOpen] = useState(false);
+    const [openDropdown, setOpenDropdown] = useState(false);
+    const [renameGroupOverlayStatus, setRenameGroupOverlayStatus] = useState(false);
+    const [inviteMembersOverlayStatus, setInviteMembersOverlayStatus] = useState(false);
+    const [deleteGroupOverlayStatus, setDeleteGroupOverlayStatus] = useState(false);
+
+    const showOverlay = (overlayStatusSetter: React.Dispatch<React.SetStateAction<boolean>>) => {
+        setOpenDropdown(false);
+        overlayStatusSetter(true);
+    };
+
+    const deleteList = () => {
+        console.log('deleteList called');
+    };
+
+    const renderOverlay = () => {
+        return (
+            <Fragment>
+                {renameGroupOverlayStatus ? (
+                    <RenameListOverlay setOpen={setRenameGroupOverlayStatus}></RenameListOverlay>
+                ) : inviteMembersOverlayStatus ? (
+                    <InviteMembersOverlay setOpen={setInviteMembersOverlayStatus}></InviteMembersOverlay>
+                ) : (
+                    deleteGroupOverlayStatus && (
+                        <ConfirmationOverlay
+                            setOpen={setDeleteGroupOverlayStatus}
+                            submitForm={deleteList}
+                            description='Are you sure you want to delete this list?'
+                        ></ConfirmationOverlay>
+                    )
+                )}
+            </Fragment>
+        );
+    };
 
     return (
-        <li className={`ListTitleBar-controls ${open && 'ListTitleBar-controls-active'}`}>
-            <span>
-                <i
-                    className='fas fa-ellipsis-v'
-                    onClick={() => {
-                        setOpen(!open);
-                    }}
-                ></i>
-            </span>
-            {open && <ListTitleBarMenuDropdown setOpen={setOpen}></ListTitleBarMenuDropdown>}
-        </li>
+        <Fragment>
+            <li className={`ListTitleBar-controls ${openDropdown && 'ListTitleBar-controls-active'}`}>
+                <span>
+                    <i
+                        className='fas fa-ellipsis-v'
+                        onClick={() => {
+                            setOpenDropdown(!openDropdown);
+                        }}
+                    ></i>
+                </span>
+                {openDropdown && (
+                    <ListTitleBarMenuDropdown
+                        setOpen={setOpenDropdown}
+                        showOverlay={showOverlay}
+                        setRenameGroupOverlayStatus={setRenameGroupOverlayStatus}
+                        setInviteMembersOverlayStatus={setInviteMembersOverlayStatus}
+                        setDeleteGroupOverlayStatus={setDeleteGroupOverlayStatus}
+                    ></ListTitleBarMenuDropdown>
+                )}
+            </li>
+            {renderOverlay()}
+        </Fragment>
     );
 };
 
