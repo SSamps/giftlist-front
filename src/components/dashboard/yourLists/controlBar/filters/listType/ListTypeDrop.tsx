@@ -67,7 +67,7 @@ const ListTypeDrop: React.FC<Props> = ({ setOpen, listVariantFilter, setFiltersA
                     ></input>
                 </div>
             </div>
-            <DropdownUnderlay setOpen={setOpen} onSubmit={onSubmit} classes={'underlay'}></DropdownUnderlay>
+            <DropdownUnderlay setOpen={setOpen} onSubmit={onSubmit}></DropdownUnderlay>
         </Fragment>
     );
 };

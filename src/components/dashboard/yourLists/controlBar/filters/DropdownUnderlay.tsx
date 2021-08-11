@@ -1,13 +1,13 @@
 interface Props {
     setOpen: React.Dispatch<React.SetStateAction<boolean>>;
     onSubmit?: () => void;
-    classes: string;
+    extraClasses?: string;
 }
 
-const DropdownUnderlay: React.FC<Props> = ({ setOpen, onSubmit, classes }) => {
+const DropdownUnderlay: React.FC<Props> = ({ setOpen, onSubmit, extraClasses }) => {
     return (
         <div
-            className={classes}
+            className={'underlay ' + extraClasses}
             onClick={() => {
                 if (onSubmit) {
                     onSubmit();

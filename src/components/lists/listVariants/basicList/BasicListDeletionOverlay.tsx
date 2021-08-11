@@ -23,7 +23,7 @@ const BasicListDeletionOverlay: React.FC<Props> = ({ setOpen, submitForm, descri
                     </div>
                 </div>
             </div>
-            <DropdownUnderlay setOpen={setOpen} classes={'underlay underlay-focus'}></DropdownUnderlay>
+            <DropdownUnderlay setOpen={setOpen} extraClasses={'underlay-focus'}></DropdownUnderlay>
         </Fragment>
     );
 };
