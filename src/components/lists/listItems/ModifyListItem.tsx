@@ -30,7 +30,7 @@ const ModifyListItem: React.FC<Props> = ({ hideModifyItemOverlay, listItem, list
                     providedInitialFormState={{ itemBody: listItem.body, itemLinks: listItem.links }}
                 ></ListItemForm>
             </div>
-            <DropdownUnderlay setOpen={hideModifyItemOverlay}></DropdownUnderlay>
+            <DropdownUnderlay setOpen={hideModifyItemOverlay} classes={'underlay'}></DropdownUnderlay>
         </Fragment>
     );
 };

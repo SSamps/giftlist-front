@@ -44,7 +44,7 @@ const ListOwnershipDrop: React.FC<Props> = ({ listOwnershipFilter, setOpen, setF
                     Owned by others
                 </div>
             </div>
-            <DropdownUnderlay setOpen={setOpen}></DropdownUnderlay>
+            <DropdownUnderlay setOpen={setOpen} classes={'underlay'}></DropdownUnderlay>
         </Fragment>
     );
 };
