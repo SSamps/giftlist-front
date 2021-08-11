@@ -26,12 +26,17 @@
         font-size: 1.2rem;
         justify-self: center;
         grid-column: 3/4;
+        position: relative;
 
         &:hover {
             color: darken($highlight-color, 5%);
         }
 
         &:active {
+            color: darken($highlight-color, 10%);
+        }
+
+        &-active {
             color: darken($highlight-color, 10%);
         }
     }

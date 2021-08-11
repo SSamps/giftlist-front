@@ -209,13 +209,18 @@ body {
 
 .dropDown {
   position: absolute;
-  top: 1.5rem;
   background-color: #edf7fd;
-  border: black;
+  border: #ccc;
   border-style: solid;
   border-width: thin;
   overflow: visible;
-  z-index: 2; }
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  padding: 0.5rem 0.5rem;
+  width: max-content; }
+  .dropDown-leftCover {
+    transform: translate(-9.5rem, -1.6rem); }
 
 .dropDownItem {
   color: orange;
@@ -232,6 +237,13 @@ body {
     margin-right: auto; }
   .dropDownItem-icon {
     margin-left: 0.5rem; }
+  .dropDownItem-danger {
+    width: 100%;
+    color: #dc3545;
+    border-top-style: dashed;
+    border-top-width: thin;
+    margin-top: 1rem;
+    padding-top: 0.5rem; }
 
 .navbar {
   display: flex;
@@ -514,10 +526,13 @@ body {
     color: orange;
     font-size: 1.2rem;
     justify-self: center;
-    grid-column: 3/4; }
+    grid-column: 3/4;
+    position: relative; }
     .ListTitleBar-controls:hover {
       color: #e69500; }
     .ListTitleBar-controls:active {
+      color: #cc8400; }
+    .ListTitleBar-controls-active {
       color: #cc8400; }
   .ListTitleBar-hr {
     border: 0;

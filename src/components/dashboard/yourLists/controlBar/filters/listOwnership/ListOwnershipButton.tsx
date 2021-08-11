@@ -18,7 +18,6 @@ const ListOwnershipButton: React.FC<Props> = ({ listOwnershipFilter }) => {
                     setOpen(!open);
                 }}
             >
-                {' '}
                 Owned by {listOwnershipFilter} <i className='fas fa-angle-down'></i>
             </div>
             {open && <ListOwnershipDrop setOpen={setOpen}></ListOwnershipDrop>}

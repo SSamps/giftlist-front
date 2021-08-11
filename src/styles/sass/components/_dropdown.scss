@@ -1,12 +1,19 @@
 .dropDown {
     position: absolute;
-    top: 1.5rem;
     background-color: $content-background-color;
-    border: black;
+    border: $border-color;
     border-style: solid;
     border-width: thin;
     overflow: visible;
     z-index: 2;
+    display: flex;
+    flex-direction: column;
+    padding: 0.5rem 0.5rem;
+    width: max-content;
+
+    &-leftCover {
+        transform: translate(-9.5rem, -1.6rem);
+    }
 }
 
 .dropDownItem {
@@ -33,5 +40,14 @@
 
     &-icon {
         margin-left: 0.5rem;
+    }
+
+    &-danger {
+        width: 100%;
+        color: $danger-color;
+        border-top-style: dashed;
+        border-top-width: thin;
+        margin-top: 1rem;
+        padding-top: 0.5rem;
     }
 }
