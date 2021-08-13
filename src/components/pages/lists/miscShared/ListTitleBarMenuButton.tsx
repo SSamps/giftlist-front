@@ -1,10 +1,20 @@
 import { Fragment, useState } from 'react';
+import { connect } from 'react-redux';
+import { deleteListActionCreator, TdeleteListActionCreator } from '../../../../redux/actions/listGroupActions';
+import { TbasicListFields, TgiftListFields } from '../../../../types/models/listGroups';
 import ConfirmationOverlay from '../../../misc/ConfirmationOverlay';
 import InviteMembersOverlay from './ListMenuOverlays.tsx/InviteMembersOverlay';
 import RenameListOverlay from './ListMenuOverlays.tsx/RenameListOverlay';
 import ListTitleBarMenuDropdown from './ListTitleBarMenuDropdown';
+import { useHistory } from 'react-router-dom';
 
-const ListTitleBarMenuButton: React.FC = () => {
+interface Props {
+    currentList: TgiftListFields | TbasicListFields;
+    deleteListActionCreator: TdeleteListActionCreator;
+}
+
+const ListTitleBarMenuButton: React.FC<Props> = ({ deleteListActionCreator, currentList }) => {
+    const history = useHistory();
     const [openDropdown, setOpenDropdown] = useState(false);
     const [renameGroupOverlayStatus, setRenameGroupOverlayStatus] = useState(false);
     const [inviteMembersOverlayStatus, setInviteMembersOverlayStatus] = useState(false);
@@ -15,8 +25,9 @@ const ListTitleBarMenuButton: React.FC = () => {
         overlayStatusSetter(true);
     };
 
-    const deleteList = () => {
-        console.log('deleteList called');
+    const deleteList = async () => {
+        await deleteListActionCreator(currentList._id.toString());
+        history.push(`/dashboard`);
     };
 
     const renderOverlay = () => {
@@ -65,4 +76,4 @@ const ListTitleBarMenuButton: React.FC = () => {
     );
 };
 
-export default ListTitleBarMenuButton;
+export default connect(null, { deleteListActionCreator })(ListTitleBarMenuButton);

@@ -7,6 +7,7 @@ import {
     NEW_LIST_ITEM,
     MODIFY_LIST_ITEM,
     SELECT_LIST_ITEM,
+    DELETE_LIST,
 } from './actionTypes';
 import { Dispatch } from 'redux';
 import axios, { AxiosResponse } from 'axios';
@@ -173,6 +174,26 @@ export const selectListItemActionCreator: TselectListItemActionCreator =
 
             dispatch({
                 type: SELECT_LIST_ITEM,
+                payload: res.data,
+            });
+        } catch (err) {
+            dispatch({ type: LIST_ERROR, payload: { msg: err.response.data.msg, status: err.response.status } });
+        }
+    };
+
+interface IdeleteListSuccess {
+    type: typeof DELETE_LIST;
+}
+
+export type TdeleteListActionCreator = (groupId: string) => void;
+
+export const deleteListActionCreator: TdeleteListActionCreator =
+    (groupId) => async (dispatch: Dispatch<IdeleteListSuccess | IlistActionError>) => {
+        try {
+            const res = await axios.delete(`/api/groups/${groupId}/delete`);
+
+            dispatch({
+                type: DELETE_LIST,
                 payload: res.data,
             });
         } catch (err) {

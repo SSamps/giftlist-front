@@ -2,6 +2,7 @@ import { AnyAction } from 'redux';
 import { TListGroupAnyFields } from '../../types/models/listGroups';
 import {
     CURRENT_LIST_GET,
+    DELETE_LIST,
     DELETE_LIST_ITEM,
     LIST_ERROR,
     LIST_RESET,
@@ -77,11 +78,19 @@ export default function reducer(state: IlistGroupData = initialState, action: An
                 currentList: payload,
                 listError: undefined,
             };
-        case LIST_ERROR:
+        case DELETE_LIST:
             return {
                 ...state,
                 listLoading: false,
-                listError: payload,
+                currentList: payload,
+                listError: undefined,
+            };
+        case LIST_ERROR:
+            return {
+                listLoading: true,
+                currentList: undefined,
+                parentList: undefined,
+                listError: undefined,
             };
         default:
             return {

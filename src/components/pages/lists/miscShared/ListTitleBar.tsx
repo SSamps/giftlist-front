@@ -11,7 +11,7 @@ const ListTitleBar: React.FC<Props> = ({ currentList }) => {
         <Fragment>
             <ul className='ListTitleBar'>
                 <li className='ListTitleBar-title lead'>{currentList.groupName}</li>
-                <ListTitleBarMenuButton></ListTitleBarMenuButton>
+                <ListTitleBarMenuButton currentList={currentList}></ListTitleBarMenuButton>
                 <hr className='ListTitleBar-hr'></hr>
             </ul>
         </Fragment>
