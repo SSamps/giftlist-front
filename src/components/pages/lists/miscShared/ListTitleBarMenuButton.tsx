@@ -34,7 +34,10 @@ const ListTitleBarMenuButton: React.FC<Props> = ({ deleteListActionCreator, curr
         return (
             <Fragment>
                 {renameGroupOverlayStatus ? (
-                    <RenameListOverlay setOpen={setRenameGroupOverlayStatus}></RenameListOverlay>
+                    <RenameListOverlay
+                        setOpen={setRenameGroupOverlayStatus}
+                        currentList={currentList}
+                    ></RenameListOverlay>
                 ) : inviteMembersOverlayStatus ? (
                     <InviteMembersOverlay setOpen={setInviteMembersOverlayStatus}></InviteMembersOverlay>
                 ) : (

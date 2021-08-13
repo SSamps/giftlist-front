@@ -9,6 +9,7 @@ import {
     MODIFY_LIST_ITEM,
     NEW_LIST_ITEM,
     PARENT_LIST_GET,
+    RENAME_LIST,
     SELECT_LIST_ITEM,
 } from '../actions/actionTypes';
 
@@ -78,6 +79,13 @@ export default function reducer(state: IlistGroupData = initialState, action: An
                 currentList: payload,
                 listError: undefined,
             };
+        case RENAME_LIST:
+            return {
+                ...state,
+                listLoading: false,
+                currentList: payload,
+                listError: undefined,
+            };
         case DELETE_LIST:
             return {
                 ...state,
@@ -90,7 +98,7 @@ export default function reducer(state: IlistGroupData = initialState, action: An
                 listLoading: true,
                 currentList: undefined,
                 parentList: undefined,
-                listError: undefined,
+                listError: payload,
             };
         default:
             return {

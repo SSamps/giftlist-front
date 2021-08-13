@@ -8,6 +8,7 @@ import {
     MODIFY_LIST_ITEM,
     SELECT_LIST_ITEM,
     DELETE_LIST,
+    RENAME_LIST,
 } from './actionTypes';
 import { Dispatch } from 'redux';
 import axios, { AxiosResponse } from 'axios';
@@ -190,10 +191,38 @@ export type TdeleteListActionCreator = (groupId: string) => void;
 export const deleteListActionCreator: TdeleteListActionCreator =
     (groupId) => async (dispatch: Dispatch<IdeleteListSuccess | IlistActionError>) => {
         try {
-            const res = await axios.delete(`/api/groups/${groupId}/delete`);
+            await axios.delete(`/api/groups/${groupId}/delete`);
 
             dispatch({
                 type: DELETE_LIST,
+            });
+        } catch (err) {
+            dispatch({ type: LIST_ERROR, payload: { msg: err.response.data.msg, status: err.response.status } });
+        }
+    };
+
+interface IrenameListSuccess {
+    type: typeof RENAME_LIST;
+}
+
+export type TrenameListActionCreator = (groupId: string, newName: string) => void;
+
+export const renameListActionCreator: TrenameListActionCreator =
+    //@ts-ignore
+    (groupId, newName) => async (dispatch: Dispatch<IrenameListSuccess | IlistActionError>) => {
+        const config = {
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        };
+
+        const reqBody = JSON.stringify({ newName: newName });
+
+        try {
+            const res = await axios.put(`/api/groups/${groupId}/rename`, reqBody, config);
+
+            dispatch({
+                type: RENAME_LIST,
                 payload: res.data,
             });
         } catch (err) {
