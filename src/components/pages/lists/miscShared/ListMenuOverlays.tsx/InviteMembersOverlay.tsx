@@ -9,7 +9,9 @@ const InviteMembersOverlay: React.FC<Props> = ({ setOpen }) => {
     return (
         <Fragment>
             <div className='overlay'>
-                <div className='overlayContainer'>Invite members</div>
+                <div className='overlayContainer'>
+                    <span>Invite members</span>
+                </div>
             </div>
             <DropdownUnderlay setOpen={setOpen} extraClasses={'underlay-focus'}></DropdownUnderlay>
         </Fragment>
