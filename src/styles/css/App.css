@@ -203,15 +203,15 @@ body {
   z-index: 2;
   display: flex;
   flex-direction: column;
-  padding: 0.5rem 0.5rem;
-  width: max-content; }
+  width: max-content;
+  padding: 0.5rem 0; }
   .dropDown-leftCover {
-    transform: translate(-9.5rem, -1.6rem); }
+    transform: translate(-8.8rem, -2.1rem); }
 
 .dropDownItem {
   color: orange;
-  padding: 0 0.5rem;
-  cursor: pointer; }
+  cursor: pointer;
+  padding: 0rem 0.5rem; }
   .dropDownItem:hover {
     background-color: #e6e6e6; }
   .dropDownItem-selected {
