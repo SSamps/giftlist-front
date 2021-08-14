@@ -206,7 +206,21 @@ body {
   flex-direction: column;
   width: max-content;
   padding: 0.5rem 0; }
-  .dropDown-leftCover {
+
+.listMenuDropDown {
+  position: absolute;
+  background-color: #edf7fd;
+  border: #ccc;
+  border-style: solid;
+  border-width: thin;
+  overflow: visible;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  width: max-content;
+  padding: 0.5rem 0; }
+  .listMenuDropDown-leftCover {
+    width: 9.5rem;
     transform: translate(-8.8rem, -2.1rem); }
 
 .dropDownItem {

@@ -38,7 +38,7 @@ const ListTitleBarMenuDropdown: React.FC<Props> = ({
 
     return (
         <Fragment>
-            <div className='dropDown dropDown-leftCover'>
+            <div className='listMenuDropDown listMenuDropDown-leftCover '>
                 {currentListPermissions?.includes(PERM_GROUP_ADMIN) && (
                     <div className={`dropDownItem`} onClick={showRenameGroupOverlay}>
                         Rename Group
