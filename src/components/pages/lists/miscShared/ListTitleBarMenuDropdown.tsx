@@ -33,7 +33,7 @@ const ListTitleBarMenuDropdown: React.FC<Props> = ({
                     Rename Group
                 </div>
                 <div className={`dropDownItem`} onClick={showInviteMembersOverlay}>
-                    Invite Members
+                    Members
                 </div>
                 <div className='dropDownItem-danger'>
                     <div className='dropDownItem ' onClick={showDeleteGroupOverlay}>

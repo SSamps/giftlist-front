@@ -32,12 +32,24 @@ const MembersOverlay: React.FC<Props> = ({ setOpen, currentList }) => {
         }
     };
 
+    const renderCurrentMembers = () => {
+        let members = [];
+        members.push(currentList.owner.displayName);
+
+        for (let member of currentList.members) {
+            members.push(member.displayName);
+        }
+        return members.map((member, index) => {
+            return <span key={'member' + index}>{member}</span>;
+        });
+    };
+
     return (
         <Fragment>
             <div className='overlay'>
                 <div className='overlayContainer'>
                     <span className='lead'>Members</span>
-                    <div></div>
+                    <div className='memberList'>{renderCurrentMembers()}</div>
                     <InviteFormInput inviteArray={inviteArray} setInviteArray={setInviteArray}></InviteFormInput>
                     {loading ? (
                         <Spinner className='spinner-tiny'></Spinner>

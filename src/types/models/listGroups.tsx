@@ -12,6 +12,7 @@ type TlistGroupBaseFields = { groupName: string; creationDate?: Date; groupVaria
 
 interface IgroupMemberBase {
     userId: string;
+    displayName: string;
     oldestReadMessage?: Date | undefined;
     permissions: TYPE_PERM_ALL_LIST_GROUP[];
 }
