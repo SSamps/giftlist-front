@@ -1,8 +1,7 @@
 import { Fragment } from 'react';
 import { connect } from 'react-redux';
 import { IrootStateAuthed } from '../../../../redux/reducers/root/rootReducer';
-import { TbasicListFields, TgiftListFields } from '../../../../types/models/listGroups';
-import { IUser } from '../../../../types/models/User';
+import { PERM_GROUP_ADMIN, PERM_GROUP_DELETE } from '../../../../types/listGroupPermissions';
 import DropdownUnderlay from '../../dashboard/yourLists/controlBar/filters/DropdownUnderlay';
 
 interface Props {
@@ -12,8 +11,7 @@ interface Props {
     setLeaveGroupOverlayStatus: React.Dispatch<React.SetStateAction<boolean>>;
     setDeleteGroupOverlayStatus: React.Dispatch<React.SetStateAction<boolean>>;
     showOverlay: (overlayStatusSetter: React.Dispatch<React.SetStateAction<boolean>>) => void;
-    user: IUser;
-    currentList: TgiftListFields | TbasicListFields;
+    currentListPermissions: string[] | undefined;
 }
 
 const ListTitleBarMenuDropdown: React.FC<Props> = ({
@@ -23,6 +21,7 @@ const ListTitleBarMenuDropdown: React.FC<Props> = ({
     setDeleteGroupOverlayStatus,
     setLeaveGroupOverlayStatus,
     showOverlay,
+    currentListPermissions,
 }) => {
     const showRenameGroupOverlay = () => {
         showOverlay(setRenameGroupOverlayStatus);
@@ -40,19 +39,24 @@ const ListTitleBarMenuDropdown: React.FC<Props> = ({
     return (
         <Fragment>
             <div className='dropDown dropDown-leftCover'>
-                <div className={`dropDownItem`} onClick={showRenameGroupOverlay}>
-                    Rename Group
-                </div>
+                {currentListPermissions?.includes(PERM_GROUP_ADMIN) && (
+                    <div className={`dropDownItem`} onClick={showRenameGroupOverlay}>
+                        Rename Group
+                    </div>
+                )}
                 <div className={`dropDownItem`} onClick={showInviteMembersOverlay}>
                     Members
                 </div>
                 <div className='dropDownItem-danger'>
-                    <div className='dropDownItem ' onClick={showLeaveGroupOverlay}>
-                        Leave Group
-                    </div>
-                    <div className='dropDownItem ' onClick={showDeleteGroupOverlay}>
-                        Delete Group
-                    </div>
+                    {currentListPermissions?.includes(PERM_GROUP_DELETE) ? (
+                        <div className='dropDownItem ' onClick={showDeleteGroupOverlay}>
+                            Delete Group
+                        </div>
+                    ) : (
+                        <div className='dropDownItem ' onClick={showLeaveGroupOverlay}>
+                            Leave Group
+                        </div>
+                    )}
                 </div>
             </div>
             <DropdownUnderlay setOpen={setOpen}></DropdownUnderlay>
@@ -62,6 +66,7 @@ const ListTitleBarMenuDropdown: React.FC<Props> = ({
 
 const mapStateToProps = (state: IrootStateAuthed) => ({
     user: state.authReducer.user,
+    currentListPermissions: state.listGroupReducer.currentListPermissions,
 });
 
 export default connect(mapStateToProps)(ListTitleBarMenuDropdown);
