@@ -2,11 +2,11 @@ import { Fragment, useState } from 'react';
 import { connect } from 'react-redux';
 import { deleteListActionCreator, TdeleteListActionCreator } from '../../../../redux/actions/listGroupActions';
 import { TbasicListFields, TgiftListFields } from '../../../../types/models/listGroups';
-import ConfirmationOverlay from '../../../misc/ConfirmationOverlay';
-import InviteMembersOverlay from './ListMenuOverlays.tsx/InviteMembersOverlay';
+import MembersOverlay from './ListMenuOverlays.tsx/MembersOverlay';
 import RenameListOverlay from './ListMenuOverlays.tsx/RenameListOverlay';
 import ListTitleBarMenuDropdown from './ListTitleBarMenuDropdown';
 import { useHistory } from 'react-router-dom';
+import ConfirmationOverlay from '../../../misc/ConfirmationOverlay';
 
 interface Props {
     currentList: TgiftListFields | TbasicListFields;
@@ -39,7 +39,7 @@ const ListTitleBarMenuButton: React.FC<Props> = ({ deleteListActionCreator, curr
                         currentList={currentList}
                     ></RenameListOverlay>
                 ) : inviteMembersOverlayStatus ? (
-                    <InviteMembersOverlay setOpen={setInviteMembersOverlayStatus}></InviteMembersOverlay>
+                    <MembersOverlay setOpen={setInviteMembersOverlayStatus} currentList={currentList}></MembersOverlay>
                 ) : (
                     deleteGroupOverlayStatus && (
                         <ConfirmationOverlay
