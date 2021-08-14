@@ -1,6 +1,11 @@
 import { Fragment, useState } from 'react';
 import { connect } from 'react-redux';
-import { deleteListActionCreator, TdeleteListActionCreator } from '../../../../redux/actions/listGroupActions';
+import {
+    deleteListActionCreator,
+    leaveListActionCreator,
+    TdeleteListActionCreator,
+    TleaveListActionCreator,
+} from '../../../../redux/actions/listGroupActions';
 import { TbasicListFields, TgiftListFields } from '../../../../types/models/listGroups';
 import MembersOverlay from './ListMenuOverlays.tsx/MembersOverlay';
 import RenameListOverlay from './ListMenuOverlays.tsx/RenameListOverlay';
@@ -11,13 +16,15 @@ import ConfirmationOverlay from '../../../misc/ConfirmationOverlay';
 interface Props {
     currentList: TgiftListFields | TbasicListFields;
     deleteListActionCreator: TdeleteListActionCreator;
+    leaveListActionCreator: TleaveListActionCreator;
 }
 
-const ListTitleBarMenuButton: React.FC<Props> = ({ deleteListActionCreator, currentList }) => {
+const ListTitleBarMenuButton: React.FC<Props> = ({ deleteListActionCreator, leaveListActionCreator, currentList }) => {
     const history = useHistory();
     const [openDropdown, setOpenDropdown] = useState(false);
     const [renameGroupOverlayStatus, setRenameGroupOverlayStatus] = useState(false);
     const [inviteMembersOverlayStatus, setInviteMembersOverlayStatus] = useState(false);
+    const [leaveGroupOverlayStatus, setLeaveGroupOverlayStatus] = useState(false);
     const [deleteGroupOverlayStatus, setDeleteGroupOverlayStatus] = useState(false);
 
     const showOverlay = (overlayStatusSetter: React.Dispatch<React.SetStateAction<boolean>>) => {
@@ -30,27 +37,37 @@ const ListTitleBarMenuButton: React.FC<Props> = ({ deleteListActionCreator, curr
         history.push(`/dashboard`);
     };
 
+    const leaveList = async () => {
+        await leaveListActionCreator(currentList._id.toString());
+        history.push(`/dashboard`);
+    };
+
     const renderOverlay = () => {
-        return (
-            <Fragment>
-                {renameGroupOverlayStatus ? (
-                    <RenameListOverlay
-                        setOpen={setRenameGroupOverlayStatus}
-                        currentList={currentList}
-                    ></RenameListOverlay>
-                ) : inviteMembersOverlayStatus ? (
-                    <MembersOverlay setOpen={setInviteMembersOverlayStatus} currentList={currentList}></MembersOverlay>
-                ) : (
-                    deleteGroupOverlayStatus && (
-                        <ConfirmationOverlay
-                            setOpen={setDeleteGroupOverlayStatus}
-                            submitForm={deleteList}
-                            description='Are you sure you want to delete this list?'
-                        ></ConfirmationOverlay>
-                    )
-                )}
-            </Fragment>
-        );
+        if (renameGroupOverlayStatus) {
+            return (
+                <RenameListOverlay setOpen={setRenameGroupOverlayStatus} currentList={currentList}></RenameListOverlay>
+            );
+        } else if (inviteMembersOverlayStatus) {
+            return <MembersOverlay setOpen={setInviteMembersOverlayStatus} currentList={currentList}></MembersOverlay>;
+        } else if (deleteGroupOverlayStatus) {
+            return (
+                <ConfirmationOverlay
+                    setOpen={setDeleteGroupOverlayStatus}
+                    submitForm={deleteList}
+                    description='Are you sure you want to delete this group?'
+                ></ConfirmationOverlay>
+            );
+        } else if (leaveGroupOverlayStatus) {
+            return (
+                <ConfirmationOverlay
+                    setOpen={setLeaveGroupOverlayStatus}
+                    submitForm={leaveList}
+                    description='Are you sure you want to leave this group?'
+                ></ConfirmationOverlay>
+            );
+        } else {
+            return null;
+        }
     };
 
     return (
@@ -71,6 +88,7 @@ const ListTitleBarMenuButton: React.FC<Props> = ({ deleteListActionCreator, curr
                         setRenameGroupOverlayStatus={setRenameGroupOverlayStatus}
                         setInviteMembersOverlayStatus={setInviteMembersOverlayStatus}
                         setDeleteGroupOverlayStatus={setDeleteGroupOverlayStatus}
+                        setLeaveGroupOverlayStatus={setLeaveGroupOverlayStatus}
                     ></ListTitleBarMenuDropdown>
                 )}
             </li>
@@ -79,4 +97,4 @@ const ListTitleBarMenuButton: React.FC<Props> = ({ deleteListActionCreator, curr
     );
 };
 
-export default connect(null, { deleteListActionCreator })(ListTitleBarMenuButton);
+export default connect(null, { deleteListActionCreator, leaveListActionCreator })(ListTitleBarMenuButton);

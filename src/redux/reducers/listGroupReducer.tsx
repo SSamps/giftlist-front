@@ -4,6 +4,7 @@ import {
     CURRENT_LIST_GET,
     DELETE_LIST,
     DELETE_LIST_ITEM,
+    LEAVE_LIST,
     LIST_ERROR,
     LIST_RESET,
     MODIFY_LIST_ITEM,
@@ -86,19 +87,20 @@ export default function reducer(state: IlistGroupData = initialState, action: An
                 currentList: payload,
                 listError: undefined,
             };
-        case DELETE_LIST:
+        case LEAVE_LIST:
             return {
                 ...state,
                 listLoading: false,
-                currentList: payload,
+                currentList: undefined,
                 listError: undefined,
+            };
+        case DELETE_LIST:
+            return {
+                ...initialState,
             };
         case LIST_ERROR:
             return {
-                listLoading: true,
-                currentList: undefined,
-                parentList: undefined,
-                listError: payload,
+                ...initialState,
             };
         default:
             return {

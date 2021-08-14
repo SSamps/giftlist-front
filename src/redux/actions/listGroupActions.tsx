@@ -9,6 +9,7 @@ import {
     SELECT_LIST_ITEM,
     DELETE_LIST,
     RENAME_LIST,
+    LEAVE_LIST,
 } from './actionTypes';
 import { Dispatch } from 'redux';
 import axios, { AxiosResponse } from 'axios';
@@ -208,7 +209,6 @@ interface IrenameListSuccess {
 export type TrenameListActionCreator = (groupId: string, newName: string) => void;
 
 export const renameListActionCreator: TrenameListActionCreator =
-    //@ts-ignore
     (groupId, newName) => async (dispatch: Dispatch<IrenameListSuccess | IlistActionError>) => {
         const config = {
             headers: {
@@ -223,6 +223,26 @@ export const renameListActionCreator: TrenameListActionCreator =
 
             dispatch({
                 type: RENAME_LIST,
+                payload: res.data,
+            });
+        } catch (err) {
+            dispatch({ type: LIST_ERROR, payload: { msg: err.response.data.msg, status: err.response.status } });
+        }
+    };
+
+interface IleaveListSuccess {
+    type: typeof LEAVE_LIST;
+}
+
+export type TleaveListActionCreator = (groupId: string) => void;
+
+export const leaveListActionCreator: TleaveListActionCreator =
+    (groupId) => async (dispatch: Dispatch<IleaveListSuccess | IlistActionError>) => {
+        try {
+            const res = await axios.put(`/api/groups/${groupId}/leave`);
+
+            dispatch({
+                type: LEAVE_LIST,
                 payload: res.data,
             });
         } catch (err) {

@@ -5,6 +5,7 @@ interface Props {
     setOpen: React.Dispatch<React.SetStateAction<boolean>>;
     setRenameGroupOverlayStatus: React.Dispatch<React.SetStateAction<boolean>>;
     setInviteMembersOverlayStatus: React.Dispatch<React.SetStateAction<boolean>>;
+    setLeaveGroupOverlayStatus: React.Dispatch<React.SetStateAction<boolean>>;
     setDeleteGroupOverlayStatus: React.Dispatch<React.SetStateAction<boolean>>;
     showOverlay: (overlayStatusSetter: React.Dispatch<React.SetStateAction<boolean>>) => void;
 }
@@ -14,6 +15,7 @@ const ListTitleBarMenuDropdown: React.FC<Props> = ({
     setRenameGroupOverlayStatus,
     setInviteMembersOverlayStatus,
     setDeleteGroupOverlayStatus,
+    setLeaveGroupOverlayStatus,
     showOverlay,
 }) => {
     const showRenameGroupOverlay = () => {
@@ -21,6 +23,9 @@ const ListTitleBarMenuDropdown: React.FC<Props> = ({
     };
     const showInviteMembersOverlay = () => {
         showOverlay(setInviteMembersOverlayStatus);
+    };
+    const showLeaveGroupOverlay = () => {
+        showOverlay(setLeaveGroupOverlayStatus);
     };
     const showDeleteGroupOverlay = () => {
         showOverlay(setDeleteGroupOverlayStatus);
@@ -36,6 +41,9 @@ const ListTitleBarMenuDropdown: React.FC<Props> = ({
                     Members
                 </div>
                 <div className='dropDownItem-danger'>
+                    <div className='dropDownItem ' onClick={showLeaveGroupOverlay}>
+                        Leave Group
+                    </div>
                     <div className='dropDownItem ' onClick={showDeleteGroupOverlay}>
                         Delete Group
                     </div>
