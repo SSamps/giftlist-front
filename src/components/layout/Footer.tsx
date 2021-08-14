@@ -4,7 +4,7 @@ const Footer: React.FC = () => {
     return (
         <div>
             <div className='footerContainerOuter'>
-                <div className='footerContainerInner'>Footer</div>
+                <div className='footerContainerInner'>GiftList Alpha</div>
             </div>
         </div>
     );

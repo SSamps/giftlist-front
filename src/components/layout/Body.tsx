@@ -11,6 +11,7 @@ import NotFound from '../routing/NotFound';
 import PrivateRoute from '../routing/PrivateRoute';
 import VerifiedRoute from '../routing/VerifiedRoute';
 import Verify from '../pages/auth/Verify';
+import ResetPassword from '../pages/ResetPassword';
 
 const Body: React.FC = () => {
     return (
@@ -22,6 +23,7 @@ const Body: React.FC = () => {
                         <Route exact path='/register' component={Register} />
                         <Route exact path='/login' component={Login} />
                         <Route exact path='/invite/:token' component={Invite} />
+                        <Route exact path='/resetpassword/:token' component={ResetPassword} />
                         <PrivateRoute exact path='/verify/:token' component={Verify} />
                         <PrivateRoute exact path='/dashboard' component={Dashboard} />
                         <VerifiedRoute exact path='/list/newlist' component={NewListPage} />

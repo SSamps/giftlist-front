@@ -38,7 +38,7 @@
     max-width: calc(min(75rem, 100%));
     background-color: $content-background-color;
     height: 5rem;
-    border-top: 2px solid $dark-color;
+    border-top: thin solid $border-color;
 }
 
 .footerContainerInner {

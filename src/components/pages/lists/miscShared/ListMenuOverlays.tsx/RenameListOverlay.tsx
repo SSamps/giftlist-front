@@ -40,7 +40,6 @@ const RenameListOverlay: React.FC<Props> = ({ setOpen, currentList, renameListAc
                     {waiting && <Spinner className='spinner-tiny'></Spinner>}
                 </div>
             </div>
-            <div></div>
             <DropdownUnderlay setOpen={setOpen} extraClasses={'underlay-focus'}></DropdownUnderlay>
         </Fragment>
     );

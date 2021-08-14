@@ -87,7 +87,7 @@ body {
   max-width: calc(min(75rem, 100%));
   background-color: #edf7fd;
   height: 5rem;
-  border-top: 2px solid #343a40; }
+  border-top: thin solid #ccc; }
 
 .footerContainerInner {
   height: 100%;
@@ -669,3 +669,12 @@ body {
   justify-content: space-between; }
   .basicListDeleteItemsContainer-button {
     width: 7rem; }
+
+.extraAuthButtonContainer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 0rem;
+  padding-top: 1rem;
+  border-top: thin solid #ccc; }

@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { loginActionCreator, TloginActionCreator } from '../../../redux/actions/authActions';
 import { IrootState } from '../../../redux/reducers/root/rootReducer';
 import axios, { AxiosError, AxiosResponse } from 'axios';
+import ForgottenPassOverlay from './ForgottenPassOverlay';
 
 interface Props {
     loginActionCreator: TloginActionCreator;
@@ -22,6 +23,8 @@ const Login: React.FC<Props> = ({ loginActionCreator, isAuthenticated }) => {
         passwordErrorHighlight: false,
         emailErrorHighlight: false,
     });
+
+    const [showForgottenPassOverlay, setShowForgottenPassOverlay] = useState(false);
 
     if (isAuthenticated) {
         return <Redirect to='/dashboard' />;
@@ -116,9 +119,15 @@ const Login: React.FC<Props> = ({ loginActionCreator, isAuthenticated }) => {
                 {loginErrorMessage && <p className='form-error-message'>{loginErrorMessage}</p>}
                 <input type='submit' className='btn btn-primary' value='Login' />
             </form>
-            <p className='my-1'>
-                Don't have an account? <Link to='/register'>Sign Up</Link>
+            <p className='extraAuthButtonContainer'>
+                <Link to='/register'>Sign Up</Link>
+                <span className='btn-simple' onClick={() => setShowForgottenPassOverlay(true)}>
+                    Forgotten Password
+                </span>
             </p>
+            {showForgottenPassOverlay && (
+                <ForgottenPassOverlay setOpen={setShowForgottenPassOverlay}></ForgottenPassOverlay>
+            )}
         </Fragment>
     );
 };
