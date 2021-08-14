@@ -1,4 +1,8 @@
 import { Fragment } from 'react';
+import { connect } from 'react-redux';
+import { IrootStateAuthed } from '../../../../redux/reducers/root/rootReducer';
+import { TbasicListFields, TgiftListFields } from '../../../../types/models/listGroups';
+import { IUser } from '../../../../types/models/User';
 import DropdownUnderlay from '../../dashboard/yourLists/controlBar/filters/DropdownUnderlay';
 
 interface Props {
@@ -8,6 +12,8 @@ interface Props {
     setLeaveGroupOverlayStatus: React.Dispatch<React.SetStateAction<boolean>>;
     setDeleteGroupOverlayStatus: React.Dispatch<React.SetStateAction<boolean>>;
     showOverlay: (overlayStatusSetter: React.Dispatch<React.SetStateAction<boolean>>) => void;
+    user: IUser;
+    currentList: TgiftListFields | TbasicListFields;
 }
 
 const ListTitleBarMenuDropdown: React.FC<Props> = ({
@@ -54,4 +60,8 @@ const ListTitleBarMenuDropdown: React.FC<Props> = ({
     );
 };
 
-export default ListTitleBarMenuDropdown;
+const mapStateToProps = (state: IrootStateAuthed) => ({
+    user: state.authReducer.user,
+});
+
+export default connect(mapStateToProps)(ListTitleBarMenuDropdown);

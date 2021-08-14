@@ -10,6 +10,7 @@ import {
     DELETE_LIST,
     RENAME_LIST,
     LEAVE_LIST,
+    LOAD_LIST_PERMISSIONS,
 } from './actionTypes';
 import { Dispatch } from 'redux';
 import axios, { AxiosResponse } from 'axios';
@@ -247,5 +248,38 @@ export const leaveListActionCreator: TleaveListActionCreator =
             });
         } catch (err) {
             dispatch({ type: LIST_ERROR, payload: { msg: err.response.data.msg, status: err.response.status } });
+        }
+    };
+
+interface IloadListPermissions {
+    type: typeof LOAD_LIST_PERMISSIONS;
+}
+
+export type TloadListPermissionsActionCreator = (currentList: TListGroupAnyFields | undefined, userId: string) => void;
+
+export const loadListPermissionsActionCreator: TloadListPermissionsActionCreator =
+    (currentList, userId) => async (dispatch: Dispatch<IloadListPermissions | IlistActionError>) => {
+        if (!currentList) {
+            dispatch({
+                type: LOAD_LIST_PERMISSIONS,
+                payload: undefined,
+            });
+        } else {
+            let foundUser;
+            if (currentList.owner.userId === userId) {
+                foundUser = currentList.owner;
+            } else {
+                for (let i = 0; i < currentList.members.length; i++) {
+                    if (currentList.members[i].userId === userId) {
+                        foundUser = currentList.members[i];
+                        break;
+                    }
+                }
+            }
+
+            dispatch({
+                type: LOAD_LIST_PERMISSIONS,
+                payload: foundUser?.permissions,
+            });
         }
     };

@@ -7,6 +7,7 @@ import {
     LEAVE_LIST,
     LIST_ERROR,
     LIST_RESET,
+    LOAD_LIST_PERMISSIONS,
     MODIFY_LIST_ITEM,
     NEW_LIST_ITEM,
     PARENT_LIST_GET,
@@ -19,6 +20,8 @@ export interface IlistGroupData {
     currentList: undefined | TListGroupAnyFields;
     parentList: undefined | TListGroupAnyFields;
     listError: undefined | { status: number; data: string };
+    currentListPermissions: string[] | undefined;
+    parentListPermissions: string[] | undefined;
 }
 
 const initialState = {
@@ -26,6 +29,8 @@ const initialState = {
     currentList: undefined,
     parentList: undefined,
     listError: undefined,
+    currentListPermissions: undefined,
+    parentListPermissions: undefined,
 };
 
 export default function reducer(state: IlistGroupData = initialState, action: AnyAction): IlistGroupData {
@@ -51,6 +56,11 @@ export default function reducer(state: IlistGroupData = initialState, action: An
                 currentList: undefined,
                 parentList: payload,
                 listError: undefined,
+            };
+        case LOAD_LIST_PERMISSIONS:
+            return {
+                ...state,
+                currentListPermissions: payload,
             };
         case DELETE_LIST_ITEM:
             return {

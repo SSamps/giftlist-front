@@ -5,11 +5,14 @@ import {
     getListActionCreator,
     TgetListActionCreator,
     TresetListActionCreator,
+    loadListPermissionsActionCreator,
+    TloadListPermissionsActionCreator,
 } from '../../../redux/actions/listGroupActions';
 import { IlistGroupData } from '../../../redux/reducers/listGroupReducer';
 import { IrootStateAuthed } from '../../../redux/reducers/root/rootReducer';
 import { BASIC_LIST, GIFT_GROUP, GIFT_GROUP_CHILD, GIFT_LIST } from '../../../types/listVariants';
 import { TListGroupAnyFields } from '../../../types/models/listGroups';
+import { IUser } from '../../../types/models/User';
 import Spinner from '../../misc/spinner';
 import BasicListContainer from './listVariants/basicList/BasicListContainer';
 import GiftGroupChildContainer from './listVariants/giftGroup/GiftGroupChildContainer';
@@ -18,8 +21,10 @@ import GiftListContainer from './listVariants/giftList/GiftListContainer';
 
 interface Props extends IlistGroupData {
     listid: string;
+    user: IUser;
     getListActionCreator: TgetListActionCreator;
     resetListActionCreator: TresetListActionCreator;
+    loadListPermissionsActionCreator: TloadListPermissionsActionCreator;
 }
 
 const ListLoader: React.FC<Props> = ({
@@ -30,6 +35,8 @@ const ListLoader: React.FC<Props> = ({
     listError,
     getListActionCreator,
     resetListActionCreator,
+    loadListPermissionsActionCreator,
+    user,
 }): JSX.Element => {
     useEffect(() => {
         let init = () => {
@@ -38,6 +45,13 @@ const ListLoader: React.FC<Props> = ({
         };
         init();
     }, [listid]);
+
+    useEffect(() => {
+        let loadPermissions = () => {
+            loadListPermissionsActionCreator(currentList, user._id);
+        };
+        loadPermissions();
+    }, [currentList, parentList]);
 
     function listSwitch(group: TListGroupAnyFields) {
         switch (group.groupVariant) {
@@ -84,8 +98,12 @@ const mapStateToProps = (state: IrootStateAuthed) => ({
     currentList: state.listGroupReducer.currentList,
     parentList: state.listGroupReducer.parentList,
     listError: state.listGroupReducer.listError,
+    currentListPermissions: state.listGroupReducer.currentListPermissions,
+    parentListPermissions: state.listGroupReducer.parentListPermissions,
 });
 
-export default connect(mapStateToProps, { getListActionCreator, resetListActionCreator: resetListActionCreator })(
-    ListLoader
-);
+export default connect(mapStateToProps, {
+    getListActionCreator,
+    resetListActionCreator,
+    loadListPermissionsActionCreator,
+})(ListLoader);
