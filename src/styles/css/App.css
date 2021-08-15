@@ -142,16 +142,20 @@ body {
   width: 50px; }
 
 .form {
-  margin: 1rem 0rem;
+  margin: 1rem 0;
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  width: 100%; }
+  width: 95%; }
   .form-error-message {
     color: #dc3545;
     margin-top: 0.5rem; }
   .form-error-field {
     border-color: #dc3545; }
+  .form-error-container {
+    display: flex;
+    justify-content: center;
+    align-items: center; }
   .form input[type='text'],
   .form input[type='email'],
   .form input[type='password'],
