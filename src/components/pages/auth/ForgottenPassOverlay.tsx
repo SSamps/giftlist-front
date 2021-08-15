@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React, { Fragment, useState } from 'react';
 import { connect } from 'react-redux';
 import OverlayButtons from '../../misc/OverlayButtons';
@@ -19,12 +20,20 @@ const ForgottenPassOverlay: React.FC<Props> = ({ setOpen }) => {
     };
 
     const submitForm = async (e?: React.FormEvent<HTMLFormElement>) => {
-        setSubmitState({ ...submitState, error: '' });
         e?.preventDefault();
+        setSubmitState({ ...submitState, error: '', waiting: true });
         try {
-            //axios request
-            setSubmitState({ ...submitState, waiting: false, complete: true });
+            const config = {
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            };
+
+            const body = JSON.stringify({ email: email });
+            await axios.post(`/api/users/resetpassword`, body, config);
+            setSubmitState({ error: '', waiting: false, complete: true });
         } catch (err) {
+            console.log(err);
             setSubmitState({ ...submitState, waiting: false, error: err.response.data });
         }
     };
@@ -34,19 +43,19 @@ const ForgottenPassOverlay: React.FC<Props> = ({ setOpen }) => {
             <div className='overlay'>
                 <div className='overlayContainer'>
                     <span className='lead'>Recover your password</span>
-                    <form className='form' onSubmit={submitForm}>
+                    <div className='form'>
                         <label>
                             Email
                             <input type='text' value={email} onChange={onChange}></input>
                         </label>
-                    </form>
-                    <OverlayButtons submitForm={submitForm} setOpen={setOpen}></OverlayButtons>
-                    {waiting ? (
-                        <Spinner className='spinner-tiny'></Spinner>
+                    </div>
+                    {complete ? (
+                        <div>Password recovery email sent</div>
                     ) : (
-                        complete && <div>Password recovery email sent</div>
+                        <OverlayButtons submitForm={submitForm} setOpen={setOpen}></OverlayButtons>
                     )}
-                    {error.length > 0 && error}
+                    {waiting && <Spinner className='spinner-tiny'></Spinner>}
+                    {error.length > 0 && <div className='form-error-message'>{error}</div>}
                 </div>
             </div>
             <DropdownUnderlay setOpen={setOpen} extraClasses={'underlay-focus'}></DropdownUnderlay>
