@@ -108,6 +108,12 @@ type Tchildren = {
     children?: TListGroupAnyFields[];
 };
 
+interface IprocessedGroupFields {
+    currentUser: TgroupMemberAny;
+}
+
 export type TListGroupAnyFields = TlistGroupAnyFieldsUncensored & TlistGroupAnyFieldsCensored & Tchildren;
+
+export type TProcessedListGroupAnyFields = TListGroupAnyFields & IprocessedGroupFields;
 
 export type TgroupMemberAny = IbasicListMember & IgiftListMember & IgiftGroupMember & IgiftGroupChildMember;

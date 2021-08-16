@@ -11,7 +11,11 @@ import { BASIC_LIST, GIFT_GROUP, GIFT_LIST } from '../../../../types/listVariant
 import { GiftListPreviewCard } from './previewCards/GiftListPreviewCard';
 import { BasicListPreviewCard } from './previewCards/BasicListPreviewCard';
 import { GiftGroupPreviewCard } from './previewCards/GiftGroupPreviewCard';
-import { TListGroupAnyFields } from '../../../../types/models/listGroups';
+import {
+    TgroupMemberAny,
+    TListGroupAnyFields,
+    TProcessedListGroupAnyFields,
+} from '../../../../types/models/listGroups';
 import { IUser } from '../../../../types/models/User';
 import { findUserInGroup } from '../../../../utils/helperFunctions';
 import { PERM_GROUP_OWNER } from '../../../../types/listGroupPermissions';
@@ -32,9 +36,13 @@ export const YourLists: React.FC<Props> = ({
         getDashboardListDataActionCreator();
     }, []);
 
+    const processedListGroups: TProcessedListGroupAnyFields[] = listGroups.map((group) => {
+        const foundUser = findUserInGroup(group, user._id) as TgroupMemberAny;
+        return { ...group, currentUser: foundUser };
+    });
+
     const applyListFilters = (
-        listGroups: TListGroupAnyFields[],
-        userId: string,
+        processedListGroups: TProcessedListGroupAnyFields[],
         listOwnershipFilter: 'anyone' | 'you' | 'others',
         listVariantFilter: {
             basicListSelected: boolean;
@@ -42,9 +50,8 @@ export const YourLists: React.FC<Props> = ({
             giftGroupSelected: boolean;
         }
     ): TListGroupAnyFields[] => {
-        let filteredLists = listGroups.filter((list) => {
-            const foundUser = findUserInGroup(list, userId);
-            const isOwner = foundUser?.permissions.includes(PERM_GROUP_OWNER);
+        let filteredLists = processedListGroups.filter((list) => {
+            const isOwner = list.currentUser.permissions.includes(PERM_GROUP_OWNER);
             switch (listOwnershipFilter) {
                 case 'you': {
                     return isOwner;
@@ -73,7 +80,7 @@ export const YourLists: React.FC<Props> = ({
         return filteredLists;
     };
 
-    let filteredListGroups = applyListFilters(listGroups, user._id.toString(), listOwnershipFilter, listVariantFilter);
+    let filteredListGroups = applyListFilters(processedListGroups, listOwnershipFilter, listVariantFilter);
 
     return (
         <Fragment>
