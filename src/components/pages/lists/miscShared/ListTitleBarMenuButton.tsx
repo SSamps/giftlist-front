@@ -89,6 +89,7 @@ const ListTitleBarMenuButton: React.FC<Props> = ({ deleteListActionCreator, leav
                         setInviteMembersOverlayStatus={setInviteMembersOverlayStatus}
                         setDeleteGroupOverlayStatus={setDeleteGroupOverlayStatus}
                         setLeaveGroupOverlayStatus={setLeaveGroupOverlayStatus}
+                        currentListVariant={currentList.groupVariant}
                     ></ListTitleBarMenuDropdown>
                 )}
             </li>

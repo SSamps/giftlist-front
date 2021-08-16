@@ -13,6 +13,8 @@ import { BasicListPreviewCard } from './previewCards/BasicListPreviewCard';
 import { GiftGroupPreviewCard } from './previewCards/GiftGroupPreviewCard';
 import { TListGroupAnyFields } from '../../../../types/models/listGroups';
 import { IUser } from '../../../../types/models/User';
+import { findUserInGroup } from '../../../../utils/helperFunctions';
+import { PERM_GROUP_OWNER } from '../../../../types/listGroupPermissions';
 
 interface Props extends IdashboardState {
     getDashboardListDataActionCreator: TgetDashboardListDataActionCreator;
@@ -41,12 +43,14 @@ export const YourLists: React.FC<Props> = ({
         }
     ): TListGroupAnyFields[] => {
         let filteredLists = listGroups.filter((list) => {
+            const foundUser = findUserInGroup(list, userId);
+            const isOwner = foundUser?.permissions.includes(PERM_GROUP_OWNER);
             switch (listOwnershipFilter) {
                 case 'you': {
-                    return userId === list.owner.userId;
+                    return isOwner;
                 }
                 case 'others': {
-                    return !(userId === list.owner.userId);
+                    return !isOwner;
                 }
                 case 'anyone': {
                     return true;

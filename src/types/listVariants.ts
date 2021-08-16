@@ -12,13 +12,21 @@ export const LIST_GROUP_ALL_VARIANTS = [
     ...LIST_GROUP_CHILD_VARIANTS,
 ];
 
-export const LIST_GROUP_ALL_VARIANTS_WITH_MESSAGES = [GIFT_GROUP_CHILD, GIFT_LIST];
+// All groups which are not children
 export const LIST_GROUP_ALL_TOP_LEVEL_VARIANTS = [...LIST_GROUP_SINGLE_VARIANTS, ...LIST_GROUP_PARENT_VARIANTS];
-
 export type TYPE_LIST_GROUP_ALL_TOP_LEVEL_VARIANTS = typeof BASIC_LIST | typeof GIFT_LIST | typeof GIFT_GROUP;
+
+// Has items of any kind
+export const LIST_GROUP_ALL_WITH_ANY_ITEMS = [GIFT_LIST, GIFT_GROUP_CHILD, BASIC_LIST];
 
 // Has secretListItems
 export const LIST_GROUP_ALL_WITH_SECRET_ITEMS = [GIFT_LIST, GIFT_GROUP_CHILD];
+
+// Has regular ListItems
+export const LIST_GROUP_ALL_WITH_REGULAR_ITEMS = [GIFT_LIST, GIFT_GROUP_CHILD, BASIC_LIST];
+
+// Has messages
+export const LIST_GROUP_ALL_WITH_MESSAGES = [GIFT_LIST, GIFT_GROUP_CHILD];
 
 // All groups must fall into one of these categories
 export const LIST_GROUP_ALL_CENSORABLE = [GIFT_LIST, GIFT_GROUP_CHILD];

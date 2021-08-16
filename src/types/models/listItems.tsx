@@ -1,4 +1,4 @@
-export interface TgiftListItem {
+export interface IgiftListItem {
     authorId: string;
     creationDate?: Date;
     body: string;

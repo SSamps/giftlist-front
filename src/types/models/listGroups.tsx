@@ -5,7 +5,7 @@ import {
     TYPE_PERM_GIFT_GROUP_CHILD_ALL,
     TYPE_PERM_GIFT_LIST_ALL,
 } from '../listGroupPermissions';
-import { IbasicListItem, TgiftListItem, IgiftListItemCensored } from './listItems';
+import { IbasicListItem, IgiftListItem, IgiftListItemCensored } from './listItems';
 
 // Shared
 type TlistGroupBaseFields = { groupName: string; creationDate?: Date; groupVariant: string; _id: string };
@@ -24,8 +24,7 @@ interface IbasicListMember extends IgroupMemberBase {
 }
 
 type TbasicListExtraFields = {
-    owner: IbasicListMember;
-    members: [IbasicListMember];
+    members: IbasicListMember[];
     maxListItems: Number;
     listItems: IbasicListItem[];
 };
@@ -38,20 +37,19 @@ export interface IgiftListMember extends IgroupMemberBase {
 }
 
 type TgiftListExtraFields = {
-    owner: IgiftListMember;
-    members: [IgiftListMember];
+    members: IgiftListMember[];
     maxListItems: Number;
-    listItems: TgiftListItem[];
+    listItems: IgiftListItem[];
     maxSecretListItemsEach: Number;
-    secretListItems: TgiftListItem[];
+    secretListItems: IgiftListItem[];
 };
 
 type TgiftListExtraFieldsCensored = {
-    owner: IgiftListMember;
-    members: [IgiftListMember];
+    members: IgiftListMember[];
     maxListItems: Number;
     listItems: IgiftListItemCensored[];
     maxSecretListItemsEach: Number;
+    secretListItems: IgiftListItemCensored[] | undefined;
 };
 
 export type TgiftListFields = TlistGroupBaseFields & TgiftListExtraFields;
@@ -64,8 +62,7 @@ interface IgiftGroupMember extends IgroupMemberBase {
 }
 
 type TgiftGroupExtraFields = {
-    owner: IgiftGroupMember;
-    members: [IgiftGroupMember];
+    members: IgiftGroupMember[];
 };
 
 export type TgiftGroupFields = TlistGroupBaseFields & TgiftGroupExtraFields;
@@ -76,22 +73,21 @@ export interface IgiftGroupChildMember extends IgroupMemberBase {
 }
 
 type TgiftGroupChildExtraFields = {
-    owner: IgiftGroupChildMember;
-    members: [IgiftGroupChildMember];
+    members: IgiftGroupChildMember[];
     parentGroupId: string;
     maxListItems: Number;
-    listItems: TgiftListItem[];
+    listItems: IgiftListItem[];
     maxSecretListItemsEach: Number;
-    secretListItems: TgiftListItem[];
+    secretListItems: IgiftListItem[];
 };
 
 type TgiftGroupChildExtraFieldsCensored = {
-    owner: IgiftGroupChildMember;
-    members: [IgiftGroupChildMember];
+    members: IgiftGroupChildMember[];
     parentGroupId: string;
     maxListItems: Number;
     listItems: IgiftListItemCensored[];
     maxSecretListItemsEach: Number;
+    secretListItems: IgiftListItemCensored[] | undefined;
 };
 
 export type TgiftGroupChildFields = TlistGroupBaseFields & TgiftGroupChildExtraFields;
@@ -113,3 +109,5 @@ type Tchildren = {
 };
 
 export type TListGroupAnyFields = TlistGroupAnyFieldsUncensored & TlistGroupAnyFieldsCensored & Tchildren;
+
+export type TgroupMemberAny = IbasicListMember & IgiftListMember & IgiftGroupMember & IgiftGroupChildMember;

@@ -34,7 +34,6 @@ const MembersOverlay: React.FC<Props> = ({ setOpen, currentList }) => {
 
     const renderCurrentMembers = () => {
         let members = [];
-        members.push(currentList.owner.displayName);
 
         for (let member of currentList.members) {
             members.push(member.displayName);

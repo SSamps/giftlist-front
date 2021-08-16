@@ -16,6 +16,7 @@ import { Dispatch } from 'redux';
 import axios, { AxiosResponse } from 'axios';
 import { TListGroupAnyFields } from '../../types/models/listGroups';
 import { LIST_GROUP_PARENT_VARIANTS } from '../../types/listVariants';
+import { findUserInGroup } from '../../utils/helperFunctions';
 
 interface IlistActionError {
     type: typeof LIST_ERROR;
@@ -265,17 +266,7 @@ export const loadListPermissionsActionCreator: TloadListPermissionsActionCreator
                 payload: undefined,
             });
         } else {
-            let foundUser;
-            if (currentList.owner.userId === userId) {
-                foundUser = currentList.owner;
-            } else {
-                for (let i = 0; i < currentList.members.length; i++) {
-                    if (currentList.members[i].userId === userId) {
-                        foundUser = currentList.members[i];
-                        break;
-                    }
-                }
-            }
+            let foundUser = findUserInGroup(currentList, userId);
 
             dispatch({
                 type: LOAD_LIST_PERMISSIONS,
