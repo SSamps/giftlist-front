@@ -5,13 +5,6 @@ import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import { IrootState } from '../../redux/reducers/root/rootReducer';
 import { connect } from 'react-redux';
-import {
-    inviteTokenErrorActionCreator,
-    setPendingInviteActionCreator,
-    TInviteTokenErrorActionCreator,
-    TsetPendingInviteActionCreator,
-} from '../../redux/actions/inviteActions';
-import jwt from 'jsonwebtoken';
 
 interface Props {
     match: {
@@ -19,8 +12,6 @@ interface Props {
     };
     isAuthenticated: boolean;
     authLoading: boolean;
-    setPendingInviteActionCreator: TsetPendingInviteActionCreator;
-    inviteTokenErrorActionCreator: TInviteTokenErrorActionCreator;
 }
 
 const Invite: React.FC<Props> = ({
@@ -29,8 +20,6 @@ const Invite: React.FC<Props> = ({
     },
     authLoading,
     isAuthenticated,
-    setPendingInviteActionCreator,
-    inviteTokenErrorActionCreator,
 }) => {
     const [inviteError, setInviteError] = useState<undefined | string>(undefined);
     const history = useHistory();
@@ -46,28 +35,21 @@ const Invite: React.FC<Props> = ({
     }, [authLoading]);
 
     const tryVerify = async () => {
+        if (!validator.isJWT(token)) {
+            setInviteError('Invalid invite token');
+            return;
+        }
         try {
             const res = await axios.post(`/api/groups/invite/accept/${token}`);
             history.push(`/list/${res.data._id}`);
         } catch (err) {
-            setInviteError('Error: ' + err.response.status + ' ' + err.response.statusText);
+            setInviteError(err.response.status + ' Error: ' + err.response.data);
         }
     };
 
     const setPendingInvite = () => {
-        if (validator.isJWT(token)) {
-            const decodedToken = jwt.decode(token) as jwt.JwtPayload;
-            if (decodedToken.groupName) {
-                setPendingInviteActionCreator(token, decodedToken.groupName);
-                history.push(`/login`);
-            } else {
-                inviteTokenErrorActionCreator();
-                history.push(`/login`);
-            }
-        } else {
-            inviteTokenErrorActionCreator();
-            history.push(`/login`);
-        }
+        localStorage.setItem('pendingInviteToken', token);
+        history.push(`/login`);
     };
 
     return (
@@ -90,4 +72,4 @@ const mapStateToProps = (state: IrootState) => ({
     isAuthenticated: state.authReducer.isAuthenticated,
 });
 
-export default connect(mapStateToProps, { setPendingInviteActionCreator, inviteTokenErrorActionCreator })(Invite);
+export default connect(mapStateToProps)(Invite);

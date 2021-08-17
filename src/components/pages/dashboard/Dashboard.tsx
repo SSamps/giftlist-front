@@ -1,63 +1,53 @@
-import { Fragment, useEffect } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import {
-    acceptInviteActionCreator,
-    clearInviteActionCreator,
-    convertInviteTokenErrorActionCreator,
-    resetInviteErrorActionCreator,
-    TacceptInviteActionCreator,
-    TclearInviteActionCreator,
-    TconvertInviteTokenErrorActionCreator,
-    TresetInviteErrorActionCreator,
-} from '../../../redux/actions/inviteActions';
+import validator from 'validator';
 import { IrootState } from '../../../redux/reducers/root/rootReducer';
 import { IUser } from '../../../types/models/User';
 import ErrorMessage from '../../misc/ErrorMessage';
 import VerifyNotification from './VerifyNotification';
 import YourLists from './yourLists/YourLists';
+import jwt from 'jsonwebtoken';
+import axios from 'axios';
 
 interface Props {
     user: IUser | null;
     authLoading: boolean;
-    invitePending: undefined | { inviteToken: string; groupName: string };
-    inviteError: undefined | string;
-    inviteAccepted: undefined | string;
-    inviteTokenError: undefined | string;
-    acceptInviteActionCreator: TacceptInviteActionCreator;
-    resetInviteErrorActionCreator: TresetInviteErrorActionCreator;
-    convertInviteTokenErrorActionCreator: TconvertInviteTokenErrorActionCreator;
-    clearInviteActionCreator: TclearInviteActionCreator;
 }
 
-const Dashboard: React.FC<Props> = ({
-    user,
-    authLoading,
-    invitePending,
-    inviteError,
-    inviteAccepted,
-    inviteTokenError,
-    resetInviteErrorActionCreator,
-    acceptInviteActionCreator,
-    convertInviteTokenErrorActionCreator,
-    clearInviteActionCreator,
-}): JSX.Element => {
+const Dashboard: React.FC<Props> = ({ user, authLoading }): JSX.Element => {
     const history = useHistory();
+    const [inviteError, setInviteError] = useState<undefined | string>(undefined);
 
     useEffect(() => {
-        if (inviteError) {
-            resetInviteErrorActionCreator();
-        }
-        if (inviteTokenError) {
-            convertInviteTokenErrorActionCreator();
-        }
-        if (invitePending) {
-            acceptInviteActionCreator(invitePending.inviteToken, invitePending.groupName);
-        } else if (inviteAccepted) {
-            history.push(`/list/${inviteAccepted}`);
-            clearInviteActionCreator();
-        }
-    }, [inviteAccepted]);
+        const processPendingInvite = async () => {
+            if (user?.verified) {
+                const pendingInviteToken = localStorage.getItem('pendingInviteToken');
+                if (pendingInviteToken) {
+                    if (validator.isJWT(pendingInviteToken)) {
+                        const decodedToken = jwt.decode(pendingInviteToken) as jwt.JwtPayload;
+                        if (!decodedToken.groupName) {
+                            setInviteError('Invalid invite token');
+                            localStorage.removeItem('pendingInviteToken');
+                            return;
+                        }
+                        try {
+                            const res = await axios.post(`/api/groups/invite/accept/${pendingInviteToken}`);
+                            localStorage.removeItem('pendingInviteToken');
+                            history.push(`/list/${res.data._id}`);
+                            return;
+                        } catch (err) {
+                            setInviteError(
+                                'Error processing invite: ' + err.response.status + ' ' + err.response.statusText
+                            );
+                            localStorage.removeItem('pendingInviteToken');
+                        }
+                    }
+                }
+            }
+        };
+        processPendingInvite();
+    }, [user?.verified]);
 
     return (
         <Fragment>
@@ -81,15 +71,6 @@ const Dashboard: React.FC<Props> = ({
 const mapStateToProps = (state: IrootState) => ({
     user: state.authReducer.user,
     authLoading: state.authReducer.loading,
-    invitePending: state.pendingInviteReducer.invitePending,
-    inviteError: state.pendingInviteReducer.inviteError,
-    inviteTokenError: state.pendingInviteReducer.inviteTokenError,
-    inviteAccepted: state.pendingInviteReducer.inviteAccepted,
 });
 
-export default connect(mapStateToProps, {
-    resetInviteErrorActionCreator,
-    acceptInviteActionCreator,
-    convertInviteTokenErrorActionCreator,
-    clearInviteActionCreator,
-})(Dashboard);
+export default connect(mapStateToProps)(Dashboard);
