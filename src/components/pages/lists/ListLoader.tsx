@@ -75,21 +75,20 @@ const ListLoader: React.FC<Props> = ({
         }
     }
 
-    return (
-        <Fragment>
-            {listLoading ? (
-                <Spinner className='spinner-tiny'></Spinner>
-            ) : listError ? (
-                <div>
-                    {listError.status} {listError.data}
-                </div>
-            ) : parentList ? (
-                parentListSwitch(parentList)
-            ) : (
-                currentList && listSwitch(currentList)
-            )}
-        </Fragment>
-    );
+    const renderList = () => {
+        return (
+            <Fragment>
+                {listError && (
+                    <div>
+                        {listError.status} {listError.data}
+                    </div>
+                )}
+                {parentList ? parentListSwitch(parentList) : currentList && listSwitch(currentList)}
+            </Fragment>
+        );
+    };
+
+    return <Fragment>{listLoading ? <Spinner className='spinner-tiny'></Spinner> : renderList()}</Fragment>;
 };
 
 const mapStateToProps = (state: IrootStateAuthed) => ({

@@ -110,7 +110,8 @@ export default function reducer(state: IlistGroupData = initialState, action: An
             };
         case LIST_ERROR:
             return {
-                ...initialState,
+                ...state,
+                listError: payload,
             };
         default:
             return {

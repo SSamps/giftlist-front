@@ -20,7 +20,7 @@ import { findUserInGroup } from '../../utils/helperFunctions';
 
 interface IlistActionError {
     type: typeof LIST_ERROR;
-    payload?: { msg: string; status: string };
+    payload?: { data: string; status: string };
 }
 
 interface IgetListActionSuccess {
@@ -52,7 +52,7 @@ export const getListActionCreator =
                 });
             }
         } catch (err) {
-            dispatch({ type: LIST_ERROR, payload: { msg: err.response.data, status: err.response.status } });
+            dispatch({ type: LIST_ERROR, payload: { data: err.response.data, status: err.response.status } });
         }
     };
 
@@ -80,7 +80,7 @@ export const deleteListItemActionCreator =
                 payload: res.data,
             });
         } catch (err) {
-            dispatch({ type: LIST_ERROR, payload: { msg: err.response.data.msg, status: err.response.status } });
+            dispatch({ type: LIST_ERROR, payload: { data: err.response.data, status: err.response.status } });
         }
     };
 
@@ -124,7 +124,7 @@ export const newListItemActionCreator =
                 payload: res.data,
             });
         } catch (err) {
-            dispatch({ type: LIST_ERROR, payload: { msg: err.response.data.msg, status: err.response.status } });
+            dispatch({ type: LIST_ERROR, payload: { data: err.response.data, status: err.response.status } });
         }
     };
 
@@ -153,7 +153,7 @@ export const modifyListItemActionCreator: TmodifyListItemActionCreator =
             });
         } catch (err) {
             console.error(err);
-            dispatch({ type: LIST_ERROR, payload: { msg: err.response.data.msg, status: err.response.status } });
+            dispatch({ type: LIST_ERROR, payload: { data: err.response.data, status: err.response.status } });
         }
     };
 
@@ -181,7 +181,8 @@ export const selectListItemActionCreator: TselectListItemActionCreator =
                 payload: res.data,
             });
         } catch (err) {
-            dispatch({ type: LIST_ERROR, payload: { msg: err.response.data.msg, status: err.response.status } });
+            console.log({ ...err });
+            dispatch({ type: LIST_ERROR, payload: { data: err.response.data, status: err.response.status } });
         }
     };
 
@@ -200,7 +201,7 @@ export const deleteListActionCreator: TdeleteListActionCreator =
                 type: DELETE_LIST,
             });
         } catch (err) {
-            dispatch({ type: LIST_ERROR, payload: { msg: err.response.data.msg, status: err.response.status } });
+            dispatch({ type: LIST_ERROR, payload: { data: err.response.data, status: err.response.status } });
         }
     };
 
@@ -228,7 +229,7 @@ export const renameListActionCreator: TrenameListActionCreator =
                 payload: res.data,
             });
         } catch (err) {
-            dispatch({ type: LIST_ERROR, payload: { msg: err.response.data.msg, status: err.response.status } });
+            dispatch({ type: LIST_ERROR, payload: { data: err.response.data, status: err.response.status } });
         }
     };
 
@@ -248,7 +249,7 @@ export const leaveListActionCreator: TleaveListActionCreator =
                 payload: res.data,
             });
         } catch (err) {
-            dispatch({ type: LIST_ERROR, payload: { msg: err.response.data.msg, status: err.response.status } });
+            dispatch({ type: LIST_ERROR, payload: { data: err.response.data, status: err.response.status } });
         }
     };
 
