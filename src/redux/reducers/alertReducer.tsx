@@ -19,11 +19,9 @@ export default function reducer(state = initialState, action: AnyAction) {
             return [...state, payload];
         case REMOVE_ALERT:
             return state.filter((alert) => {
-                alert.id !== payload;
+                return alert.id !== payload;
             });
         default:
-            return {
-                ...state,
-            };
+            return [...state];
     }
 }

@@ -295,6 +295,28 @@ body {
   align-items: left;
   color: #00a8c2; }
 
+.alert-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  position: absolute;
+  z-index: 2;
+  top: 3%;
+  left: 50%;
+  transform: translate(-50%, 0%);
+  height: 100vh; }
+
+.alert {
+  padding: 0.8rem;
+  margin: 1rem 0;
+  opacity: 0.9;
+  background-color: light-color;
+  color: #333; }
+  .alert-error {
+    background-color: rgba(31, 8, 6, 0.95);
+    color: #ff8981; }
+
 .navbar {
   display: flex;
   justify-content: space-between;

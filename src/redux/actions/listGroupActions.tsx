@@ -11,12 +11,16 @@ import {
     RENAME_LIST,
     LEAVE_LIST,
     LOAD_LIST_PERMISSIONS,
+    ADD_ALERT,
+    REMOVE_ALERT,
 } from './actionTypes';
 import { Dispatch } from 'redux';
 import axios, { AxiosResponse } from 'axios';
 import { TListGroupAnyFields } from '../../types/models/listGroups';
 import { LIST_GROUP_PARENT_VARIANTS } from '../../types/listVariants';
 import { findUserInGroup } from '../../utils/helperFunctions';
+import { v4 as uuidv4 } from 'uuid';
+import { IaddAlertAction, IremoveAlertAction } from './alertActions';
 
 interface IlistActionError {
     type: typeof LIST_ERROR;
@@ -164,7 +168,8 @@ interface IselectListItemActionSuccess {
 export type TselectListItemActionCreator = (action: 'SELECT' | 'DESELECT', itemId: string, groupId: string) => void;
 
 export const selectListItemActionCreator: TselectListItemActionCreator =
-    (action, itemId, groupId) => async (dispatch: Dispatch<IselectListItemActionSuccess | IlistActionError>) => {
+    (action, itemId, groupId) =>
+    async (dispatch: Dispatch<IselectListItemActionSuccess | IaddAlertAction | IremoveAlertAction>) => {
         const config = {
             headers: {
                 'Content-Type': 'application/json',
@@ -181,8 +186,14 @@ export const selectListItemActionCreator: TselectListItemActionCreator =
                 payload: res.data,
             });
         } catch (err) {
-            console.log({ ...err });
-            dispatch({ type: LIST_ERROR, payload: { data: err.response.data, status: err.response.status } });
+            const id = uuidv4();
+            dispatch({
+                type: ADD_ALERT,
+                payload: { type: 'error', message: `${err.response.status} Error: ${err.response.data}`, id: id },
+            });
+            setTimeout(() => dispatch({ type: REMOVE_ALERT, payload: id }), 4000);
+
+            // dispatch({ type: LIST_ERROR, payload: { data: err.response.data, status: err.response.status } });
         }
     };
 

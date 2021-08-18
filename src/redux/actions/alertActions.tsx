@@ -2,12 +2,12 @@ import { Dispatch } from 'redux';
 import { v4 as uuidv4 } from 'uuid';
 import { ADD_ALERT, REMOVE_ALERT } from './actionTypes';
 
-interface IaddAlertAction {
+export interface IaddAlertAction {
     type: typeof ADD_ALERT;
     payload: { type: string; message: string; id: string };
 }
 
-interface IremoveAlertAction {
+export interface IremoveAlertAction {
     type: typeof REMOVE_ALERT;
     payload: string;
 }
