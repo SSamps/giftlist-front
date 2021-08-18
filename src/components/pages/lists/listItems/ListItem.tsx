@@ -85,7 +85,7 @@ const ListItem: React.FC<Props> = ({
     const toggleSelected = async () => {
         setSelectionStatus({ waitingSelection: true });
         const action = isSelected() ? 'DESELECT' : 'SELECT';
-        await selectListItemActionCreator(action, listItem._id, listId);
+        selectListItemActionCreator(action, listItem._id, listId);
         setSelectionStatus({ waitingSelection: false });
     };
 

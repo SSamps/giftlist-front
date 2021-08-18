@@ -19,7 +19,7 @@ interface IgroupMemberBase {
 // Singular Groups
 // Basic Lists
 
-interface IbasicListMember extends IgroupMemberBase {
+export interface IbasicListMember extends IgroupMemberBase {
     permissions: TYPE_PERM_BASIC_LIST_ALL[];
 }
 
