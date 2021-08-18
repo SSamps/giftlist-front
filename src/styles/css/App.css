@@ -304,8 +304,7 @@ body {
   z-index: 2;
   top: 3%;
   left: 50%;
-  transform: translate(-50%, 0%);
-  height: 100vh; }
+  transform: translate(-50%, 0%); }
 
 .alert {
   padding: 0.8rem;
