@@ -16,7 +16,7 @@ export const INVITE_CLEAR = 'INVITE_CLEAR';
 export const INVITE_TOKEN_ERROR = 'INVITE_TOKEN_ERROR';
 export const INVITE_CONVERT_TOKEN_ERROR = 'INVITE_RESET_TOKEN_ERROR';
 
-// lists
+// Lists
 export const CURRENT_LIST_GET = 'CURRENT_LIST_GET';
 export const PARENT_LIST_GET = 'PARENT_LIST_GET';
 export const LOAD_LIST_PERMISSIONS = 'LOAD_LIST_PERMISSIONS';
@@ -29,3 +29,7 @@ export const SELECT_LIST_ITEM = 'SELECT_LIST_ITEM';
 export const RENAME_LIST = 'RENAME_LIST';
 export const LEAVE_LIST = 'LEAVE_LIST';
 export const DELETE_LIST = 'DELETE_LIST';
+
+// Alerts
+export const ADD_ALERT = 'ADD_ALERT';
+export const REMOVE_ALERT = 'REMOVE_ALERT';
