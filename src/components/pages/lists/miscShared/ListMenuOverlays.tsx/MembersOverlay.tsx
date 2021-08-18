@@ -33,13 +33,8 @@ const MembersOverlay: React.FC<Props> = ({ setOpen, currentList }) => {
     };
 
     const renderCurrentMembers = () => {
-        let members = [];
-
-        for (let member of currentList.members) {
-            members.push(member.displayName);
-        }
-        return members.map((member, index) => {
-            return <span key={'member' + index}>{member}</span>;
+        return currentList.members.map((member, index) => {
+            return <span key={'member' + index}>{member.displayName}</span>;
         });
     };
 
