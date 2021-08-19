@@ -29,7 +29,6 @@ const InviteFormInput: React.FC<Props> = ({ inviteArray, setInviteArray }) => {
     };
 
     const addInvitee = () => {
-        console.log(invitee);
         if (invitee.length > 0) {
             if (!validator.isEmail(invitee)) {
                 setInviteFormErrorData({ ...inviteFormErrorData, invalidEmail: true });

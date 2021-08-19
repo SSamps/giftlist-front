@@ -1,17 +1,18 @@
 import { Fragment, useState } from 'react';
 import { connect } from 'react-redux';
+
+import MembersOverlay from './ListMenuOverlays.tsx/MembersOverlay';
+import RenameListOverlay from './ListMenuOverlays.tsx/RenameListOverlay';
+import ListTitleBarMenuDropdown from './ListTitleBarMenuDropdown';
+import { useHistory } from 'react-router-dom';
+import { TbasicListFields, TgiftListFields } from '../../../../../types/models/listGroups';
 import {
     deleteListActionCreator,
     leaveListActionCreator,
     TdeleteListActionCreator,
     TleaveListActionCreator,
-} from '../../../../redux/actions/listGroupActions';
-import { TbasicListFields, TgiftListFields } from '../../../../types/models/listGroups';
-import MembersOverlay from './ListMenuOverlays.tsx/MembersOverlay';
-import RenameListOverlay from './ListMenuOverlays.tsx/RenameListOverlay';
-import ListTitleBarMenuDropdown from './ListTitleBarMenuDropdown';
-import { useHistory } from 'react-router-dom';
-import ConfirmationOverlay from '../../../misc/ConfirmationOverlay';
+} from '../../../../../redux/actions/listGroupActions';
+import ConfirmationOverlay from '../../../../misc/ConfirmationOverlay';
 
 interface Props {
     currentList: TgiftListFields | TbasicListFields;
@@ -33,13 +34,13 @@ const ListTitleBarMenuButton: React.FC<Props> = ({ deleteListActionCreator, leav
     };
 
     const deleteList = async () => {
-        await deleteListActionCreator(currentList._id.toString());
-        history.push(`/dashboard`);
+        const success = await deleteListActionCreator(currentList._id.toString());
+        success && history.push(`/dashboard`);
     };
 
     const leaveList = async () => {
-        await leaveListActionCreator(currentList._id.toString());
-        history.push(`/dashboard`);
+        const success = await leaveListActionCreator(currentList._id.toString());
+        success && history.push(`/dashboard`);
     };
 
     const renderOverlay = () => {

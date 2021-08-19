@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { logoutActionCreator, TlogoutActionCreator } from '../../redux/actions/authActions';
 import { Fragment } from 'react';
 import { IrootState } from '../../redux/reducers/root/rootReducer';
+import Alerts from '../misc/Alerts';
 
 interface Props {
     logoutActionCreator: TlogoutActionCreator;
@@ -38,14 +39,19 @@ const Navbar: React.FC<Props> = ({ logoutActionCreator, loading, isAuthenticated
     );
 
     return (
-        <nav className='navbar bg-dark'>
-            <h1>
-                <Link to='/'>
-                    <i className='fas fa-code'></i> Gift List
-                </Link>
-            </h1>
-            {!loading && <Fragment>{isAuthenticated ? authedLinks : guestLinks}</Fragment>}
-        </nav>
+        <Fragment>
+            <nav className='navbar bg-dark'>
+                <h1>
+                    <Link to='/'>
+                        <i className='fas fa-code'></i> Gift List
+                    </Link>
+                </h1>
+                {!loading && <Fragment>{isAuthenticated ? authedLinks : guestLinks}</Fragment>}
+            </nav>
+            <div className='alert-placeholder'>
+                <Alerts></Alerts>
+            </div>
+        </Fragment>
     );
 };
 

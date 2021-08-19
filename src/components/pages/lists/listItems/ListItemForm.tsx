@@ -5,7 +5,7 @@ import Spinner from '../../../misc/spinner';
 
 interface Props {
     header?: string;
-    submitFormData: (itemBody: string, itemLinks: string[]) => Promise<void>;
+    submitFormData: (itemBody: string, itemLinks: string[]) => Promise<boolean>;
     shouldCloseAfterSubmit: boolean;
     submitButtonLabel: string;
     setItemFormHidden: () => void;
@@ -107,12 +107,16 @@ const ListItemForm: React.FC<Props> = ({
         setItemFormState({ ...itemFormState, waiting: true });
 
         try {
-            await submitFormData(itemBody, updatedItemLinks);
+            const success = await submitFormData(itemBody, updatedItemLinks);
 
-            if (shouldCloseAfterSubmit) {
-                setItemFormHidden();
+            if (success) {
+                if (shouldCloseAfterSubmit) {
+                    setItemFormHidden();
+                } else {
+                    setItemFormState({ itemBody: '', itemLinks: [''], waiting: false, error: '' });
+                }
             } else {
-                setItemFormState({ itemBody: '', itemLinks: [''], waiting: false, error: '' });
+                setItemFormState({ ...itemFormState, waiting: false, error: '' });
             }
         } catch (err) {
             console.log('error: ', err);

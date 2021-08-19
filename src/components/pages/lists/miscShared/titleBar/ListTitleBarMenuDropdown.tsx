@@ -1,9 +1,9 @@
 import { Fragment } from 'react';
 import { connect } from 'react-redux';
-import { IrootStateAuthed } from '../../../../redux/reducers/root/rootReducer';
-import { PERM_GROUP_DELETE, PERM_GROUP_OWNER, PERM_GROUP_RENAME } from '../../../../types/listGroupPermissions';
-import { LIST_GROUP_ALL_TOP_LEVEL_VARIANTS } from '../../../../types/listVariants';
-import DropdownUnderlay from '../../dashboard/yourLists/controlBar/filters/DropdownUnderlay';
+import { IrootStateAuthed } from '../../../../../redux/reducers/root/rootReducer';
+import { PERM_GROUP_DELETE, PERM_GROUP_OWNER, PERM_GROUP_RENAME } from '../../../../../types/listGroupPermissions';
+import { LIST_GROUP_ALL_TOP_LEVEL_VARIANTS } from '../../../../../types/listVariants';
+import DropdownUnderlay from '../../../dashboard/yourLists/controlBar/filters/DropdownUnderlay';
 
 interface Props {
     setOpen: React.Dispatch<React.SetStateAction<boolean>>;

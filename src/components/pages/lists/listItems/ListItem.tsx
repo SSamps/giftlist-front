@@ -30,7 +30,6 @@ const ListItem: React.FC<Props> = ({
 }) => {
     const [removalStatus, setRemovalStatus] = useState({
         waitingRemoval: false,
-        error: '',
     });
 
     const [selectionStatus, setSelectionStatus] = useState({
@@ -43,11 +42,10 @@ const ListItem: React.FC<Props> = ({
     const { waitingSelection } = selectionStatus;
 
     const onClickDelete = async () => {
-        setRemovalStatus({ waitingRemoval: true, error: '' });
-        try {
-            await deleteListItemActionCreator(listId, [listItem._id]);
-        } catch (err) {
-            setRemovalStatus({ waitingRemoval: false, error: err.response.status });
+        setRemovalStatus({ waitingRemoval: true });
+        const success = await deleteListItemActionCreator(listId, [listItem._id]);
+        if (!success) {
+            setRemovalStatus({ waitingRemoval: false });
         }
     };
 
@@ -85,7 +83,7 @@ const ListItem: React.FC<Props> = ({
     const toggleSelected = async () => {
         setSelectionStatus({ waitingSelection: true });
         const action = isSelected() ? 'DESELECT' : 'SELECT';
-        selectListItemActionCreator(action, listItem._id, listId);
+        await selectListItemActionCreator(action, listItem._id, listId);
         setSelectionStatus({ waitingSelection: false });
     };
 

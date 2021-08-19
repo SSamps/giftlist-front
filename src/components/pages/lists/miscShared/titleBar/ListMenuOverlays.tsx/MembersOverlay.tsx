@@ -1,23 +1,38 @@
 import axios from 'axios';
-import React, { Fragment, useState } from 'react';
-import { TbasicListFields, TgiftListFields } from '../../../../../types/models/listGroups';
-import OverlayButtons from '../../../../misc/OverlayButtons';
-import Spinner from '../../../../misc/spinner';
-import DropdownUnderlay from '../../../dashboard/yourLists/controlBar/filters/DropdownUnderlay';
-import InviteFormInput from '../InviteFormInput';
+import React, { Fragment, useEffect, useState } from 'react';
+import { connect } from 'react-redux';
+import { addAlertThunkActionCreator, TaddAlertThunkActionCreator } from '../../../../../../redux/actions/alertActions';
+import { TbasicListFields, TgiftListFields } from '../../../../../../types/models/listGroups';
+import OverlayButtons from '../../../../../misc/OverlayButtons';
+import Spinner from '../../../../../misc/spinner';
+import DropdownUnderlay from '../../../../dashboard/yourLists/controlBar/filters/DropdownUnderlay';
+import InviteFormInput from '../../InviteFormInput';
 
 interface Props {
     setOpen: React.Dispatch<React.SetStateAction<boolean>>;
     currentList: TgiftListFields | TbasicListFields;
+    addAlertThunkActionCreator: TaddAlertThunkActionCreator;
 }
 
-const MembersOverlay: React.FC<Props> = ({ setOpen, currentList }) => {
+const MembersOverlay: React.FC<Props> = ({ setOpen, currentList, addAlertThunkActionCreator }) => {
     const [inviteArray, setInviteArray] = useState<string[]>([]);
-    const [submitState, setSubmitState] = useState({ loading: false, completed: false, error: '' });
-    const { loading, completed, error } = submitState;
+    const [inviteArrayError, setInviteArrayError] = useState('');
+    const [submitState, setSubmitState] = useState({ loading: false, completed: false });
+    const { loading, completed } = submitState;
+
+    useEffect(() => {
+        if (inviteArray.length > 0) {
+            setInviteArrayError('');
+        }
+    }, [inviteArray]);
 
     const submitForm = async () => {
-        setSubmitState({ ...submitState, loading: true, error: '' });
+        if (inviteArray.length < 1) {
+            setInviteArrayError('You must specify at least one invitee');
+            return;
+        }
+
+        setSubmitState({ ...submitState, loading: true });
         const config = {
             headers: {
                 'Content-Type': 'application/json',
@@ -26,9 +41,10 @@ const MembersOverlay: React.FC<Props> = ({ setOpen, currentList }) => {
         const inviteBody = JSON.stringify({ invitedEmails: inviteArray });
         try {
             await axios.post(`/api/groups/${currentList._id}/invite/send`, inviteBody, config);
-            setSubmitState({ loading: false, completed: true, error: '' });
+            setSubmitState({ loading: false, completed: true });
         } catch (err) {
-            setSubmitState({ loading: false, completed: false, error: err.response.data });
+            addAlertThunkActionCreator('error', `${err.response.status} ${err.response.data}`);
+            setSubmitState({ loading: false, completed: false });
         }
     };
 
@@ -47,13 +63,12 @@ const MembersOverlay: React.FC<Props> = ({ setOpen, currentList }) => {
                     <InviteFormInput inviteArray={inviteArray} setInviteArray={setInviteArray}></InviteFormInput>
                     {loading ? (
                         <Spinner className='spinner-tiny'></Spinner>
-                    ) : error ? (
-                        <div>{console.log(error)}Error</div>
                     ) : completed ? (
                         <div>Invite sent</div>
                     ) : (
                         <OverlayButtons setOpen={setOpen} submitForm={submitForm}></OverlayButtons>
                     )}
+                    {inviteArrayError && <div className='form-error-message'>{inviteArrayError}</div>}
                 </div>
             </div>
             <DropdownUnderlay setOpen={setOpen} extraClasses={'underlay-focus'}></DropdownUnderlay>
@@ -61,4 +76,4 @@ const MembersOverlay: React.FC<Props> = ({ setOpen, currentList }) => {
     );
 };
 
-export default MembersOverlay;
+export default connect(null, { addAlertThunkActionCreator })(MembersOverlay);

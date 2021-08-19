@@ -33,8 +33,8 @@ const BasicListDeleteItems: React.FC<Props> = ({ currentList, deleteListItemActi
     const deleteSelection = async () => {
         const itemsToDelete = getSelectedItemIds();
 
-        await deleteListItemActionCreator(currentList._id.toString(), itemsToDelete);
-        setdeleteSelectedOverlayStatus(false);
+        const success = await deleteListItemActionCreator(currentList._id.toString(), itemsToDelete);
+        success && setdeleteSelectedOverlayStatus(false);
     };
 
     const showDeleteAllOverlay = () => {
@@ -49,8 +49,8 @@ const BasicListDeleteItems: React.FC<Props> = ({ currentList, deleteListItemActi
 
     const deleteAll = async () => {
         const itemsToDelete = getAllItemIds();
-        await deleteListItemActionCreator(currentList._id.toString(), itemsToDelete);
-        setdeleteAllOverlayStatus(false);
+        const success = await deleteListItemActionCreator(currentList._id.toString(), itemsToDelete);
+        success && setdeleteAllOverlayStatus(false);
     };
 
     const renderOverlays = () => {

@@ -13,7 +13,8 @@ const NewListItem: React.FC<Props> = ({ itemType, groupId, newListItemActionCrea
     const [itemFormVisible, setitemFormVisible] = useState(false);
 
     const submitForm = async (itemBody: string, itemLinks: string[]) => {
-        await newListItemActionCreator(itemBody, itemLinks, itemType, groupId);
+        const success = await newListItemActionCreator(itemBody, itemLinks, itemType, groupId);
+        return success;
     };
 
     const showNewItemForm = () => {

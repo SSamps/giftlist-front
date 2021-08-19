@@ -14,7 +14,8 @@ interface Props {
 
 const ModifyListItem: React.FC<Props> = ({ hideModifyItemOverlay, listItem, listId, modifyListItemActionCreator }) => {
     const submitForm = async (itemBody: string, itemLinks: string[]) => {
-        await modifyListItemActionCreator(itemBody, itemLinks, listItem._id, listId);
+        const success = await modifyListItemActionCreator(itemBody, itemLinks, listItem._id, listId);
+        return success;
     };
 
     return (

@@ -32,7 +32,6 @@ const ListLoader: React.FC<Props> = ({
     listLoading,
     currentList,
     parentList,
-    listError,
     getListActionCreator,
     resetListActionCreator,
     loadListPermissionsActionCreator,
@@ -77,14 +76,7 @@ const ListLoader: React.FC<Props> = ({
 
     const renderList = () => {
         return (
-            <Fragment>
-                {listError && (
-                    <div>
-                        {listError.status} {listError.data}
-                    </div>
-                )}
-                {parentList ? parentListSwitch(parentList) : currentList && listSwitch(currentList)}
-            </Fragment>
+            <Fragment>{parentList ? parentListSwitch(parentList) : currentList && listSwitch(currentList)}</Fragment>
         );
     };
 
@@ -96,7 +88,6 @@ const mapStateToProps = (state: IrootStateAuthed) => ({
     listLoading: state.listGroupReducer.listLoading,
     currentList: state.listGroupReducer.currentList,
     parentList: state.listGroupReducer.parentList,
-    listError: state.listGroupReducer.listError,
     currentListPermissions: state.listGroupReducer.currentListPermissions,
     parentListPermissions: state.listGroupReducer.parentListPermissions,
 });

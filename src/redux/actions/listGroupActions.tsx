@@ -1,7 +1,6 @@
 import {
     CURRENT_LIST_GET,
     PARENT_LIST_GET,
-    LIST_ERROR,
     DELETE_LIST_ITEM,
     LIST_RESET,
     NEW_LIST_ITEM,
@@ -17,12 +16,7 @@ import axios, { AxiosResponse } from 'axios';
 import { TListGroupAnyFields } from '../../types/models/listGroups';
 import { LIST_GROUP_PARENT_VARIANTS } from '../../types/listVariants';
 import { findUserInGroup } from '../../utils/helperFunctions';
-import { addAlertActionCreator, IaddAlertAction, IremoveAlertAction } from './alertActions';
-
-interface IlistActionError {
-    type: typeof LIST_ERROR;
-    payload?: { data: string; status: string };
-}
+import { addAlertActionCreator } from './alertActions';
 
 interface IgetListActionSuccess {
     type: typeof CURRENT_LIST_GET;
@@ -37,8 +31,7 @@ interface IgetParentListActionSuccess {
 export type TgetListActionCreator = (id: string) => void;
 
 export const getListActionCreator =
-    (listId: string) =>
-    async (dispatch: Dispatch<IgetListActionSuccess | IgetParentListActionSuccess | IlistActionError>) => {
+    (listId: string) => async (dispatch: Dispatch<IgetListActionSuccess | IgetParentListActionSuccess>) => {
         try {
             const res: AxiosResponse<TListGroupAnyFields> = await axios.get(`/api/groups/${listId}`);
             if (LIST_GROUP_PARENT_VARIANTS.includes(res.data.groupVariant)) {
@@ -53,7 +46,7 @@ export const getListActionCreator =
                 });
             }
         } catch (err) {
-            dispatch({ type: LIST_ERROR, payload: { data: err.response.data, status: err.response.status } });
+            addAlertActionCreator('error', `${err.response.status} ${err.response.data}`);
         }
     };
 
@@ -62,11 +55,10 @@ interface IdeleteListItemActionSuccess {
     payload?: TListGroupAnyFields;
 }
 
-export type TdeleteListItemActionCreator = (listId: string, listItemIds: string[]) => void;
+export type TdeleteListItemActionCreator = (listId: string, listItemIds: string[]) => Promise<boolean>;
 
 export const deleteListItemActionCreator =
-    (listId: string, listItemIds: string[]) =>
-    async (dispatch: Dispatch<IdeleteListItemActionSuccess | IlistActionError>) => {
+    (listId: string, listItemIds: string[]) => async (dispatch: Dispatch<IdeleteListItemActionSuccess>) => {
         const config = {
             headers: {
                 'Content-Type': 'application/json',
@@ -80,8 +72,10 @@ export const deleteListItemActionCreator =
                 type: DELETE_LIST_ITEM,
                 payload: res.data,
             });
+            return true;
         } catch (err) {
-            dispatch({ type: LIST_ERROR, payload: { data: err.response.data, status: err.response.status } });
+            addAlertActionCreator('error', `${err.response.status} ${err.response.data}`);
+            return false;
         }
     };
 
@@ -104,11 +98,11 @@ export type TnewListItemActionCreator = (
     links: string[],
     type: 'listItem' | 'secretListItem',
     groupId: string
-) => void;
+) => Promise<boolean>;
 
 export const newListItemActionCreator =
     (body: string, links: string[], itemType: 'listItem' | 'secretListItem', groupId: string) =>
-    async (dispatch: Dispatch<InewListItemActionSuccess | IlistActionError>) => {
+    async (dispatch: Dispatch<InewListItemActionSuccess>) => {
         const config = {
             headers: {
                 'Content-Type': 'application/json',
@@ -124,8 +118,10 @@ export const newListItemActionCreator =
                 type: NEW_LIST_ITEM,
                 payload: res.data,
             });
+            return true;
         } catch (err) {
-            dispatch({ type: LIST_ERROR, payload: { data: err.response.data, status: err.response.status } });
+            addAlertActionCreator('error', `${err.response.status} ${err.response.data}`);
+            return false;
         }
     };
 
@@ -133,10 +129,16 @@ interface ImodifyListItemActionSuccess {
     type: typeof MODIFY_LIST_ITEM;
 }
 
-export type TmodifyListItemActionCreator = (body: string, links: string[], itemId: string, groupId: string) => void;
+export type TmodifyListItemActionCreator = (
+    body: string,
+    links: string[],
+    itemId: string,
+    groupId: string
+) => Promise<boolean>;
 
-export const modifyListItemActionCreator: TmodifyListItemActionCreator =
-    (body, links, itemId, groupId) => async (dispatch: Dispatch<ImodifyListItemActionSuccess | IlistActionError>) => {
+export const modifyListItemActionCreator =
+    (body: string, links: string[], itemId: string, groupId: string) =>
+    async (dispatch: Dispatch<ImodifyListItemActionSuccess>) => {
         const config = {
             headers: {
                 'Content-Type': 'application/json',
@@ -152,9 +154,10 @@ export const modifyListItemActionCreator: TmodifyListItemActionCreator =
                 type: MODIFY_LIST_ITEM,
                 payload: res.data,
             });
+            return true;
         } catch (err) {
-            console.error(err);
-            dispatch({ type: LIST_ERROR, payload: { data: err.response.data, status: err.response.status } });
+            addAlertActionCreator('error', `${err.response.status} ${err.response.data}`);
+            return false;
         }
     };
 
@@ -165,8 +168,7 @@ interface IselectListItemActionSuccess {
 export type TselectListItemActionCreator = (action: 'SELECT' | 'DESELECT', itemId: string, groupId: string) => void;
 
 export const selectListItemActionCreator: TselectListItemActionCreator =
-    (action, itemId, groupId) =>
-    async (dispatch: Dispatch<IselectListItemActionSuccess | IaddAlertAction | IremoveAlertAction>) => {
+    (action, itemId, groupId) => async (dispatch: Dispatch<IselectListItemActionSuccess>) => {
         const config = {
             headers: {
                 'Content-Type': 'application/json',
@@ -183,7 +185,7 @@ export const selectListItemActionCreator: TselectListItemActionCreator =
                 payload: res.data,
             });
         } catch (err) {
-            addAlertActionCreator('error', `${err.response.status} Error: ${err.response.data}`);
+            addAlertActionCreator('error', `${err.response.status} ${err.response.data}`);
         }
     };
 
@@ -191,29 +193,30 @@ interface IdeleteListSuccess {
     type: typeof DELETE_LIST;
 }
 
-export type TdeleteListActionCreator = (groupId: string) => void;
+export type TdeleteListActionCreator = (groupId: string) => Promise<boolean>;
 
-export const deleteListActionCreator: TdeleteListActionCreator =
-    (groupId) => async (dispatch: Dispatch<IdeleteListSuccess | IlistActionError>) => {
-        try {
-            await axios.delete(`/api/groups/${groupId}/delete`);
+export const deleteListActionCreator = (groupId: string) => async (dispatch: Dispatch<IdeleteListSuccess>) => {
+    try {
+        await axios.delete(`/api/groups/${groupId}/delete`);
 
-            dispatch({
-                type: DELETE_LIST,
-            });
-        } catch (err) {
-            dispatch({ type: LIST_ERROR, payload: { data: err.response.data, status: err.response.status } });
-        }
-    };
+        dispatch({
+            type: DELETE_LIST,
+        });
+        return true;
+    } catch (err) {
+        addAlertActionCreator('error', `${err.response.status} ${err.response.data}`);
+        return false;
+    }
+};
 
 interface IrenameListSuccess {
     type: typeof RENAME_LIST;
 }
 
-export type TrenameListActionCreator = (groupId: string, newName: string) => void;
+export type TrenameListActionCreator = (groupId: string, newName: string) => Promise<boolean>;
 
-export const renameListActionCreator: TrenameListActionCreator =
-    (groupId, newName) => async (dispatch: Dispatch<IrenameListSuccess | IlistActionError>) => {
+export const renameListActionCreator =
+    (groupId: string, newName: string) => async (dispatch: Dispatch<IrenameListSuccess>) => {
         const config = {
             headers: {
                 'Content-Type': 'application/json',
@@ -229,8 +232,11 @@ export const renameListActionCreator: TrenameListActionCreator =
                 type: RENAME_LIST,
                 payload: res.data,
             });
+
+            return true;
         } catch (err) {
-            dispatch({ type: LIST_ERROR, payload: { data: err.response.data, status: err.response.status } });
+            addAlertActionCreator('error', `${err.response.status} ${err.response.data}`);
+            return false;
         }
     };
 
@@ -238,21 +244,22 @@ interface IleaveListSuccess {
     type: typeof LEAVE_LIST;
 }
 
-export type TleaveListActionCreator = (groupId: string) => void;
+export type TleaveListActionCreator = (groupId: string) => Promise<boolean>;
 
-export const leaveListActionCreator: TleaveListActionCreator =
-    (groupId) => async (dispatch: Dispatch<IleaveListSuccess | IlistActionError>) => {
-        try {
-            const res = await axios.put(`/api/groups/${groupId}/leave`);
+export const leaveListActionCreator = (groupId: string) => async (dispatch: Dispatch<IleaveListSuccess>) => {
+    try {
+        const res = await axios.put(`/api/groups/${groupId}/leave`).then();
 
-            dispatch({
-                type: LEAVE_LIST,
-                payload: res.data,
-            });
-        } catch (err) {
-            dispatch({ type: LIST_ERROR, payload: { data: err.response.data, status: err.response.status } });
-        }
-    };
+        dispatch({
+            type: LEAVE_LIST,
+            payload: res.data,
+        });
+        return true;
+    } catch (err) {
+        addAlertActionCreator('error', `${err.response.status} ${err.response.data}`);
+        return false;
+    }
+};
 
 interface IloadListPermissions {
     type: typeof LOAD_LIST_PERMISSIONS;
@@ -261,7 +268,7 @@ interface IloadListPermissions {
 export type TloadListPermissionsActionCreator = (currentList: TListGroupAnyFields | undefined, userId: string) => void;
 
 export const loadListPermissionsActionCreator: TloadListPermissionsActionCreator =
-    (currentList, userId) => async (dispatch: Dispatch<IloadListPermissions | IlistActionError>) => {
+    (currentList, userId) => async (dispatch: Dispatch<IloadListPermissions>) => {
         if (!currentList) {
             dispatch({
                 type: LOAD_LIST_PERMISSIONS,

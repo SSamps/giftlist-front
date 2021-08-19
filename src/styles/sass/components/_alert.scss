@@ -1,26 +1,34 @@
 .alert-container {
+    position: absolute;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    position: absolute;
-    z-index: 2;
-    top: 3%;
+    z-index: 3;
     left: 50%;
     transform: translate(-50%, 0%);
-    // background-color: red;
-    // height: 100vh;
+    gap: 0.5rem;
+    width: calc(min(35rem, 90%));
 }
 
 .alert {
-    padding: 0.8rem;
-    margin: 1rem 0;
-    opacity: 0.9;
-    background-color: light-color;
-    color: #333;
+    text-align: center;
+    width: 100%;
+    padding: 0.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    visibility: visible;
 
     &-error {
         background-color: $error-background;
         color: $error-text;
+    }
+
+    &-placeholder {
+        position: relative;
+        visibility: hidden;
+        width: 100%;
     }
 }

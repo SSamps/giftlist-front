@@ -12,14 +12,12 @@ import PrivateRoute from '../routing/PrivateRoute';
 import VerifiedRoute from '../routing/VerifiedRoute';
 import Verify from '../pages/auth/Verify';
 import ResetPassword from '../pages/ResetPassword';
-import Alerts from '../misc/Alerts';
 
 const Body: React.FC = () => {
     return (
         <div className='mainBodyContainer'>
             <div className='mainContentContainerOuter'>
                 <div className='mainContentContainerInner'>
-                    <Alerts></Alerts>
                     <Switch>
                         <Route exact path='/' component={Landing} />
                         <Route exact path='/register' component={Register} />

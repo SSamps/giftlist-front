@@ -5,7 +5,6 @@ import {
     DELETE_LIST,
     DELETE_LIST_ITEM,
     LEAVE_LIST,
-    LIST_ERROR,
     LIST_RESET,
     LOAD_LIST_PERMISSIONS,
     MODIFY_LIST_ITEM,
@@ -19,7 +18,6 @@ export interface IlistGroupData {
     listLoading: boolean;
     currentList: undefined | TListGroupAnyFields;
     parentList: undefined | TListGroupAnyFields;
-    listError: undefined | { status: number; data: string };
     currentListPermissions: string[] | undefined;
     parentListPermissions: string[] | undefined;
 }
@@ -28,7 +26,6 @@ const initialState = {
     listLoading: true,
     currentList: undefined,
     parentList: undefined,
-    listError: undefined,
     currentListPermissions: undefined,
     parentListPermissions: undefined,
 };
@@ -47,7 +44,6 @@ export default function reducer(state: IlistGroupData = initialState, action: An
                 listLoading: false,
                 currentList: payload,
                 parentList: undefined,
-                listError: undefined,
             };
         case PARENT_LIST_GET:
             return {
@@ -55,7 +51,6 @@ export default function reducer(state: IlistGroupData = initialState, action: An
                 listLoading: false,
                 currentList: undefined,
                 parentList: payload,
-                listError: undefined,
             };
         case LOAD_LIST_PERMISSIONS:
             return {
@@ -67,51 +62,40 @@ export default function reducer(state: IlistGroupData = initialState, action: An
                 ...state,
                 listLoading: false,
                 currentList: payload,
-                listError: undefined,
             };
         case NEW_LIST_ITEM:
             return {
                 ...state,
                 listLoading: false,
                 currentList: payload,
-                listError: undefined,
             };
         case MODIFY_LIST_ITEM:
             return {
                 ...state,
                 listLoading: false,
                 currentList: payload,
-                listError: undefined,
             };
         case SELECT_LIST_ITEM:
             return {
                 ...state,
                 listLoading: false,
                 currentList: payload,
-                listError: undefined,
             };
         case RENAME_LIST:
             return {
                 ...state,
                 listLoading: false,
                 currentList: payload,
-                listError: undefined,
             };
         case LEAVE_LIST:
             return {
                 ...state,
                 listLoading: false,
                 currentList: undefined,
-                listError: undefined,
             };
         case DELETE_LIST:
             return {
                 ...initialState,
-            };
-        case LIST_ERROR:
-            return {
-                ...state,
-                listError: payload,
             };
         default:
             return {

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { IrootStateAuthed } from '../../../../../redux/reducers/root/rootReducer';
 import { TbasicListFields } from '../../../../../types/models/listGroups';
 
-import ListTitleBar from '../../miscShared/ListTitleBar';
+import ListTitleBar from '../../miscShared/titleBar/ListTitleBar';
 import NewListItem from '../../listItems/NewListItem';
 import ListItem from '../../listItems/ListItem';
 import { IUser } from '../../../../../types/models/User';

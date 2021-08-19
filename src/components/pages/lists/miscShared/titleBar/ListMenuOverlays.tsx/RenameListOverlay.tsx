@@ -1,10 +1,10 @@
 import React, { Fragment, useState } from 'react';
 import { connect } from 'react-redux';
-import { renameListActionCreator, TrenameListActionCreator } from '../../../../../redux/actions/listGroupActions';
-import { TbasicListFields, TgiftListFields } from '../../../../../types/models/listGroups';
-import OverlayButtons from '../../../../misc/OverlayButtons';
-import Spinner from '../../../../misc/spinner';
-import DropdownUnderlay from '../../../dashboard/yourLists/controlBar/filters/DropdownUnderlay';
+import { renameListActionCreator, TrenameListActionCreator } from '../../../../../../redux/actions/listGroupActions';
+import { TbasicListFields, TgiftListFields } from '../../../../../../types/models/listGroups';
+import OverlayButtons from '../../../../../misc/OverlayButtons';
+import Spinner from '../../../../../misc/spinner';
+import DropdownUnderlay from '../../../../dashboard/yourLists/controlBar/filters/DropdownUnderlay';
 
 interface Props {
     setOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -24,8 +24,9 @@ const RenameListOverlay: React.FC<Props> = ({ setOpen, currentList, renameListAc
     const submitForm = async (e?: React.FormEvent<HTMLFormElement>) => {
         setRenameFormState({ ...renameFormState, waiting: true });
         e?.preventDefault();
-        await renameListActionCreator(currentList._id, newName);
-        setOpen(false);
+        const success = await renameListActionCreator(currentList._id, newName);
+        success && setOpen(false);
+        setRenameFormState({ ...renameFormState, waiting: false });
     };
 
     return (
