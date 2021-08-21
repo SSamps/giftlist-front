@@ -15,7 +15,7 @@ export interface IremoveAlertAction {
     payload: string;
 }
 
-export const addAlertActionCreator = (type: 'error', message: string, timeout = 40000) => {
+export const addAlertActionCreator = (type: 'error', message: string, timeout = 4000) => {
     if (type === 'error') {
         message = shortenError(message);
     }

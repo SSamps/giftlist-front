@@ -58,7 +58,7 @@ const ListLoader: React.FC<Props> = ({
                 return <BasicListContainer key={group._id}></BasicListContainer>;
             }
             case GIFT_LIST: {
-                return <GiftListContainer key={group._id} giftList={group}></GiftListContainer>;
+                return <GiftListContainer key={group._id}></GiftListContainer>;
             }
             case GIFT_GROUP_CHILD: {
                 return <GiftGroupChildContainer key={group._id} giftGroupChild={group}></GiftGroupChildContainer>;
