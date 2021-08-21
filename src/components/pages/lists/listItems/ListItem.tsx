@@ -7,24 +7,29 @@ import {
     TdeleteListItemActionCreator,
     TselectListItemActionCreator,
 } from '../../../../redux/actions/listGroupActions';
+import { IrootStateAuthedCurrentListLoaded } from '../../../../redux/reducers/root/rootReducer';
+import { TYPE_PERM_ALL_LIST_GROUP } from '../../../../types/listGroupPermissions';
+import { TListGroupAnyFields } from '../../../../types/models/listGroups';
 import { IbasicListItem, IgiftListItemCensored } from '../../../../types/models/listItems';
+import { IUser } from '../../../../types/models/User';
+import { findUserInGroup } from '../../../../utils/helperFunctions';
 import Spinner from '../../../misc/spinner';
 import ModifyListItem from './ModifyListItem';
 
 interface Props {
-    userId: string;
+    user: IUser;
     listItem: IbasicListItem | IgiftListItemCensored;
-    listId: string;
-    allowSelection: boolean;
+    currentList: TListGroupAnyFields;
+    currentListPermissions: TYPE_PERM_ALL_LIST_GROUP[];
     deleteListItemActionCreator: TdeleteListItemActionCreator;
     selectListItemActionCreator: TselectListItemActionCreator;
 }
 
 const ListItem: React.FC<Props> = ({
-    userId,
+    user,
     listItem,
-    listId,
-    allowSelection,
+    currentList,
+    currentListPermissions,
     deleteListItemActionCreator,
     selectListItemActionCreator,
 }) => {
@@ -43,7 +48,7 @@ const ListItem: React.FC<Props> = ({
 
     const onClickDelete = async () => {
         setRemovalStatus({ waitingRemoval: true });
-        const success = await deleteListItemActionCreator(listId, [listItem._id]);
+        const success = await deleteListItemActionCreator(currentList._id, [listItem._id]);
         if (!success) {
             setRemovalStatus({ waitingRemoval: false });
         }
@@ -76,20 +81,20 @@ const ListItem: React.FC<Props> = ({
         if ('selected' in listItem) {
             return listItem.selected;
         } else {
-            return listItem.selectedBy?.includes(userId);
+            return listItem.selectedBy?.includes(user._id);
         }
     };
 
     const toggleSelected = async () => {
         setSelectionStatus({ waitingSelection: true });
         const action = isSelected() ? 'DESELECT' : 'SELECT';
-        await selectListItemActionCreator(action, listItem._id, listId);
+        await selectListItemActionCreator(action, listItem._id, currentList._id);
         setSelectionStatus({ waitingSelection: false });
     };
 
     const renderSelectionButton = () => {
         return (
-            allowSelection && (
+            currentListPermissions.includes('GROUP_SELECT_LIST_ITEMS') && (
                 <span className='basicListItem-main-select'>
                     {waitingSelection ? (
                         <span>
@@ -110,7 +115,11 @@ const ListItem: React.FC<Props> = ({
     };
 
     const renderSelectedByElement = () => {
-        if (!allowSelection || !('selectedBy' in listItem) || listItem.selectedBy === undefined) {
+        if (
+            !currentListPermissions.includes('GROUP_SELECT_LIST_ITEMS') ||
+            !('selectedBy' in listItem) ||
+            listItem.selectedBy === undefined
+        ) {
             return null;
         }
 
@@ -119,7 +128,11 @@ const ListItem: React.FC<Props> = ({
         // TODO also need to actually fetch the names - selectedBy is IDs at the moment.
 
         if (numSelected === 1) {
-            return <div className='basicListItem-selected'>Selected by + {listItem.selectedBy[0]}</div>;
+            const selectedUserId = listItem.selectedBy[0];
+
+            const selectedUserDisplayname = findUserInGroup(currentList, selectedUserId)?.displayName;
+
+            return <div className='basicListItem-selected'>Selected by {selectedUserDisplayname}</div>;
         } else if (numSelected > 1) {
             // TODO Make this clickable and show an overlay of the individuals
             return <div className='basicListItem-selected'>Shared by + {numSelected} people</div>;
@@ -155,7 +168,7 @@ const ListItem: React.FC<Props> = ({
                 <ModifyListItem
                     hideModifyItemOverlay={hideModifyItemOverlay}
                     listItem={listItem}
-                    listId={listId}
+                    listId={currentList._id}
                 ></ModifyListItem>
             )}
             <div className='basicListItem'>
@@ -169,8 +182,12 @@ const ListItem: React.FC<Props> = ({
                             </span>
                         ) : (
                             <span className='basicListItem-main-controlsContainer-controls'>
-                                <span className='fas fa-pen btn-simple' onClick={onClickModify}></span>
-                                <span onClick={onClickDelete} className='fas fa-times btn-simple'></span>
+                                {currentListPermissions.includes('GROUP_RW_LIST_ITEMS') && (
+                                    <span className='fas fa-pen btn-simple' onClick={onClickModify}></span>
+                                )}
+                                {currentListPermissions.includes('GROUP_RW_LIST_ITEMS') && (
+                                    <span onClick={onClickDelete} className='fas fa-times btn-simple'></span>
+                                )}
                             </span>
                         )}
                     </span>
@@ -182,4 +199,10 @@ const ListItem: React.FC<Props> = ({
     );
 };
 
-export default connect(null, { deleteListItemActionCreator, selectListItemActionCreator })(ListItem);
+const mapStateToProps = (state: IrootStateAuthedCurrentListLoaded) => ({
+    user: state.authReducer.user,
+    currentList: state.listGroupReducer.currentList,
+    currentListPermissions: state.listGroupReducer.currentListPermissions,
+});
+
+export default connect(mapStateToProps, { deleteListItemActionCreator, selectListItemActionCreator })(ListItem);

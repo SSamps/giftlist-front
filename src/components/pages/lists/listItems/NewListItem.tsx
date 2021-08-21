@@ -37,17 +37,19 @@ const NewListItem: React.FC<Props> = ({ itemType, groupId, newListItemActionCrea
 
     return (
         <Fragment>
-            {!itemFormVisible ? (
-                returnNewItemButton()
-            ) : (
-                <ListItemForm
-                    submitFormData={submitForm}
-                    shouldCloseAfterSubmit={false}
-                    submitButtonLabel='Add item'
-                    setItemFormHidden={hideNewItemForm}
-                    maxLinks={3}
-                ></ListItemForm>
-            )}
+            <div className='basicListNewItemContainer'>
+                {!itemFormVisible ? (
+                    returnNewItemButton()
+                ) : (
+                    <ListItemForm
+                        submitFormData={submitForm}
+                        shouldCloseAfterSubmit={false}
+                        submitButtonLabel='Add item'
+                        setItemFormHidden={hideNewItemForm}
+                        maxLinks={3}
+                    ></ListItemForm>
+                )}
+            </div>
         </Fragment>
     );
 };

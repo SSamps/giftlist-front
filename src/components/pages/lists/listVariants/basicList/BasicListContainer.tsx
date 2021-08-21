@@ -8,29 +8,23 @@ import NewListItem from '../../listItems/NewListItem';
 import ListItem from '../../listItems/ListItem';
 import { IUser } from '../../../../../types/models/User';
 import BasicListDeleteItems from './BasicListDeleteItems';
+import { TYPE_PERM_ALL_LIST_GROUP } from '../../../../../types/listGroupPermissions';
 
 interface Props {
     currentList: TbasicListFields | undefined;
     user: IUser;
+    currentListPermissions: TYPE_PERM_ALL_LIST_GROUP[] | undefined;
 }
 
-const BasicListContainer: React.FC<Props> = ({ currentList, user }) => {
+const BasicListContainer: React.FC<Props> = ({ currentList, currentListPermissions }) => {
     return (
         <Fragment>
-            {currentList && (
+            {currentList && currentListPermissions && (
                 <div className={'BasicListContainer'}>
                     <ListTitleBar currentList={currentList}></ListTitleBar>
                     <div className='basicListItemContainer'>
                         {currentList.listItems.map((item) => {
-                            return (
-                                <ListItem
-                                    key={item._id}
-                                    listItem={item}
-                                    listId={currentList._id}
-                                    userId={user._id}
-                                    allowSelection={true}
-                                ></ListItem>
-                            );
+                            return <ListItem key={item._id} listItem={item}></ListItem>;
                         })}
                     </div>
                     <div className='basicListNewItemContainer'>
@@ -48,6 +42,7 @@ const BasicListContainer: React.FC<Props> = ({ currentList, user }) => {
 const mapStateToProps = (state: IrootStateAuthed) => ({
     user: state.authReducer.user,
     currentList: state.listGroupReducer.currentList,
+    currentListPermissions: state.listGroupReducer.currentListPermissions,
 });
 
 export default connect(mapStateToProps, {})(BasicListContainer);

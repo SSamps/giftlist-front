@@ -1,4 +1,5 @@
 import { AnyAction } from 'redux';
+import { TYPE_PERM_ALL_LIST_GROUP } from '../../types/listGroupPermissions';
 import { TListGroupAnyFields } from '../../types/models/listGroups';
 import {
     CURRENT_LIST_GET,
@@ -18,8 +19,16 @@ export interface IlistGroupData {
     listLoading: boolean;
     currentList: undefined | TListGroupAnyFields;
     parentList: undefined | TListGroupAnyFields;
-    currentListPermissions: string[] | undefined;
-    parentListPermissions: string[] | undefined;
+    currentListPermissions: TYPE_PERM_ALL_LIST_GROUP[] | undefined;
+    parentListPermissions: TYPE_PERM_ALL_LIST_GROUP[] | undefined;
+}
+
+export interface IlistGroupDataCurrentListLoaded {
+    listLoading: boolean;
+    currentList: TListGroupAnyFields;
+    parentList: undefined | TListGroupAnyFields;
+    currentListPermissions: TYPE_PERM_ALL_LIST_GROUP[];
+    parentListPermissions: TYPE_PERM_ALL_LIST_GROUP[] | undefined;
 }
 
 const initialState = {
