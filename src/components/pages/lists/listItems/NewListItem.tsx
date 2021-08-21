@@ -29,7 +29,7 @@ const NewListItem: React.FC<Props> = ({ itemType, groupId, newListItemActionCrea
         return (
             <div>
                 <span className='btn-simple' onClick={showNewItemForm}>
-                    <i className='fas fa-plus'></i> New item
+                    <i className='fas fa-plus'></i> {itemType === 'listItem' ? 'New item' : 'Gift idea'}
                 </span>
             </div>
         );

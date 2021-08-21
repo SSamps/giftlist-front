@@ -8,7 +8,6 @@ import {
     TselectListItemActionCreator,
 } from '../../../../redux/actions/listGroupActions';
 import { IrootStateAuthedCurrentListLoaded } from '../../../../redux/reducers/root/rootReducer';
-import { TYPE_PERM_ALL_LIST_GROUP } from '../../../../types/listGroupPermissions';
 import { TgroupMemberAny, TListGroupAnyFields } from '../../../../types/models/listGroups';
 import { IbasicListItem, IgiftListItemCensored } from '../../../../types/models/listItems';
 import { IUser } from '../../../../types/models/User';
@@ -21,7 +20,9 @@ interface Props {
     user: IUser;
     listItem: IbasicListItem | IgiftListItemCensored;
     currentList: TListGroupAnyFields;
-    currentListPermissions: TYPE_PERM_ALL_LIST_GROUP[];
+    allowSelection: boolean;
+    allowModification: boolean;
+    allowDeletion: boolean;
     deleteListItemActionCreator: TdeleteListItemActionCreator;
     selectListItemActionCreator: TselectListItemActionCreator;
 }
@@ -30,7 +31,9 @@ const ListItem: React.FC<Props> = ({
     user,
     listItem,
     currentList,
-    currentListPermissions,
+    allowSelection,
+    allowModification,
+    allowDeletion,
     deleteListItemActionCreator,
     selectListItemActionCreator,
 }) => {
@@ -96,7 +99,7 @@ const ListItem: React.FC<Props> = ({
 
     const renderSelectionButton = () => {
         return (
-            currentListPermissions.includes('GROUP_SELECT_LIST_ITEMS') && (
+            allowSelection && (
                 <span className='basicListItem-main-select'>
                     {waitingSelection ? (
                         <span>
@@ -117,11 +120,7 @@ const ListItem: React.FC<Props> = ({
     };
 
     const renderSelectedByElement = () => {
-        if (
-            !currentListPermissions.includes('GROUP_SELECT_LIST_ITEMS') ||
-            !('selectedBy' in listItem) ||
-            listItem.selectedBy === undefined
-        ) {
+        if (!allowSelection || !('selectedBy' in listItem) || listItem.selectedBy === undefined) {
             return null;
         }
 
@@ -201,10 +200,10 @@ const ListItem: React.FC<Props> = ({
                             </span>
                         ) : (
                             <span className='basicListItem-main-controlsContainer-controls'>
-                                {currentListPermissions.includes('GROUP_RW_LIST_ITEMS') && (
+                                {allowModification && (
                                     <span className='fas fa-pen btn-simple' onClick={onClickModify}></span>
                                 )}
-                                {currentListPermissions.includes('GROUP_RW_LIST_ITEMS') && (
+                                {allowDeletion && (
                                     <span onClick={onClickDelete} className='fas fa-times btn-simple'></span>
                                 )}
                             </span>
@@ -221,7 +220,6 @@ const ListItem: React.FC<Props> = ({
 const mapStateToProps = (state: IrootStateAuthedCurrentListLoaded) => ({
     user: state.authReducer.user,
     currentList: state.listGroupReducer.currentList,
-    currentListPermissions: state.listGroupReducer.currentListPermissions,
 });
 
 export default connect(mapStateToProps, { deleteListItemActionCreator, selectListItemActionCreator })(ListItem);

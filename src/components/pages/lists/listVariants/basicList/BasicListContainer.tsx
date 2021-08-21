@@ -8,20 +8,30 @@ import NewListItem from '../../listItems/NewListItem';
 import ListItem from '../../listItems/ListItem';
 import { IUser } from '../../../../../types/models/User';
 import BasicListDeleteItems from './BasicListDeleteItems';
+import { TYPE_PERM_ALL_LIST_GROUP } from '../../../../../types/listGroupPermissions';
 
 interface Props {
     currentList: TbasicListFields;
     user: IUser;
+    currentListPermissions: TYPE_PERM_ALL_LIST_GROUP[];
 }
 
-const BasicListContainer: React.FC<Props> = ({ currentList }) => {
+const BasicListContainer: React.FC<Props> = ({ currentList, currentListPermissions }) => {
     return (
         <Fragment>
             <div className={'BasicListContainer'}>
                 <ListTitleBar currentList={currentList}></ListTitleBar>
                 <div className='basicListItemContainer'>
                     {currentList.listItems.map((item) => {
-                        return <ListItem key={item._id} listItem={item}></ListItem>;
+                        return (
+                            <ListItem
+                                key={item._id}
+                                listItem={item}
+                                allowSelection={currentListPermissions.includes('GROUP_SELECT_LIST_ITEMS')}
+                                allowModification={currentListPermissions.includes('GROUP_RW_LIST_ITEMS')}
+                                allowDeletion={currentListPermissions.includes('GROUP_RW_LIST_ITEMS')}
+                            ></ListItem>
+                        );
                     })}
                 </div>
                 <div className='basicListNewItemContainer'>
@@ -38,6 +48,7 @@ const BasicListContainer: React.FC<Props> = ({ currentList }) => {
 const mapStateToProps = (state: IrootStateAuthedCurrentListLoaded) => ({
     user: state.authReducer.user,
     currentList: state.listGroupReducer.currentList,
+    currentListPermissions: state.listGroupReducer.currentListPermissions,
 });
 
 export default connect(mapStateToProps, {})(BasicListContainer);

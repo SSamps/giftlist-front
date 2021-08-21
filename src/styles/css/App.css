@@ -723,6 +723,28 @@ body {
   width: 100%;
   padding-left: 1rem; }
 
+.giftListContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0.5rem; }
+
+.giftListOwnerItemsContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start; }
+
+.giftListSecretItemsContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start; }
+
 .extraAuthButtonContainer {
   width: 100%;
   display: flex;
