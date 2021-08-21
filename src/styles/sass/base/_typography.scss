@@ -4,6 +4,11 @@ body {
     line-height: 1.6;
 }
 
+.systemMessage {
+    font-size: 1rem;
+    color: $h1-color;
+}
+
 .lead {
     font-size: 1.5rem;
     color: $h1-color;
@@ -24,4 +29,16 @@ body {
 
 .text-primary {
     color: $primary-color;
+}
+
+.danger {
+    color: $danger-color;
+}
+
+.success {
+    color: $success-color;
+}
+
+.name {
+    color: $name-color;
 }

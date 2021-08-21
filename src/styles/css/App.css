@@ -33,6 +33,10 @@ body {
   font-weight: 400;
   line-height: 1.6; }
 
+.systemMessage {
+  font-size: 1rem;
+  color: #9c9c9c; }
+
 .lead {
   font-size: 1.5rem;
   color: #9c9c9c; }
@@ -50,6 +54,15 @@ body {
 
 .text-primary {
   color: #17a2b8; }
+
+.danger {
+  color: #dc3545; }
+
+.success {
+  color: #28a745; }
+
+.name {
+  color: #00a8c2; }
 
 .pageContainer {
   display: flex;
@@ -591,7 +604,6 @@ body {
   justify-content: flex-start; }
 
 .ListTitleBar {
-  margin-bottom: 1rem;
   width: 100%;
   display: grid;
   grid-template-columns: calc(min(10%, 3rem)) 1fr calc(min(10%, 3rem));
@@ -631,11 +643,12 @@ body {
   width: 100%;
   padding: 0.25rem 0.5rem 0.25rem 0.5rem;
   border-color: #ccc;
+  background-color: #e2eff8;
   border-width: thin; }
-  .basicListItem:nth-child(n + 1) {
+  .basicListItem:nth-child(n) {
     border-bottom-style: solid; }
-  .basicListItem:nth-child(1) {
-    border-top-style: solid; }
+  .basicListItem:last-child {
+    border-bottom-style: none; }
 
 .basicListItem-main {
   grid-row: 1/2;
@@ -705,6 +718,10 @@ body {
   .basicListDeleteItemsContainer-button {
     width: 7rem;
     text-align: center; }
+
+.giftListListLabel {
+  width: 100%;
+  padding-left: 1rem; }
 
 .extraAuthButtonContainer {
   width: 100%;

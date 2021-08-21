@@ -35,6 +35,7 @@ const ListLoader: React.FC<Props> = ({
     getListActionCreator,
     resetListActionCreator,
     loadListPermissionsActionCreator,
+    currentListPermissions,
     user,
 }): JSX.Element => {
     useEffect(() => {
@@ -76,7 +77,11 @@ const ListLoader: React.FC<Props> = ({
 
     const renderList = () => {
         return (
-            <Fragment>{parentList ? parentListSwitch(parentList) : currentList && listSwitch(currentList)}</Fragment>
+            <Fragment>
+                {parentList
+                    ? parentListSwitch(parentList)
+                    : currentList && currentListPermissions && listSwitch(currentList)}
+            </Fragment>
         );
     };
 
