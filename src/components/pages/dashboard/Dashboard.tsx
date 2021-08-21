@@ -24,9 +24,10 @@ const Dashboard: React.FC<Props> = ({ user, authLoading }): JSX.Element => {
             if (user?.verified) {
                 const pendingInviteToken = localStorage.getItem('pendingInviteToken');
                 if (pendingInviteToken) {
+                    console.log(pendingInviteToken);
                     if (validator.isJWT(pendingInviteToken)) {
                         const decodedToken = jwt.decode(pendingInviteToken) as jwt.JwtPayload;
-                        if (!decodedToken.groupName) {
+                        if (!decodedToken?.groupName) {
                             setInviteError('Invalid invite token');
                             localStorage.removeItem('pendingInviteToken');
                             return;
