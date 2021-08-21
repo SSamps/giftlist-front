@@ -292,7 +292,7 @@ body {
   width: 100%;
   display: flex;
   flex-direction: column;
-  align-items: left;
+  align-items: center;
   color: #00a8c2; }
 
 .alert-container {
@@ -679,6 +679,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  gap: 0.3rem;
   padding: 0 0.5rem;
   color: #9c9c9c; }
 

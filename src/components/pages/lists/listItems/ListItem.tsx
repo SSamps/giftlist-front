@@ -9,12 +9,13 @@ import {
 } from '../../../../redux/actions/listGroupActions';
 import { IrootStateAuthedCurrentListLoaded } from '../../../../redux/reducers/root/rootReducer';
 import { TYPE_PERM_ALL_LIST_GROUP } from '../../../../types/listGroupPermissions';
-import { TListGroupAnyFields } from '../../../../types/models/listGroups';
+import { TgroupMemberAny, TListGroupAnyFields } from '../../../../types/models/listGroups';
 import { IbasicListItem, IgiftListItemCensored } from '../../../../types/models/listItems';
 import { IUser } from '../../../../types/models/User';
 import { findUserInGroup } from '../../../../utils/helperFunctions';
 import Spinner from '../../../misc/spinner';
 import ModifyListItem from './ModifyListItem';
+import SelectedByOverlay from './SelectedByOverlay';
 
 interface Props {
     user: IUser;
@@ -42,6 +43,7 @@ const ListItem: React.FC<Props> = ({
     });
 
     const [modifyOverlayStatus, setModifyOverlayStatus] = useState(false);
+    const [selectedByOverlayStatus, setSelectedByOverlayStatus] = useState(false);
 
     const { waitingRemoval } = removalStatus;
     const { waitingSelection } = selectionStatus;
@@ -125,8 +127,6 @@ const ListItem: React.FC<Props> = ({
 
         const numSelected = listItem.selectedBy.length;
 
-        // TODO also need to actually fetch the names - selectedBy is IDs at the moment.
-
         if (numSelected === 1) {
             const selectedUserId = listItem.selectedBy[0];
 
@@ -134,11 +134,30 @@ const ListItem: React.FC<Props> = ({
 
             return <div className='basicListItem-selected'>Selected by {selectedUserDisplayname}</div>;
         } else if (numSelected > 1) {
-            // TODO Make this clickable and show an overlay of the individuals
-            return <div className='basicListItem-selected'>Shared by + {numSelected} people</div>;
+            let selectedByNames = listItem.selectedBy.map((userId) => {
+                return (findUserInGroup(currentList, userId) as TgroupMemberAny).displayName;
+            });
+
+            return (
+                <Fragment>
+                    <div className='basicListItem-selected'>
+                        <span>Shared by</span>{' '}
+                        {
+                            <span className='btn-simple' onClick={() => setSelectedByOverlayStatus(true)}>
+                                {numSelected} people
+                            </span>
+                        }
+                    </div>
+                    {selectedByOverlayStatus && (
+                        <SelectedByOverlay
+                            setOpen={setSelectedByOverlayStatus}
+                            selectedBy={selectedByNames}
+                        ></SelectedByOverlay>
+                    )}
+                </Fragment>
+            );
         }
     };
-
     const renderLinks = () => {
         return (
             <div className='basicListItem-links'>
