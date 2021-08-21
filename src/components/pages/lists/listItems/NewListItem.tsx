@@ -27,8 +27,10 @@ const NewListItem: React.FC<Props> = ({ itemType, groupId, newListItemActionCrea
 
     const returnNewItemButton = () => {
         return (
-            <div className='basicListNewItemButton'>
-                <i className='fas fa-plus btn-simple' onClick={showNewItemForm}></i>
+            <div>
+                <span className='btn-simple' onClick={showNewItemForm}>
+                    <i className='fas fa-plus'></i> New item
+                </span>
             </div>
         );
     };

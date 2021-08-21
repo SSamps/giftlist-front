@@ -698,11 +698,12 @@ body {
 
 .basicListDeleteItemsContainer {
   margin-top: 2rem;
-  width: calc(min(20rem, 80%));
+  width: calc(min(24rem, 80%));
   display: flex;
   justify-content: space-between; }
   .basicListDeleteItemsContainer-button {
-    width: 7rem; }
+    width: 7rem;
+    text-align: center; }
 
 .extraAuthButtonContainer {
   width: 100%;

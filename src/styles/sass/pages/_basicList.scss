@@ -137,11 +137,6 @@
     justify-content: center;
 }
 
-.basicListNewItemButton {
-    // display: flex;
-    // justify-content: center;
-}
-
 .newListItemFormContainer {
     width: calc(min(28rem, 100%));
     display: flex;
@@ -153,11 +148,12 @@
 
 .basicListDeleteItemsContainer {
     margin-top: 2rem;
-    width: calc(min(20rem, 80%));
+    width: calc(min(24rem, 80%));
     display: flex;
     justify-content: space-between;
 
     &-button {
         width: 7rem;
+        text-align: center;
     }
 }
