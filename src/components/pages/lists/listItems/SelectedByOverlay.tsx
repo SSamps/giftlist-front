@@ -11,7 +11,7 @@ const SelectedByOverlay: React.FC<Props> = ({ setOpen, selectedBy }) => {
         <Fragment>
             <div className='overlay'>
                 <div className='overlayContainer'>
-                    <div className='lead'>This item has been selected by:</div>
+                    <div className='lead'>This has been selected by:</div>
                     <div className='memberList'>
                         {selectedBy.map((name) => {
                             return <span className=''>{name}</span>;
