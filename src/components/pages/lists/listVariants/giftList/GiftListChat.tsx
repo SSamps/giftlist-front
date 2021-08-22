@@ -1,9 +1,10 @@
-import React, { useEffect } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import io, { Socket } from 'socket.io-client';
 import { DefaultEventsMap } from 'socket.io-client/build/typed-events';
 import { IrootStateAuthedCurrentListLoaded } from '../../../../../redux/reducers/root/rootReducer';
 import { TListGroupAnyFields } from '../../../../../types/models/listGroups';
+import { TmessageAny } from '../../../../../types/models/messages';
 
 interface Props {
     ownerName: string;
@@ -12,9 +13,11 @@ interface Props {
 }
 
 const GiftListChat: React.FC<Props> = ({ ownerName, token, currentList }) => {
-    let socket: Socket<DefaultEventsMap, DefaultEventsMap>;
+    const [socket, setSocket] = useState<undefined | Socket<DefaultEventsMap, DefaultEventsMap>>(undefined);
+    const [messages, setMessages] = useState<TmessageAny[]>([]);
+
     useEffect(() => {
-        socket = io(process.env.REACT_APP_BACKEND_BASE_URL || 'http://localhost:5000', {
+        const socket = io(process.env.REACT_APP_BACKEND_BASE_URL || 'http://localhost:5000', {
             auth: { token: token },
             query: { groupId: currentList._id },
         });
@@ -25,18 +28,22 @@ const GiftListChat: React.FC<Props> = ({ ownerName, token, currentList }) => {
 
         socket.emit('giftListChat:joinRoom');
 
-        socket.on('giftListChat:joinRoom-success', () => {
-            console.log('I have joined the room!');
+        socket.on('giftListChat:joinRoom-success', (currentMessages) => {
+            setMessages([...currentMessages]);
         });
 
-        socket.on('giftListChat:message', (data) => {
-            console.log(data);
-        });
+        setSocket(socket);
     }, []);
+
+    if (socket) {
+        socket.on('giftListChat:postMessage-success', (newMessage) => {
+            setMessages([...messages, newMessage]);
+        });
+    }
 
     const renderChatVisibilityMessage = () => {
         return (
-            <div className='giftListVisibilityMessage systemMessage'>
+            <div className='systemMessage'>
                 <i className='fas fa-eye-slash danger'></i>{' '}
                 <span>
                     {ownerName} <strong>can't</strong> see your chat
@@ -46,16 +53,29 @@ const GiftListChat: React.FC<Props> = ({ ownerName, token, currentList }) => {
     };
 
     const testSocket = () => {
-        socket.emit('Button clicked', { var1: 'test var1', var2: 'test var2' });
+        socket && socket.emit('giftListChat:postMessage', { var1: 'test var1', var2: 'test var2' });
     };
 
+    const renderMessages = () => {
+        return (
+            <Fragment>
+                {messages.map((message) => {
+                    return <div key={message._id}>{message.body}</div>;
+                })}
+            </Fragment>
+        );
+    };
     return (
-        <div className='giftListChatContainer'>
-            {renderChatVisibilityMessage()}
-            <div>
-                <span className='btn-simple' onClick={testSocket}>
-                    Test Me
-                </span>
+        <div className='listSectionContainer'>
+            <div className='listSectionContainer giftListChatContainer'>
+                {renderChatVisibilityMessage()}
+                <div className='giftListChat'>
+                    <span className='btn-simple' onClick={testSocket}>
+                        Test Me
+                    </span>
+                    {renderMessages()}
+                </div>
+                <div className='giftListChatControlsContainer'>Here be buttons</div>
             </div>
         </div>
     );

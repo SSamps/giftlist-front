@@ -36,6 +36,9 @@ body {
 .systemMessage {
   font-size: 1rem;
   color: #9c9c9c; }
+  .systemMessage-dark {
+    font-size: 1rem;
+    color: #8f8f8f; }
 
 .lead {
   font-size: 1.5rem;
@@ -337,6 +340,133 @@ body {
     visibility: hidden;
     width: 100%; }
 
+.listContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start; }
+
+.listSectionContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  margin-bottom: 2.5rem;
+  padding-top: 0.5rem; }
+
+.listSectionContentContainer {
+  width: calc(min(100%, 50rem));
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; }
+
+.listItem {
+  width: 100%;
+  padding: 0.25rem 0.5rem 0.25rem 0.5rem;
+  border-color: #ccc;
+  background-color: #e2eff8;
+  border-width: thin; }
+  .listItem:nth-child(n) {
+    border-bottom-style: solid; }
+  .listItem:last-child {
+    border-bottom-style: none; }
+
+.listItem-main {
+  display: grid;
+  grid-template-columns: 2rem auto 3.2rem;
+  grid-template-rows: 1fr; }
+  .listItem-main-select {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    grid-column: 1; }
+  .listItem-main-body {
+    word-wrap: break-word;
+    word-break: break-all;
+    hyphens: auto;
+    grid-column: 2; }
+  .listItem-main-controlsContainer {
+    display: flex;
+    justify-content: center;
+    grid-column: 3; }
+    .listItem-main-controlsContainer-controls {
+      font-size: 1.2rem;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center; }
+
+.listItem-Empty {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  grid-column: 1/4; }
+
+.listItem-links {
+  display: flex;
+  flex-direction: column;
+  margin-left: 2rem;
+  margin-right: 3.5rem; }
+  .listItem-links-linkContainer {
+    height: 1.5rem;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis; }
+
+.listItem-selected {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0 0.5rem;
+  color: #9c9c9c; }
+
+.listNewItemContainer {
+  margin: 1rem 0;
+  width: 100%;
+  display: flex;
+  justify-content: center; }
+
+.newListItemFormContainer {
+  width: calc(min(28rem, 100%));
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  align-items: center; }
+
+.ListTitleBar {
+  width: 100%;
+  display: grid;
+  grid-template-columns: calc(min(10%, 3rem)) 1fr calc(min(10%, 3rem));
+  grid-template-rows: 1fr 1px;
+  align-items: center; }
+  .ListTitleBar-title {
+    justify-self: center;
+    text-align: center;
+    grid-column: 2/3;
+    width: 100%; }
+  .ListTitleBar-controls {
+    color: orange;
+    font-size: 1.2rem;
+    justify-self: center;
+    grid-column: 3/4;
+    position: relative; }
+    .ListTitleBar-controls:hover {
+      color: #e69500; }
+    .ListTitleBar-controls:active {
+      color: #cc8400; }
+    .ListTitleBar-controls-active {
+      color: #cc8400; }
+  .ListTitleBar-hr {
+    border: 0;
+    border-top: 1px solid #ccc;
+    grid-column: 1 / 4;
+    grid-row: 2; }
+
 .navbar {
   display: flex;
   justify-content: space-between;
@@ -596,120 +726,6 @@ body {
   align-items: center;
   text-align: center; }
 
-.BasicListContainer {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start; }
-
-.ListTitleBar {
-  width: 100%;
-  display: grid;
-  grid-template-columns: calc(min(10%, 3rem)) 1fr calc(min(10%, 3rem));
-  grid-template-rows: 1fr 1px;
-  align-items: center; }
-  .ListTitleBar-title {
-    justify-self: center;
-    text-align: center;
-    grid-column: 2/3;
-    width: 100%; }
-  .ListTitleBar-controls {
-    color: orange;
-    font-size: 1.2rem;
-    justify-self: center;
-    grid-column: 3/4;
-    position: relative; }
-    .ListTitleBar-controls:hover {
-      color: #e69500; }
-    .ListTitleBar-controls:active {
-      color: #cc8400; }
-    .ListTitleBar-controls-active {
-      color: #cc8400; }
-  .ListTitleBar-hr {
-    border: 0;
-    border-top: 1px solid #ccc;
-    grid-column: 1 / 4;
-    grid-row: 2; }
-
-.basicListItemContainer {
-  width: calc(min(100%, 50rem));
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center; }
-
-.basicListItem {
-  width: 100%;
-  padding: 0.25rem 0.5rem 0.25rem 0.5rem;
-  border-color: #ccc;
-  background-color: #e2eff8;
-  border-width: thin; }
-  .basicListItem:nth-child(n) {
-    border-bottom-style: solid; }
-  .basicListItem:last-child {
-    border-bottom-style: none; }
-
-.basicListItem-main {
-  grid-row: 1/2;
-  grid-column: 1/4;
-  display: grid;
-  grid-template-columns: 2rem auto 3.2rem;
-  grid-template-rows: 1fr; }
-  .basicListItem-main-select {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    grid-column: 1; }
-  .basicListItem-main-body {
-    word-wrap: break-word;
-    word-break: break-all;
-    hyphens: auto;
-    grid-column: 2; }
-  .basicListItem-main-controlsContainer {
-    display: flex;
-    justify-content: center;
-    grid-column: 3; }
-    .basicListItem-main-controlsContainer-controls {
-      font-size: 1.2rem;
-      width: 100%;
-      display: flex;
-      justify-content: space-between;
-      align-items: center; }
-
-.basicListItem-links {
-  display: flex;
-  flex-direction: column;
-  margin-left: 2rem;
-  margin-right: 3.5rem; }
-  .basicListItem-links-linkContainer {
-    height: 1.5rem;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis; }
-
-.basicListItem-selected {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 0.3rem;
-  padding: 0 0.5rem;
-  color: #9c9c9c; }
-
-.basicListNewItemContainer {
-  margin: 1rem 0;
-  width: 100%;
-  display: flex;
-  justify-content: center; }
-
-.newListItemFormContainer {
-  width: calc(min(28rem, 100%));
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  text-align: center;
-  align-items: center; }
-
 .basicListDeleteItemsContainer {
   margin-top: 2rem;
   width: calc(min(24rem, 80%));
@@ -723,27 +739,16 @@ body {
   width: 100%;
   padding-left: 1rem; }
 
-.giftListContainer {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  gap: 0.5rem; }
+.giftListChatContainer {
+  border-top: thin solid #ccc; }
 
-.giftListOwnerItemsContainer {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start; }
+.giftListChat {
+  margin: 1rem 0; }
 
-.giftListSecretItemsContainer {
+.giftListChatControlsContainer {
   width: 100%;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start; }
+  justify-content: center; }
 
 .extraAuthButtonContainer {
   width: 100%;

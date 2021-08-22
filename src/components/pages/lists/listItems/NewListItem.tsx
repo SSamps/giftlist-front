@@ -37,7 +37,7 @@ const NewListItem: React.FC<Props> = ({ itemType, groupId, newListItemActionCrea
 
     return (
         <Fragment>
-            <div className='basicListNewItemContainer'>
+            <div className='listNewItemContainer'>
                 {!itemFormVisible ? (
                     returnNewItemButton()
                 ) : (

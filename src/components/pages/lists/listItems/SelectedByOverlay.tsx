@@ -13,8 +13,12 @@ const SelectedByOverlay: React.FC<Props> = ({ setOpen, selectedBy }) => {
                 <div className='overlayContainer'>
                     <div className='lead'>This has been selected by:</div>
                     <div className='memberList'>
-                        {selectedBy.map((name) => {
-                            return <span className=''>{name}</span>;
+                        {selectedBy.map((name, index) => {
+                            return (
+                                <span key={`selectedBy-${index}`} className=''>
+                                    {name}
+                                </span>
+                            );
                         })}
                     </div>
                 </div>

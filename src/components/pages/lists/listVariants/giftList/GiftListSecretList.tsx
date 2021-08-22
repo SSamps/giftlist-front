@@ -4,6 +4,7 @@ import { IrootStateAuthedCurrentListLoaded } from '../../../../../redux/reducers
 import { TYPE_PERM_ALL_LIST_GROUP } from '../../../../../types/listGroupPermissions';
 import { TgiftListFields } from '../../../../../types/models/listGroups';
 import { IUser } from '../../../../../types/models/User';
+import EmptyListItem from '../../listItems/EmptyListItem';
 import ListItem from '../../listItems/ListItem';
 import NewListItem from '../../listItems/NewListItem';
 
@@ -17,7 +18,7 @@ interface Props {
 const GiftListSecretList: React.FC<Props> = ({ currentList, currentListPermissions, user, ownerName }) => {
     const renderSecretItemVisibilityMessage = () => {
         return (
-            <div className='giftListVisibilityMessage systemMessage'>
+            <div className='systemMessage'>
                 <i className='fas fa-eye-slash danger'></i>{' '}
                 <span>
                     {ownerName} <strong>can't</strong> see added gift ideas
@@ -29,25 +30,29 @@ const GiftListSecretList: React.FC<Props> = ({ currentList, currentListPermissio
     const renderGuestList = () => {
         return (
             currentListPermissions.includes('GROUP_RW_SECRET_LIST_ITEMS') && (
-                <div className='basicListItemContainer'>
+                <div className='listSectionContentContainer'>
                     <div className='giftListListLabel systemMessage'>Gift ideas</div>
-                    {currentList.secretListItems.map((item) => {
-                        return (
-                            <ListItem
-                                key={item._id}
-                                listItem={item}
-                                allowSelection={currentListPermissions.includes('GROUP_SELECT_SECRET_LIST_ITEMS')}
-                                allowModification={
-                                    currentListPermissions.includes('GROUP_RW_SECRET_LIST_ITEMS') &&
-                                    item.authorId === user._id
-                                }
-                                allowDeletion={
-                                    currentListPermissions.includes('GROUP_RW_SECRET_LIST_ITEMS') &&
-                                    item.authorId === user._id
-                                }
-                            ></ListItem>
-                        );
-                    })}
+                    {currentList.secretListItems.length > 0 ? (
+                        currentList.secretListItems.map((item) => {
+                            return (
+                                <ListItem
+                                    key={item._id}
+                                    listItem={item}
+                                    allowSelection={currentListPermissions.includes('GROUP_SELECT_SECRET_LIST_ITEMS')}
+                                    allowModification={
+                                        currentListPermissions.includes('GROUP_RW_SECRET_LIST_ITEMS') &&
+                                        item.authorId === user._id
+                                    }
+                                    allowDeletion={
+                                        currentListPermissions.includes('GROUP_RW_SECRET_LIST_ITEMS') &&
+                                        item.authorId === user._id
+                                    }
+                                ></ListItem>
+                            );
+                        })
+                    ) : (
+                        <EmptyListItem description={`Nobody has suggested any gift ideas`}></EmptyListItem>
+                    )}
                 </div>
             )
         );
@@ -73,7 +78,7 @@ const GiftListSecretList: React.FC<Props> = ({ currentList, currentListPermissio
     };
 
     return (
-        <div className='giftListSecretItemsContainer'>
+        <div className='listSectionContainer'>
             {renderSecretItemVisibilityMessage()}
             {renderGuestList()}
             {renderNewSecretListItem()}

@@ -100,7 +100,7 @@ const ListItem: React.FC<Props> = ({
     const renderSelectionButton = () => {
         return (
             allowSelection && (
-                <span className='basicListItem-main-select'>
+                <span className='listItem-main-select'>
                     {waitingSelection ? (
                         <span>
                             <Spinner className='spinner-tiny'></Spinner>
@@ -131,7 +131,7 @@ const ListItem: React.FC<Props> = ({
 
             const selectedUserDisplayname = findUserInGroup(currentList, selectedUserId)?.displayName;
 
-            return <div className='basicListItem-selected'>Selected by {selectedUserDisplayname}</div>;
+            return <div className='listItem-selected'>Selected by {selectedUserDisplayname}</div>;
         } else if (numSelected > 1) {
             let selectedByNames = listItem.selectedBy.map((userId) => {
                 return (findUserInGroup(currentList, userId) as TgroupMemberAny).displayName;
@@ -139,7 +139,7 @@ const ListItem: React.FC<Props> = ({
 
             return (
                 <Fragment>
-                    <div className='basicListItem-selected'>
+                    <div className='listItem-selected'>
                         <span>Shared by</span>{' '}
                         {
                             <span className='btn-simple' onClick={() => setSelectedByOverlayStatus(true)}>
@@ -159,7 +159,7 @@ const ListItem: React.FC<Props> = ({
     };
     const renderLinks = () => {
         return (
-            <div className='basicListItem-links'>
+            <div className='listItem-links'>
                 {listItem.links.map((link, index) => {
                     let url;
                     if (link.startsWith('http://') || link.startsWith('https://')) {
@@ -169,7 +169,7 @@ const ListItem: React.FC<Props> = ({
                     }
                     const displayUrl = shortenLink(link);
                     return (
-                        <span className='basicListItem-links-linkContainer btn-simple' key={`${listItem._id}_${index}`}>
+                        <span className='listItem-links-linkContainer btn-simple' key={`${listItem._id}_${index}`}>
                             <a href={url} target='_blank' rel='noreferrer noopener'>
                                 {displayUrl}
                             </a>
@@ -189,17 +189,17 @@ const ListItem: React.FC<Props> = ({
                     listId={currentList._id}
                 ></ModifyListItem>
             )}
-            <div className='basicListItem'>
-                <div className='basicListItem-main'>
+            <div className='listItem'>
+                <div className='listItem-main'>
                     {renderSelectionButton()}
-                    <span className='basicListItem-main-body'>{listItem.body}</span>
-                    <span className='basicListItem-main-controlsContainer'>
+                    <span className='listItem-main-body'>{listItem.body}</span>
+                    <span className='listItem-main-controlsContainer'>
                         {waitingRemoval ? (
                             <span>
                                 <Spinner className='spinner-tiny'></Spinner>
                             </span>
                         ) : (
-                            <span className='basicListItem-main-controlsContainer-controls'>
+                            <span className='listItem-main-controlsContainer-controls'>
                                 {allowModification && (
                                     <span className='fas fa-pen btn-simple' onClick={onClickModify}></span>
                                 )}

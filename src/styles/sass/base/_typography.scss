@@ -7,6 +7,11 @@ body {
 .systemMessage {
     font-size: 1rem;
     color: $h1-color;
+
+    &-dark {
+        font-size: 1rem;
+        color: darken($h1-color, 5%);
+    }
 }
 
 .lead {

@@ -19,9 +19,9 @@ interface Props {
 const BasicListContainer: React.FC<Props> = ({ currentList, currentListPermissions }) => {
     return (
         <Fragment>
-            <div className={'BasicListContainer'}>
+            <div className={'listContainer'}>
                 <ListTitleBar currentList={currentList}></ListTitleBar>
-                <div className='basicListItemContainer'>
+                <div className='listSectionContentContainer'>
                     {currentList.listItems.map((item) => {
                         return (
                             <ListItem
@@ -34,7 +34,7 @@ const BasicListContainer: React.FC<Props> = ({ currentList, currentListPermissio
                         );
                     })}
                 </div>
-                <div className='basicListNewItemContainer'>
+                <div className='listNewItemContainer'>
                     {currentList.listItems.length < currentList.maxListItems && (
                         <NewListItem itemType='listItem' groupId={currentList._id}></NewListItem>
                     )}

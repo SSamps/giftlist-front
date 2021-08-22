@@ -23,7 +23,7 @@ export const GiftListContainer: React.FC<Props> = ({ currentList, currentListPer
     return (
         <Fragment>
             {currentList && currentListPermissions && (
-                <div className={'giftListContainer'}>
+                <div className={'listContainer'}>
                     <ListTitleBar currentList={currentList}></ListTitleBar>
                     <GiftListOwnerList
                         ownerName={ownerName}

@@ -4,6 +4,7 @@ import { IrootStateAuthedCurrentListLoaded } from '../../../../../redux/reducers
 import { TYPE_PERM_ALL_LIST_GROUP } from '../../../../../types/listGroupPermissions';
 import { TgiftListFields } from '../../../../../types/models/listGroups';
 import { IUser } from '../../../../../types/models/User';
+import EmptyListItem from '../../listItems/EmptyListItem';
 import ListItem from '../../listItems/ListItem';
 import NewListItem from '../../listItems/NewListItem';
 
@@ -17,8 +18,8 @@ interface Props {
 
 const GiftListOwnerList: React.FC<Props> = ({ currentList, currentListPermissions, ownerName, currentUserIsOwner }) => {
     const renderSelectionVisibilityMessage = () => {
-        return !currentUserIsOwner ? (
-            <div className='giftListVisibilityMessage systemMessage'>
+        return !currentUserIsOwner && currentList.listItems.length > 0 ? (
+            <div className='systemMessage'>
                 <i className='fas fa-eye-slash danger'></i>{' '}
                 <span>
                     {ownerName} <strong>can't</strong> see your selection
@@ -39,19 +40,27 @@ const GiftListOwnerList: React.FC<Props> = ({ currentList, currentListPermission
 
     const renderOwnerList = () => {
         return (
-            <div className='basicListItemContainer'>
+            <div className='listSectionContentContainer'>
                 {renderListLabel()}
-                {currentList.listItems.map((item) => {
-                    return (
-                        <ListItem
-                            key={item._id}
-                            listItem={item}
-                            allowSelection={currentListPermissions.includes('GROUP_SELECT_LIST_ITEMS')}
-                            allowModification={currentListPermissions.includes('GROUP_RW_LIST_ITEMS')}
-                            allowDeletion={currentListPermissions.includes('GROUP_RW_LIST_ITEMS')}
-                        ></ListItem>
-                    );
-                })}
+                {currentList.listItems.length > 0 ? (
+                    currentList.listItems.map((item) => {
+                        return (
+                            <ListItem
+                                key={item._id}
+                                listItem={item}
+                                allowSelection={currentListPermissions.includes('GROUP_SELECT_LIST_ITEMS')}
+                                allowModification={currentListPermissions.includes('GROUP_RW_LIST_ITEMS')}
+                                allowDeletion={currentListPermissions.includes('GROUP_RW_LIST_ITEMS')}
+                            ></ListItem>
+                        );
+                    })
+                ) : (
+                    <EmptyListItem
+                        description={`${
+                            currentUserIsOwner ? "You haven't" : ownerName + " hasn't"
+                        } added any items yet`}
+                    ></EmptyListItem>
+                )}
             </div>
         );
     };
@@ -66,7 +75,7 @@ const GiftListOwnerList: React.FC<Props> = ({ currentList, currentListPermission
     };
 
     return (
-        <div className='giftListOwnerItemsContainer'>
+        <div className='listSectionContainer'>
             {renderSelectionVisibilityMessage()}
             {renderOwnerList()}
             {renderNewListItem()}
