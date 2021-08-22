@@ -8,7 +8,7 @@ interface Props {
 const GiftListChat: React.FC<Props> = ({ ownerName }) => {
     let socket;
     useEffect(() => {
-        socket = io(process.env.REACT_APP_BACKEND_BASE_URL || 'http://localhost:3000');
+        socket = io(process.env.REACT_APP_BACKEND_BASE_URL || 'http://localhost:5000');
         if (socket) {
             console.log('connected via socket');
         }
