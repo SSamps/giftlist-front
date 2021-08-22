@@ -1,10 +1,19 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import io from 'socket.io-client';
 
 interface Props {
     ownerName: string;
 }
 
 const GiftListChat: React.FC<Props> = ({ ownerName }) => {
+    let socket;
+    useEffect(() => {
+        socket = io(process.env.REACT_APP_BACKEND_BASE_URL || 'http://localhost:3000');
+        if (socket) {
+            console.log('connected via socket');
+        }
+    }, []);
+
     const renderChatVisibilityMessage = () => {
         return (
             <div className='giftListVisibilityMessage systemMessage'>
