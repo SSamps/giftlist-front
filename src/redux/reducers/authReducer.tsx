@@ -11,7 +11,7 @@ import { IUser } from '../../types/models/User';
 import { AnyAction } from 'redux';
 
 export interface IauthStateAuthed {
-    token: string | null;
+    token: string;
     isAuthenticated: boolean;
     loading: boolean;
     user: IUser;
