@@ -28,7 +28,7 @@ interface IgetParentListActionSuccess {
     payload?: TListGroupAnyFields;
 }
 
-export type TgetListActionCreator = (id: string) => void;
+export type TgetListActionCreator = (listid: string) => void;
 
 export const getListActionCreator =
     (listId: string) => async (dispatch: Dispatch<IgetListActionSuccess | IgetParentListActionSuccess>) => {
@@ -39,6 +39,26 @@ export const getListActionCreator =
                     type: PARENT_LIST_GET,
                     payload: res.data,
                 });
+            } else {
+                dispatch({
+                    type: CURRENT_LIST_GET,
+                    payload: res.data,
+                });
+            }
+        } catch (err) {
+            addAlertActionCreator('error', `${err.response.status} ${err.response.data}`);
+        }
+    };
+
+export type TcheckForNewUserActionCreator = (listId: string, userId: string) => void;
+
+export const checkForNewUserActionCreator =
+    (listId: string, userId: string) => async (dispatch: Dispatch<IgetListActionSuccess>) => {
+        try {
+            const res: AxiosResponse<TListGroupAnyFields> = await axios.get(`/api/groups/${listId}`);
+
+            if (!findUserInGroup(res.data, userId)) {
+                addAlertActionCreator('error', `Error: A required userId was not found`);
             } else {
                 dispatch({
                     type: CURRENT_LIST_GET,
