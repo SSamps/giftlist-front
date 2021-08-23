@@ -2,14 +2,15 @@ import React from 'react';
 
 interface props {
     onClick: () => void;
+    description: string;
 }
 
-export const ListChatNewMessageNotification: React.FC<props> = ({ onClick }) => {
+export const ListChatReturnToBottomButton: React.FC<props> = ({ onClick, description }) => {
     return (
         <div className='newMessageNotificationContainer btn-simple' onClick={onClick}>
-            New messages
+            {description}
         </div>
     );
 };
 
-export default ListChatNewMessageNotification;
+export default ListChatReturnToBottomButton;

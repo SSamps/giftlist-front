@@ -7,7 +7,7 @@ import { TListGroupAnyFields } from '../../../../types/models/listGroups';
 import { TmessageAny } from '../../../../types/models/messages';
 import ListChatForm from './ListChatForm';
 import ListChatMessage from './ListChatMessage';
-import ListChatNewMessageNotification from './ListChatNewMessageNotification';
+import ListChatReturnToBottomButton from './ListChatReturnToBottomButton';
 
 interface Props {
     ownerName: string;
@@ -21,7 +21,7 @@ const GiftListChat: React.FC<Props> = ({ ownerName, token, currentList }) => {
         messages: [],
         firstUpdate: true,
     });
-    const [newMessageNotification, setNewMessageNotification] = useState(false);
+    const [returnToBottomNotification, setreturnToBottomNotification] = useState('');
     const latestMessageRef = useRef<HTMLDivElement>(null);
     const chatContainerRef = useRef<HTMLDivElement>(null);
 
@@ -62,7 +62,7 @@ const GiftListChat: React.FC<Props> = ({ ownerName, token, currentList }) => {
                 ) {
                     scrollToLatestMessage();
                 } else {
-                    setNewMessageNotification(true);
+                    setreturnToBottomNotification('New messages');
                 }
             }
         } else {
@@ -94,12 +94,15 @@ const GiftListChat: React.FC<Props> = ({ ownerName, token, currentList }) => {
 
     const onScroll = () => {
         if (chatContainerRef.current) {
-            if (
+            const distanceToBottom =
                 chatContainerRef.current.scrollHeight -
-                    (chatContainerRef.current.scrollTop + chatContainerRef.current.offsetHeight) <
-                50
-            ) {
-                setNewMessageNotification(false);
+                (chatContainerRef.current.scrollTop + chatContainerRef.current.offsetHeight);
+            if (distanceToBottom < 50) {
+                setreturnToBottomNotification('');
+            } else {
+                if (distanceToBottom > 1000 && returnToBottomNotification !== 'New messages') {
+                    setreturnToBottomNotification('Return to latest');
+                }
             }
         }
     };
@@ -117,10 +120,11 @@ const GiftListChat: React.FC<Props> = ({ ownerName, token, currentList }) => {
                     {renderMessages()}
                 </div>
                 <div className='listChatBottom'>
-                    {newMessageNotification && (
-                        <ListChatNewMessageNotification
+                    {returnToBottomNotification && (
+                        <ListChatReturnToBottomButton
                             onClick={scrollToLatestMessage}
-                        ></ListChatNewMessageNotification>
+                            description={returnToBottomNotification}
+                        ></ListChatReturnToBottomButton>
                     )}
                 </div>
                 <ListChatForm submitForm={submitForm}></ListChatForm>
