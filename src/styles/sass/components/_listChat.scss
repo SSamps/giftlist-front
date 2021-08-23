@@ -79,3 +79,16 @@
     display: flex;
     justify-content: center;
 }
+
+.listChatBottom {
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.newMessageNotificationContainer {
+    z-index: 1;
+    position: absolute;
+    bottom: 1rem;
+}
