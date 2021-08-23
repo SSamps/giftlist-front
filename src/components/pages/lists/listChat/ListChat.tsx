@@ -5,6 +5,7 @@ import { DefaultEventsMap } from 'socket.io-client/build/typed-events';
 import { IrootStateAuthedCurrentListLoaded } from '../../../../redux/reducers/root/rootReducer';
 import { TListGroupAnyFields } from '../../../../types/models/listGroups';
 import { TmessageAny } from '../../../../types/models/messages';
+import ListChatForm from './ListChatForm';
 import ListChatMessage from './ListChatMessage';
 
 interface Props {
@@ -71,7 +72,7 @@ const GiftListChat: React.FC<Props> = ({ ownerName, token, currentList }) => {
             <div className='listSectionContentContainer'>
                 {renderChatVisibilityMessage()}
                 <div className='listChat'>{renderMessages()}</div>
-                <div className='listChatControlsContainer'>Here be buttons</div>
+                <ListChatForm></ListChatForm>
             </div>
         </div>
     );

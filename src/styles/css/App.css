@@ -492,7 +492,9 @@ body {
   flex-direction: column;
   gap: 0.6rem;
   max-height: 40rem;
-  overflow-y: scroll; }
+  overflow-y: scroll;
+  scrollbar-color: #ffa600 #efebd7;
+  scrollbar-width: thin; }
   .listChat::-webkit-scrollbar {
     width: 8px; }
   .listChat::-webkit-scrollbar-track {
@@ -507,6 +509,8 @@ body {
   display: flex; }
   .messageContainerOuter-currentUser {
     justify-content: flex-end; }
+  .messageContainerOuter-otherUser {
+    justify-content: flex-start; }
   .messageContainerOuter-system {
     justify-content: center; }
 
