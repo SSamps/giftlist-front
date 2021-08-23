@@ -499,12 +499,12 @@ body {
   display: flex;
   flex-direction: column;
   gap: 0.6rem;
-  max-height: 40rem;
+  max-height: calc(min(50rem, 75vh));
   overflow-y: scroll;
   scrollbar-color: #ffa600 #efebd7;
   scrollbar-width: thin;
   word-wrap: break-word;
-  word-break: break-all; }
+  background-color: #edf3f3; }
   .listChat::-webkit-scrollbar {
     width: 8px; }
   .listChat::-webkit-scrollbar-track {
@@ -559,7 +559,7 @@ body {
 .newMessageNotificationContainer {
   z-index: 1;
   position: absolute;
-  bottom: 1rem;
+  bottom: 1.25rem;
   border-radius: 10px;
   backdrop-filter: blur(0.2rem);
   background-color: rgba(255, 236, 202, 0.8);
