@@ -12,6 +12,11 @@ body {
         font-size: 1rem;
         color: darken($h1-color, 5%);
     }
+
+    &-tag {
+        font-size: 0.8rem;
+        color: $h1-color;
+    }
 }
 
 .lead {

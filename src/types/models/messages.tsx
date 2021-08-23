@@ -6,7 +6,7 @@ export type SYSTEM_MESSAGE = 'SYSTEM_MESSAGE';
 export interface TuserMessageFields {
     groupId: string;
     body: string;
-    creationDate: Date;
+    creationDate: string;
     messageVariant: 'USER_MESSAGE';
     _id: string;
     author: string;
@@ -17,7 +17,7 @@ export interface TuserMessageFields {
 export interface TsystemMessageFields {
     groupId: string;
     body: string;
-    creationDate: Date;
+    creationDate: string;
     messageVariant: 'SYSTEM_MESSAGE';
     _id: string;
 }

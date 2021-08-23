@@ -4,7 +4,7 @@ import { IrootStateAuthedCurrentListLoaded } from '../../../../redux/reducers/ro
 import { TListGroupAnyFields } from '../../../../types/models/listGroups';
 import { TmessageAny } from '../../../../types/models/messages';
 import { IUser } from '../../../../types/models/User';
-import { findUserInGroup } from '../../../../utils/helperFunctions';
+import { findUserInGroup, getPrettyDate } from '../../../../utils/helperFunctions';
 
 interface props {
     message: TmessageAny;
@@ -38,7 +38,10 @@ const ListChatMessage: React.FC<props> = ({ user, message, currentList }) => {
         <div className={`messageContainerOuter messageContainerOuter-${messageType}`}>
             <div className='messageContainerInner'>
                 {authorName && (
-                    <div className='message-label'>{messageType === 'currentUser' ? 'You' : authorName}</div>
+                    <div className='message-label'>
+                        {messageType === 'currentUser' ? 'You' : authorName}{' '}
+                        <span className='systemMessage-tag'>{getPrettyDate(message.creationDate)}</span>
+                    </div>
                 )}
                 <div className={`message message-${messageType}`}>{message.body}</div>
             </div>

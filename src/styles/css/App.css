@@ -39,6 +39,9 @@ body {
   .systemMessage-dark {
     font-size: 1rem;
     color: #8f8f8f; }
+  .systemMessage-tag {
+    font-size: 0.8rem;
+    color: #9c9c9c; }
 
 .lead {
   font-size: 1.5rem;
