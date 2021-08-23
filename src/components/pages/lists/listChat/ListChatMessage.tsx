@@ -26,7 +26,13 @@ const ListChatMessage: React.FC<props> = ({ user, message, currentList }) => {
 
     const messageType = getMessageType();
 
-    const authorName = findUserInGroup(currentList, user._id)?.displayName;
+    const getAuthorName = () => {
+        if (message.messageVariant === 'USER_MESSAGE') {
+            return findUserInGroup(currentList, message.author)?.displayName;
+        }
+    };
+
+    const authorName = getAuthorName();
 
     return (
         <div className={`messageContainerOuter messageContainerOuter-${messageType}`}>
