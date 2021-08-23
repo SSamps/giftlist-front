@@ -543,7 +543,8 @@ body {
   padding-left: 0.5rem; }
 
 .message-system {
-  justify-content: center; }
+  justify-content: center;
+  color: #9c9c9c; }
 
 .message-label {
   color: #00a8c2; }

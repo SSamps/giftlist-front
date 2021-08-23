@@ -17,7 +17,7 @@ export const getPrettyDate = (inputDate: string) => {
         return 'Just now';
     }
     if (ageSeconds < 60) {
-        return `${ageSeconds} seconds ago`;
+        return `${Math.round(ageSeconds)} seconds ago`;
     }
     if (ageSeconds < 3600) {
         return `${Math.round(ageSeconds / 60)} minutes ago`;
