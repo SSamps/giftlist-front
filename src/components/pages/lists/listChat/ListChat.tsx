@@ -2,9 +2,10 @@ import React, { Fragment, useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import io, { Socket } from 'socket.io-client';
 import { DefaultEventsMap } from 'socket.io-client/build/typed-events';
-import { IrootStateAuthedCurrentListLoaded } from '../../../../../redux/reducers/root/rootReducer';
-import { TListGroupAnyFields } from '../../../../../types/models/listGroups';
-import { TmessageAny } from '../../../../../types/models/messages';
+import { IrootStateAuthedCurrentListLoaded } from '../../../../redux/reducers/root/rootReducer';
+import { TListGroupAnyFields } from '../../../../types/models/listGroups';
+import { TmessageAny } from '../../../../types/models/messages';
+import ListChatMessage from './ListChatMessage';
 
 interface Props {
     ownerName: string;
@@ -52,30 +53,25 @@ const GiftListChat: React.FC<Props> = ({ ownerName, token, currentList }) => {
         );
     };
 
-    const testSocket = () => {
-        socket && socket.emit('giftListChat:postMessage', { var1: 'test var1', var2: 'test var2' });
-    };
+    // const testSocket = () => {
+    //     socket && socket.emit('giftListChat:postMessage', { var1: 'test var1', var2: 'test var2' });
+    // };
 
     const renderMessages = () => {
         return (
             <Fragment>
                 {messages.map((message) => {
-                    return <div key={message._id}>{message.body}</div>;
+                    return <ListChatMessage key={message._id} message={message}></ListChatMessage>;
                 })}
             </Fragment>
         );
     };
     return (
-        <div className='listSectionContainer'>
-            <div className='listSectionContainer giftListChatContainer'>
+        <div className='listSectionContainer listChatContainerBorder'>
+            <div className='listSectionContentContainer'>
                 {renderChatVisibilityMessage()}
-                <div className='giftListChat'>
-                    <span className='btn-simple' onClick={testSocket}>
-                        Test Me
-                    </span>
-                    {renderMessages()}
-                </div>
-                <div className='giftListChatControlsContainer'>Here be buttons</div>
+                <div className='listChat'>{renderMessages()}</div>
+                <div className='listChatControlsContainer'>Here be buttons</div>
             </div>
         </div>
     );

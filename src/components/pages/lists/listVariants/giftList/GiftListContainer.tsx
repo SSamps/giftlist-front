@@ -4,7 +4,7 @@ import { IrootStateAuthedCurrentListLoaded } from '../../../../../redux/reducers
 import { TYPE_PERM_ALL_LIST_GROUP } from '../../../../../types/listGroupPermissions';
 import { IgiftListMember, TgiftListFields } from '../../../../../types/models/listGroups';
 import ListTitleBar from '../../miscShared/titleBar/ListTitleBar';
-import GiftListChat from './GiftListChat';
+import GiftListChat from '../../listChat/ListChat';
 import GiftListOwnerList from './GiftListOwnerList';
 import GiftListSecretList from './GiftListSecretList';
 

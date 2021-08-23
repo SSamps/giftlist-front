@@ -18,7 +18,7 @@ body {
 
 a {
   text-decoration: none;
-  color: orange;
+  color: #ffa600;
   cursor: pointer; }
   a:hover {
     color: #db8f00; }
@@ -65,6 +65,10 @@ body {
   color: #28a745; }
 
 .name {
+  color: #00a8c2; }
+
+.groupName {
+  font-size: 1.5rem;
   color: #00a8c2; }
 
 .pageContainer {
@@ -133,7 +137,7 @@ body {
     color: #333; }
 
 .btn-simple {
-  color: orange;
+  color: #ffa600;
   cursor: pointer; }
   .btn-simple:hover {
     color: #db8f00; }
@@ -244,7 +248,7 @@ body {
     transform: translate(-8.8rem, -2.1rem); }
 
 .dropDownItem {
-  color: orange;
+  color: #ffa600;
   cursor: pointer;
   padding: 0rem 0.5rem; }
   .dropDownItem:hover {
@@ -354,14 +358,15 @@ body {
   align-items: center;
   justify-content: flex-start;
   margin-bottom: 2.5rem;
-  padding-top: 0.5rem; }
+  margin-top: 0.5rem; }
 
 .listSectionContentContainer {
   width: calc(min(100%, 50rem));
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center; }
+  justify-content: center;
+  margin-top: 0.5rem; }
 
 .listItem {
   width: 100%;
@@ -414,7 +419,12 @@ body {
     height: 1.5rem;
     overflow: hidden;
     white-space: nowrap;
-    text-overflow: ellipsis; }
+    text-overflow: ellipsis;
+    color: #ffa600; }
+    .listItem-links-linkContainer:hover {
+      color: #db8f00; }
+    .listItem-links-linkContainer:active {
+      color: #cc8500; }
 
 .listItem-selected {
   display: flex;
@@ -450,7 +460,7 @@ body {
     grid-column: 2/3;
     width: 100%; }
   .ListTitleBar-controls {
-    color: orange;
+    color: #ffa600;
     font-size: 1.2rem;
     justify-self: center;
     grid-column: 3/4;
@@ -458,14 +468,73 @@ body {
     .ListTitleBar-controls:hover {
       color: #e69500; }
     .ListTitleBar-controls:active {
-      color: #cc8400; }
+      color: #cc8500; }
     .ListTitleBar-controls-active {
-      color: #cc8400; }
+      color: #cc8500; }
   .ListTitleBar-hr {
     border: 0;
     border-top: 1px solid #ccc;
     grid-column: 1 / 4;
     grid-row: 2; }
+
+.giftListListLabel {
+  width: 100%;
+  padding-left: 1rem; }
+
+.listChatContainerBorder {
+  border-top: thin solid #ccc; }
+
+.listChat {
+  margin: 1rem 0;
+  padding: 1rem 1rem;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  max-height: 40rem;
+  overflow-y: scroll; }
+  .listChat::-webkit-scrollbar {
+    width: 8px; }
+  .listChat::-webkit-scrollbar-track {
+    background-color: #efebd7;
+    border-radius: 10px; }
+  .listChat::-webkit-scrollbar-thumb {
+    background-color: #ffa600;
+    border-radius: 10px; }
+
+.messageContainerOuter {
+  width: 100%;
+  display: flex; }
+  .messageContainerOuter-currentUser {
+    justify-content: flex-end; }
+  .messageContainerOuter-system {
+    justify-content: center; }
+
+.messageContainerInner {
+  padding: 0.25rem 1rem;
+  border-radius: 4px;
+  max-width: 80%;
+  display: flex;
+  flex-direction: column;
+  background-color: #e2eff8; }
+
+.message-currentUser {
+  padding-left: 0.5rem;
+  justify-content: flex-end; }
+
+.message-otherUser {
+  padding-left: 0.5rem; }
+
+.message-system {
+  justify-content: center; }
+
+.message-label {
+  color: #00a8c2; }
+
+.listChatControlsContainer {
+  width: 100%;
+  display: flex;
+  justify-content: center; }
 
 .navbar {
   display: flex;
@@ -524,7 +593,7 @@ body {
     gap: 1rem; }
   .dashboardFilterControlBar-item {
     margin: 0 auto;
-    color: orange;
+    color: #ffa600;
     overflow: visible;
     cursor: pointer; }
     .dashboardFilterControlBar-item:hover {
@@ -605,7 +674,7 @@ body {
     width: 100%; }
   .newListControls-button {
     text-align: center;
-    color: orange;
+    color: #ffa600;
     height: 1.5rem;
     width: 100%; }
     .newListControls-button:hover {
@@ -705,7 +774,7 @@ body {
   align-items: center;
   margin: 0.5rem 0.5rem; }
   .inviteeElement-remove {
-    color: orange;
+    color: #ffa600;
     margin-left: 0.25rem;
     cursor: pointer; }
     .inviteeElement-remove:hover {
@@ -734,21 +803,6 @@ body {
   .basicListDeleteItemsContainer-button {
     width: 7rem;
     text-align: center; }
-
-.giftListListLabel {
-  width: 100%;
-  padding-left: 1rem; }
-
-.giftListChatContainer {
-  border-top: thin solid #ccc; }
-
-.giftListChat {
-  margin: 1rem 0; }
-
-.giftListChatControlsContainer {
-  width: 100%;
-  display: flex;
-  justify-content: center; }
 
 .extraAuthButtonContainer {
   width: 100%;

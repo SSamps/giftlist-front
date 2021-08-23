@@ -169,8 +169,8 @@ const ListItem: React.FC<Props> = ({
                     }
                     const displayUrl = shortenLink(link);
                     return (
-                        <span className='listItem-links-linkContainer btn-simple' key={`${listItem._id}_${index}`}>
-                            <a href={url} target='_blank' rel='noreferrer noopener'>
+                        <span className='listItem-links-linkContainer' key={`${listItem._id}_${index}`}>
+                            <a href={url} target='_blank' rel='noreferrer noopener' className='btn-simple'>
                                 {displayUrl}
                             </a>
                         </span>

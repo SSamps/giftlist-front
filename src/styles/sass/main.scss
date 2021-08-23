@@ -14,6 +14,7 @@
 @import 'components/overlay';
 @import 'components/alert';
 @import 'components/list';
+@import 'components/listChat';
 
 @import './layouts/navbar';
 
@@ -24,5 +25,4 @@
 @import './pages/verify';
 @import './pages/notFound';
 @import './pages/basicList';
-@import './pages/giftList';
 @import './pages/auth';

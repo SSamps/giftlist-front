@@ -1,12 +1,15 @@
 // Base model
 
+export type USER_MESSAGE = 'USER_MESSAGE';
+export type SYSTEM_MESSAGE = 'SYSTEM_MESSAGE';
+
 export interface TuserMessageFields {
     groupId: string;
     body: string;
     creationDate: Date;
     messageVariant: 'USER_MESSAGE';
-    author: string;
     _id: string;
+    author: string;
 }
 
 // System messages
