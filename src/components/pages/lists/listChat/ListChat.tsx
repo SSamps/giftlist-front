@@ -54,9 +54,9 @@ const GiftListChat: React.FC<Props> = ({ ownerName, token, currentList }) => {
         );
     };
 
-    // const testSocket = () => {
-    //     socket && socket.emit('giftListChat:postMessage', { var1: 'test var1', var2: 'test var2' });
-    // };
+    const submitForm = (body: string) => {
+        socket && socket.emit('giftListChat:postMessage', body);
+    };
 
     const renderMessages = () => {
         return (
@@ -72,7 +72,7 @@ const GiftListChat: React.FC<Props> = ({ ownerName, token, currentList }) => {
             <div className='listSectionContentContainer'>
                 {renderChatVisibilityMessage()}
                 <div className='listChat'>{renderMessages()}</div>
-                <ListChatForm></ListChatForm>
+                <ListChatForm submitForm={submitForm}></ListChatForm>
             </div>
         </div>
     );

@@ -167,6 +167,13 @@ body {
   flex-direction: column;
   gap: 1rem;
   width: 95%; }
+  .form-singleInput {
+    margin: 1rem 0;
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    width: 80%;
+    align-items: center; }
   .form-error-message {
     color: #dc3545;
     margin-top: 0.5rem; }
@@ -186,7 +193,8 @@ body {
     width: 100%;
     padding: 0.4rem;
     font-size: 1.2rem;
-    border: 1px solid #ccc; }
+    border: 1px solid #ccc;
+    border-radius: 4px; }
   .form input[type='submit'],
   .form button {
     margin-top: 1rem;

@@ -5,6 +5,15 @@
     gap: 1rem;
     width: 95%;
 
+    &-singleInput {
+        margin: 1rem 0;
+        display: flex;
+        flex-direction: row;
+        gap: 1rem;
+        width: 80%;
+        align-items: center;
+    }
+
     &-error-message {
         color: $danger-color;
         margin-top: 0.5rem;
@@ -31,6 +40,7 @@
         padding: 0.4rem;
         font-size: 1.2rem;
         border: 1px solid $border-color;
+        border-radius: 4px;
     }
 
     input[type='submit'],
