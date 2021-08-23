@@ -6,7 +6,7 @@ interface props {
 
 export const ListChatNewMessageNotification: React.FC<props> = ({ onClick }) => {
     return (
-        <div className='newMessageNotificationContainer' onClick={onClick}>
+        <div className='newMessageNotificationContainer btn-simple' onClick={onClick}>
             New messages
         </div>
     );

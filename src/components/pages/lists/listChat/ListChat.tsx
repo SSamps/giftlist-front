@@ -104,15 +104,8 @@ const GiftListChat: React.FC<Props> = ({ ownerName, token, currentList }) => {
         }
     };
 
-    const testFunc = () => {
-        setNewMessageNotification(!newMessageNotification);
-    };
-
     return (
         <div className='listSectionContainer listChatContainerBorder'>
-            <div className='btn-simple' onClick={testFunc}>
-                Button
-            </div>
             <div className='listSectionContentContainer'>
                 <div className='systemMessage'>
                     <i className='fas fa-eye-slash danger'></i>{' '}
