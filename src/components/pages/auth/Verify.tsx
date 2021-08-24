@@ -3,6 +3,8 @@ import validator from 'validator';
 import { Fragment, useEffect, useState } from 'react';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
+import { loadUserActionCreator } from '../../../redux/actions/authActions';
+import store from '../../../redux/reducers/root/reducerStore';
 
 interface Props {
     match: {
@@ -25,8 +27,10 @@ const Verify: React.FC<Props> = ({
     const tryVerify = async () => {
         try {
             await axios.post(`/api/users/verify/${token}`);
+            await loadUserActionCreator(store.dispatch);
             history.push(`/dashboard`);
         } catch (err) {
+            console.log(err);
             setVerifyError('Error: ' + err.response.status + ' ' + err.response.statusText);
         }
     };

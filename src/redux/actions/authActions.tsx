@@ -18,6 +18,8 @@ export interface IloadUserAction {
     payload?: IUser;
 }
 
+export type TloadUserActionCreator = () => void;
+
 export const loadUserActionCreator = async (dispatch: Dispatch<IloadUserAction>) => {
     try {
         const res = await axios.get('/api/auth');
