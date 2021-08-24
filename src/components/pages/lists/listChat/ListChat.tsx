@@ -37,6 +37,7 @@ const GiftListChat: React.FC<Props> = ({ ownerName, token, currentList, checkFor
         const socket = io(process.env.REACT_APP_BACKEND_BASE_URL || 'http://localhost:5000', {
             auth: { token: token },
             query: { groupId: currentList._id },
+            transports: ['websocket'],
         });
 
         socket.on('connect_error', (err) => {

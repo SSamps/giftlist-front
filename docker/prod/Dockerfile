@@ -1,5 +1,5 @@
 # State 1
-FROM node:current-alpine3.13 AS build
+FROM node:current-alpine3.14 AS build
 WORKDIR /app
 RUN npm install npm@7.12.0 -g
 RUN apk --no-cache --virtual build-dependencies add \
@@ -14,7 +14,7 @@ ARG REACT_APP_BACKEND_BASE_URL
 RUN REACT_APP_BACKEND_BASE_URL=$REACT_APP_BACKEND_BASE_URL npm run build
 
 # Stage 2
-FROM node:current-alpine3.13
+FROM node:current-alpine3.14
 WORKDIR /app
 RUN npm install express
 RUN npm install path
