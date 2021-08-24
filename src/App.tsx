@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import './styles/css/App.css';
 
@@ -21,26 +21,34 @@ import Body from './components/layout/Body';
 axios.defaults.baseURL = process.env.REACT_APP_BACKEND_BASE_URL;
 
 const App = () => {
-    useEffect(() => {
-        if (localStorage.token) {
-            setAuthToken(localStorage.token);
-        }
-        loadUserActionCreator(store.dispatch);
+    const [loaded, setLoaded] = useState(false);
 
-        // log user out from all tabs if they log out in one tab
-        window.addEventListener('storage', () => {
-            if (!localStorage.token) store.dispatch({ type: LOGOUT });
-        });
+    useEffect(() => {
+        const init = async () => {
+            if (localStorage.token) {
+                setAuthToken(localStorage.token);
+            }
+
+            await loadUserActionCreator(store.dispatch);
+
+            window.addEventListener('storage', () => {
+                if (!localStorage.token) store.dispatch({ type: LOGOUT });
+            });
+            setLoaded(true);
+        };
+        init();
     }, []);
 
     return (
         <Provider store={store}>
             <Router>
-                <div className='pageContainer'>
-                    <Navbar />
-                    <Body></Body>
-                    <Footer></Footer>
-                </div>
+                {loaded && (
+                    <div className='pageContainer'>
+                        <Navbar />
+                        <Body></Body>
+                        <Footer></Footer>
+                    </div>
+                )}
             </Router>
         </Provider>
     );
