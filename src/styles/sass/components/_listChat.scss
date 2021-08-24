@@ -60,7 +60,6 @@
 .message {
     &-currentUser {
         padding-left: 0.5rem;
-        justify-content: flex-end;
     }
 
     &-otherUser {
@@ -68,8 +67,10 @@
     }
 
     &-system {
-        justify-content: center;
         color: $h1-color;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }
 
     &-label {

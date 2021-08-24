@@ -36,15 +36,22 @@ const ListChatMessage: React.FC<props> = ({ user, message, currentList }) => {
 
     return (
         <div className={`messageContainerOuter messageContainerOuter-${messageType}`}>
-            <div className='messageContainerInner'>
-                {authorName && (
+            {authorName ? (
+                <div className='messageContainerInner'>
                     <div className='message-label'>
                         {messageType === 'currentUser' ? 'You' : authorName}{' '}
                         <span className='systemMessage-tag'>{getPrettyDate(message.creationDate)}</span>
                     </div>
-                )}
-                <div className={`message message-${messageType}`}>{message.body}</div>
-            </div>
+                    <div className={`message message-${messageType}`}>{message.body}</div>
+                </div>
+            ) : (
+                <div className='messageContainerInner'>
+                    <div className={`message message-${messageType}`}>
+                        <span className='systemMessage-tag-small'>{getPrettyDate(message.creationDate)}</span>
+                        <span>{message.body}</span>
+                    </div>
+                </div>
+            )}
         </div>
     );
 };

@@ -17,6 +17,12 @@ body {
         font-size: 0.8rem;
         color: $h1-color;
     }
+
+    &-tag-small {
+        font-size: 0.8rem;
+        color: $h1-color;
+        height: 0.8rem;
+    }
 }
 
 .lead {
