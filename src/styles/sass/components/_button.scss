@@ -1,47 +1,26 @@
-.btn {
-    display: inline-block;
-    background: $light-color;
-    color: $dark-color;
-    padding: 0.4rem 0.5rem;
-    font-size: 1rem;
-    border: none;
-    cursor: pointer;
-    // margin-right: 0.5rem;
-    transition: opacity 0.2s ease-in;
-    outline: none;
+.btn-block {
+    background: $color-interactive;
+    color: $color-text-light;
+    border-radius: 4px;
 
-    &-primary {
-        background: $primary-color;
-        color: #fff;
-
-        &:hover {
-            background: darken($primary-color, 5%);
-        }
-
-        &:active {
-            background: darken($primary-color, 10%);
-        }
+    &:hover {
+        background: $color-interactive-hover;
     }
 
-    &-light {
-        background: $light-color;
-        color: #333;
+    &:active {
+        background: $color-interactive-active;
     }
 }
 
 .btn-simple {
-    color: $highlight-color;
+    color: $color-interactive;
     cursor: pointer;
 
     &:hover {
-        color: $highlight-hover-color;
+        color: $color-interactive-hover;
     }
 
     &:active {
-        color: $highlight-active-color;
+        color: $color-interactive-active;
     }
-}
-
-.buttons {
-    margin: 1rem;
 }

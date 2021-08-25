@@ -180,10 +180,10 @@ const ListItemForm: React.FC<Props> = ({
                     )}
                 </div>
                 <div className='form-controls'>
-                    <span className='btn btn-primary' onClick={submitForm}>
+                    <span className='btn-block' onClick={submitForm}>
                         {submitButtonLabel}
                     </span>
-                    <span className='btn btn-primary' onClick={setItemFormHidden}>
+                    <span className='btn-block' onClick={setItemFormHidden}>
                         Cancel
                     </span>
                 </div>

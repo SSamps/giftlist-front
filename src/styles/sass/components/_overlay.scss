@@ -5,8 +5,9 @@
     left: 50%;
     transform: translate(-50%, -50%);
     width: calc(min(28rem, 95%));
-    background-color: $content-background-color;
-    border: $border-color;
+    background-color: $color-background-primary;
+    border: $color-border;
+    border-radius: 4px;
     border-style: solid;
     border-width: thin;
 }
@@ -41,7 +42,7 @@
 
     &-focus {
         backdrop-filter: blur(0.2rem);
-        background-color: rgba(255, 236, 202, 0.8);
+        background-color: adjust-color($color-highlight, $alpha: -0.2);
     }
 }
 
@@ -50,5 +51,5 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    color: $name-color;
+    color: $color-text-name;
 }

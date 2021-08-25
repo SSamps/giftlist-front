@@ -32,7 +32,7 @@ const VerifyNotification = () => {
                     ) : (
                         <input
                             type='button'
-                            className='btn btn-primary'
+                            className='btn-block'
                             value='Resend verification email'
                             onClick={onClick}
                         />

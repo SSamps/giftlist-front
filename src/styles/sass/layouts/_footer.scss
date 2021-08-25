@@ -1,11 +1,11 @@
 .footerContainerOuter {
     margin: auto auto;
     display: block;
-    max-width: calc(min(75rem, 100%));
-    background-color: $dark-color;
-    color: $light-color;
+    max-width: 100%;
+    background-color: $color-background-dark;
+    color: $color-text-light;
     height: 5rem;
-    border-top: thin solid $border-color;
+    border-top: thin solid $color-border;
 }
 
 .footerContainerInner {

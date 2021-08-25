@@ -25,20 +25,20 @@
     margin-top: 0.5rem;
 }
 
-.listItem {
+.listListItemContainer {
     width: 100%;
+    gap: 0.25rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.listItem {
+    width: 95%;
     padding: 0.25rem 0.5rem 0.25rem 0.5rem;
-    border-color: $border-color;
-    background-color: $list-item-background-color;
-    border-width: thin;
-
-    &:nth-child(n) {
-        border-bottom-style: solid;
-    }
-
-    &:last-child {
-        border-bottom-style: none;
-    }
+    border-radius: 4px;
+    background-color: $color-background-secondary;
 }
 
 .listItem-main {
@@ -58,6 +58,7 @@
         word-break: break-all;
         hyphens: auto;
         grid-column: 2;
+        color: $color-text-body;
     }
 
     &-controlsContainer {
@@ -94,13 +95,13 @@
         white-space: nowrap;
         text-overflow: ellipsis;
 
-        color: $highlight-color;
+        color: $color-interactive;
         &:hover {
-            color: $highlight-hover-color;
+            color: $color-interactive-hover;
         }
 
         &:active {
-            color: $highlight-active-color;
+            color: $color-interactive-active;
         }
     }
 }
@@ -111,7 +112,7 @@
     align-items: center;
     gap: 0.3rem;
     padding: 0 0.5rem;
-    color: $h1-color;
+    color: $color-text-system;
 }
 
 .listNewItemContainer {
@@ -145,28 +146,33 @@
     }
 
     &-controls {
-        color: $highlight-color;
+        color: $color-interactive;
         font-size: 1.2rem;
         justify-self: center;
         grid-column: 3/4;
         position: relative;
+        padding: 0 0.3rem;
+        border-radius: 10px;
 
         &:hover {
-            color: darken($highlight-color, 5%);
+            color: darken($color-interactive, 5%);
+            background-color: $color-background-secondary;
         }
 
         &:active {
-            color: darken($highlight-color, 10%);
+            color: darken($color-interactive, 10%);
+            background-color: $color-background-secondary;
         }
 
         &-active {
-            color: darken($highlight-color, 10%);
+            color: darken($color-interactive, 10%);
+            background-color: $color-background-secondary;
         }
     }
 
     &-hr {
         border: 0;
-        border-top: 1px solid $border-color;
+        border-top: 1px solid $color-border;
         grid-column: 1 / 4;
         grid-row: 2;
     }

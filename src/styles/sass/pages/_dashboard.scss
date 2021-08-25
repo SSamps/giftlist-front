@@ -8,7 +8,7 @@
     position: relative;
     border-bottom-style: solid;
     border-width: thin;
-    border-color: $border-color;
+    border-color: $color-border;
 
     &-newList {
         margin: 0 auto;
@@ -27,15 +27,15 @@
 
     &-item {
         margin: 0 auto;
-        color: $highlight-color;
+        color: $color-interactive;
         overflow: visible;
         cursor: pointer;
         &:hover {
-            color: $highlight-hover-color;
+            color: $color-interactive-hover;
         }
 
         &-active {
-            color: $highlight-hover-color;
+            color: $color-interactive-hover;
         }
     }
 }
@@ -56,16 +56,16 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    border-color: black;
+    border-color: $color-border;
     border-style: solid;
     cursor: pointer;
-    background-color: $light-color;
-    color: $h1-color;
+    background-color: $color-background-secondary;
+    color: $color-text-system;
 
     &:hover {
-        color: $dark-color;
+        color: $color-background-dark;
         opacity: 1;
-        border-color: orange;
+        border-color: $color-interactive-hover;
     }
 }
 

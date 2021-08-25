@@ -117,7 +117,7 @@ const Login: React.FC<Props> = ({ loginActionCreator, isAuthenticated }) => {
                     </label>
                 </div>
                 {loginErrorMessage && <p className='form-error-message'>{loginErrorMessage}</p>}
-                <input type='submit' className='btn btn-primary' value='Login' />
+                <input type='submit' className='btn-block' value='Login' />
             </form>
             <p className='extraAuthButtonContainer'>
                 <Link to='/register'>Sign Up</Link>

@@ -16,24 +16,30 @@ body {
 }
 
 #root {
-    background-color: $page-background-color;
+    background-color: $color-background-secondary;
     min-height: 100%;
 }
 
 a {
     text-decoration: none;
-    color: $highlight-color;
+    color: $color-interactive;
     cursor: pointer;
 
     &:hover {
-        color: $highlight-hover-color;
+        color: $color-interactive-hover;
     }
 
     &:active {
-        color: $highlight-active-color;
+        color: $color-interactive-active;
     }
 }
 
 ul {
     list-style: none;
+}
+
+h1,
+h2,
+h3 {
+    color: $color-text-header;
 }

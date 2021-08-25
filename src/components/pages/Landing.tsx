@@ -16,11 +16,11 @@ const landing: React.FC<Props> = ({ isAuthenticated }) => {
             <div className='landing-inner'>
                 <h1 className='title'>Header</h1>
                 <p className='lead'>Headline goes here</p>
-                <div className='buttons'>
-                    <Link to='/register' className='btn btn-primary'>
+                <div className=''>
+                    <Link to='/register' className='btn-block'>
                         Sign Up
                     </Link>
-                    <Link to='/login' className='btn btn-light'>
+                    <Link to='/login' className='btn-block'>
                         Login
                     </Link>
                 </div>

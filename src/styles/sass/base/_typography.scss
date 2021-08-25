@@ -6,35 +6,35 @@ body {
 
 .systemMessage {
     font-size: 1rem;
-    color: $h1-color;
+    color: $color-text-system;
 
     &-dark {
         font-size: 1rem;
-        color: darken($h1-color, 5%);
+        color: darken($color-text-system, 5%);
     }
 
     &-tag {
         font-size: 0.8rem;
-        color: $h1-color;
+        color: $color-text-system;
     }
 
     &-tag-small {
         font-size: 0.8rem;
-        color: $h1-color;
+        color: $color-text-system;
         height: 0.8rem;
     }
 }
 
 .lead {
     font-size: 1.5rem;
-    color: $h1-color;
+    color: $color-text-header;
 }
 
 .title {
     font-size: 4rem;
     line-height: 1.2;
     margin-bottom: 1rem;
-    color: $h1-color;
+    color: $color-text-header;
 }
 
 .large {
@@ -43,23 +43,19 @@ body {
     margin-bottom: 1rem;
 }
 
-.text-primary {
-    color: $primary-color;
-}
-
 .danger {
-    color: $danger-color;
+    color: $color-background-danger;
 }
 
 .success {
-    color: $success-color;
+    color: $color-background-success;
 }
 
 .name {
-    color: $name-color;
+    color: $color-text-name;
 }
 
 .groupName {
     font-size: 1.5rem;
-    color: $name-color;
+    color: $color-text-name;
 }

@@ -22,8 +22,8 @@
     visibility: visible;
 
     &-error {
-        background-color: $error-background;
-        color: $error-text;
+        background-color: $color-background-danger;
+        color: $color-text-error;
     }
 
     &-placeholder {

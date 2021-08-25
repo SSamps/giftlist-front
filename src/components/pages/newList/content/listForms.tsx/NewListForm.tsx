@@ -104,7 +104,7 @@ const NewListForm: React.FC<Props> = ({ controllerState }) => {
                         {emptylistName && <div className='form-error-message'>You must provide a name</div>}
                     </div>
                     <InviteFormInput inviteArray={inviteArray} setInviteArray={setInviteArray}></InviteFormInput>
-                    <input type='button' className='btn btn-primary' value='Create group' onClick={createList} />
+                    <input type='button' className='btn-block' value='Create group' onClick={createList} />
                     {submitError && <div className='form-error-message'>{submitError}</div>}
                 </form>
             )}

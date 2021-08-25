@@ -14,7 +14,7 @@
     max-width: calc(min(75rem, 100%));
     margin: 0 auto;
     grid-template-columns: 1fr 2fr 1fr;
-    background-color: $content-background-color;
+    background-color: $color-background-primary;
     min-height: 100%;
     padding-bottom: 4rem;
     padding-top: 0rem;
@@ -26,7 +26,7 @@
     height: 100%;
     margin: auto auto;
     grid-template-columns: 1fr 2fr 1fr;
-    background-color: $content-background-color;
+    background-color: $color-background-primary;
     display: flex;
     flex-direction: column;
     align-items: center;

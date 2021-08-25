@@ -42,25 +42,27 @@ const GiftListOwnerList: React.FC<Props> = ({ currentList, currentListPermission
         return (
             <div className='listSectionContentContainer'>
                 {renderListLabel()}
-                {currentList.listItems.length > 0 ? (
-                    currentList.listItems.map((item) => {
-                        return (
-                            <ListItem
-                                key={item._id}
-                                listItem={item}
-                                allowSelection={currentListPermissions.includes('GROUP_SELECT_LIST_ITEMS')}
-                                allowModification={currentListPermissions.includes('GROUP_RW_LIST_ITEMS')}
-                                allowDeletion={currentListPermissions.includes('GROUP_RW_LIST_ITEMS')}
-                            ></ListItem>
-                        );
-                    })
-                ) : (
-                    <EmptyListItem
-                        description={`${
-                            currentUserIsOwner ? "You haven't" : ownerName + " hasn't"
-                        } added any items yet`}
-                    ></EmptyListItem>
-                )}
+                <div className='listListItemContainer'>
+                    {currentList.listItems.length > 0 ? (
+                        currentList.listItems.map((item) => {
+                            return (
+                                <ListItem
+                                    key={item._id}
+                                    listItem={item}
+                                    allowSelection={currentListPermissions.includes('GROUP_SELECT_LIST_ITEMS')}
+                                    allowModification={currentListPermissions.includes('GROUP_RW_LIST_ITEMS')}
+                                    allowDeletion={currentListPermissions.includes('GROUP_RW_LIST_ITEMS')}
+                                ></ListItem>
+                            );
+                        })
+                    ) : (
+                        <EmptyListItem
+                            description={`${
+                                currentUserIsOwner ? "You haven't" : ownerName + " hasn't"
+                            } added any items yet`}
+                        ></EmptyListItem>
+                    )}
+                </div>
             </div>
         );
     };

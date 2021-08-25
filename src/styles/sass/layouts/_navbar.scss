@@ -2,7 +2,7 @@
     padding: 0.4rem 1rem;
     z-index: 1;
     width: 100%;
-    background: $dark-color;
+    background: $color-background-dark;
 
     ul {
         width: 100%;
@@ -11,13 +11,7 @@
     }
 
     a {
-        color: #fff;
-        // // padding: 0.45rem;
-        // margin: 0 0.4rem;
-
-        &:hover {
-            color: $primary-color;
-        }
+        color: $color-text-light;
     }
 }
 

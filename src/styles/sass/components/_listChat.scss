@@ -1,32 +1,33 @@
 .listChatContainerBorder {
-    border-top: thin solid $border-color;
+    border-top: thin solid $color-border;
 }
 
 .listChat {
     margin: 1rem 0;
     padding: 1rem 1rem;
-    width: 100%;
+    width: 95%;
     display: flex;
     flex-direction: column;
     gap: 0.6rem;
     max-height: calc(min(50rem, 75vh));
-    overflow-y: scroll;
-    scrollbar-color: $highlight-color $highlight-background-strong;
+    overflow-y: auto;
+    scrollbar-color: $color-interactive $color-border;
     scrollbar-width: thin;
     word-wrap: break-word;
-    background-color: $highlight-background;
+    background-color: $color-background-secondary;
+    border-radius: 4px;
 
     &::-webkit-scrollbar {
         width: 8px;
     }
 
     &::-webkit-scrollbar-track {
-        background-color: $highlight-background-strong;
+        background-color: $color-border;
         border-radius: 10px;
     }
 
     &::-webkit-scrollbar-thumb {
-        background-color: $highlight-color;
+        background-color: $color-interactive;
         border-radius: 10px;
     }
 }
@@ -54,7 +55,7 @@
     max-width: 80%;
     display: flex;
     flex-direction: column;
-    background-color: $list-item-background-color;
+    background-color: $color-highlight;
 }
 
 .message {
@@ -67,14 +68,14 @@
     }
 
     &-system {
-        color: $h1-color;
+        color: $color-text-system;
         display: flex;
         flex-direction: column;
         align-items: center;
     }
 
     &-label {
-        color: $name-color;
+        color: $color-text-name;
     }
 }
 
@@ -97,6 +98,15 @@
     bottom: 1.25rem;
     border-radius: 10px;
     backdrop-filter: blur(0.2rem);
-    background-color: rgba(255, 236, 202, 0.8);
+    border-color: $color-border;
+    background-color: adjust-color($color-highlight, $alpha: -0.2);
     padding: 0.25rem 0.5rem;
+
+    &:hover {
+        border-color: $color-interactive-hover;
+    }
+
+    &:active {
+        border-color: $color-interactive-active;
+    }
 }

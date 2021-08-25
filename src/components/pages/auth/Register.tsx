@@ -153,7 +153,7 @@ const Register: React.FC<Props> = ({ registerActionCreator, isAuthenticated }) =
                     </label>
                 </div>
                 {!passwordsMatch && <p className='form-error-message'>Passwords do not match</p>}
-                <input type='submit' className='btn btn-primary' value='Register' />
+                <input type='submit' className='btn-block' value='Register' />
                 {registerErrorMessage && <p className='form-error-message'>{registerErrorMessage}</p>}
             </form>
             <p className='extraAuthButtonContainer'>

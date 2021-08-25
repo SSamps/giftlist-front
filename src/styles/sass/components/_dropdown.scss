@@ -1,7 +1,7 @@
 .dropDown {
     position: absolute;
-    background-color: $content-background-color;
-    border: $border-color;
+    background-color: $color-background-secondary;
+    border: $color-border;
     border-style: solid;
     border-width: thin;
     overflow: visible;
@@ -14,8 +14,8 @@
 
 .listMenuDropDown {
     position: absolute;
-    background-color: $content-background-color;
-    border: $border-color;
+    background-color: $color-background-secondary;
+    border: $color-border;
     border-style: solid;
     border-width: thin;
     overflow: visible;
@@ -32,16 +32,18 @@
 }
 
 .dropDownItem {
-    color: $highlight-color;
+    color: $color-interactive;
     cursor: pointer;
     padding: 0rem 0.5rem;
 
     &:hover {
-        background-color: $test-color;
+        background-color: $color-interactive-hover;
+        color: $color-text-light;
     }
 
     &-selected {
-        background-color: $test-color;
+        background-color: $color-interactive-active;
+        color: $color-text-light;
     }
 
     &-checkbox {
@@ -59,7 +61,7 @@
 
     &-danger {
         width: 100%;
-        color: $danger-color;
+        color: $color-background-danger;
         border-top-style: dashed;
         border-top-width: thin;
         margin-top: 1rem;
