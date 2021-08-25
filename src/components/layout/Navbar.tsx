@@ -13,40 +13,48 @@ interface Props {
 
 const Navbar: React.FC<Props> = ({ logoutActionCreator, loading, isAuthenticated }) => {
     const authedLinks = (
-        <ul>
+        <Fragment>
             <li>
                 <Link to='/dashboard'>
-                    <i className='fas fa-user'></i> <span className='hide-sm'>Dashboard</span>
+                    <span className=''>Your Lists</span>
                 </Link>
             </li>
             <li>
-                <Link to='/' onClick={() => logoutActionCreator()}>
-                    <i className='fas fa-sign-out-alt'></i> <span className='hide-sm'>Logout</span>
+                <Link to='/profile'>
+                    <span className=''>Profile</span>
                 </Link>
             </li>
-        </ul>
+
+            <li>
+                <Link to='/' onClick={() => logoutActionCreator()}>
+                    <span className=''>Logout</span>
+                </Link>
+            </li>
+        </Fragment>
     );
 
     const guestLinks = (
-        <ul>
+        <Fragment>
             <li>
                 <Link to='/register'>Register</Link>
             </li>
             <li>
                 <Link to='/login'>Login</Link>
             </li>
-        </ul>
+        </Fragment>
     );
 
     return (
         <Fragment>
-            <nav className='navbar bg-dark'>
-                <h1>
-                    <Link to='/'>
-                        <i className='fas fa-code'></i> Gift List
-                    </Link>
-                </h1>
-                {!loading && <Fragment>{isAuthenticated ? authedLinks : guestLinks}</Fragment>}
+            <nav className='navbar'>
+                <ul>
+                    <li className='navLogo'>
+                        <Link to='/'>
+                            <span>Gift List</span>
+                        </Link>
+                    </li>
+                    {!loading && <Fragment>{isAuthenticated ? authedLinks : guestLinks}</Fragment>}
+                </ul>
             </nav>
             <div className='alert-placeholder'>
                 <Alerts></Alerts>

@@ -31,19 +31,3 @@
     flex-direction: column;
     align-items: center;
 }
-
-.footerContainerOuter {
-    margin: auto auto;
-    display: block;
-    max-width: calc(min(75rem, 100%));
-    background-color: $content-background-color;
-    height: 5rem;
-    border-top: thin solid $border-color;
-}
-
-.footerContainerInner {
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
