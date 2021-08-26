@@ -44,9 +44,15 @@ export default function reducer(state: IauthState = initialState, action: AnyAct
                 loading: false,
                 user: payload,
             };
-        case RENAME_USER:
         case LOGIN_SUCCESS:
         case REGISTER_SUCCESS:
+            return {
+                ...state,
+                ...payload,
+                isAuthenticated: true,
+                loading: false,
+            };
+        case RENAME_USER:
             return {
                 ...state,
                 user: payload,
