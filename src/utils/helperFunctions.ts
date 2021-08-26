@@ -10,7 +10,7 @@ export const findUserInGroup = (group: TListGroupAnyFields, userId: string): Tgr
     return null;
 };
 
-export const getPrettyDate = (inputDate: string) => {
+export const formatMessageDateTag = (inputDate: string) => {
     const date = new Date(inputDate);
     const ageSeconds = (Date.now() - date.getTime()) / 1000;
     if (ageSeconds < 1) {
@@ -25,5 +25,10 @@ export const getPrettyDate = (inputDate: string) => {
     if (ageSeconds < 86400) {
         return `${Math.round(ageSeconds / 3600)} hours ago`;
     }
+    return date.toLocaleDateString(undefined, { day: 'numeric', month: 'numeric', year: 'numeric' });
+};
+
+export const formatJoinDate = (inputDate: string) => {
+    const date = new Date(inputDate);
     return date.toLocaleDateString(undefined, { day: 'numeric', month: 'numeric', year: 'numeric' });
 };

@@ -12,12 +12,18 @@
     border-width: thin;
 }
 
+.overlay-danger {
+    border: $color-border-danger;
+    border-style: solid;
+}
+
 .overlayContainer {
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 1rem 1.5rem;
     gap: 1rem;
+    text-align: center;
 
     &-buttons {
         display: flex;

@@ -2,25 +2,33 @@ import { Fragment, useState } from 'react';
 import { connect } from 'react-redux';
 
 import MembersOverlay from './ListMenuOverlays.tsx/MembersOverlay';
-import RenameListOverlay from './ListMenuOverlays.tsx/RenameListOverlay';
+import SingleTextFieldOverlay from '../../../../misc/overlays/SingleTextFieldOverlay';
 import ListTitleBarMenuDropdown from './ListTitleBarMenuDropdown';
 import { useHistory } from 'react-router-dom';
 import { TbasicListFields, TgiftListFields } from '../../../../../types/models/listGroups';
 import {
     deleteListActionCreator,
     leaveListActionCreator,
+    renameListActionCreator,
     TdeleteListActionCreator,
     TleaveListActionCreator,
+    TrenameListActionCreator,
 } from '../../../../../redux/actions/listGroupActions';
-import ConfirmationOverlay from '../../../../misc/ConfirmationOverlay';
+import ConfirmationOverlay from '../../../../misc/overlays/ConfirmationOverlay';
 
 interface Props {
     currentList: TgiftListFields | TbasicListFields;
     deleteListActionCreator: TdeleteListActionCreator;
     leaveListActionCreator: TleaveListActionCreator;
+    renameListActionCreator: TrenameListActionCreator;
 }
 
-const ListTitleBarMenuButton: React.FC<Props> = ({ deleteListActionCreator, leaveListActionCreator, currentList }) => {
+const ListTitleBarMenuButton: React.FC<Props> = ({
+    deleteListActionCreator,
+    leaveListActionCreator,
+    renameListActionCreator,
+    currentList,
+}) => {
     const history = useHistory();
     const [openDropdown, setOpenDropdown] = useState(false);
     const [renameGroupOverlayStatus, setRenameGroupOverlayStatus] = useState(false);
@@ -43,10 +51,19 @@ const ListTitleBarMenuButton: React.FC<Props> = ({ deleteListActionCreator, leav
         success && history.push(`/dashboard`);
     };
 
+    const renameList = async (newName: string) => {
+        return await renameListActionCreator(currentList._id, newName);
+    };
+
     const renderOverlay = () => {
         if (renameGroupOverlayStatus) {
             return (
-                <RenameListOverlay setOpen={setRenameGroupOverlayStatus} currentList={currentList}></RenameListOverlay>
+                <SingleTextFieldOverlay
+                    setOpen={setRenameGroupOverlayStatus}
+                    initialValue={currentList.groupName}
+                    submitAction={renameList}
+                    description='Rename list'
+                ></SingleTextFieldOverlay>
             );
         } else if (inviteMembersOverlayStatus) {
             return <MembersOverlay setOpen={setInviteMembersOverlayStatus} currentList={currentList}></MembersOverlay>;
@@ -73,14 +90,14 @@ const ListTitleBarMenuButton: React.FC<Props> = ({ deleteListActionCreator, leav
 
     return (
         <Fragment>
-            <li className={`ListTitleBar-controls ${openDropdown && 'ListTitleBar-controls-active'}`}>
+            <li
+                className={`ListTitleBar-controls ${openDropdown && 'ListTitleBar-controls-active'}`}
+                onClick={() => {
+                    setOpenDropdown(!openDropdown);
+                }}
+            >
                 <span>
-                    <i
-                        className='fas fa-ellipsis-v'
-                        onClick={() => {
-                            setOpenDropdown(!openDropdown);
-                        }}
-                    ></i>
+                    <i className='fas fa-ellipsis-v'></i>
                 </span>
                 {openDropdown && (
                     <ListTitleBarMenuDropdown
@@ -99,4 +116,6 @@ const ListTitleBarMenuButton: React.FC<Props> = ({ deleteListActionCreator, leav
     );
 };
 
-export default connect(null, { deleteListActionCreator, leaveListActionCreator })(ListTitleBarMenuButton);
+export default connect(null, { deleteListActionCreator, leaveListActionCreator, renameListActionCreator })(
+    ListTitleBarMenuButton
+);

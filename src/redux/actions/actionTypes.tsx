@@ -1,3 +1,4 @@
+// Auth
 export const REGISTER_SUCCESS = 'REGISTER_SUCCESS';
 export const REGISTER_FAIL = 'REGISTER_FAIL';
 export const USER_LOADED = 'USER_LOADED';
@@ -5,9 +6,15 @@ export const AUTH_ERROR = 'AUTH_ERROR';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_FAIL = 'LOGIN_FAIL';
 export const LOGOUT = 'LOGOUT';
+export const RENAME_USER = 'RENAME_USER';
+export const DELETE_ACCOUNT = 'DELETE_ACCOUNT';
+
+// Dashboard
 export const DASHBOARD_LISTS_GET = 'DASHBOARD_LISTS_GET';
 export const DASHBAORD_DATA_ERROR = 'DASHBAORD_DATA_ERROR';
 export const DASHBOARD_SET_FILTERS = 'DASHBOARD_SET_FILTERS';
+
+//Invites
 export const INVITE_PENDING = 'INVITE_PENDING';
 export const INVITE_ACCEPTED = 'INVITE_ACCEPTED';
 export const INVITE_ERROR = 'INVITE_ERROR';

@@ -6,6 +6,8 @@ import {
     LOGIN_SUCCESS,
     LOGIN_FAIL,
     LOGOUT,
+    DELETE_ACCOUNT,
+    RENAME_USER,
 } from '../actions/actionTypes';
 import { IUser } from '../../types/models/User';
 import { AnyAction } from 'redux';
@@ -42,14 +44,16 @@ export default function reducer(state: IauthState = initialState, action: AnyAct
                 loading: false,
                 user: payload,
             };
+        case RENAME_USER:
         case LOGIN_SUCCESS:
         case REGISTER_SUCCESS:
             return {
                 ...state,
-                ...payload,
+                user: payload,
                 isAuthenticated: true,
                 loading: false,
             };
+        case DELETE_ACCOUNT:
         case LOGIN_FAIL:
         case REGISTER_FAIL:
         case AUTH_ERROR:

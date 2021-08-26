@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { Fragment, useState } from 'react';
 import { connect } from 'react-redux';
-import OverlayButtons from '../../misc/OverlayButtons';
+import OverlayButtons from '../../misc/overlays/OverlayButtons';
 import Spinner from '../../misc/spinner';
 import DropdownUnderlay from '../dashboard/yourLists/controlBar/filters/DropdownUnderlay';
 

@@ -8,11 +8,13 @@ import {
     LOGIN_SUCCESS,
     LOGIN_FAIL,
     LOGOUT,
+    DELETE_ACCOUNT,
+    RENAME_USER,
 } from './actionTypes';
 import { IUser } from '../../types/models/User';
 import store from '../reducers/root/reducerStore';
+import { addAlertActionCreator } from './alertActions';
 
-// Load User
 export interface IloadUserAction {
     type: typeof USER_LOADED | typeof AUTH_ERROR;
     payload?: IUser;
@@ -34,7 +36,6 @@ export const loadUserActionCreator = async (dispatch: Dispatch<IloadUserAction>)
     }
 };
 
-// Register User
 export type TregisterActionCreator = (
     displayName: string,
     email: string,
@@ -68,7 +69,6 @@ export const registerActionCreator =
         }
     };
 
-// Login
 export type TloginActionCreator = (email: string, password: string) => AxiosPromise<Error | AxiosError>;
 export interface IloginUserAction {
     type: typeof LOGIN_SUCCESS | typeof LOGIN_FAIL;
@@ -101,7 +101,6 @@ export interface IlogoutAction {
     type: typeof LOGOUT;
 }
 
-// Logout
 export interface IlogoutAction {
     type: typeof LOGOUT;
 }
@@ -109,4 +108,53 @@ export type TlogoutActionCreator = () => void;
 
 export const logoutActionCreator = () => async (dispatch: Dispatch<IlogoutAction>) => {
     dispatch({ type: LOGOUT });
+};
+
+interface IrenameUserSuccess {
+    type: typeof RENAME_USER;
+}
+
+export type TrenameUserActionCreator = (newName: string) => Promise<boolean>;
+
+export const renameUserActionCreator = (newName: string) => async (dispatch: Dispatch<IrenameUserSuccess>) => {
+    const config = {
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    };
+
+    const reqBody = JSON.stringify({ displayName: newName });
+
+    try {
+        const res = await axios.put(`/api/users`, reqBody, config);
+
+        dispatch({
+            type: RENAME_USER,
+            payload: res.data,
+        });
+        return true;
+    } catch (err) {
+        addAlertActionCreator('error', `${err.response.status} ${err.response.data}`);
+        return false;
+    }
+};
+
+interface IdeleteAccountSuccess {
+    type: typeof DELETE_ACCOUNT;
+}
+
+export type TdeleteAccountActionCreator = () => Promise<boolean>;
+
+export const deleteAccountActionCreator = () => async (dispatch: Dispatch<IdeleteAccountSuccess>) => {
+    try {
+        await axios.delete(`/api/users`);
+
+        dispatch({
+            type: DELETE_ACCOUNT,
+        });
+        return true;
+    } catch (err) {
+        addAlertActionCreator('error', `${err.response.status} ${err.response.data}`);
+        return false;
+    }
 };

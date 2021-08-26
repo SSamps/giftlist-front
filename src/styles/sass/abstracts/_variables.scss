@@ -17,6 +17,11 @@ $color-text-name: hsl(204, 100%, 38%);
 
 //Misc
 $color-border: hsl(240, 49%, 85%);
-$color-interactive: hsl(247, 74%, 63%);
-$color-interactive-hover: scale-color($color-interactive, $lightness: -20%);
-$color-interactive-active: scale-color($color-interactive, $lightness: -40%);
+$color-border-hover: hsl(240, 73%, 75%);
+$color-border-danger: hsl(0, 71%, 67%);
+$color-interactive: hsl(247, 67%, 63%);
+$color-interactive-hover: hsl(253, 78%, 58%);
+$color-interactive-active: hsl(261, 96%, 54%);
+$color-interactive-danger: hsl(354, 70%, 54%);
+$color-interactive-danger-hover: hsl(354, 89%, 55%);
+$color-interactive-danger-active: hsl(354, 100%, 50%);

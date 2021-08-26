@@ -2,6 +2,8 @@
     background: $color-interactive;
     color: $color-text-light;
     border-radius: 4px;
+    cursor: pointer;
+    padding: 0.3rem;
 
     &:hover {
         background: $color-interactive-hover;
@@ -9,6 +11,22 @@
 
     &:active {
         background: $color-interactive-active;
+    }
+}
+
+.btn-block-danger {
+    background: $color-interactive-danger;
+    color: $color-text-light;
+    border-radius: 4px;
+    cursor: pointer;
+    padding: 0.3rem;
+
+    &:hover {
+        background: $color-interactive-danger-hover;
+    }
+
+    &:active {
+        background: $color-interactive-danger-active;
     }
 }
 
@@ -22,5 +40,18 @@
 
     &:active {
         color: $color-interactive-active;
+    }
+}
+
+.btn-simple-danger {
+    color: $color-interactive-danger;
+    cursor: pointer;
+
+    &:hover {
+        color: $color-interactive-danger-hover;
+    }
+
+    &:active {
+        color: $color-interactive-danger-active;
     }
 }

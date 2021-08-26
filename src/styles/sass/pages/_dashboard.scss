@@ -63,9 +63,9 @@
     color: $color-text-system;
 
     &:hover {
-        color: $color-background-dark;
+        color: $color-text-body;
         opacity: 1;
-        border-color: $color-interactive-hover;
+        border-color: $color-border-hover;
     }
 }
 

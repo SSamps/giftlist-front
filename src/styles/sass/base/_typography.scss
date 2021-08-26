@@ -25,11 +25,6 @@ body {
     }
 }
 
-.lead {
-    font-size: 1.5rem;
-    color: $color-text-header;
-}
-
 .title {
     font-size: 4rem;
     line-height: 1.2;
@@ -37,10 +32,9 @@ body {
     color: $color-text-header;
 }
 
-.large {
-    font-size: 3rem;
-    line-height: 1.2;
-    margin-bottom: 1rem;
+.lead {
+    font-size: 1.5rem;
+    color: $color-text-header;
 }
 
 .danger {

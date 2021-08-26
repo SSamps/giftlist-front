@@ -12,7 +12,7 @@ import PrivateRoute from '../routing/PrivateRoute';
 import VerifiedRoute from '../routing/VerifiedRoute';
 import Verify from '../pages/auth/Verify';
 import ResetPassword from '../pages/ResetPassword';
-import Profile from '../pages/Profile';
+import Profile from '../pages/profile/Profile';
 
 const Body: React.FC = () => {
     return (

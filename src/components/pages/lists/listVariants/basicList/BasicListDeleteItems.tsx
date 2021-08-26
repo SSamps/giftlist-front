@@ -5,7 +5,7 @@ import {
     TdeleteListItemActionCreator,
 } from '../../../../../redux/actions/listGroupActions';
 import { TbasicListFields } from '../../../../../types/models/listGroups';
-import ConfirmationOverlay from '../../../../misc/ConfirmationOverlay';
+import ConfirmationOverlay from '../../../../misc/overlays/ConfirmationOverlay';
 
 interface Props {
     currentList: TbasicListFields;

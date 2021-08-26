@@ -3,7 +3,7 @@ import React, { Fragment, useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { addAlertThunkActionCreator, TaddAlertThunkActionCreator } from '../../../../../../redux/actions/alertActions';
 import { TbasicListFields, TgiftListFields } from '../../../../../../types/models/listGroups';
-import OverlayButtons from '../../../../../misc/OverlayButtons';
+import OverlayButtons from '../../../../../misc/overlays/OverlayButtons';
 import Spinner from '../../../../../misc/spinner';
 import DropdownUnderlay from '../../../../dashboard/yourLists/controlBar/filters/DropdownUnderlay';
 import InviteFormInput from '../../InviteFormInput';
