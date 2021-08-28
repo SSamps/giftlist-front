@@ -33,7 +33,6 @@ const ForgottenPassOverlay: React.FC<Props> = ({ setOpen }) => {
             await axios.post(`/api/users/resetpassword`, body, config);
             setSubmitState({ error: '', waiting: false, complete: true });
         } catch (err) {
-            console.log(err);
             setSubmitState({ ...submitState, waiting: false, error: err.response.data });
         }
     };
