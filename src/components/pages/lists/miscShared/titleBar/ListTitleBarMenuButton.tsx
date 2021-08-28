@@ -73,6 +73,7 @@ const ListTitleBarMenuButton: React.FC<Props> = ({
                     setOpen={setDeleteGroupOverlayStatus}
                     submitForm={deleteList}
                     description='Are you sure you want to delete this group?'
+                    danger={true}
                 ></ConfirmationOverlay>
             );
         } else if (leaveGroupOverlayStatus) {
@@ -81,6 +82,7 @@ const ListTitleBarMenuButton: React.FC<Props> = ({
                     setOpen={setLeaveGroupOverlayStatus}
                     submitForm={leaveList}
                     description='Are you sure you want to leave this group?'
+                    danger={true}
                 ></ConfirmationOverlay>
             );
         } else {

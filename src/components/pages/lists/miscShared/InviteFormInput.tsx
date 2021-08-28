@@ -17,6 +17,13 @@ const InviteFormInput: React.FC<Props> = ({ inviteArray, setInviteArray }) => {
 
     const { invalidEmail, duplicateEmail } = inviteFormErrorData;
 
+    if (invitee.length < 1 && (invalidEmail || duplicateEmail)) {
+        setInviteFormErrorData({
+            invalidEmail: false,
+            duplicateEmail: false,
+        });
+    }
+
     const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setinvitee(e.target.value);
     };

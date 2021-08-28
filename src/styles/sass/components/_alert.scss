@@ -20,6 +20,7 @@
     align-items: center;
     gap: 1rem;
     visibility: visible;
+    border-radius: 4px;
 
     &-error {
         background-color: $color-background-danger;

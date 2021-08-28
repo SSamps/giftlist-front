@@ -17,44 +17,15 @@
     }
 }
 
-.parentListControlBar {
-    display: grid;
-    grid-template-columns: 1fr auto 1fr auto 1fr;
-    grid-template-rows: 1fr;
+.parentListContentContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
     margin-top: 1rem;
-    margin-bottom: 1rem;
     width: 100%;
-    position: relative;
-    border-bottom-style: solid;
-    border-width: thin;
-    border-color: $color-border;
+}
 
-    &-newList {
-        margin: 0 auto;
-        grid-column: 2;
-        padding: 0 0.5rem;
-    }
-
-    &-filters {
-        grid-column: 4;
-        margin: 0 auto;
-        display: grid;
-        grid-template-columns: auto auto;
-        overflow: visible;
-        gap: 1rem;
-    }
-
-    &-item {
-        margin: 0 auto;
-        color: $color-interactive;
-        overflow: visible;
-        cursor: pointer;
-        &:hover {
-            color: $color-interactive-hover;
-        }
-
-        &-active {
-            color: $color-interactive-hover;
-        }
-    }
+.parentListAddListButton {
 }

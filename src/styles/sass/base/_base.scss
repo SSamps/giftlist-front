@@ -43,3 +43,7 @@ h2,
 h3 {
     color: $color-text-header;
 }
+
+::placeholder {
+    color: $color-text-system-light;
+}

@@ -52,10 +52,6 @@ const NewListForm: React.FC<Props> = ({ controllerState }) => {
         }
     };
 
-    const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-    };
-
     const createList = async () => {
         const config = {
             headers: {
@@ -88,7 +84,7 @@ const NewListForm: React.FC<Props> = ({ controllerState }) => {
             ) : invitingMembers ? (
                 <FormSubmissionStatus>Inviting members</FormSubmissionStatus>
             ) : (
-                <form className='form' onSubmit={onSubmit}>
+                <form className='form'>
                     <div className='form-group'>
                         <label>
                             List Name

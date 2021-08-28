@@ -126,7 +126,6 @@ const GiftListChat: React.FC<Props> = ({ ownerName, token, currentList, checkFor
 
         for (let i = 0; i < foundMessageAuthorIds.length; i++) {
             if (!findUserInGroup(currentList, foundMessageAuthorIds[i])) {
-                console.log("oh no! A user wasn't found!");
                 checkForNewUserActionCreator(currentList._id, foundMessageAuthorIds[i]);
                 break;
             }

@@ -6,11 +6,12 @@ import DropdownUnderlay from '../../pages/dashboard/yourLists/controlBar/filters
 interface Props {
     setOpen: React.Dispatch<React.SetStateAction<boolean>>;
     initialValue?: string;
-    submitAction: (newName: string) => Promise<boolean>;
+    submitAction: (newName: string) => Promise<boolean | void>;
     description: string;
+    placeholder?: string;
 }
 
-const SingleTextFieldOverlay: React.FC<Props> = ({ setOpen, initialValue, submitAction, description }) => {
+const SingleTextFieldOverlay: React.FC<Props> = ({ setOpen, initialValue, submitAction, description, placeholder }) => {
     const [formState, setFormState] = useState({ value: initialValue || '', waiting: false });
 
     const { value, waiting } = formState;
@@ -23,8 +24,10 @@ const SingleTextFieldOverlay: React.FC<Props> = ({ setOpen, initialValue, submit
         setFormState({ ...formState, waiting: true });
         e?.preventDefault();
         const success = await submitAction(value);
-        success && setOpen(false);
-        setFormState({ ...formState, waiting: false });
+        if (success) {
+            setFormState({ ...formState, waiting: false });
+            setOpen(false);
+        }
     };
 
     return (
@@ -33,7 +36,7 @@ const SingleTextFieldOverlay: React.FC<Props> = ({ setOpen, initialValue, submit
                 <div className='overlayContainer'>
                     <span className='lead'>{description}</span>
                     <form className='form' onSubmit={submitForm}>
-                        <input type='text' value={value} onChange={onChange}></input>
+                        <input type='text' value={value} onChange={onChange} placeholder={placeholder}></input>
                     </form>
                     <OverlayButtons submitForm={submitForm} setOpen={setOpen}></OverlayButtons>
                     {waiting && <Spinner className='spinner-tiny'></Spinner>}
