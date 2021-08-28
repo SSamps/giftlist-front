@@ -10,7 +10,13 @@ import {
 } from '../../../redux/actions/listGroupActions';
 import { IlistGroupData } from '../../../redux/reducers/listGroupReducer';
 import { IrootStateAuthed } from '../../../redux/reducers/root/rootReducer';
-import { BASIC_LIST, GIFT_GROUP, GIFT_GROUP_CHILD, GIFT_LIST } from '../../../types/listVariants';
+import {
+    BASIC_LIST,
+    GIFT_GROUP,
+    GIFT_GROUP_CHILD,
+    GIFT_LIST,
+    LIST_GROUP_PARENT_VARIANTS,
+} from '../../../types/listVariants';
 import { TListGroupAnyFields } from '../../../types/models/listGroups';
 import { IUser } from '../../../types/models/User';
 import Spinner from '../../misc/spinner';
@@ -31,7 +37,6 @@ const ListLoader: React.FC<Props> = ({
     listid,
     listLoading,
     currentList,
-    parentList,
     getListActionCreator,
     resetListActionCreator,
     loadListPermissionsActionCreator,
@@ -51,37 +56,45 @@ const ListLoader: React.FC<Props> = ({
             loadListPermissionsActionCreator(currentList, user._id);
         };
         loadPermissions();
-    }, [currentList, parentList]);
+    }, [currentList]);
 
-    function listSwitch(group: TListGroupAnyFields) {
-        switch (group.groupVariant) {
+    function listSwitch(currentList: TListGroupAnyFields) {
+        switch (currentList.groupVariant) {
             case BASIC_LIST: {
-                return <BasicListContainer key={group._id}></BasicListContainer>;
+                return <BasicListContainer key={currentList._id}></BasicListContainer>;
             }
             case GIFT_LIST: {
-                return <GiftListContainer key={group._id}></GiftListContainer>;
+                return <GiftListContainer key={currentList._id}></GiftListContainer>;
             }
             case GIFT_GROUP_CHILD: {
-                return <GiftGroupChildContainer key={group._id} giftGroupChild={group}></GiftGroupChildContainer>;
+                return (
+                    <GiftGroupChildContainer
+                        key={currentList._id}
+                        giftGroupChild={currentList}
+                    ></GiftGroupChildContainer>
+                );
             }
         }
     }
 
-    function parentListSwitch(group: TListGroupAnyFields) {
-        switch (group.groupVariant) {
+    function parentListSwitch(currentList: TListGroupAnyFields) {
+        switch (currentList.groupVariant) {
             case GIFT_GROUP: {
-                return <GiftGroupContainer key={group._id} giftGroup={group}></GiftGroupContainer>;
+                return <GiftGroupContainer key={currentList._id} giftGroup={currentList}></GiftGroupContainer>;
             }
         }
     }
 
     const renderList = () => {
         return (
-            <Fragment>
-                {parentList
-                    ? parentListSwitch(parentList)
-                    : currentList && currentListPermissions && listSwitch(currentList)}
-            </Fragment>
+            currentList &&
+            currentListPermissions && (
+                <Fragment>
+                    {LIST_GROUP_PARENT_VARIANTS.includes(currentList.groupVariant)
+                        ? parentListSwitch(currentList)
+                        : listSwitch(currentList)}
+                </Fragment>
+            )
         );
     };
 
@@ -92,9 +105,7 @@ const mapStateToProps = (state: IrootStateAuthed) => ({
     user: state.authReducer.user,
     listLoading: state.listGroupReducer.listLoading,
     currentList: state.listGroupReducer.currentList,
-    parentList: state.listGroupReducer.parentList,
     currentListPermissions: state.listGroupReducer.currentListPermissions,
-    parentListPermissions: state.listGroupReducer.parentListPermissions,
 });
 
 export default connect(mapStateToProps, {

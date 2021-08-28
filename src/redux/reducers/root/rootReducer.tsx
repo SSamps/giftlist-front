@@ -2,7 +2,11 @@ import { combineReducers } from 'redux';
 import alertReducer, { TalertData } from '../alertReducer';
 import authReducer, { IauthState, IauthStateAuthed } from '../authReducer';
 import dashboardReducer, { IdashboardState } from '../dashboardReducer';
-import listGroupReducer, { IlistGroupData, IlistGroupDataCurrentListLoaded } from '../listGroupReducer';
+import listGroupReducer, {
+    IlistGroupData,
+    IlistGroupDataCurrentListLoaded,
+    IlistGroupDataParentListLoaded,
+} from '../listGroupReducer';
 
 export interface IrootState {
     authReducer: IauthState;
@@ -20,6 +24,13 @@ export interface IrootStateAuthedCurrentListLoaded {
     authReducer: IauthStateAuthed;
     dashboardReducer: IdashboardState;
     listGroupReducer: IlistGroupDataCurrentListLoaded;
+    alertReducer: TalertData;
+}
+
+export interface IrootStateAuthedParentListLoaded {
+    authReducer: IauthStateAuthed;
+    dashboardReducer: IdashboardState;
+    listGroupReducer: IlistGroupDataParentListLoaded;
     alertReducer: TalertData;
 }
 

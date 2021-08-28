@@ -14,7 +14,6 @@ import {
 import { Dispatch } from 'redux';
 import axios, { AxiosResponse } from 'axios';
 import { TListGroupAnyFields } from '../../types/models/listGroups';
-import { LIST_GROUP_PARENT_VARIANTS } from '../../types/listVariants';
 import { findUserInGroup } from '../../utils/helperFunctions';
 import { addAlertActionCreator } from './alertActions';
 
@@ -34,17 +33,10 @@ export const getListActionCreator =
     (listId: string) => async (dispatch: Dispatch<IgetListActionSuccess | IgetParentListActionSuccess>) => {
         try {
             const res: AxiosResponse<TListGroupAnyFields> = await axios.get(`/api/groups/${listId}`);
-            if (LIST_GROUP_PARENT_VARIANTS.includes(res.data.groupVariant)) {
-                dispatch({
-                    type: PARENT_LIST_GET,
-                    payload: res.data,
-                });
-            } else {
-                dispatch({
-                    type: CURRENT_LIST_GET,
-                    payload: res.data,
-                });
-            }
+            dispatch({
+                type: CURRENT_LIST_GET,
+                payload: res.data,
+            });
         } catch (err) {
             addAlertActionCreator('error', `${err.response.status} ${err.response.data}`);
         }

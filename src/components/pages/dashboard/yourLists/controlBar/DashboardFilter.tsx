@@ -3,7 +3,7 @@ import NewListButton from './actions/NewListButton';
 import ListOwnershipButton from './filters/listOwnership/ListOwnershipButton';
 import ListTypeButton from './filters/listType/ListTypeButton';
 
-export const YourListsToolbar: React.FC = () => {
+const YourListsToolbar: React.FC = () => {
     return (
         <Fragment>
             <div className='dashboardFilterControlBar'>
@@ -16,3 +16,5 @@ export const YourListsToolbar: React.FC = () => {
         </Fragment>
     );
 };
+
+export default YourListsToolbar;

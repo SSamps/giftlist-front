@@ -10,7 +10,6 @@ import {
     LOAD_LIST_PERMISSIONS,
     MODIFY_LIST_ITEM,
     NEW_LIST_ITEM,
-    PARENT_LIST_GET,
     RENAME_LIST,
     SELECT_LIST_ITEM,
 } from '../actions/actionTypes';
@@ -18,25 +17,25 @@ import {
 export interface IlistGroupData {
     listLoading: boolean;
     currentList: undefined | TListGroupAnyFields;
-    parentList: undefined | TListGroupAnyFields;
     currentListPermissions: TYPE_PERM_ALL_LIST_GROUP[] | undefined;
-    parentListPermissions: TYPE_PERM_ALL_LIST_GROUP[] | undefined;
 }
 
 export interface IlistGroupDataCurrentListLoaded {
     listLoading: boolean;
     currentList: TListGroupAnyFields;
-    parentList: undefined | TListGroupAnyFields;
     currentListPermissions: TYPE_PERM_ALL_LIST_GROUP[];
-    parentListPermissions: TYPE_PERM_ALL_LIST_GROUP[] | undefined;
+}
+
+export interface IlistGroupDataParentListLoaded {
+    listLoading: boolean;
+    currentList: TListGroupAnyFields;
+    currentListPermissions: TYPE_PERM_ALL_LIST_GROUP[];
 }
 
 const initialState = {
     listLoading: true,
     currentList: undefined,
-    parentList: undefined,
     currentListPermissions: undefined,
-    parentListPermissions: undefined,
 };
 
 export default function reducer(state: IlistGroupData = initialState, action: AnyAction): IlistGroupData {
@@ -52,14 +51,6 @@ export default function reducer(state: IlistGroupData = initialState, action: An
                 ...state,
                 listLoading: false,
                 currentList: payload,
-                parentList: undefined,
-            };
-        case PARENT_LIST_GET:
-            return {
-                ...state,
-                listLoading: false,
-                currentList: undefined,
-                parentList: payload,
             };
         case LOAD_LIST_PERMISSIONS:
             return {

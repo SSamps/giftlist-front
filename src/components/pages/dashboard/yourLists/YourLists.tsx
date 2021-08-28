@@ -6,7 +6,6 @@ import {
     TgetDashboardListDataActionCreator,
 } from '../../../../redux/actions/dashboardActions';
 import { IdashboardState } from '../../../../redux/reducers/dashboardReducer';
-import { YourListsToolbar } from './controlBar/DashboardFilter';
 import { BASIC_LIST, GIFT_GROUP, GIFT_LIST } from '../../../../types/listVariants';
 import { GiftListPreviewCard } from './previewCards/GiftListPreviewCard';
 import { BasicListPreviewCard } from './previewCards/BasicListPreviewCard';
@@ -19,6 +18,7 @@ import {
 import { IUser } from '../../../../types/models/User';
 import { findUserInGroup } from '../../../../utils/helperFunctions';
 import { PERM_GROUP_OWNER } from '../../../../types/listGroupPermissions';
+import YourListsToolbar from './controlBar/DashboardFilter';
 
 interface Props extends IdashboardState {
     getDashboardListDataActionCreator: TgetDashboardListDataActionCreator;
