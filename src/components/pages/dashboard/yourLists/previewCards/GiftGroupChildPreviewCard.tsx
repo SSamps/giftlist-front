@@ -1,9 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { TListGroupAnyFields } from '../../../../../types/models/listGroups';
+import { TgiftListFieldsCensored } from '../../../../../types/models/listGroups';
 
 interface Props {
-    group: TListGroupAnyFields;
+    group: TgiftListFieldsCensored;
 }
 
 export const GiftGroupChildPreviewCard: React.FC<Props> = ({ group }) => {

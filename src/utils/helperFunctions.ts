@@ -1,6 +1,16 @@
-import { TgroupMemberAny, TListGroupAnyFields } from '../types/models/listGroups';
+import {
+    IbasicListMember,
+    IgiftGroupMember,
+    IgiftListMember,
+    TbasicListFields,
+    TgiftGroupFields,
+    TgiftListFieldsCensored,
+} from '../types/models/listGroups';
 
-export const findUserInGroup = (group: TListGroupAnyFields, userId: string): TgroupMemberAny | null => {
+export const findUserInGroup = (
+    group: TbasicListFields | TgiftListFieldsCensored | TgiftGroupFields,
+    userId: string
+): IbasicListMember | IgiftListMember | IgiftGroupMember | null => {
     for (let member of group.members) {
         if (member.userId.toString() === userId.toString()) {
             return member;

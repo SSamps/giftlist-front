@@ -1,8 +1,9 @@
 import { Fragment } from 'react';
 import { connect } from 'react-redux';
-import { IrootStateAuthed } from '../../../../../redux/reducers/root/rootReducer';
+import { IrootStateAuthedUnknownListLoaded } from '../../../../../redux/reducers/root/rootReducer';
 import { PERM_GROUP_DELETE, PERM_GROUP_OWNER, PERM_GROUP_RENAME } from '../../../../../types/listGroupPermissions';
 import { LIST_GROUP_ALL_TOP_LEVEL_VARIANTS } from '../../../../../types/listVariants';
+import { IbasicListMember, IgiftGroupMember, IgiftListMember } from '../../../../../types/models/listGroups';
 import DropdownUnderlay from '../../../dashboard/yourLists/controlBar/filters/DropdownUnderlay';
 
 interface Props {
@@ -12,7 +13,7 @@ interface Props {
     setLeaveGroupOverlayStatus: React.Dispatch<React.SetStateAction<boolean>>;
     setDeleteGroupOverlayStatus: React.Dispatch<React.SetStateAction<boolean>>;
     showOverlay: (overlayStatusSetter: React.Dispatch<React.SetStateAction<boolean>>) => void;
-    currentListPermissions: string[] | undefined;
+    currentListUser: IbasicListMember | IgiftListMember | IgiftGroupMember;
     currentListVariant: string;
 }
 
@@ -23,7 +24,7 @@ const ListTitleBarMenuDropdown: React.FC<Props> = ({
     setDeleteGroupOverlayStatus,
     setLeaveGroupOverlayStatus,
     showOverlay,
-    currentListPermissions,
+    currentListUser,
     currentListVariant,
 }) => {
     const showRenameGroupOverlay = () => {
@@ -40,9 +41,9 @@ const ListTitleBarMenuDropdown: React.FC<Props> = ({
     };
 
     const renderDangerOptions = () => {
-        let renderDelete = currentListPermissions?.includes(PERM_GROUP_DELETE);
+        let renderDelete = currentListUser.permissions.includes(PERM_GROUP_DELETE);
         let renderLeave =
-            !currentListPermissions?.includes(PERM_GROUP_OWNER) &&
+            !currentListUser.permissions.includes(PERM_GROUP_OWNER) &&
             LIST_GROUP_ALL_TOP_LEVEL_VARIANTS.includes(currentListVariant);
         if (!renderDelete && !renderLeave) {
             return null;
@@ -68,7 +69,7 @@ const ListTitleBarMenuDropdown: React.FC<Props> = ({
     return (
         <Fragment>
             <div className='listMenuDropDown listMenuDropDown-leftCover '>
-                {currentListPermissions?.includes(PERM_GROUP_RENAME) && (
+                {currentListUser.permissions.includes(PERM_GROUP_RENAME) && (
                     <div className={`dropDownItem`} onClick={showRenameGroupOverlay}>
                         Rename Group
                     </div>
@@ -83,9 +84,9 @@ const ListTitleBarMenuDropdown: React.FC<Props> = ({
     );
 };
 
-const mapStateToProps = (state: IrootStateAuthed) => ({
+const mapStateToProps = (state: IrootStateAuthedUnknownListLoaded) => ({
     user: state.authReducer.user,
-    currentListPermissions: state.listGroupReducer.currentListPermissions,
+    currentListUser: state.listGroupReducer.currentListUser,
 });
 
 export default connect(mapStateToProps)(ListTitleBarMenuDropdown);

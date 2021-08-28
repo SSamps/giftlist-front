@@ -1,31 +1,45 @@
 import { DASHBAORD_DATA_ERROR, DASHBOARD_LISTS_GET, DASHBOARD_SET_FILTERS } from '../actions/actionTypes';
 import { Dispatch } from 'redux';
 import axios from 'axios';
-import { TListGroupAnyFields } from '../../types/models/listGroups';
+import { TgroupMemberAny, TListGroupAnyFields, TProcessedListGroupAnyFields } from '../../types/models/listGroups';
+import { findUserInGroup } from '../../utils/helperFunctions';
 
 // Common
 interface IGetListsError {
     type: typeof DASHBAORD_DATA_ERROR;
-    payload: string;
+    payload: string | TProcessedListGroupAnyFields[];
 }
 
 interface IgetListsSuccess {
     type: typeof DASHBOARD_LISTS_GET;
-    payload: TListGroupAnyFields[];
+    payload: TProcessedListGroupAnyFields[] | string;
 }
 
 // Get Lists
 
-export type TgetDashboardListDataActionCreator = () => void;
+export type TgetDashboardListDataActionCreator = (userId: string) => void;
 
 export const getDashboardListDataActionCreator =
-    () => async (dispatch: Dispatch<IgetListsSuccess | IGetListsError>) => {
+    (userId: string) => async (dispatch: Dispatch<IgetListsSuccess | IGetListsError>) => {
         try {
             const res = await axios.get(`/api/groups/user`);
-            dispatch({
-                type: DASHBOARD_LISTS_GET,
-                payload: res.data,
-            });
+            let foundGroups: TListGroupAnyFields[] = res.data;
+            if (!foundGroups) {
+                dispatch({
+                    type: DASHBOARD_LISTS_GET,
+                    payload: [],
+                });
+            } else {
+                const processedGroups: TProcessedListGroupAnyFields[] = foundGroups.map((group) => {
+                    const foundUser = findUserInGroup(group, userId) as TgroupMemberAny;
+                    return { ...group, currentListUser: foundUser };
+                });
+
+                dispatch({
+                    type: DASHBOARD_LISTS_GET,
+                    payload: processedGroups,
+                });
+            }
         } catch (err) {
             dispatch({ type: DASHBAORD_DATA_ERROR, payload: 'error' });
         }

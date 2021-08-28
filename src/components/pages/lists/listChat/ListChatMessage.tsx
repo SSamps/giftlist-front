@@ -1,7 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { IrootStateAuthedCurrentListLoaded } from '../../../../redux/reducers/root/rootReducer';
-import { TListGroupAnyFields } from '../../../../types/models/listGroups';
+import { IrootStateAuthedGiftListLoaded } from '../../../../redux/reducers/root/rootReducer';
+
+import { TgiftListFieldsCensored } from '../../../../types/models/listGroups';
 import { TmessageAny } from '../../../../types/models/messages';
 import { IUser } from '../../../../types/models/User';
 import { findUserInGroup, formatMessageDateTag } from '../../../../utils/helperFunctions';
@@ -9,7 +10,7 @@ import { findUserInGroup, formatMessageDateTag } from '../../../../utils/helperF
 interface props {
     message: TmessageAny;
     user: IUser;
-    currentList: TListGroupAnyFields;
+    currentList: TgiftListFieldsCensored;
 }
 
 const ListChatMessage: React.FC<props> = ({ user, message, currentList }) => {
@@ -56,7 +57,7 @@ const ListChatMessage: React.FC<props> = ({ user, message, currentList }) => {
     );
 };
 
-const mapStateToProps = (state: IrootStateAuthedCurrentListLoaded) => ({
+const mapStateToProps = (state: IrootStateAuthedGiftListLoaded) => ({
     user: state.authReducer.user,
     currentList: state.listGroupReducer.currentList,
 });

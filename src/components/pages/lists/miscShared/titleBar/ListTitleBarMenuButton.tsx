@@ -5,7 +5,7 @@ import MembersOverlay from './ListMenuOverlays.tsx/MembersOverlay';
 import SingleTextFieldOverlay from '../../../../misc/overlays/SingleTextFieldOverlay';
 import ListTitleBarMenuDropdown from './ListTitleBarMenuDropdown';
 import { useHistory } from 'react-router-dom';
-import { TbasicListFields, TgiftListFields } from '../../../../../types/models/listGroups';
+import { TbasicListFields, TgiftGroupFields, TgiftListFieldsCensored } from '../../../../../types/models/listGroups';
 import {
     deleteListActionCreator,
     leaveListActionCreator,
@@ -17,7 +17,7 @@ import {
 import ConfirmationOverlay from '../../../../misc/overlays/ConfirmationOverlay';
 
 interface Props {
-    currentList: TgiftListFields | TbasicListFields;
+    currentList: TgiftListFieldsCensored | TbasicListFields | TgiftGroupFields;
     deleteListActionCreator: TdeleteListActionCreator;
     leaveListActionCreator: TleaveListActionCreator;
     renameListActionCreator: TrenameListActionCreator;

@@ -1,13 +1,20 @@
 import { AnyAction } from 'redux';
-import { TYPE_PERM_ALL_LIST_GROUP } from '../../types/listGroupPermissions';
-import { TListGroupAnyFields } from '../../types/models/listGroups';
+import {
+    IbasicListMember,
+    IgiftGroupMember,
+    IgiftListMember,
+    TbasicListFields,
+    TgiftGroupFields,
+    TgiftListFieldsCensored,
+    TListGroupAnyFields,
+} from '../../types/models/listGroups';
 import {
     CURRENT_LIST_GET,
     DELETE_LIST,
     DELETE_LIST_ITEM,
     LEAVE_LIST,
     LIST_RESET,
-    LOAD_LIST_PERMISSIONS,
+    LOAD_CURRENT_LIST_USER,
     MODIFY_LIST_ITEM,
     NEW_LIST_ITEM,
     RENAME_LIST,
@@ -17,25 +24,37 @@ import {
 export interface IlistGroupData {
     listLoading: boolean;
     currentList: undefined | TListGroupAnyFields;
-    currentListPermissions: TYPE_PERM_ALL_LIST_GROUP[] | undefined;
+    currentListUser: IbasicListMember | IgiftListMember | IgiftGroupMember | undefined;
 }
 
-export interface IlistGroupDataCurrentListLoaded {
+export interface IunknownListLoaded {
     listLoading: boolean;
-    currentList: TListGroupAnyFields;
-    currentListPermissions: TYPE_PERM_ALL_LIST_GROUP[];
+    currentList: TbasicListFields | TgiftListFieldsCensored | TgiftGroupFields;
+    currentListUser: IbasicListMember | IgiftListMember | IgiftGroupMember;
 }
 
-export interface IlistGroupDataParentListLoaded {
+export interface IbasicListLoaded {
     listLoading: boolean;
-    currentList: TListGroupAnyFields;
-    currentListPermissions: TYPE_PERM_ALL_LIST_GROUP[];
+    currentList: TbasicListFields;
+    currentListUser: IbasicListMember;
+}
+
+export interface IgiftListLoaded {
+    listLoading: boolean;
+    currentList: TgiftListFieldsCensored;
+    currentListUser: IgiftListMember;
+}
+
+export interface IgiftGroupLoaded {
+    listLoading: boolean;
+    currentList: TgiftGroupFields;
+    currentListUser: IgiftGroupMember;
 }
 
 const initialState = {
     listLoading: true,
     currentList: undefined,
-    currentListPermissions: undefined,
+    currentListUser: undefined,
 };
 
 export default function reducer(state: IlistGroupData = initialState, action: AnyAction): IlistGroupData {
@@ -52,10 +71,10 @@ export default function reducer(state: IlistGroupData = initialState, action: An
                 listLoading: false,
                 currentList: payload,
             };
-        case LOAD_LIST_PERMISSIONS:
+        case LOAD_CURRENT_LIST_USER:
             return {
                 ...state,
-                currentListPermissions: payload,
+                currentListUser: payload,
             };
         case DELETE_LIST_ITEM:
             return {

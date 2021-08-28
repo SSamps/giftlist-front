@@ -2,7 +2,7 @@ import axios from 'axios';
 import React, { Fragment, useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { addAlertThunkActionCreator, TaddAlertThunkActionCreator } from '../../../../../../redux/actions/alertActions';
-import { TbasicListFields, TgiftListFields } from '../../../../../../types/models/listGroups';
+import { TbasicListFields, TgiftGroupFields, TgiftListFieldsCensored } from '../../../../../../types/models/listGroups';
 import OverlayButtons from '../../../../../misc/overlays/OverlayButtons';
 import Spinner from '../../../../../misc/spinner';
 import DropdownUnderlay from '../../../../dashboard/yourLists/controlBar/filters/DropdownUnderlay';
@@ -10,7 +10,7 @@ import InviteFormInput from '../../InviteFormInput';
 
 interface Props {
     setOpen: React.Dispatch<React.SetStateAction<boolean>>;
-    currentList: TgiftListFields | TbasicListFields;
+    currentList: TgiftListFieldsCensored | TbasicListFields | TgiftGroupFields;
     addAlertThunkActionCreator: TaddAlertThunkActionCreator;
 }
 

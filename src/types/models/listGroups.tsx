@@ -57,12 +57,13 @@ export type TgiftListFieldsCensored = TlistGroupBaseFields & TgiftListExtraField
 
 // Parent Groups
 // Gift Groups
-interface IgiftGroupMember extends IgroupMemberBase {
+export interface IgiftGroupMember extends IgroupMemberBase {
     permissions: TYPE_PERM_GIFT_GROUP_ALL[];
 }
 
 type TgiftGroupExtraFields = {
     members: IgiftGroupMember[];
+    children: TgiftListFieldsCensored[];
 };
 
 export type TgiftGroupFields = TlistGroupBaseFields & TgiftGroupExtraFields;
@@ -109,7 +110,7 @@ type Tchildren = {
 };
 
 interface IprocessedGroupFields {
-    currentUser: TgroupMemberAny;
+    currentListUser: TgroupMemberAny;
 }
 
 export type TListGroupAnyFields = TlistGroupAnyFieldsUncensored & TlistGroupAnyFieldsCensored & Tchildren;

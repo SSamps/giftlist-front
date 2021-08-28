@@ -3,9 +3,11 @@ import alertReducer, { TalertData } from '../alertReducer';
 import authReducer, { IauthState, IauthStateAuthed } from '../authReducer';
 import dashboardReducer, { IdashboardState } from '../dashboardReducer';
 import listGroupReducer, {
+    IbasicListLoaded,
+    IgiftGroupLoaded,
+    IgiftListLoaded,
     IlistGroupData,
-    IlistGroupDataCurrentListLoaded,
-    IlistGroupDataParentListLoaded,
+    IunknownListLoaded,
 } from '../listGroupReducer';
 
 export interface IrootState {
@@ -20,17 +22,31 @@ export interface IrootStateAuthed {
     alertReducer: TalertData;
 }
 
-export interface IrootStateAuthedCurrentListLoaded {
+export interface IrootStateAuthedUnknownListLoaded {
     authReducer: IauthStateAuthed;
     dashboardReducer: IdashboardState;
-    listGroupReducer: IlistGroupDataCurrentListLoaded;
+    listGroupReducer: IunknownListLoaded;
     alertReducer: TalertData;
 }
 
-export interface IrootStateAuthedParentListLoaded {
+export interface IrootStateAuthedBasicListLoaded {
     authReducer: IauthStateAuthed;
     dashboardReducer: IdashboardState;
-    listGroupReducer: IlistGroupDataParentListLoaded;
+    listGroupReducer: IbasicListLoaded;
+    alertReducer: TalertData;
+}
+
+export interface IrootStateAuthedGiftListLoaded {
+    authReducer: IauthStateAuthed;
+    dashboardReducer: IdashboardState;
+    listGroupReducer: IgiftListLoaded;
+    alertReducer: TalertData;
+}
+
+export interface IrootStateAuthedGiftGroupLoaded {
+    authReducer: IauthStateAuthed;
+    dashboardReducer: IdashboardState;
+    listGroupReducer: IgiftGroupLoaded;
     alertReducer: TalertData;
 }
 

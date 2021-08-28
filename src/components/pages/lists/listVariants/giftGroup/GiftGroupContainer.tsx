@@ -1,22 +1,21 @@
 import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
-import { IrootStateAuthedParentListLoaded } from '../../../../../redux/reducers/root/rootReducer';
-import { TListGroupAnyFields } from '../../../../../types/models/listGroups';
+import { IrootStateAuthedGiftGroupLoaded } from '../../../../../redux/reducers/root/rootReducer';
+import { TgiftGroupFields } from '../../../../../types/models/listGroups';
 import { GiftGroupChildPreviewCard } from '../../../dashboard/yourLists/previewCards/GiftGroupChildPreviewCard';
 import ListTitleBar from '../../miscShared/titleBar/ListTitleBar';
 
 interface Props {
-    giftGroup: TListGroupAnyFields;
-    currentList: TListGroupAnyFields;
+    currentList: TgiftGroupFields;
 }
 
-export const GiftGroupContainer: React.FC<Props> = ({ giftGroup, currentList }) => {
+export const GiftGroupContainer: React.FC<Props> = ({ currentList }) => {
     return (
         <Fragment>
             <ListTitleBar currentList={currentList}></ListTitleBar>
-            <div>I am a gift group with id {giftGroup?._id}</div>
+            <div>I am a gift group with id {currentList._id}</div>
             <div className={'dashboardListContainer'}>
-                {giftGroup.children?.map((group) => {
+                {currentList.children?.map((group) => {
                     return <GiftGroupChildPreviewCard key={group._id} group={group}></GiftGroupChildPreviewCard>;
                 })}
             </div>
@@ -24,7 +23,7 @@ export const GiftGroupContainer: React.FC<Props> = ({ giftGroup, currentList }) 
     );
 };
 
-const mapStateToProps = (state: IrootStateAuthedParentListLoaded) => ({
+const mapStateToProps = (state: IrootStateAuthedGiftGroupLoaded) => ({
     user: state.authReducer.user,
     currentList: state.listGroupReducer.currentList,
 });

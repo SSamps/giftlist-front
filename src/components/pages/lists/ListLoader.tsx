@@ -5,8 +5,8 @@ import {
     getListActionCreator,
     TgetListActionCreator,
     TresetListActionCreator,
-    loadListPermissionsActionCreator,
-    TloadListPermissionsActionCreator,
+    loadListUserActionCreator,
+    TloadListUserActionCreator,
 } from '../../../redux/actions/listGroupActions';
 import { IlistGroupData } from '../../../redux/reducers/listGroupReducer';
 import { IrootStateAuthed } from '../../../redux/reducers/root/rootReducer';
@@ -30,7 +30,7 @@ interface Props extends IlistGroupData {
     user: IUser;
     getListActionCreator: TgetListActionCreator;
     resetListActionCreator: TresetListActionCreator;
-    loadListPermissionsActionCreator: TloadListPermissionsActionCreator;
+    loadListUserActionCreator: TloadListUserActionCreator;
 }
 
 const ListLoader: React.FC<Props> = ({
@@ -39,8 +39,8 @@ const ListLoader: React.FC<Props> = ({
     currentList,
     getListActionCreator,
     resetListActionCreator,
-    loadListPermissionsActionCreator,
-    currentListPermissions,
+    loadListUserActionCreator,
+    currentListUser,
     user,
 }): JSX.Element => {
     useEffect(() => {
@@ -53,7 +53,7 @@ const ListLoader: React.FC<Props> = ({
 
     useEffect(() => {
         let loadPermissions = () => {
-            loadListPermissionsActionCreator(currentList, user._id);
+            loadListUserActionCreator(currentList, user._id);
         };
         loadPermissions();
     }, [currentList]);
@@ -80,7 +80,7 @@ const ListLoader: React.FC<Props> = ({
     function parentListSwitch(currentList: TListGroupAnyFields) {
         switch (currentList.groupVariant) {
             case GIFT_GROUP: {
-                return <GiftGroupContainer key={currentList._id} giftGroup={currentList}></GiftGroupContainer>;
+                return <GiftGroupContainer key={currentList._id}></GiftGroupContainer>;
             }
         }
     }
@@ -88,7 +88,7 @@ const ListLoader: React.FC<Props> = ({
     const renderList = () => {
         return (
             currentList &&
-            currentListPermissions && (
+            currentListUser && (
                 <Fragment>
                     {LIST_GROUP_PARENT_VARIANTS.includes(currentList.groupVariant)
                         ? parentListSwitch(currentList)
@@ -105,11 +105,11 @@ const mapStateToProps = (state: IrootStateAuthed) => ({
     user: state.authReducer.user,
     listLoading: state.listGroupReducer.listLoading,
     currentList: state.listGroupReducer.currentList,
-    currentListPermissions: state.listGroupReducer.currentListPermissions,
+    currentListUser: state.listGroupReducer.currentListUser,
 });
 
 export default connect(mapStateToProps, {
     getListActionCreator,
     resetListActionCreator,
-    loadListPermissionsActionCreator,
+    loadListUserActionCreator: loadListUserActionCreator,
 })(ListLoader);

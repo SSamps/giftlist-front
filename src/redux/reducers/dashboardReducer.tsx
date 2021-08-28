@@ -1,10 +1,10 @@
 import { DASHBAORD_DATA_ERROR, DASHBOARD_LISTS_GET, DASHBOARD_SET_FILTERS } from '../actions/actionTypes';
 import { AnyAction } from 'redux';
-import { TListGroupAnyFields } from '../../types/models/listGroups';
+import { TProcessedListGroupAnyFields } from '../../types/models/listGroups';
 
 export interface IdashboardState {
     loadingDashboard: boolean;
-    listGroups: TListGroupAnyFields[];
+    listGroups: TProcessedListGroupAnyFields[];
     error: string | undefined;
     listOwnershipFilter: 'anyone' | 'you' | 'others';
     listVariantFilter: { basicListSelected: boolean; giftListSelected: boolean; giftGroupSelected: boolean };

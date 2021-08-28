@@ -1,9 +1,9 @@
 import React, { Fragment } from 'react';
-import { TbasicListFields, TgiftListFields } from '../../../../../types/models/listGroups';
+import { TbasicListFields, TgiftGroupFields, TgiftListFieldsCensored } from '../../../../../types/models/listGroups';
 import ListTitleBarMenuButton from './ListTitleBarMenuButton';
 
 interface Props {
-    currentList: TgiftListFields | TbasicListFields;
+    currentList: TgiftListFieldsCensored | TbasicListFields | TgiftGroupFields;
 }
 
 const ListTitleBar: React.FC<Props> = ({ currentList }) => {

@@ -1,22 +1,20 @@
 import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
-import { IrootStateAuthedCurrentListLoaded } from '../../../../../redux/reducers/root/rootReducer';
-import { TbasicListFields } from '../../../../../types/models/listGroups';
-
+import { IrootStateAuthedBasicListLoaded } from '../../../../../redux/reducers/root/rootReducer';
+import { IbasicListMember, TbasicListFields } from '../../../../../types/models/listGroups';
 import ListTitleBar from '../../miscShared/titleBar/ListTitleBar';
 import NewListItem from '../../listItems/NewListItem';
 import ListItem from '../../listItems/ListItem';
 import { IUser } from '../../../../../types/models/User';
 import BasicListDeleteItems from './BasicListDeleteItems';
-import { TYPE_PERM_ALL_LIST_GROUP } from '../../../../../types/listGroupPermissions';
 
 interface Props {
     currentList: TbasicListFields;
     user: IUser;
-    currentListPermissions: TYPE_PERM_ALL_LIST_GROUP[];
+    currentListUser: IbasicListMember;
 }
 
-const BasicListContainer: React.FC<Props> = ({ currentList, currentListPermissions }) => {
+const BasicListContainer: React.FC<Props> = ({ currentList, currentListUser }) => {
     return (
         <Fragment>
             <div className={'listContainer'}>
@@ -27,9 +25,9 @@ const BasicListContainer: React.FC<Props> = ({ currentList, currentListPermissio
                             <ListItem
                                 key={item._id}
                                 listItem={item}
-                                allowSelection={currentListPermissions.includes('GROUP_SELECT_LIST_ITEMS')}
-                                allowModification={currentListPermissions.includes('GROUP_RW_LIST_ITEMS')}
-                                allowDeletion={currentListPermissions.includes('GROUP_RW_LIST_ITEMS')}
+                                allowSelection={currentListUser.permissions.includes('GROUP_SELECT_LIST_ITEMS')}
+                                allowModification={currentListUser.permissions.includes('GROUP_RW_LIST_ITEMS')}
+                                allowDeletion={currentListUser.permissions.includes('GROUP_RW_LIST_ITEMS')}
                             ></ListItem>
                         );
                     })}
@@ -45,10 +43,10 @@ const BasicListContainer: React.FC<Props> = ({ currentList, currentListPermissio
     );
 };
 
-const mapStateToProps = (state: IrootStateAuthedCurrentListLoaded) => ({
+const mapStateToProps = (state: IrootStateAuthedBasicListLoaded) => ({
     user: state.authReducer.user,
     currentList: state.listGroupReducer.currentList,
-    currentListPermissions: state.listGroupReducer.currentListPermissions,
+    currentListUser: state.listGroupReducer.currentListUser,
 });
 
 export default connect(mapStateToProps, {})(BasicListContainer);

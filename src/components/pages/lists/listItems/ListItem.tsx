@@ -7,8 +7,13 @@ import {
     TdeleteListItemActionCreator,
     TselectListItemActionCreator,
 } from '../../../../redux/actions/listGroupActions';
-import { IrootStateAuthedCurrentListLoaded } from '../../../../redux/reducers/root/rootReducer';
-import { TgroupMemberAny, TListGroupAnyFields } from '../../../../types/models/listGroups';
+import { IrootStateAuthedUnknownListLoaded } from '../../../../redux/reducers/root/rootReducer';
+import {
+    TbasicListFields,
+    TgiftGroupFields,
+    TgiftListFieldsCensored,
+    TgroupMemberAny,
+} from '../../../../types/models/listGroups';
 import { IbasicListItem, IgiftListItemCensored } from '../../../../types/models/listItems';
 import { IUser } from '../../../../types/models/User';
 import { findUserInGroup } from '../../../../utils/helperFunctions';
@@ -19,7 +24,7 @@ import SelectedByOverlay from './SelectedByOverlay';
 interface Props {
     user: IUser;
     listItem: IbasicListItem | IgiftListItemCensored;
-    currentList: TListGroupAnyFields;
+    currentList: TbasicListFields | TgiftListFieldsCensored | TgiftGroupFields;
     allowSelection: boolean;
     allowModification: boolean;
     allowDeletion: boolean;
@@ -217,7 +222,7 @@ const ListItem: React.FC<Props> = ({
     );
 };
 
-const mapStateToProps = (state: IrootStateAuthedCurrentListLoaded) => ({
+const mapStateToProps = (state: IrootStateAuthedUnknownListLoaded) => ({
     user: state.authReducer.user,
     currentList: state.listGroupReducer.currentList,
 });

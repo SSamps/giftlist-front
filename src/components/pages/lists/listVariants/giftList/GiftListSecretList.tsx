@@ -1,21 +1,20 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { IrootStateAuthedCurrentListLoaded } from '../../../../../redux/reducers/root/rootReducer';
-import { TYPE_PERM_ALL_LIST_GROUP } from '../../../../../types/listGroupPermissions';
-import { TgiftListFields } from '../../../../../types/models/listGroups';
+import { IrootStateAuthedGiftListLoaded } from '../../../../../redux/reducers/root/rootReducer';
+import { IgiftListMember, TgiftListFieldsCensored } from '../../../../../types/models/listGroups';
 import { IUser } from '../../../../../types/models/User';
 import EmptyListItem from '../../listItems/EmptyListItem';
 import ListItem from '../../listItems/ListItem';
 import NewListItem from '../../listItems/NewListItem';
 
 interface Props {
-    currentList: TgiftListFields;
+    currentList: TgiftListFieldsCensored;
     user: IUser;
-    currentListPermissions: TYPE_PERM_ALL_LIST_GROUP[];
+    currentListUser: IgiftListMember;
     ownerName: string;
 }
 
-const GiftListSecretList: React.FC<Props> = ({ currentList, currentListPermissions, user, ownerName }) => {
+const GiftListSecretList: React.FC<Props> = ({ currentList, currentListUser, user, ownerName }) => {
     const renderSecretItemVisibilityMessage = () => {
         return (
             <div className='systemMessage'>
@@ -29,22 +28,24 @@ const GiftListSecretList: React.FC<Props> = ({ currentList, currentListPermissio
 
     const renderGuestList = () => {
         return (
-            currentListPermissions.includes('GROUP_RW_SECRET_LIST_ITEMS') && (
+            currentListUser.permissions.includes('GROUP_RW_SECRET_LIST_ITEMS') && (
                 <div className='listSectionContentContainer'>
                     <div className='giftListListLabel systemMessage'>Gift ideas</div>
-                    {currentList.secretListItems.length > 0 ? (
+                    {currentList.secretListItems && currentList.secretListItems.length > 0 ? (
                         currentList.secretListItems.map((item) => {
                             return (
                                 <ListItem
                                     key={item._id}
                                     listItem={item}
-                                    allowSelection={currentListPermissions.includes('GROUP_SELECT_SECRET_LIST_ITEMS')}
+                                    allowSelection={currentListUser.permissions.includes(
+                                        'GROUP_SELECT_SECRET_LIST_ITEMS'
+                                    )}
                                     allowModification={
-                                        currentListPermissions.includes('GROUP_RW_SECRET_LIST_ITEMS') &&
+                                        currentListUser.permissions.includes('GROUP_RW_SECRET_LIST_ITEMS') &&
                                         item.authorId === user._id
                                     }
                                     allowDeletion={
-                                        currentListPermissions.includes('GROUP_RW_SECRET_LIST_ITEMS') &&
+                                        currentListUser.permissions.includes('GROUP_RW_SECRET_LIST_ITEMS') &&
                                         item.authorId === user._id
                                     }
                                 ></ListItem>
@@ -59,18 +60,21 @@ const GiftListSecretList: React.FC<Props> = ({ currentList, currentListPermissio
     };
 
     const numAuthoredSecretItems = () => {
-        return currentList.secretListItems.reduce((total, item) => {
-            if (item.authorId === user._id) {
-                return total + 1;
-            } else {
-                return total;
-            }
-        }, 0);
+        if (currentList.secretListItems) {
+            return currentList.secretListItems.reduce((total, item) => {
+                if (item.authorId === user._id) {
+                    return total + 1;
+                } else {
+                    return total;
+                }
+            }, 0);
+        }
+        return 0;
     };
 
     const renderNewSecretListItem = () => {
         return (
-            currentListPermissions.includes('GROUP_RW_SECRET_LIST_ITEMS') &&
+            currentListUser.permissions.includes('GROUP_RW_SECRET_LIST_ITEMS') &&
             numAuthoredSecretItems() < currentList.maxSecretListItemsEach && (
                 <NewListItem itemType='secretListItem' groupId={currentList._id}></NewListItem>
             )
@@ -86,10 +90,10 @@ const GiftListSecretList: React.FC<Props> = ({ currentList, currentListPermissio
     );
 };
 
-const mapStateToProps = (state: IrootStateAuthedCurrentListLoaded) => ({
+const mapStateToProps = (state: IrootStateAuthedGiftListLoaded) => ({
     user: state.authReducer.user,
     currentList: state.listGroupReducer.currentList,
-    currentListPermissions: state.listGroupReducer.currentListPermissions,
+    currentListUser: state.listGroupReducer.currentListUser,
 });
 
 export default connect(mapStateToProps)(GiftListSecretList);

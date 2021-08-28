@@ -6,8 +6,8 @@ import {
     checkForNewUserActionCreator,
     TcheckForNewUserActionCreator,
 } from '../../../../redux/actions/listGroupActions';
-import { IrootStateAuthedCurrentListLoaded } from '../../../../redux/reducers/root/rootReducer';
-import { TListGroupAnyFields } from '../../../../types/models/listGroups';
+import { IrootStateAuthedGiftListLoaded } from '../../../../redux/reducers/root/rootReducer';
+import { TgiftListFieldsCensored } from '../../../../types/models/listGroups';
 import { TmessageAny } from '../../../../types/models/messages';
 import { findUserInGroup } from '../../../../utils/helperFunctions';
 import ListChatForm from './ListChatForm';
@@ -17,7 +17,7 @@ import ListChatReturnToBottomButton from './ListChatReturnToBottomButton';
 interface Props {
     ownerName: string;
     token: string;
-    currentList: TListGroupAnyFields;
+    currentList: TgiftListFieldsCensored;
     checkForNewUserActionCreator: TcheckForNewUserActionCreator;
 }
 
@@ -160,7 +160,7 @@ const GiftListChat: React.FC<Props> = ({ ownerName, token, currentList, checkFor
     );
 };
 
-const mapStateToProps = (state: IrootStateAuthedCurrentListLoaded) => ({
+const mapStateToProps = (state: IrootStateAuthedGiftListLoaded) => ({
     token: state.authReducer.token,
     currentList: state.listGroupReducer.currentList,
 });
