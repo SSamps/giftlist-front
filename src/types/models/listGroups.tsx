@@ -42,6 +42,7 @@ type TgiftListExtraFields = {
     listItems: IgiftListItem[];
     maxSecretListItemsEach: Number;
     secretListItems: IgiftListItem[];
+    parentGroupId: string;
 };
 
 type TgiftListExtraFieldsCensored = {
@@ -50,6 +51,7 @@ type TgiftListExtraFieldsCensored = {
     listItems: IgiftListItemCensored[];
     maxSecretListItemsEach: Number;
     secretListItems: IgiftListItemCensored[] | undefined;
+    parentGroupId: string;
 };
 
 export type TgiftListFields = TlistGroupBaseFields & TgiftListExtraFields;

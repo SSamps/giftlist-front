@@ -149,7 +149,7 @@
         color: $color-interactive;
         font-size: 1.2rem;
         justify-self: center;
-        grid-column: 3/4;
+        grid-column: 3;
         position: relative;
         padding: 0 0.3rem;
         border-radius: 10px;
@@ -166,6 +166,27 @@
         }
 
         &-active {
+            color: darken($color-interactive, 10%);
+            background-color: $color-background-secondary;
+        }
+    }
+
+    &-back {
+        color: $color-interactive;
+        font-size: 1.2rem;
+        justify-self: center;
+        grid-column: 1;
+        position: relative;
+        padding: 0 0.3rem;
+        border-radius: 10px;
+        cursor: pointer;
+
+        &:hover {
+            color: darken($color-interactive, 5%);
+            background-color: $color-background-secondary;
+        }
+
+        &:active {
             color: darken($color-interactive, 10%);
             background-color: $color-background-secondary;
         }
