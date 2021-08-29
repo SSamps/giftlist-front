@@ -12,6 +12,7 @@
         gap: 1rem;
         width: 80%;
         align-items: center;
+        border-style: none;
     }
 
     &-error-message {
@@ -42,6 +43,9 @@
         font-size: 1.2rem;
         border: 1px solid $color-border;
         border-radius: 4px;
+        &:focus-visible {
+            outline-color: $color-border-hover;
+        }
     }
 
     input[type='submit'],
