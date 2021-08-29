@@ -5,7 +5,7 @@ import { IrootStateAuthedGiftGroupLoaded } from '../../../../../redux/reducers/r
 import { IgiftGroupMember, TgiftGroupFields } from '../../../../../types/models/listGroups';
 import { IUser } from '../../../../../types/models/User';
 import { findUserInGroup } from '../../../../../utils/helperFunctions';
-import { GiftGroupChildPreviewCard } from '../../../dashboard/yourLists/previewCards/GiftGroupChildPreviewCard';
+import GiftListPreviewCard from '../../../dashboard/yourLists/previewCards/GiftListPreviewCard';
 import ListTitleBar from '../../miscShared/titleBar/ListTitleBar';
 import AddChildGroupOverlay from './AddChildGroupOverlay';
 
@@ -46,8 +46,8 @@ export const GiftGroupContainer: React.FC<Props> = ({ user, currentList, current
                     )}
                 </div>
                 <div className={'dashboardListContainer'}>
-                    {currentList.children.map((group) => {
-                        return <GiftGroupChildPreviewCard key={group._id} group={group}></GiftGroupChildPreviewCard>;
+                    {currentList.children.map((list) => {
+                        return <GiftListPreviewCard key={list._id} list={list}></GiftListPreviewCard>;
                     })}
                 </div>
             </div>

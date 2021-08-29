@@ -1,16 +1,18 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { TListGroupAnyFields } from '../../../../../types/models/listGroups';
+import { TbasicListFields } from '../../../../../types/models/listGroups';
 
 interface Props {
-    group: TListGroupAnyFields;
+    list: TbasicListFields;
 }
 
-export const BasicListPreviewCard: React.FC<Props> = ({ group }) => {
+const BasicListPreviewCard: React.FC<Props> = ({ list }) => {
     return (
-        <Link to={`list/${group._id}`} className='dashboardListPreviewCard'>
-            <div>{group.groupVariant}</div>
-            <div>{group.groupName}</div>
+        <Link to={`list/${list._id}`} className='dashboardListPreviewCard'>
+            <div>{list.groupVariant}</div>
+            <div>{list.groupName}</div>
         </Link>
     );
 };
+
+export default BasicListPreviewCard;

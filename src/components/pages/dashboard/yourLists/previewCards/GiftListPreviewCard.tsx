@@ -1,16 +1,18 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { TListGroupAnyFields } from '../../../../../types/models/listGroups';
+import { TgiftGroupChildFieldsCensored, TgiftListFieldsCensored } from '../../../../../types/models/listGroups';
 
 interface Props {
-    group: TListGroupAnyFields;
+    list: TgiftGroupChildFieldsCensored | TgiftListFieldsCensored;
 }
 
-export const GiftListPreviewCard: React.FC<Props> = ({ group }) => {
+const GiftListPreviewCard: React.FC<Props> = ({ list }) => {
     return (
-        <Link to={`list/${group._id}`} className='dashboardListPreviewCard'>
-            <div>{group.groupVariant}</div>
-            <div>{group.groupName}</div>
+        <Link to={`list/${list._id}`} className='dashboardListPreviewCard'>
+            <div>{list.groupVariant}</div>
+            <div>{list.groupName}</div>
         </Link>
     );
 };
+
+export default GiftListPreviewCard;
