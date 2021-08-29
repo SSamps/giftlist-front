@@ -5,6 +5,7 @@ import {
     TYPE_PERM_GIFT_GROUP_CHILD_ALL,
     TYPE_PERM_GIFT_LIST_ALL,
 } from '../listGroupPermissions';
+import { BASIC_LIST, GIFT_GROUP, GIFT_GROUP_CHILD, GIFT_LIST } from '../listVariants';
 import { IbasicListItem, IgiftListItem, IgiftListItemCensored } from './listItems';
 
 // Shared
@@ -27,6 +28,7 @@ type TbasicListExtraFields = {
     members: IbasicListMember[];
     maxListItems: Number;
     listItems: IbasicListItem[];
+    groupVariant: typeof BASIC_LIST;
 };
 
 export type TbasicListFields = TlistGroupBaseFields & TbasicListExtraFields;
@@ -43,6 +45,7 @@ type TgiftListExtraFields = {
     maxSecretListItemsEach: Number;
     secretListItems: IgiftListItem[];
     parentGroupId: string;
+    groupVariant: typeof GIFT_LIST;
 };
 
 type TgiftListExtraFieldsCensored = {
@@ -52,6 +55,7 @@ type TgiftListExtraFieldsCensored = {
     maxSecretListItemsEach: Number;
     secretListItems: IgiftListItemCensored[] | undefined;
     parentGroupId: string;
+    groupVariant: typeof GIFT_LIST;
 };
 
 export type TgiftListFields = TlistGroupBaseFields & TgiftListExtraFields;
@@ -66,6 +70,7 @@ export interface IgiftGroupMember extends IgroupMemberBase {
 type TgiftGroupExtraFields = {
     members: IgiftGroupMember[];
     children: TgiftListFieldsCensored[];
+    groupVariant: typeof GIFT_GROUP;
 };
 
 export type TgiftGroupFields = TlistGroupBaseFields & TgiftGroupExtraFields;
@@ -82,6 +87,7 @@ type TgiftGroupChildExtraFields = {
     listItems: IgiftListItem[];
     maxSecretListItemsEach: Number;
     secretListItems: IgiftListItem[];
+    groupVariant: typeof GIFT_GROUP_CHILD;
 };
 
 type TgiftGroupChildExtraFieldsCensored = {
@@ -91,6 +97,7 @@ type TgiftGroupChildExtraFieldsCensored = {
     listItems: IgiftListItemCensored[];
     maxSecretListItemsEach: Number;
     secretListItems: IgiftListItemCensored[] | undefined;
+    groupVariant: typeof GIFT_GROUP_CHILD;
 };
 
 export type TgiftGroupChildFields = TlistGroupBaseFields & TgiftGroupChildExtraFields;
@@ -98,14 +105,16 @@ export type TgiftGroupChildFieldsCensored = TlistGroupBaseFields & TgiftGroupChi
 
 // Aggregate
 
-export type TlistGroupAnyFieldsUncensored = TbasicListFields &
-    TgiftListFields &
-    TgiftGroupFields &
-    TgiftGroupChildFields;
-export type TlistGroupAnyFieldsCensored = TbasicListFields &
-    TgiftListFieldsCensored &
-    TgiftGroupFields &
-    TgiftGroupChildFieldsCensored;
+export type TlistGroupAnyFieldsUncensored =
+    | TbasicListFields
+    | TgiftListFields
+    | TgiftGroupFields
+    | TgiftGroupChildFields;
+export type TlistGroupAnyFieldsCensored =
+    | TbasicListFields
+    | TgiftListFieldsCensored
+    | TgiftGroupFields
+    | TgiftGroupChildFieldsCensored;
 
 type Tchildren = {
     children?: TListGroupAnyFields[];

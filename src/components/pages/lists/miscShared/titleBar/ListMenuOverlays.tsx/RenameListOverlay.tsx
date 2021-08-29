@@ -1,14 +1,19 @@
 import React, { Fragment, useState } from 'react';
 import { connect } from 'react-redux';
 import { renameListActionCreator, TrenameListActionCreator } from '../../../../../../redux/actions/listGroupActions';
-import { TbasicListFields, TgiftGroupFields, TgiftListFieldsCensored } from '../../../../../../types/models/listGroups';
+import {
+    TbasicListFields,
+    TgiftGroupChildFieldsCensored,
+    TgiftGroupFields,
+    TgiftListFieldsCensored,
+} from '../../../../../../types/models/listGroups';
 import OverlayButtons from '../../../../../misc/overlays/OverlayButtons';
 import Spinner from '../../../../../misc/spinner';
 import DropdownUnderlay from '../../../../dashboard/yourLists/controlBar/filters/DropdownUnderlay';
 
 interface Props {
     setOpen: React.Dispatch<React.SetStateAction<boolean>>;
-    currentList: TgiftListFieldsCensored | TbasicListFields | TgiftGroupFields;
+    currentList: TgiftListFieldsCensored | TbasicListFields | TgiftGroupFields | TgiftGroupChildFieldsCensored;
     renameListActionCreator: TrenameListActionCreator;
 }
 

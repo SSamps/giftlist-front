@@ -4,7 +4,15 @@ import { connect } from 'react-redux';
 import MembersOverlay from './ListMenuOverlays.tsx/MembersOverlay';
 import ListTitleBarMenuDropdown from './ListTitleBarMenuDropdown';
 import { useHistory } from 'react-router-dom';
-import { TbasicListFields, TgiftGroupFields, TgiftListFieldsCensored } from '../../../../../types/models/listGroups';
+import {
+    IbasicListMember,
+    IgiftGroupMember,
+    IgiftListMember,
+    TbasicListFields,
+    TgiftGroupChildFieldsCensored,
+    TgiftGroupFields,
+    TgiftListFieldsCensored,
+} from '../../../../../types/models/listGroups';
 import {
     deleteListActionCreator,
     leaveListActionCreator,
@@ -13,14 +21,21 @@ import {
 } from '../../../../../redux/actions/listGroupActions';
 import ConfirmationOverlay from '../../../../misc/overlays/ConfirmationOverlay';
 import RenameListOverlay from './ListMenuOverlays.tsx/RenameListOverlay';
+import { IrootStateAuthedUnknownListLoaded } from '../../../../../redux/reducers/root/rootReducer';
 
 interface Props {
-    currentList: TgiftListFieldsCensored | TbasicListFields | TgiftGroupFields;
+    currentList: TgiftListFieldsCensored | TbasicListFields | TgiftGroupFields | TgiftGroupChildFieldsCensored;
     deleteListActionCreator: TdeleteListActionCreator;
     leaveListActionCreator: TleaveListActionCreator;
+    currentListUser: IbasicListMember | IgiftListMember | IgiftGroupMember;
 }
 
-const ListTitleBarMenuButton: React.FC<Props> = ({ deleteListActionCreator, leaveListActionCreator, currentList }) => {
+const ListTitleBarMenuButton: React.FC<Props> = ({
+    deleteListActionCreator,
+    leaveListActionCreator,
+    currentList,
+    currentListUser,
+}) => {
     const history = useHistory();
     const [openDropdown, setOpenDropdown] = useState(false);
     const [renameGroupOverlayStatus, setRenameGroupOverlayStatus] = useState(false);
@@ -73,6 +88,19 @@ const ListTitleBarMenuButton: React.FC<Props> = ({ deleteListActionCreator, leav
         }
     };
 
+    const userHasActions = () => {
+        const perms = currentListUser.permissions;
+        if (
+            !perms.includes('GROUP_DELETE') &&
+            !perms.includes('GROUP_INVITE') &&
+            !perms.includes('GROUP_RENAME') &&
+            currentList.groupVariant === 'GIFT_GROUP_CHILD'
+        ) {
+            return false;
+        }
+        return true;
+    };
+
     return (
         <Fragment>
             <li
@@ -81,9 +109,13 @@ const ListTitleBarMenuButton: React.FC<Props> = ({ deleteListActionCreator, leav
                     setOpenDropdown(!openDropdown);
                 }}
             >
-                <span>
-                    <i className='fas fa-ellipsis-v'></i>
-                </span>
+                {userHasActions() ? (
+                    <span>
+                        <i className='fas fa-ellipsis-v'></i>
+                    </span>
+                ) : (
+                    <i className='fas fa-info'></i>
+                )}
                 {openDropdown && (
                     <ListTitleBarMenuDropdown
                         setOpen={setOpenDropdown}
@@ -101,4 +133,8 @@ const ListTitleBarMenuButton: React.FC<Props> = ({ deleteListActionCreator, leav
     );
 };
 
-export default connect(null, { deleteListActionCreator, leaveListActionCreator })(ListTitleBarMenuButton);
+const mapStateToProps = (state: IrootStateAuthedUnknownListLoaded) => ({
+    currentListUser: state.listGroupReducer.currentListUser,
+});
+
+export default connect(mapStateToProps, { deleteListActionCreator, leaveListActionCreator })(ListTitleBarMenuButton);

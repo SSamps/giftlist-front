@@ -30,6 +30,7 @@
         border-bottom-style: solid;
 
         &-variant {
+            color: $color-text-system;
         }
 
         &-name {
@@ -73,6 +74,30 @@
                 margin: auto;
             }
         }
+
+        &-child {
+            position: relative;
+            height: 100%;
+            display: grid;
+            grid-template-rows: 1;
+            grid-template-columns: 1fr 6.2rem;
+            overflow: hidden;
+
+            &-name {
+                margin: auto 0;
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                min-width: 0;
+            }
+
+            &-selection {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: $color-text-system;
+            }
+        }
     }
 
     &-fade {
@@ -105,6 +130,7 @@
             grid-template-rows: 1;
             align-items: center;
             gap: 0.2rem;
+            color: $color-text-system;
 
             &-icon {
                 margin: auto;

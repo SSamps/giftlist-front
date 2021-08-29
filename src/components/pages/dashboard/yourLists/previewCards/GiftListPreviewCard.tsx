@@ -13,12 +13,12 @@ const GiftListPreviewCard: React.FC<Props> = ({ list }) => {
     const owner = findOwnerInGroup(list);
 
     return (
-        <Link to={`list/${list._id}`} className='listPreviewCard'>
+        <Link to={`/list/${list._id}`} className='listPreviewCard'>
             <PreviewCardHeader listVariant='Gift list' list={list}></PreviewCardHeader>
             <ul className='listPreviewCard-body'>
                 {list.listItems.map((item) => {
                     return (
-                        <div>{item._id}</div>
+                        <div key={`previewItem${item._id}`}>{item._id}</div>
                         // <BasicListPreviewCardItem key={`previewItem${item._id}`} item={item}></BasicListPreviewCardItem>
                     );
                 })}

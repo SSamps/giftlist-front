@@ -7,7 +7,6 @@ import {
 } from '../../../../redux/actions/dashboardActions';
 import { IdashboardState } from '../../../../redux/reducers/dashboardReducer';
 import { BASIC_LIST, GIFT_GROUP, GIFT_LIST } from '../../../../types/listVariants';
-import { GiftGroupPreviewCard } from './previewCards/GiftGroupPreviewCard';
 import { TListGroupAnyFields } from '../../../../types/models/listGroups';
 import { IUser } from '../../../../types/models/User';
 import { PERM_GROUP_OWNER } from '../../../../types/listGroupPermissions';
@@ -16,6 +15,7 @@ import { Link } from 'react-router-dom';
 import GiftListPreviewCard from './previewCards/GiftListPreviewCard';
 import BasicListPreviewCard from './previewCards/basicListPreviews/BasicListPreviewCard';
 import Spinner from '../../../misc/spinner';
+import GiftGroupPreviewCard from './previewCards/giftGroupPreviews/GiftGroupPreviewCard';
 
 interface Props extends IdashboardState {
     getDashboardListDataActionCreator: TgetDashboardListDataActionCreator;
