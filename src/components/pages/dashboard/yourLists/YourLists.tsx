@@ -14,6 +14,7 @@ import { TListGroupAnyFields } from '../../../../types/models/listGroups';
 import { IUser } from '../../../../types/models/User';
 import { PERM_GROUP_OWNER } from '../../../../types/listGroupPermissions';
 import YourListsToolbar from './controlBar/DashboardFilter';
+import { Link } from 'react-router-dom';
 
 interface Props extends IdashboardState {
     getDashboardListDataActionCreator: TgetDashboardListDataActionCreator;
@@ -74,21 +75,29 @@ export const YourLists: React.FC<Props> = ({
     return (
         <Fragment>
             <YourListsToolbar></YourListsToolbar>
-            <div className={'dashboardListContainer'}>
-                {filteredListGroups.map((group) => {
-                    switch (group.groupVariant) {
-                        case BASIC_LIST: {
-                            return <BasicListPreviewCard key={group._id} group={group}></BasicListPreviewCard>;
+            {listGroups.length < 1 ? (
+                <Link to='/list/newlist'>
+                    <div className='dashboardAddFirstList'>
+                        <i className='fas fa-plus'></i> Add your first list
+                    </div>
+                </Link>
+            ) : (
+                <div className={'dashboardListContainer'}>
+                    {filteredListGroups.map((group) => {
+                        switch (group.groupVariant) {
+                            case BASIC_LIST: {
+                                return <BasicListPreviewCard key={group._id} group={group}></BasicListPreviewCard>;
+                            }
+                            case GIFT_LIST: {
+                                return <GiftListPreviewCard key={group._id} group={group}></GiftListPreviewCard>;
+                            }
+                            case GIFT_GROUP: {
+                                return <GiftGroupPreviewCard key={group._id} group={group}></GiftGroupPreviewCard>;
+                            }
                         }
-                        case GIFT_LIST: {
-                            return <GiftListPreviewCard key={group._id} group={group}></GiftListPreviewCard>;
-                        }
-                        case GIFT_GROUP: {
-                            return <GiftGroupPreviewCard key={group._id} group={group}></GiftGroupPreviewCard>;
-                        }
-                    }
-                })}
-            </div>
+                    })}
+                </div>
+            )}
         </Fragment>
     );
 };
