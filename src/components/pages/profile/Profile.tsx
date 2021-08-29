@@ -1,25 +1,19 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import {
-    deleteAccountActionCreator,
-    renameUserActionCreator,
-    TdeleteAccountActionCreator,
-    TrenameUserActionCreator,
-} from '../../../redux/actions/authActions';
+import { deleteAccountActionCreator, TdeleteAccountActionCreator } from '../../../redux/actions/authActions';
 import { IrootStateAuthed } from '../../../redux/reducers/root/rootReducer';
 import { IUser } from '../../../types/models/User';
 import { formatJoinDate } from '../../../utils/helperFunctions';
 import ConfirmationOverlay from '../../misc/overlays/ConfirmationOverlay';
-import SingleTextFieldOverlay from '../../misc/overlays/SingleTextFieldOverlay';
 import ProfileRow from './ProfileRow';
+import RenameUserOverlay from './RenameUserOverlay';
 
 interface props {
     user: IUser;
     deleteAccountActionCreator: TdeleteAccountActionCreator;
-    renameUserActionCreator: TrenameUserActionCreator;
 }
 
-const Profile: React.FC<props> = ({ user, deleteAccountActionCreator, renameUserActionCreator }) => {
+const Profile: React.FC<props> = ({ user, deleteAccountActionCreator }) => {
     const [changeNameOverlayStatus, setChangeNameOverlayStatus] = useState(false);
     const [deleteAccountOverlayStatus, setDeleteAccountOverlayStatus] = useState(false);
 
@@ -29,20 +23,9 @@ const Profile: React.FC<props> = ({ user, deleteAccountActionCreator, renameUser
         return await deleteAccountActionCreator();
     };
 
-    const renameUser = async (newName: string) => {
-        return await renameUserActionCreator(newName);
-    };
-
     const renderOverlays = () => {
         if (changeNameOverlayStatus) {
-            return (
-                <SingleTextFieldOverlay
-                    setOpen={setChangeNameOverlayStatus}
-                    submitAction={renameUser}
-                    initialValue={user.displayName}
-                    description='Choose a new name'
-                ></SingleTextFieldOverlay>
-            );
+            return <RenameUserOverlay setOpen={setChangeNameOverlayStatus}></RenameUserOverlay>;
         } else if (deleteAccountOverlayStatus) {
             return (
                 <ConfirmationOverlay
@@ -98,4 +81,4 @@ const mapStateToProps = (state: IrootStateAuthed) => ({
     user: state.authReducer.user,
 });
 
-export default connect(mapStateToProps, { deleteAccountActionCreator, renameUserActionCreator })(Profile);
+export default connect(mapStateToProps, { deleteAccountActionCreator })(Profile);

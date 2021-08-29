@@ -21,7 +21,6 @@ import { TListGroupAnyFields } from '../../../types/models/listGroups';
 import { IUser } from '../../../types/models/User';
 import Spinner from '../../misc/spinner';
 import BasicListContainer from './listVariants/basicList/BasicListContainer';
-import GiftGroupChildContainer from './listVariants/giftGroup/GiftGroupChildContainer';
 import GiftGroupContainer from './listVariants/giftGroup/GiftGroupContainer';
 import GiftListContainer from './listVariants/giftList/GiftListContainer';
 
@@ -67,12 +66,7 @@ const ListLoader: React.FC<Props> = ({
                 return <GiftListContainer key={currentList._id}></GiftListContainer>;
             }
             case GIFT_GROUP_CHILD: {
-                return (
-                    <GiftGroupChildContainer
-                        key={currentList._id}
-                        giftGroupChild={currentList}
-                    ></GiftGroupChildContainer>
-                );
+                return <GiftListContainer key={currentList._id}></GiftListContainer>;
             }
         }
     }
