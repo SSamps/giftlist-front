@@ -7,6 +7,7 @@ import NewListItem from '../../listItems/NewListItem';
 import ListItem from '../../listItems/ListItem';
 import { IUser } from '../../../../../types/models/User';
 import BasicListDeleteItems from './BasicListDeleteItems';
+import EmptyListItem from '../../listItems/EmptyListItem';
 
 interface Props {
     currentList: TbasicListFields;
@@ -19,18 +20,25 @@ const BasicListContainer: React.FC<Props> = ({ currentList, currentListUser }) =
         <Fragment>
             <div className={'listContainer'}>
                 <ListTitleBar currentList={currentList}></ListTitleBar>
+                <div>
+                    <pre> </pre>
+                </div>
                 <div className='listSectionContentContainer'>
-                    {currentList.listItems.map((item) => {
-                        return (
-                            <ListItem
-                                key={item._id}
-                                listItem={item}
-                                allowSelection={currentListUser.permissions.includes('GROUP_SELECT_LIST_ITEMS')}
-                                allowModification={currentListUser.permissions.includes('GROUP_RW_LIST_ITEMS')}
-                                allowDeletion={currentListUser.permissions.includes('GROUP_RW_LIST_ITEMS')}
-                            ></ListItem>
-                        );
-                    })}
+                    {currentList.listItems.length > 0 ? (
+                        currentList.listItems.map((item) => {
+                            return (
+                                <ListItem
+                                    key={item._id}
+                                    listItem={item}
+                                    allowSelection={currentListUser.permissions.includes('GROUP_SELECT_LIST_ITEMS')}
+                                    allowModification={currentListUser.permissions.includes('GROUP_RW_LIST_ITEMS')}
+                                    allowDeletion={currentListUser.permissions.includes('GROUP_RW_LIST_ITEMS')}
+                                ></ListItem>
+                            );
+                        })
+                    ) : (
+                        <EmptyListItem description={`No items have been added yet`}></EmptyListItem>
+                    )}
                 </div>
                 <div className='listNewItemContainer'>
                     {currentList.listItems.length < currentList.maxListItems && (
