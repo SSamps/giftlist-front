@@ -5,6 +5,7 @@ import { IrootStateAuthedBasicListLoaded } from '../../../../../redux/reducers/r
 import { TbasicListFields } from '../../../../../types/models/listGroups';
 import { IUser } from '../../../../../types/models/User';
 import { findOwnerInGroup } from '../../../../../utils/helperFunctions';
+import BasicListPreviewCardItem from './BasicListPreviewCardItem';
 import PreviewCardFooter from './PreviewCardFooter';
 import PreviewCardHeader from './PreviewCardHeader';
 
@@ -19,7 +20,11 @@ const BasicListPreviewCard: React.FC<Props> = ({ list }) => {
     return (
         <Link to={`list/${list._id}`} className='listPreviewCard'>
             <PreviewCardHeader listVariant='Basic list' list={list}></PreviewCardHeader>
-            <div className='listPreviewCard-body'></div>
+            <ul className='listPreviewCard-body'>
+                {list.listItems.map((item) => {
+                    return <BasicListPreviewCardItem item={item}></BasicListPreviewCardItem>;
+                })}
+            </ul>
             <PreviewCardFooter list={list} owner={owner}></PreviewCardFooter>
         </Link>
     );

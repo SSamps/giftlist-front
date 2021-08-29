@@ -5,8 +5,10 @@ body {
 }
 
 .systemMessage {
+    padding: 0 0.5rem;
     font-size: 1rem;
     color: $color-text-system;
+    text-align: center;
 
     &-dark {
         font-size: 1rem;
