@@ -1,14 +1,16 @@
 import {
     IbasicListMember,
+    IgiftGroupChildMember,
     IgiftGroupMember,
     IgiftListMember,
     TbasicListFields,
+    TgiftGroupChildFieldsCensored,
     TgiftGroupFields,
     TgiftListFieldsCensored,
 } from '../types/models/listGroups';
 
 export const findUserInGroup = (
-    group: TbasicListFields | TgiftListFieldsCensored | TgiftGroupFields,
+    group: TbasicListFields | TgiftListFieldsCensored | TgiftGroupFields | TgiftGroupChildFieldsCensored,
     userId: string
 ): IbasicListMember | IgiftListMember | IgiftGroupMember | null => {
     for (let member of group.members) {
@@ -17,6 +19,17 @@ export const findUserInGroup = (
         }
     }
 
+    return null;
+};
+
+export const findOwnerInGroup = (
+    group: TbasicListFields | TgiftListFieldsCensored | TgiftGroupFields | TgiftGroupChildFieldsCensored
+): IbasicListMember | IgiftListMember | IgiftGroupMember | IgiftGroupChildMember | null => {
+    for (let member of group.members) {
+        if (member.permissions.includes('GROUP_OWNER')) {
+            return member;
+        }
+    }
     return null;
 };
 

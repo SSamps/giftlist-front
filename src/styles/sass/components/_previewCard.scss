@@ -1,0 +1,64 @@
+.listPreviewCard {
+    height: 24rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-color: $color-border;
+    border-style: solid;
+    cursor: pointer;
+    background-color: $color-background-secondary;
+    color: $color-text-system;
+
+    &:hover {
+        color: $color-text-body;
+        opacity: 1;
+        border-color: $color-border-hover;
+    }
+
+    &-header {
+        height: 4rem;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        &-variant {
+        }
+
+        &-name {
+            font-size: 1.3rem;
+        }
+    }
+
+    &-body {
+        border-color: $color-text-system-light;
+        border-top-style: solid;
+        border-width: thin;
+        border-bottom-style: solid;
+        height: 100%;
+        width: 100%;
+    }
+
+    &-footer {
+        height: 4rem;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 0 2rem;
+
+        &-row {
+            display: grid;
+            grid-template-columns: 1.5rem 1fr;
+            grid-template-rows: 1;
+            align-items: center;
+            gap: 0.2rem;
+
+            &-icon {
+                margin: auto;
+            }
+        }
+    }
+}

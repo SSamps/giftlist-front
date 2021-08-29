@@ -15,10 +15,12 @@ import YourListsToolbar from './controlBar/DashboardFilter';
 import { Link } from 'react-router-dom';
 import GiftListPreviewCard from './previewCards/GiftListPreviewCard';
 import BasicListPreviewCard from './previewCards/BasicListPreviewCard';
+import Spinner from '../../../misc/spinner';
 
 interface Props extends IdashboardState {
     getDashboardListDataActionCreator: TgetDashboardListDataActionCreator;
     user: IUser;
+    loadingDashboard: boolean;
 }
 
 export const YourLists: React.FC<Props> = ({
@@ -27,6 +29,7 @@ export const YourLists: React.FC<Props> = ({
     getDashboardListDataActionCreator,
     listOwnershipFilter,
     listVariantFilter,
+    loadingDashboard,
 }) => {
     useEffect(() => {
         getDashboardListDataActionCreator(user._id);
@@ -75,7 +78,9 @@ export const YourLists: React.FC<Props> = ({
     return (
         <Fragment>
             <YourListsToolbar></YourListsToolbar>
-            {listGroups.length < 1 ? (
+            {loadingDashboard ? (
+                <Spinner className='spinner-large'></Spinner>
+            ) : listGroups.length < 1 ? (
                 <Link to='/list/newlist'>
                     <div className='dashboardAddFirstList'>
                         <i className='fas fa-plus'></i> Add your first list
