@@ -14,7 +14,7 @@ import { PERM_GROUP_OWNER } from '../../../../types/listGroupPermissions';
 import YourListsToolbar from './controlBar/DashboardFilter';
 import { Link } from 'react-router-dom';
 import GiftListPreviewCard from './previewCards/GiftListPreviewCard';
-import BasicListPreviewCard from './previewCards/BasicListPreviewCard';
+import BasicListPreviewCard from './previewCards/basicListPreviews/BasicListPreviewCard';
 import Spinner from '../../../misc/spinner';
 
 interface Props extends IdashboardState {

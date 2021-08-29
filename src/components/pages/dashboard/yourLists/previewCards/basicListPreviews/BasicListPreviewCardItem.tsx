@@ -1,5 +1,5 @@
 import React from 'react';
-import { IbasicListItem } from '../../../../../types/models/listItems';
+import { IbasicListItem } from '../../../../../../types/models/listItems';
 
 interface props {
     item: IbasicListItem;
