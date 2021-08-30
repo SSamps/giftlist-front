@@ -4,9 +4,10 @@ interface props {
     isSelected: boolean;
     body: string;
     link?: string;
+    showControls: boolean;
 }
 
-const BasicListExampleItem: React.FC<props> = ({ isSelected, body, link }) => {
+const BasicListExampleItem: React.FC<props> = ({ isSelected, body, link, showControls }) => {
     return (
         <div className='exampleItem'>
             <div className='exampleItem-main'>
@@ -18,12 +19,14 @@ const BasicListExampleItem: React.FC<props> = ({ isSelected, body, link }) => {
                     )}
                 </span>
                 <span className='exampleItem-main-body'>{body}</span>
-                <span className='exampleItem-main-controlsContainer'>
-                    <span className='exampleItem-main-controlsContainer-controls'>
-                        <span className='fas fa-pen btn-simple-disabled'></span>
-                        <span className='fas fa-times btn-simple-disabled'></span>
+                {showControls && (
+                    <span className='exampleItem-main-controlsContainer'>
+                        <span className='exampleItem-main-controlsContainer-controls'>
+                            <span className='fas fa-pen btn-simple-disabled'></span>
+                            <span className='fas fa-times btn-simple-disabled'></span>
+                        </span>
                     </span>
-                </span>
+                )}
             </div>
             {link && (
                 <div className='listItem-links'>

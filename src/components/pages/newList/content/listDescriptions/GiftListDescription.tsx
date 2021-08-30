@@ -4,7 +4,7 @@ const GiftListDescription: React.FC = () => {
     return (
         <div>
             <div className='title'>Gift List</div>
-            <div>Help them choose something you'd love without giving away any surprises</div>
+            <div>Help them choose something you'd love without spoiling any surprises</div>
         </div>
     );
 };

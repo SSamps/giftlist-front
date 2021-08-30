@@ -42,11 +42,9 @@ const BasicListContainer: React.FC<Props> = ({ currentList, currentListUser }) =
                         )}
                     </div>
                 </div>
-                <div className='listNewItemContainer'>
-                    {currentList.listItems.length < currentList.maxListItems && (
-                        <NewListItem itemType='listItem' groupId={currentList._id}></NewListItem>
-                    )}
-                </div>
+                {currentList.listItems.length < currentList.maxListItems && (
+                    <NewListItem itemType='listItem' groupId={currentList._id}></NewListItem>
+                )}
                 <BasicListDeleteItems currentList={currentList}></BasicListDeleteItems>
             </div>
         </Fragment>

@@ -4,9 +4,9 @@ import {
     GIFT_LIST,
     TYPE_LIST_GROUP_ALL_TOP_LEVEL_VARIANTS,
 } from '../../../../../types/listVariants';
-import BasicListExample from './basicLists.tsx/BasicListExample';
+import BasicListExample from './basicList/BasicListExample';
 import GiftGroupExample from './GiftGroupExample';
-import GiftListExample from './GiftListExample';
+import GiftListExample from './gistList/GiftListExample';
 
 interface Props {
     controllerState: TYPE_LIST_GROUP_ALL_TOP_LEVEL_VARIANTS;
