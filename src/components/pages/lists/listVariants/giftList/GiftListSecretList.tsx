@@ -26,11 +26,20 @@ const GiftListSecretList: React.FC<Props> = ({ currentList, currentListUser, use
         );
     };
 
+    const renderListLabel = () => {
+        return (
+            <div className='giftListLabel'>
+                <div className='systemMessage'>Gift ideas</div>
+                {renderSecretItemVisibilityMessage()}
+            </div>
+        );
+    };
+
     const renderGuestList = () => {
         return (
             currentListUser.permissions.includes('GROUP_RW_SECRET_LIST_ITEMS') && (
                 <div className='listSectionContentContainer'>
-                    <div className='giftListLabel systemMessage'>Gift ideas</div>
+                    {renderListLabel()}
                     <div className='listItemContainer'>
                         {currentList.secretListItems && currentList.secretListItems.length > 0 ? (
                             currentList.secretListItems.map((item) => {
@@ -85,7 +94,6 @@ const GiftListSecretList: React.FC<Props> = ({ currentList, currentListUser, use
 
     return (
         <div className='listSectionContainer'>
-            {renderSecretItemVisibilityMessage()}
             {renderGuestList()}
             {renderNewSecretListItem()}
         </div>
