@@ -14,11 +14,11 @@ const ListFormContainer: React.FC<Props> = ({ controllerState }) => {
     const getListType = () => {
         switch (controllerState) {
             case BASIC_LIST:
-                return 'Basic list';
+                return 'Basic List';
             case GIFT_LIST:
-                return 'Gift list';
+                return 'Gift List';
             case GIFT_GROUP:
-                return 'Gift group';
+                return 'Gift Group';
         }
     };
 
