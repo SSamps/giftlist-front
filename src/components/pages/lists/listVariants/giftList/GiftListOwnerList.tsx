@@ -32,9 +32,7 @@ const GiftListOwnerList: React.FC<Props> = ({ currentList, currentListUser, owne
     };
 
     const renderListLabel = () => {
-        return (
-            <div className='giftListListLabel systemMessage'>{currentUserIsOwner ? 'Your' : `${ownerName}'s`} list</div>
-        );
+        return <div className='giftListLabel systemMessage'>{currentUserIsOwner ? 'Your' : `${ownerName}'s`} list</div>;
     };
 
     const renderOwnerList = () => {

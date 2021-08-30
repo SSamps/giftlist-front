@@ -30,7 +30,7 @@ const GiftListSecretList: React.FC<Props> = ({ currentList, currentListUser, use
         return (
             currentListUser.permissions.includes('GROUP_RW_SECRET_LIST_ITEMS') && (
                 <div className='listSectionContentContainer'>
-                    <div className='giftListListLabel systemMessage'>Gift ideas</div>
+                    <div className='giftListLabel systemMessage'>Gift ideas</div>
                     <div className='listItemContainer'>
                         {currentList.secretListItems && currentList.secretListItems.length > 0 ? (
                             currentList.secretListItems.map((item) => {

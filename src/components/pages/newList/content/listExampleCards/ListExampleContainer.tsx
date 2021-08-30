@@ -6,7 +6,7 @@ import {
 } from '../../../../../types/listVariants';
 import BasicListExample from './basicList/BasicListExample';
 import GiftGroupExample from './GiftGroupExample';
-import GiftListExample from './gistList/GiftListExample';
+import GiftListExample from './giftList/GiftListExample';
 
 interface Props {
     controllerState: TYPE_LIST_GROUP_ALL_TOP_LEVEL_VARIANTS;

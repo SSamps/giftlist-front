@@ -9,14 +9,16 @@ const GiftListExample: React.FC = () => {
         <div className='newListExampleCard newListExampleCard-giftList'>
             <ListExampleToolbar title={`${ownerName}'s Birthday List`}></ListExampleToolbar>
             <div className='basicListExample-items'>
-                <div className='listItemContainer'>
-                    <div className='systemMessage'>
-                        <i className='fas fa-eye-slash danger'></i>{' '}
-                        <span>
-                            {ownerName} <strong>can't</strong> see your selection
-                        </span>
+                <div className='exampleListItemContainer'>
+                    <div className='exampleListLabel'>
+                        <div className='systemMessage'>{ownerName}'s list</div>
+                        <div className='systemMessage'>
+                            <i className='fas fa-eye-slash danger'></i>{' '}
+                            <span>
+                                {ownerName} <strong>can't</strong> see your selection
+                            </span>
+                        </div>
                     </div>
-                    <div className='giftListListLabel systemMessage'>{ownerName}'s list</div>
                     <BasicListExampleItem
                         isSelected={true}
                         selectedBy={['You']}
@@ -26,36 +28,36 @@ const GiftListExample: React.FC = () => {
                     ></BasicListExampleItem>
                     <BasicListExampleItem
                         isSelected={false}
-                        selectedBy={['Sarah', 'Charlie']}
                         body='Socks with penguins on them'
                         showControls={false}
                     ></BasicListExampleItem>
                     <BasicListExampleItem
                         isSelected={false}
                         body='A terrarium for my desk'
+                        selectedBy={['Sarah', 'Charlie']}
                         showControls={false}
                     ></BasicListExampleItem>
                 </div>
             </div>
             <div className='basicListExample-items'>
-                <div className='listItemContainer'>
-                    <div className='systemMessage'>
-                        <i className='fas fa-eye-slash danger'></i>{' '}
-                        <span>
-                            {ownerName} <strong>can't</strong> see added gift ideas
-                        </span>
-                    </div>
-                    <div className='giftListListLabel systemMessage'>
-                        <span>Gift ideas</span>
+                <div className='exampleListItemContainer'>
+                    <div className='exampleListLabel'>
+                        <div className='systemMessage'>Gift ideas</div>
+                        <div className='systemMessage'>
+                            <i className='fas fa-eye-slash danger'></i>{' '}
+                            <span>
+                                {ownerName} <strong>can't</strong> see added gift ideas
+                            </span>
+                        </div>
                     </div>
                     <BasicListExampleItem
-                        isSelected={true}
-                        body='All purpose flour'
-                        showControls={true}
+                        isSelected={false}
+                        body='Cast iron pan'
+                        showControls={false}
                     ></BasicListExampleItem>
                     <BasicListExampleItem
-                        isSelected={true}
-                        body='Baking soda'
+                        isSelected={false}
+                        body='Tickets to something?'
                         showControls={true}
                     ></BasicListExampleItem>
                 </div>
@@ -78,15 +80,15 @@ const GiftListExample: React.FC = () => {
                 </div>
                 <div className='exampleChatContainer-listChat'>
                     <ExampleChatMessage
-                        message={'Hello there'}
-                        author={'Alex'}
+                        message={'Anyone want go halfsies on a terrarium?'}
+                        author={'Sarah'}
                         type='otherUser'
                         date='yesterday'
                     ></ExampleChatMessage>
                     <ExampleChatMessage
-                        message={'Hello there'}
-                        author={'Ben'}
-                        type='currentUser'
+                        message={"Sure I'd be up for that!"}
+                        author={'Mattia'}
+                        type='otherUser'
                         date='yesterday'
                     ></ExampleChatMessage>
                 </div>
