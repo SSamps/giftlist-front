@@ -54,7 +54,7 @@
         align-items: center;
         padding: 0 1rem;
 
-        &-item {
+        &-basicItem {
             position: relative;
             height: 100%;
             display: grid;
@@ -63,6 +63,7 @@
             overflow: hidden;
 
             &-text {
+                grid-column: 2;
                 margin: auto 0;
                 overflow: hidden;
                 white-space: nowrap;
@@ -71,19 +72,20 @@
             }
 
             &-icon {
+                grid-column: 1;
                 margin: auto;
             }
         }
 
-        &-child {
+        &-item {
             position: relative;
             height: 100%;
             display: grid;
             grid-template-rows: 1;
-            grid-template-columns: 1fr 6.2rem;
+            grid-template-columns: 1fr 4.375rem;
             overflow: hidden;
 
-            &-name {
+            &-text {
                 margin: auto 0;
                 overflow: hidden;
                 white-space: nowrap;

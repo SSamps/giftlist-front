@@ -5,7 +5,7 @@ import { IrootStateAuthedGiftGroupLoaded } from '../../../../../redux/reducers/r
 import { IgiftGroupMember, TgiftGroupFields } from '../../../../../types/models/listGroups';
 import { IUser } from '../../../../../types/models/User';
 import { findUserInGroup } from '../../../../../utils/helperFunctions';
-import GiftListPreviewCard from '../../../dashboard/yourLists/previewCards/GiftListPreviewCard';
+import GiftListPreviewCard from '../../../dashboard/yourLists/previewCards/GiftListPreviews/GiftListPreviewCard';
 import ListTitleBar from '../../miscShared/titleBar/ListTitleBar';
 import AddChildGroupOverlay from './AddChildGroupOverlay';
 

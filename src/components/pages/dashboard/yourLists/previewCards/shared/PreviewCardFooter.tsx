@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { IrootStateAuthedUnknownListLoaded } from '../../../../../redux/reducers/root/rootReducer';
+import { IrootStateAuthedUnknownListLoaded } from '../../../../../../redux/reducers/root/rootReducer';
 import {
     IbasicListMember,
     IgiftGroupChildMember,
@@ -10,8 +10,8 @@ import {
     TgiftGroupChildFieldsCensored,
     TgiftGroupFields,
     TgiftListFieldsCensored,
-} from '../../../../../types/models/listGroups';
-import { IUser } from '../../../../../types/models/User';
+} from '../../../../../../types/models/listGroups';
+import { IUser } from '../../../../../../types/models/User';
 
 interface props {
     owner: IbasicListMember | IgiftListMember | IgiftGroupMember | IgiftGroupChildMember | null;

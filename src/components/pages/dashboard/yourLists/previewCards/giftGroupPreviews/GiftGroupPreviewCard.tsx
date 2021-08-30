@@ -2,8 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { TgiftGroupFields } from '../../../../../../types/models/listGroups';
 import { findOwnerInGroup } from '../../../../../../utils/helperFunctions';
-import PreviewCardFooter from '../PreviewCardFooter';
-import PreviewCardHeader from '../PreviewCardHeader';
+import PreviewCardFooter from '../shared/PreviewCardFooter';
+import PreviewCardHeader from '../shared/PreviewCardHeader';
 import GiftGroupPreviewCardChild from './GiftGroupPreviewCardChild';
 
 interface Props {

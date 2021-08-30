@@ -5,8 +5,8 @@ import { IrootStateAuthedBasicListLoaded } from '../../../../../../redux/reducer
 import { TbasicListFields } from '../../../../../../types/models/listGroups';
 import { IUser } from '../../../../../../types/models/User';
 import { findOwnerInGroup } from '../../../../../../utils/helperFunctions';
-import PreviewCardFooter from '../PreviewCardFooter';
-import PreviewCardHeader from '../PreviewCardHeader';
+import PreviewCardFooter from '../shared/PreviewCardFooter';
+import PreviewCardHeader from '../shared/PreviewCardHeader';
 import BasicListPreviewCardItem from './BasicListPreviewCardItem';
 
 interface Props {

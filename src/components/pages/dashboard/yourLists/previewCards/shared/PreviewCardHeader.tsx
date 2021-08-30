@@ -5,7 +5,7 @@ import {
     TgiftGroupChildFieldsCensored,
     TgiftGroupFields,
     TgiftListFieldsCensored,
-} from '../../../../../types/models/listGroups';
+} from '../../../../../../types/models/listGroups';
 
 interface props {
     list: TbasicListFields | TgiftListFieldsCensored | TgiftGroupFields | TgiftGroupChildFieldsCensored;

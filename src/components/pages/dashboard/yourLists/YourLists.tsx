@@ -12,7 +12,7 @@ import { IUser } from '../../../../types/models/User';
 import { PERM_GROUP_OWNER } from '../../../../types/listGroupPermissions';
 import YourListsToolbar from './controlBar/DashboardFilter';
 import { Link } from 'react-router-dom';
-import GiftListPreviewCard from './previewCards/GiftListPreviewCard';
+import GiftListPreviewCard from './previewCards/GiftListPreviews/GiftListPreviewCard';
 import BasicListPreviewCard from './previewCards/basicListPreviews/BasicListPreviewCard';
 import Spinner from '../../../misc/spinner';
 import GiftGroupPreviewCard from './previewCards/giftGroupPreviews/GiftGroupPreviewCard';
