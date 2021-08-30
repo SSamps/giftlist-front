@@ -1,7 +1,6 @@
 import React from 'react';
 import BasicListExampleItem from '../shared/ExampleListItem';
 import ListExampleToolbar from '../shared/ListExampleToolbar';
-import ExampleChatMessage from './ExampleChatMessage';
 
 const GiftListExample: React.FC = () => {
     const ownerName = 'Alex';
@@ -69,34 +68,6 @@ const GiftListExample: React.FC = () => {
                             </span>
                         </div>
                     </div>
-                </div>
-            </div>
-            <div className='exampleChatContainer'>
-                <div className='systemMessage'>
-                    <i className='fas fa-eye-slash danger'></i>{' '}
-                    <span>
-                        {ownerName} <strong>can't</strong> see your chat
-                    </span>
-                </div>
-                <div className='exampleChatContainer-listChat'>
-                    <ExampleChatMessage
-                        message={'Anyone want go halfsies on a terrarium?'}
-                        author={'Sarah'}
-                        type='otherUser'
-                        date='yesterday'
-                    ></ExampleChatMessage>
-                    <ExampleChatMessage
-                        message={"Sure I'd be up for that!"}
-                        author={'Mattia'}
-                        type='otherUser'
-                        date='yesterday'
-                    ></ExampleChatMessage>
-                </div>
-                <div className='listChatControlsContainer'>
-                    <form className='form form-singleInput'>
-                        <input type='text' placeholder='Type a message'></input>
-                        <span className='btn-simple'>Send</span>
-                    </form>
                 </div>
             </div>
         </div>
