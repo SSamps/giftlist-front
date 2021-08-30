@@ -1,5 +1,5 @@
 // Backgrounds
-$color-background-primary: #fffff9;
+$color-background-primary: hsl(60, 100%, 99%);
 $color-background-secondary: hsl(158, 12%, 94%);
 $color-highlight: hsl(199, 45%, 88%);
 $color-background-dark: hsl(215, 50%, 23%);
@@ -20,6 +20,7 @@ $color-text-name: hsl(204, 100%, 38%);
 $color-border: hsl(240, 49%, 85%);
 $color-border-hover: hsl(240, 73%, 75%);
 $color-border-danger: hsl(0, 71%, 67%);
+$color-border-inactive: hsl(0, 0%, 61%);
 $color-interactive: hsl(247, 67%, 63%);
 $color-interactive-hover: hsl(253, 78%, 58%);
 $color-interactive-active: hsl(261, 96%, 54%);

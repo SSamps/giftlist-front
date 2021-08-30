@@ -31,29 +31,31 @@ const GiftListSecretList: React.FC<Props> = ({ currentList, currentListUser, use
             currentListUser.permissions.includes('GROUP_RW_SECRET_LIST_ITEMS') && (
                 <div className='listSectionContentContainer'>
                     <div className='giftListListLabel systemMessage'>Gift ideas</div>
-                    {currentList.secretListItems && currentList.secretListItems.length > 0 ? (
-                        currentList.secretListItems.map((item) => {
-                            return (
-                                <ListItem
-                                    key={item._id}
-                                    listItem={item}
-                                    allowSelection={currentListUser.permissions.includes(
-                                        'GROUP_SELECT_SECRET_LIST_ITEMS'
-                                    )}
-                                    allowModification={
-                                        currentListUser.permissions.includes('GROUP_RW_SECRET_LIST_ITEMS') &&
-                                        item.authorId === user._id
-                                    }
-                                    allowDeletion={
-                                        currentListUser.permissions.includes('GROUP_RW_SECRET_LIST_ITEMS') &&
-                                        item.authorId === user._id
-                                    }
-                                ></ListItem>
-                            );
-                        })
-                    ) : (
-                        <EmptyListItem description={`Nobody has suggested any gift ideas`}></EmptyListItem>
-                    )}
+                    <div className='listItemContainer'>
+                        {currentList.secretListItems && currentList.secretListItems.length > 0 ? (
+                            currentList.secretListItems.map((item) => {
+                                return (
+                                    <ListItem
+                                        key={item._id}
+                                        listItem={item}
+                                        allowSelection={currentListUser.permissions.includes(
+                                            'GROUP_SELECT_SECRET_LIST_ITEMS'
+                                        )}
+                                        allowModification={
+                                            currentListUser.permissions.includes('GROUP_RW_SECRET_LIST_ITEMS') &&
+                                            item.authorId === user._id
+                                        }
+                                        allowDeletion={
+                                            currentListUser.permissions.includes('GROUP_RW_SECRET_LIST_ITEMS') &&
+                                            item.authorId === user._id
+                                        }
+                                    ></ListItem>
+                                );
+                            })
+                        ) : (
+                            <EmptyListItem description={`Nobody has suggested any gift ideas`}></EmptyListItem>
+                        )}
+                    </div>
                 </div>
             )
         );

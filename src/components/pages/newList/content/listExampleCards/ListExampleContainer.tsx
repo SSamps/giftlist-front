@@ -4,7 +4,7 @@ import {
     GIFT_LIST,
     TYPE_LIST_GROUP_ALL_TOP_LEVEL_VARIANTS,
 } from '../../../../../types/listVariants';
-import BasicListExample from './BasicListExample';
+import BasicListExample from './basicLists.tsx/BasicListExample';
 import GiftGroupExample from './GiftGroupExample';
 import GiftListExample from './GiftListExample';
 

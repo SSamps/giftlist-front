@@ -43,6 +43,10 @@
     }
 }
 
+.btn-simple-disabled {
+    color: $color-interactive;
+}
+
 .btn-simple-danger {
     color: $color-interactive-danger;
     cursor: pointer;

@@ -41,7 +41,7 @@ const GiftListOwnerList: React.FC<Props> = ({ currentList, currentListUser, owne
         return (
             <div className='listSectionContentContainer'>
                 {renderListLabel()}
-                <div className='listListItemContainer'>
+                <div className='listItemContainer'>
                     {currentList.listItems.length > 0 ? (
                         currentList.listItems.map((item) => {
                             return (

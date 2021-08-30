@@ -1,0 +1,117 @@
+.newListExampleCard {
+    width: calc(min(30rem, 100%));
+    aspect-ratio: 0.8;
+    border-color: $color-border;
+    border-style: solid;
+    background-color: $color-background-primary;
+    color: $color-text-system;
+    margin-top: 1rem;
+    overflow: hidden;
+    border-radius: 4px;
+
+    &-basicList {
+        display: grid;
+        grid-template-columns: 1;
+        grid-template-rows: auto auto auto 1fr;
+        // gap: 0.5rem;
+        align-items: center;
+        // justify-content: center;
+    }
+}
+
+.basicListExample {
+    &-items {
+        width: 100%;
+        margin-top: 1rem;
+    }
+
+    &-newItem {
+        // margin: 1rem 0;
+        width: 100%;
+    }
+
+    &-deleteButtons {
+        margin-bottom: auto;
+        width: 100%;
+        display: flex;
+        justify-content: space-around;
+
+        &-button {
+            width: 7rem;
+            text-align: center;
+        }
+    }
+}
+
+.exampleTitleBar {
+    width: 100%;
+    display: grid;
+    grid-template-columns: calc(min(10%, 3rem)) 1fr calc(min(10%, 3rem));
+    grid-template-rows: 1fr 1px;
+    align-items: center;
+
+    &-title {
+        justify-self: center;
+        text-align: center;
+        grid-column: 2/3;
+        width: 100%;
+    }
+
+    &-controls {
+        color: $color-interactive;
+        font-size: 1.2rem;
+        justify-self: center;
+        grid-column: 3;
+        position: relative;
+        padding: 0 0.3rem;
+    }
+
+    &-hr {
+        border: 0;
+        border-top: 1px solid $color-interactive;
+        grid-column: 1 / 4;
+        grid-row: 2;
+    }
+}
+
+.exampleItem {
+    width: 95%;
+    padding: 0.25rem 0.5rem 0.25rem 0.5rem;
+    border-radius: 4px;
+    background-color: $color-background-secondary;
+}
+
+.exampleItem-main {
+    display: grid;
+    grid-template-columns: 2rem auto 3.2rem;
+    grid-template-rows: 1fr;
+
+    &-select {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        grid-column: 1;
+    }
+
+    &-body {
+        word-wrap: break-word;
+        word-break: break-all;
+        hyphens: auto;
+        grid-column: 2;
+        color: $color-text-body;
+    }
+
+    &-controlsContainer {
+        display: flex;
+        justify-content: center;
+        grid-column: 3;
+
+        &-controls {
+            font-size: 1.2rem;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+    }
+}

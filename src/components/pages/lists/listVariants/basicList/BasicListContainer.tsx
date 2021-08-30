@@ -24,21 +24,23 @@ const BasicListContainer: React.FC<Props> = ({ currentList, currentListUser }) =
                     <pre> </pre>
                 </div>
                 <div className='listSectionContentContainer'>
-                    {currentList.listItems.length > 0 ? (
-                        currentList.listItems.map((item) => {
-                            return (
-                                <ListItem
-                                    key={item._id}
-                                    listItem={item}
-                                    allowSelection={currentListUser.permissions.includes('GROUP_SELECT_LIST_ITEMS')}
-                                    allowModification={currentListUser.permissions.includes('GROUP_RW_LIST_ITEMS')}
-                                    allowDeletion={currentListUser.permissions.includes('GROUP_RW_LIST_ITEMS')}
-                                ></ListItem>
-                            );
-                        })
-                    ) : (
-                        <EmptyListItem description={`No items have been added yet`}></EmptyListItem>
-                    )}
+                    <div className='listItemContainer'>
+                        {currentList.listItems.length > 0 ? (
+                            currentList.listItems.map((item) => {
+                                return (
+                                    <ListItem
+                                        key={item._id}
+                                        listItem={item}
+                                        allowSelection={currentListUser.permissions.includes('GROUP_SELECT_LIST_ITEMS')}
+                                        allowModification={currentListUser.permissions.includes('GROUP_RW_LIST_ITEMS')}
+                                        allowDeletion={currentListUser.permissions.includes('GROUP_RW_LIST_ITEMS')}
+                                    ></ListItem>
+                                );
+                            })
+                        ) : (
+                            <EmptyListItem description={`No items have been added yet`}></EmptyListItem>
+                        )}
+                    </div>
                 </div>
                 <div className='listNewItemContainer'>
                     {currentList.listItems.length < currentList.maxListItems && (
