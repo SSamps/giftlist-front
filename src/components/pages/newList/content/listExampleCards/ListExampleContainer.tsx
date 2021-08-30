@@ -4,6 +4,9 @@ import {
     GIFT_LIST,
     TYPE_LIST_GROUP_ALL_TOP_LEVEL_VARIANTS,
 } from '../../../../../types/listVariants';
+import BasicListDescription from '../listDescriptions/BasicListDescription';
+import GiftGroupDescription from '../listDescriptions/GiftGroupDescription';
+import GiftListDescription from '../listDescriptions/GiftListDescription';
 import BasicListExample from './basicList/BasicListExample';
 import GiftGroupExample from './GiftGroupExample';
 import GiftListExample from './giftList/GiftListExample';
@@ -15,11 +18,26 @@ interface Props {
 const renderCard = (controllerState: TYPE_LIST_GROUP_ALL_TOP_LEVEL_VARIANTS) => {
     switch (controllerState) {
         case BASIC_LIST:
-            return <BasicListExample></BasicListExample>;
+            return (
+                <div className='newListExampleContainer-inner'>
+                    <BasicListDescription></BasicListDescription>
+                    <BasicListExample></BasicListExample>
+                </div>
+            );
         case GIFT_LIST:
-            return <GiftListExample></GiftListExample>;
+            return (
+                <div className='newListExampleContainer-inner'>
+                    <GiftListDescription></GiftListDescription>
+                    <GiftListExample></GiftListExample>
+                </div>
+            );
         case GIFT_GROUP:
-            return <GiftGroupExample></GiftGroupExample>;
+            return (
+                <div className='newListExampleContainer-inner'>
+                    <GiftGroupDescription></GiftGroupDescription>
+                    <GiftGroupExample></GiftGroupExample>
+                </div>
+            );
     }
 };
 
