@@ -83,7 +83,7 @@
             display: grid;
             grid-template-rows: 1;
             grid-template-columns: 1fr 4.375rem;
-            overflow: hidden;
+            gap: 0.1rem;
 
             &-text {
                 margin: auto 0;
