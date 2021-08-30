@@ -77,7 +77,7 @@ const InviteFormInput: React.FC<Props> = ({ inviteArray, setInviteArray }) => {
                                     );
                                 })
                             ) : (
-                                <span className='system'>none</span>
+                                <span className='system'>Enter emails below</span>
                             )}
                         </div>
                         <div className='form-group-inputContainerWithSideControls'>

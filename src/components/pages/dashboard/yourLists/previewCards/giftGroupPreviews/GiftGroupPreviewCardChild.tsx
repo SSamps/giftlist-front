@@ -28,9 +28,9 @@ const GiftGroupPreviewCardChild: React.FC<props> = ({ child, user }) => {
     };
 
     return (
-        <li className='listPreviewCard-body-item'>
-            <span className='listPreviewCard-body-item-text'>{child.groupName}</span>
-            <div className='listPreviewCard-body-item-selection'>{hasSelectedItem() ? '- Selected' : ''}</div>
+        <li className='listPreviewCard-body-giftListItem-member'>
+            <span className='listPreviewCard-body-giftListItem-text'>{child.groupName}</span>
+            <div className='listPreviewCard-body-giftListItem-selection'>{hasSelectedItem() ? '- Selected' : ''}</div>
         </li>
     );
 };
