@@ -2,12 +2,29 @@ import React from 'react';
 
 interface props {
     isSelected: boolean;
+    selectedBy?: string[];
     body: string;
     link?: string;
     showControls: boolean;
 }
 
-const BasicListExampleItem: React.FC<props> = ({ isSelected, body, link, showControls }) => {
+const BasicListExampleItem: React.FC<props> = ({ isSelected, body, link, showControls, selectedBy }) => {
+    const renderSelectedBy = () => {
+        if (!selectedBy || selectedBy.length < 1) {
+            return null;
+        }
+
+        return selectedBy.length === 1 ? (
+            <div className='listItem-selected'>Selected by {selectedBy[0]}</div>
+        ) : (
+            <div className='listItem-selected'>
+                <span>
+                    Shared by <span className='btn-simple'>{selectedBy.length} people</span>
+                </span>
+            </div>
+        );
+    };
+
     return (
         <div className='exampleItem'>
             <div className='exampleItem-main'>
@@ -35,6 +52,7 @@ const BasicListExampleItem: React.FC<props> = ({ isSelected, body, link, showCon
                     </span>
                 </div>
             )}
+            {renderSelectedBy()}
         </div>
     );
 };

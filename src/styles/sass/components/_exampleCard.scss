@@ -1,44 +1,38 @@
 .newListExampleCard {
     width: calc(min(30rem, 100%));
-    aspect-ratio: 0.8;
     border-color: $color-border;
     border-style: solid;
     background-color: $color-background-primary;
     color: $color-text-system;
-    margin-top: 1rem;
+    margin: 1rem 0;
     overflow: hidden;
     border-radius: 4px;
 
     &-basicList {
-        aspect-ratio: 0.8;
         display: grid;
         grid-template-columns: 1;
         grid-template-rows: auto auto auto 1fr;
-        // gap: 0.5rem;
         align-items: center;
-        // justify-content: center;
+        padding-bottom: 4rem;
+        gap: 1rem;
     }
 
     &-giftList {
-        aspect-ratio: 0.5;
         display: grid;
         grid-template-columns: 1;
-        grid-template-rows: auto auto auto 1fr;
-        // gap: 0.5rem;
+        grid-template-rows: auto auto auto auto;
         align-items: center;
-        // justify-content: center;
+        gap: 1rem;
     }
 }
 
 .basicListExample {
     &-items {
         width: 100%;
-        margin-top: 1rem;
         overflow: hidden;
     }
 
     &-newItem {
-        // margin: 1rem 0;
         width: 100%;
         overflow: hidden;
     }
@@ -54,6 +48,13 @@
             text-align: center;
         }
     }
+}
+
+.exampleNewItemContainer {
+    margin-top: 1.5rem;
+    width: 100%;
+    display: flex;
+    justify-content: center;
 }
 
 .exampleTitleBar {
@@ -126,5 +127,63 @@
             justify-content: space-between;
             align-items: center;
         }
+    }
+}
+
+.exampleChatContainer {
+    &-listChat {
+        margin: 1rem auto;
+        padding: 1rem 1rem;
+        width: 95%;
+        display: flex;
+        flex-direction: column;
+        gap: 0.6rem;
+        max-height: calc(min(50rem, 75vh));
+        word-wrap: break-word;
+        background-color: $color-background-secondary;
+        border-radius: 4px;
+    }
+}
+
+.exampleMessageOuter {
+    width: 100%;
+    display: flex;
+
+    &-currentUser {
+        justify-content: flex-end;
+    }
+
+    &-otherUser {
+        justify-content: flex-start;
+    }
+}
+
+.exampleMessageInner {
+    padding: 0.25rem 1rem;
+    border-radius: 4px;
+    max-width: 80%;
+    display: flex;
+    flex-direction: column;
+    background-color: $color-highlight;
+}
+
+.exampleMessage {
+    &-currentUser {
+        padding-left: 0.5rem;
+    }
+
+    &-otherUser {
+        padding-left: 0.5rem;
+    }
+
+    &-system {
+        color: $color-text-system;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    &-label {
+        color: $color-text-name;
     }
 }

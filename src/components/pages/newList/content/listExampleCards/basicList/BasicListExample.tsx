@@ -32,13 +32,13 @@ const BasicListExample: React.FC = () => {
                         showControls={true}
                     ></BasicListExampleItem>
                 </div>
-            </div>
-            <div className='basicListExample-newItem'>
-                <div className='listNewItemContainer'>
-                    <div>
-                        <span className='btn-simple-disabled'>
-                            <i className='fas fa-plus'></i> New item
-                        </span>
+                <div className='basicListExample-newItem'>
+                    <div className='exampleNewItemContainer'>
+                        <div>
+                            <span className='btn-simple-disabled'>
+                                <i className='fas fa-plus'></i> New item
+                            </span>
+                        </div>
                     </div>
                 </div>
             </div>

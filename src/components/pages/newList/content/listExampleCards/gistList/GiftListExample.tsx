@@ -4,30 +4,37 @@ import ListExampleToolbar from '../shared/ListExampleToolbar';
 import ExampleChatMessage from './ExampleChatMessage';
 
 const GiftListExample: React.FC = () => {
+    const ownerName = 'Alex';
     return (
         <div className='newListExampleCard newListExampleCard-giftList'>
-            <ListExampleToolbar title={"Simon's Birthday List"}></ListExampleToolbar>
+            <ListExampleToolbar title={`${ownerName}'s Birthday List`}></ListExampleToolbar>
             <div className='basicListExample-items'>
                 <div className='listItemContainer'>
                     <div className='systemMessage'>
                         <i className='fas fa-eye-slash danger'></i>{' '}
                         <span>
-                            Simon <strong>can't</strong> see your selection
+                            {ownerName} <strong>can't</strong> see your selection
                         </span>
                     </div>
-                    <div className='giftListListLabel systemMessage'>Simon's list</div>
+                    <div className='giftListListLabel systemMessage'>{ownerName}'s list</div>
                     <BasicListExampleItem
                         isSelected={true}
+                        selectedBy={['You']}
                         body='These climbing shoes'
                         showControls={false}
                         link={'yeoldeclimbingshoppe.com/reallyniceshoes'}
                     ></BasicListExampleItem>
                     <BasicListExampleItem
-                        isSelected={true}
+                        isSelected={false}
+                        selectedBy={['Sarah', 'Charlie']}
                         body='Socks with penguins on them'
                         showControls={false}
                     ></BasicListExampleItem>
-                    <BasicListExampleItem isSelected={false} body='Salt' showControls={false}></BasicListExampleItem>
+                    <BasicListExampleItem
+                        isSelected={false}
+                        body='A terrarium for my desk'
+                        showControls={false}
+                    ></BasicListExampleItem>
                 </div>
             </div>
             <div className='basicListExample-items'>
@@ -35,10 +42,12 @@ const GiftListExample: React.FC = () => {
                     <div className='systemMessage'>
                         <i className='fas fa-eye-slash danger'></i>{' '}
                         <span>
-                            Simon <strong>can't</strong> see added gift ideas
+                            {ownerName} <strong>can't</strong> see added gift ideas
                         </span>
                     </div>
-                    <div className='giftListListLabel systemMessage'>Gift ideas</div>
+                    <div className='giftListListLabel systemMessage'>
+                        <span>Gift ideas</span>
+                    </div>
                     <BasicListExampleItem
                         isSelected={true}
                         body='All purpose flour'
@@ -50,24 +59,24 @@ const GiftListExample: React.FC = () => {
                         showControls={true}
                     ></BasicListExampleItem>
                 </div>
-            </div>
-            <div className='basicListExample-newItem'>
-                <div className='listNewItemContainer'>
-                    <div>
-                        <span className='btn-simple-disabled'>
-                            <i className='fas fa-plus'></i> Gift idea
-                        </span>
+                <div className='basicListExample-newItem'>
+                    <div className='exampleNewItemContainer'>
+                        <div>
+                            <span className='btn-simple-disabled'>
+                                <i className='fas fa-plus'></i> Gift idea
+                            </span>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div className='ListExample-chatContainer'>
+            <div className='exampleChatContainer'>
                 <div className='systemMessage'>
                     <i className='fas fa-eye-slash danger'></i>{' '}
                     <span>
-                        Simon <strong>can't</strong> see your chat
+                        {ownerName} <strong>can't</strong> see your chat
                     </span>
                 </div>
-                <div className='listChat'>
+                <div className='exampleChatContainer-listChat'>
                     <ExampleChatMessage
                         message={'Hello there'}
                         author={'Alex'}
