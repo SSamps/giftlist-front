@@ -28,6 +28,8 @@ interface Props {
     allowSelection: boolean;
     allowModification: boolean;
     allowDeletion: boolean;
+    longLinks?: boolean;
+    longBody?: boolean;
     deleteListItemActionCreator: TdeleteListItemActionCreator;
     selectListItemActionCreator: TselectListItemActionCreator;
 }
@@ -39,9 +41,12 @@ const ListItem: React.FC<Props> = ({
     allowSelection,
     allowModification,
     allowDeletion,
+    longLinks,
+    longBody,
     deleteListItemActionCreator,
     selectListItemActionCreator,
 }) => {
+    console.log(longLinks, longBody);
     const [removalStatus, setRemovalStatus] = useState({
         waitingRemoval: false,
     });
@@ -175,7 +180,14 @@ const ListItem: React.FC<Props> = ({
                     const displayUrl = shortenLink(link);
                     return (
                         <span className='listItem-links-linkContainer' key={`${listItem._id}_${index}`}>
-                            <a href={url} target='_blank' rel='noreferrer noopener' className='btn-simple'>
+                            <a
+                                href={url}
+                                target='_blank'
+                                rel='noreferrer noopener'
+                                className={`listItem-links-link ${
+                                    longLinks ? 'listItem-links-link-long' : ''
+                                } btn-simple`}
+                            >
                                 {displayUrl}
                             </a>
                         </span>
@@ -197,7 +209,9 @@ const ListItem: React.FC<Props> = ({
             <div className='listItem'>
                 <div className='listItem-main'>
                     {renderSelectionButton()}
-                    <span className='listItem-main-body'>{listItem.body}</span>
+                    <span className={`listItem-main-body ${longBody ? 'listItem-main-body-long' : ''}`}>
+                        {listItem.body}
+                    </span>
                     <span className='listItem-main-controlsContainer'>
                         {waitingRemoval ? (
                             <span>

@@ -137,7 +137,7 @@ const GiftListChat: React.FC<Props> = ({ ownerName, token, currentList, checkFor
         <div className='listSectionContainer listChatContainerBorder'>
             <div className='listSectionContentContainer'>
                 <div className='systemMessage'>
-                    <i className='fas fa-eye-slash danger'></i>{' '}
+                    <i className='fas fa-eye-slash'></i>{' '}
                     <span>
                         {ownerName} <strong>can't</strong> see your chat
                     </span>

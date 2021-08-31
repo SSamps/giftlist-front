@@ -95,6 +95,9 @@
         grid-column: 3;
         position: relative;
         padding: 0 0.3rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 
     &-hr {
@@ -114,7 +117,7 @@
 
 .exampleItem-main {
     display: grid;
-    grid-template-columns: 2rem auto 3.2rem;
+    grid-template-columns: 1.5rem auto 3.2rem;
     grid-template-rows: 1fr;
 
     &-select {
@@ -132,6 +135,10 @@
         color: $color-text-body;
     }
 
+    &-body-long {
+        grid-column: 2/4;
+    }
+
     &-controlsContainer {
         display: flex;
         justify-content: center;
@@ -147,6 +154,37 @@
     }
 }
 
+.exampleItem-links {
+    display: flex;
+    flex-direction: column;
+    margin-left: 2rem;
+
+    &-linkContainer {
+        display: grid;
+        grid-template-rows: 1;
+        grid-template-columns: 1fr 3.5rem;
+
+        color: $color-interactive;
+        &:hover {
+            color: $color-interactive-hover;
+        }
+
+        &:active {
+            color: $color-interactive-active;
+        }
+    }
+
+    &-link {
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+
+        &-long {
+            grid-column: 1/3;
+        }
+    }
+}
+
 .giftGroupExampleCardContainer {
     &-outer {
         width: 90%;
@@ -158,43 +196,44 @@
         width: 100%;
         height: 100%;
         display: grid;
-        grid-template-columns: repeat(21, 1fr);
-        grid-template-rows: repeat(21, 1fr);
-        background-color: beige;
+        grid-template-columns: repeat(43, 1fr);
+        grid-template-rows: repeat(43, 1fr);
         overflow: hidden;
     }
 
-    &-front {
-        border-radius: 4px;
-        background-color: red;
-        grid-column: 6/20;
-        grid-row: 2/18;
+    &-back {
+        grid-column: 12/40;
+        grid-row: 2/34;
         overflow: visible;
     }
 
     &-mid {
-        border-radius: 4px;
-        background-color: green;
-        grid-column: 5/19;
-        grid-row: 3/19;
+        grid-column: 10/38;
+        grid-row: 5/37;
         overflow: visible;
     }
 
-    &-back {
-        border-radius: 4px;
-        background-color: blue;
-        grid-column: 4/18;
-        grid-row: 4/20;
+    &-front {
+        grid-column: 8/36;
+        grid-row: 8/40;
         overflow: visible;
     }
+}
 
-    // &-card {
-    //     position: absolute;
-    //     background-color: sandybrown;
-    //     height: 25rem;
-    //     width: 25rem;
-    //     top: 50%;
-    //     left: 50%;
-    //     transform: translate(-50%, -50%);
-    // }
+.giftGroupMiniExampleCard {
+    height: 100%;
+    width: 100%;
+    border-radius: 4px;
+    border-color: $color-border;
+    border-style: solid;
+    background-color: $color-background-primary;
+    color: $color-text-system;
+    overflow: hidden;
+    font-size: 0.7rem;
+
+    display: grid;
+    grid-template-columns: 1;
+    grid-template-rows: auto auto 1fr;
+    align-items: center;
+    gap: 0.75rem;
 }

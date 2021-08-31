@@ -1,5 +1,5 @@
 import React from 'react';
-import BasicListExampleItem from '../shared/ExampleListItem';
+import ExampleListItem from '../shared/ExampleListItem';
 import ListExampleToolbar from '../shared/ListExampleToolbar';
 
 const BasicListExample: React.FC = () => {
@@ -8,29 +8,13 @@ const BasicListExample: React.FC = () => {
             <ListExampleToolbar title={'Groceries'}></ListExampleToolbar>
             <div className='basicListExample-items'>
                 <div className='listItemContainer'>
-                    <BasicListExampleItem
-                        isSelected={true}
-                        body='All purpose flour'
-                        showControls={true}
-                    ></BasicListExampleItem>
-                    <BasicListExampleItem
-                        isSelected={true}
-                        body='Baking soda'
-                        showControls={true}
-                    ></BasicListExampleItem>
-                    <BasicListExampleItem isSelected={false} body='Salt' showControls={true}></BasicListExampleItem>
-                    <BasicListExampleItem isSelected={false} body='Butter' showControls={true}></BasicListExampleItem>
-                    <BasicListExampleItem
-                        isSelected={true}
-                        body='Brown sugar'
-                        showControls={true}
-                    ></BasicListExampleItem>
-                    <BasicListExampleItem isSelected={false} body='Eggs' showControls={true}></BasicListExampleItem>
-                    <BasicListExampleItem
-                        isSelected={true}
-                        body='Chocolate chips'
-                        showControls={true}
-                    ></BasicListExampleItem>
+                    <ExampleListItem isSelected={true} body='All purpose flour' showControls={true}></ExampleListItem>
+                    <ExampleListItem isSelected={true} body='Baking soda' showControls={true}></ExampleListItem>
+                    <ExampleListItem isSelected={false} body='Salt' showControls={true}></ExampleListItem>
+                    <ExampleListItem isSelected={false} body='Butter' showControls={true}></ExampleListItem>
+                    <ExampleListItem isSelected={true} body='Brown sugar' showControls={true}></ExampleListItem>
+                    <ExampleListItem isSelected={false} body='Eggs' showControls={true}></ExampleListItem>
+                    <ExampleListItem isSelected={true} body='Chocolate chips' showControls={true}></ExampleListItem>
                 </div>
                 <div className='basicListExample-newItem'>
                     <div className='exampleNewItemContainer'>

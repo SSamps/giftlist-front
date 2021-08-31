@@ -19,7 +19,7 @@ const GiftListOwnerList: React.FC<Props> = ({ currentList, currentListUser, owne
     const renderSelectionVisibilityMessage = () => {
         return !currentUserIsOwner && currentList.listItems.length > 0 ? (
             <div className='systemMessage'>
-                <i className='fas fa-eye-slash danger'></i>{' '}
+                <i className='fas fa-eye-slash'></i>{' '}
                 <span>
                     {ownerName} <strong>can't</strong> see your selection
                 </span>
@@ -54,6 +54,8 @@ const GiftListOwnerList: React.FC<Props> = ({ currentList, currentListUser, owne
                                     allowSelection={currentListUser.permissions.includes('GROUP_SELECT_LIST_ITEMS')}
                                     allowModification={currentListUser.permissions.includes('GROUP_RW_LIST_ITEMS')}
                                     allowDeletion={currentListUser.permissions.includes('GROUP_RW_LIST_ITEMS')}
+                                    longBody={!currentListUser.permissions.includes('GROUP_RW_LIST_ITEMS')}
+                                    longLinks={!currentListUser.permissions.includes('GROUP_RW_LIST_ITEMS')}
                                 ></ListItem>
                             );
                         })

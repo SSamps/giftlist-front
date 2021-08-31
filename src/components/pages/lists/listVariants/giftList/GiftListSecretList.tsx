@@ -18,7 +18,7 @@ const GiftListSecretList: React.FC<Props> = ({ currentList, currentListUser, use
     const renderSecretItemVisibilityMessage = () => {
         return (
             <div className='systemMessage'>
-                <i className='fas fa-eye-slash danger'></i>{' '}
+                <i className='fas fa-eye-slash'></i>{' '}
                 <span>
                     {ownerName} <strong>can't</strong> see added gift ideas
                 </span>

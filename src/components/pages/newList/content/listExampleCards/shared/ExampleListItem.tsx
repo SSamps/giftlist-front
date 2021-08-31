@@ -6,9 +6,20 @@ interface props {
     body: string;
     link?: string;
     showControls: boolean;
+    size?: 'small' | 'tiny';
+    longBody?: boolean;
+    longLinks?: boolean;
 }
 
-const BasicListExampleItem: React.FC<props> = ({ isSelected, body, link, showControls, selectedBy }) => {
+const ExampleListItem: React.FC<props> = ({
+    isSelected,
+    body,
+    link,
+    showControls,
+    selectedBy,
+    longBody,
+    longLinks,
+}) => {
     const renderSelectedBy = () => {
         if (!selectedBy || selectedBy.length < 1) {
             return null;
@@ -35,7 +46,7 @@ const BasicListExampleItem: React.FC<props> = ({ isSelected, body, link, showCon
                         <i className='far fa-square btn-simple-disabled'></i>
                     )}
                 </span>
-                <span className='exampleItem-main-body'>{body}</span>
+                <span className={`exampleItem-main-body ${longBody ? 'exampleItem-main-body-long' : ''}`}>{body}</span>
                 {showControls && (
                     <span className='exampleItem-main-controlsContainer'>
                         <span className='exampleItem-main-controlsContainer-controls'>
@@ -46,9 +57,15 @@ const BasicListExampleItem: React.FC<props> = ({ isSelected, body, link, showCon
                 )}
             </div>
             {link && (
-                <div className='listItem-links'>
-                    <span className='listItem-links-linkContainer'>
-                        <span className='btn-simple-disabled'>{link}</span>
+                <div className='exampleItem-links'>
+                    <span className='exampleItem-links-linkContainer'>
+                        <span
+                            className={`exampleItem-links-link ${
+                                longLinks ? 'exampleItem-links-link-long' : ''
+                            } btn-simple-disabled`}
+                        >
+                            {link}
+                        </span>
                     </span>
                 </div>
             )}
@@ -57,4 +74,4 @@ const BasicListExampleItem: React.FC<props> = ({ isSelected, body, link, showCon
     );
 };
 
-export default BasicListExampleItem;
+export default ExampleListItem;

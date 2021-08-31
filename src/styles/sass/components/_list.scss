@@ -61,6 +61,10 @@
         color: $color-text-body;
     }
 
+    &-body-long {
+        grid-column: 2/4;
+    }
+
     &-controlsContainer {
         display: flex;
         justify-content: center;
@@ -87,13 +91,11 @@
     display: flex;
     flex-direction: column;
     margin-left: 2rem;
-    margin-right: 3.5rem;
 
     &-linkContainer {
-        height: 1.5rem;
-        overflow: hidden;
-        white-space: nowrap;
-        text-overflow: ellipsis;
+        display: grid;
+        grid-template-rows: 1;
+        grid-template-columns: 1fr 3.5rem;
 
         color: $color-interactive;
         &:hover {
@@ -102,6 +104,16 @@
 
         &:active {
             color: $color-interactive-active;
+        }
+    }
+
+    &-link {
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+
+        &-long {
+            grid-column: 1/3;
         }
     }
 }

@@ -1,19 +1,25 @@
 import React from 'react';
 import ListExampleToolbar from '../shared/ListExampleToolbar';
+import GiftGroupMiniExampleCard from './GiftGroupMiniExampleCard';
+import { GiftGroupMiniExampleCardSimple } from './GiftGroupMiniExampleCardSimple';
 
 interface props {}
 
 const GiftGroupExample: React.FC<props> = ({}) => {
-    const ownerName = 'test';
-
     return (
         <div className='newListExampleCard newListExampleCard-giftGroup'>
-            <ListExampleToolbar title={`${ownerName}'s Birthday List`}></ListExampleToolbar>
+            <ListExampleToolbar title={`Family Christmas`}></ListExampleToolbar>
             <div className='giftGroupExampleCardContainer-outer'>
                 <div className='giftGroupExampleCardContainer-inner'>
-                    <div className='giftGroupExampleCardContainer-front'></div>
-                    <div className='giftGroupExampleCardContainer-mid'></div>
-                    <div className='giftGroupExampleCardContainer-back'></div>
+                    <div className='giftGroupExampleCardContainer-back'>
+                        <GiftGroupMiniExampleCardSimple ownerName='Alice'></GiftGroupMiniExampleCardSimple>
+                    </div>
+                    <div className='giftGroupExampleCardContainer-mid'>
+                        <GiftGroupMiniExampleCardSimple ownerName='Mum'></GiftGroupMiniExampleCardSimple>
+                    </div>
+                    <div className='giftGroupExampleCardContainer-front'>
+                        <GiftGroupMiniExampleCard ownerName='Dad'></GiftGroupMiniExampleCard>
+                    </div>
                 </div>
             </div>
         </div>
@@ -21,8 +27,3 @@ const GiftGroupExample: React.FC<props> = ({}) => {
 };
 
 export default GiftGroupExample;
-
-<div>
-    <div></div>
-    <div></div>
-</div>;
