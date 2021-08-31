@@ -8,7 +8,7 @@ import BasicListDescription from '../listDescriptions/BasicListDescription';
 import GiftGroupDescription from '../listDescriptions/GiftGroupDescription';
 import GiftListDescription from '../listDescriptions/GiftListDescription';
 import BasicListExample from './basicList/BasicListExample';
-import GiftGroupExample from './GiftGroupExample';
+import GiftGroupExample from './giftGroup/GiftGroupExample';
 import GiftListExample from './giftList/GiftListExample';
 
 interface Props {

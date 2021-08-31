@@ -24,6 +24,14 @@
         align-items: center;
         gap: 1.5rem;
     }
+
+    &-giftGroup {
+        aspect-ratio: 0.8;
+        display: grid;
+        grid-template-columns: 1;
+        grid-template-rows: auto 1fr;
+        align-items: center;
+    }
 }
 
 .basicListExample {
@@ -137,4 +145,56 @@
             align-items: center;
         }
     }
+}
+
+.giftGroupExampleCardContainer {
+    &-outer {
+        width: 90%;
+        aspect-ratio: 0.85;
+        margin: auto;
+    }
+
+    &-inner {
+        width: 100%;
+        height: 100%;
+        display: grid;
+        grid-template-columns: repeat(21, 1fr);
+        grid-template-rows: repeat(21, 1fr);
+        background-color: beige;
+        overflow: hidden;
+    }
+
+    &-front {
+        border-radius: 4px;
+        background-color: red;
+        grid-column: 6/20;
+        grid-row: 2/18;
+        overflow: visible;
+    }
+
+    &-mid {
+        border-radius: 4px;
+        background-color: green;
+        grid-column: 5/19;
+        grid-row: 3/19;
+        overflow: visible;
+    }
+
+    &-back {
+        border-radius: 4px;
+        background-color: blue;
+        grid-column: 4/18;
+        grid-row: 4/20;
+        overflow: visible;
+    }
+
+    // &-card {
+    //     position: absolute;
+    //     background-color: sandybrown;
+    //     height: 25rem;
+    //     width: 25rem;
+    //     top: 50%;
+    //     left: 50%;
+    //     transform: translate(-50%, -50%);
+    // }
 }
