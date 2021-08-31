@@ -26,6 +26,7 @@
     }
 
     &-item {
+        position: relative;
         margin: 0 auto;
         color: $color-interactive;
         overflow: visible;
