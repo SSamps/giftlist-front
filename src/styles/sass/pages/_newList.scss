@@ -81,6 +81,10 @@
         padding: 1rem 1rem;
         background-color: $color-background-secondary;
         border-radius: 4px;
+
+        &-description {
+            text-align: center;
+        }
     }
 
     @media (min-width: 1000px) {
