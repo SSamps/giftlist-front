@@ -128,8 +128,8 @@
     }
 
     &-body {
+        overflow: hidden;
         word-wrap: break-word;
-        word-break: break-all;
         hyphens: auto;
         grid-column: 2;
         color: $color-text-body;
