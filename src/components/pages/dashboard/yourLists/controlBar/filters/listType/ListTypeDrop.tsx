@@ -35,36 +35,33 @@ const ListTypeDrop: React.FC<Props> = ({ setOpen, listVariantFilter, setFiltersA
                     onClick={() => onClick('basicListSelected', !basicListSelected)}
                 >
                     <span className='dropDownItem-name'>Basic List</span>{' '}
-                    <input
-                        type='checkbox'
-                        readOnly={true}
-                        checked={basicListSelected}
-                        className='dropDownItem-icon'
-                    ></input>
+                    {basicListSelected ? (
+                        <i className='far fa-check-square btn-simple dropDownItem-icon'></i>
+                    ) : (
+                        <i className='far fa-square btn-simple dropDownItem-icon'></i>
+                    )}
                 </div>
                 <div
                     className='dropDownItem dropDownItem-checkbox'
                     onClick={() => onClick('giftListSelected', !giftListSelected)}
                 >
                     <span className='dropDownItem-name'>Gift List</span>{' '}
-                    <input
-                        type='checkbox'
-                        readOnly={true}
-                        checked={giftListSelected}
-                        className='dropDownItem-icon'
-                    ></input>
+                    {giftListSelected ? (
+                        <i className='far fa-check-square btn-simple dropDownItem-icon'></i>
+                    ) : (
+                        <i className='far fa-square btn-simple dropDownItem-icon'></i>
+                    )}
                 </div>
                 <div
                     className='dropDownItem dropDownItem-checkbox'
                     onClick={() => onClick('giftGroupSelected', !giftGroupSelected)}
                 >
                     <span className='dropDownItem-name'>Gift Group</span>{' '}
-                    <input
-                        type='checkbox'
-                        readOnly={true}
-                        checked={giftGroupSelected}
-                        className='dropDownItem-icon'
-                    ></input>
+                    {giftGroupSelected ? (
+                        <i className='far fa-check-square btn-simple dropDownItem-icon'></i>
+                    ) : (
+                        <i className='far fa-square btn-simple dropDownItem-icon'></i>
+                    )}
                 </div>
             </div>
             <DropdownUnderlay setOpen={setOpen} onSubmit={onSubmit}></DropdownUnderlay>
