@@ -3,6 +3,8 @@
     background-color: $color-background-secondary;
     border: $color-border-hover;
     border-style: solid;
+    border-width: thin;
+    border-top-style: none;
     overflow: visible;
     z-index: 2;
     display: flex;
@@ -10,6 +12,8 @@
     width: max-content;
     padding: 0.5rem 0;
     right: 0;
+    bottom: -1px;
+    transform: translateY(100%);
     border-bottom-left-radius: 2px;
     border-bottom-right-radius: 2px;
 }
