@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { ErrorBoundary } from 'react-error-boundary';
 import { BrowserRouter as Router } from 'react-router-dom';
 import './styles/css/App.css';
 
@@ -16,6 +17,7 @@ import { LOGOUT } from './redux/actions/actionTypes';
 
 import Footer from './components/layout/Footer';
 import Body from './components/layout/Body';
+import UncaughtError from './components/pages/UncaughtError';
 
 // Defaults to localhost if not set. This is set in the prod container and is proxied using the proxy field in package.json when running the react dev server.
 axios.defaults.baseURL = process.env.REACT_APP_BACKEND_BASE_URL;
@@ -39,18 +41,39 @@ const App = () => {
         init();
     }, []);
 
+    const errorFallback = async (error: Error, info: { componentStack: string }) => {
+        const { name, stack, message } = error;
+
+        const config = {
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        };
+
+        const body = JSON.stringify({
+            name: name,
+            stack: stack,
+            message: message,
+            componentStack: info.componentStack,
+            date: new Date().toLocaleString(),
+        });
+        await axios.post(`/api/admin/error`, body, config);
+    };
+
     return (
-        <Provider store={store}>
-            <Router>
-                {loaded && (
-                    <div className='pageContainer'>
-                        <Navbar />
-                        <Body></Body>
-                        <Footer></Footer>
-                    </div>
-                )}
-            </Router>
-        </Provider>
+        <ErrorBoundary FallbackComponent={UncaughtError} onError={errorFallback}>
+            <Provider store={store}>
+                <Router>
+                    {loaded && (
+                        <div className='pageContainer'>
+                            <Navbar />
+                            <Body></Body>
+                            <Footer></Footer>
+                        </div>
+                    )}
+                </Router>
+            </Provider>
+        </ErrorBoundary>
     );
 };
 
