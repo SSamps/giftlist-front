@@ -42,12 +42,12 @@ const ForgottenPassOverlay: React.FC<Props> = ({ setOpen }) => {
             <div className='overlay'>
                 <div className='overlayContainer'>
                     <span className='lead'>Recover your password</span>
-                    <div className='form'>
+                    <form className='form' onSubmit={submitForm}>
                         <label>
                             Email
                             <input type='text' value={email} onChange={onChange}></input>
                         </label>
-                    </div>
+                    </form>
                     {complete ? (
                         <div>Password recovery email sent</div>
                     ) : (

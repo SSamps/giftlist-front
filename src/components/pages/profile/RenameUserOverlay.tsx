@@ -1,5 +1,6 @@
 import React, { Fragment, useState } from 'react';
 import { connect } from 'react-redux';
+import { VALIDATION_USER_DISPLAY_NAME_MAX_LENGTH } from '../../../misc/validation';
 import { renameUserActionCreator, TrenameUserActionCreator } from '../../../redux/actions/authActions';
 import { IrootStateAuthed } from '../../../redux/reducers/root/rootReducer';
 import { IUser } from '../../../types/models/User';
@@ -39,7 +40,12 @@ const RenameUserOverlay: React.FC<Props> = ({ setOpen, renameUserActionCreator, 
                 <div className='overlayContainer'>
                     <span className='lead'>Choose a new name</span>
                     <form className='form' onSubmit={submitForm}>
-                        <input type='text' value={value} onChange={onChange}></input>
+                        <input
+                            type='text'
+                            value={value}
+                            onChange={onChange}
+                            maxLength={VALIDATION_USER_DISPLAY_NAME_MAX_LENGTH}
+                        ></input>
                     </form>
                     <OverlayButtons submitForm={submitForm} setOpen={setOpen}></OverlayButtons>
                     {waiting && <Spinner className='spinner-tiny'></Spinner>}

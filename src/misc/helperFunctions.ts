@@ -1,3 +1,4 @@
+import validator from 'validator';
 import {
     IbasicListMember,
     IgiftGroupChildMember,
@@ -8,6 +9,13 @@ import {
     TgiftGroupFields,
     TgiftListFieldsCensored,
 } from '../types/models/listGroups';
+import {
+    VALIDATION_USER_PASSWORD_MIN_LENGTH,
+    VALIDATION_USER_PASSWORD_MIN_LOWERCASE,
+    VALIDATION_USER_PASSWORD_MIN_NUMBER,
+    VALIDATION_USER_PASSWORD_MIN_SYMBOL,
+    VALIDATION_USER_PASSWORD_MIN_UPPERCASE,
+} from './validation';
 
 export const findUserInGroup = (
     group: TbasicListFields | TgiftListFieldsCensored | TgiftGroupFields | TgiftGroupChildFieldsCensored,
@@ -54,4 +62,14 @@ export const formatMessageDateTag = (inputDate: string) => {
 export const formatJoinDate = (inputDate: string) => {
     const date = new Date(inputDate);
     return date.toLocaleDateString(undefined, { day: 'numeric', month: 'numeric', year: 'numeric' });
+};
+
+export const isPasswordValid = (password: string) => {
+    return validator.isStrongPassword(password, {
+        minLength: VALIDATION_USER_PASSWORD_MIN_LENGTH,
+        minLowercase: VALIDATION_USER_PASSWORD_MIN_LOWERCASE,
+        minUppercase: VALIDATION_USER_PASSWORD_MIN_UPPERCASE,
+        minNumbers: VALIDATION_USER_PASSWORD_MIN_NUMBER,
+        minSymbols: VALIDATION_USER_PASSWORD_MIN_SYMBOL,
+    });
 };

@@ -1,5 +1,6 @@
 import React, { Fragment, useState } from 'react';
 import { connect } from 'react-redux';
+import { VALIDATION_GROUP_NAME_MAX_LENGTH } from '../../../../../../misc/validation';
 import { renameListActionCreator, TrenameListActionCreator } from '../../../../../../redux/actions/listGroupActions';
 import {
     TbasicListFields,
@@ -43,7 +44,12 @@ const RenameListOverlay: React.FC<Props> = ({ setOpen, currentList, renameListAc
                 <div className='overlayContainer'>
                     <span className='lead'>Rename list</span>
                     <form className='form' onSubmit={submitForm}>
-                        <input type='text' value={value} onChange={onChange}></input>
+                        <input
+                            type='text'
+                            value={value}
+                            onChange={onChange}
+                            maxLength={VALIDATION_GROUP_NAME_MAX_LENGTH}
+                        ></input>
                     </form>
                     <OverlayButtons submitForm={submitForm} setOpen={setOpen}></OverlayButtons>
                     {waiting && <Spinner className='spinner-tiny'></Spinner>}

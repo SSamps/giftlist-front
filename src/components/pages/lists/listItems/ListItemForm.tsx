@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
+import { VALIDATION_ITEM_BODY_MAX_LENGTH, VALIDATION_ITEM_LINK_MAX_LENGTH } from '../../../../misc/validation';
 import { newListItemActionCreator } from '../../../../redux/actions/listGroupActions';
 import Spinner from '../../../misc/spinner';
 
@@ -136,7 +137,13 @@ const ListItemForm: React.FC<Props> = ({
                 <div className='form-groupWithSideControls'>
                     <label className='form-label'>Item</label>
                     <div className='form-group-inputContainerWithSideControls'>
-                        <input type='text' name='itemBody' value={itemBody} onChange={onChange} />
+                        <input
+                            type='text'
+                            name='itemBody'
+                            value={itemBody}
+                            onChange={onChange}
+                            maxLength={VALIDATION_ITEM_BODY_MAX_LENGTH}
+                        />
                     </div>
                     {itemError && <p className='form-error-message'>{itemError}</p>}
                 </div>
@@ -150,6 +157,7 @@ const ListItemForm: React.FC<Props> = ({
                             placeholder='none'
                             value={itemLinks[0]}
                             onChange={(e) => onChangeLinks(e, 0)}
+                            maxLength={VALIDATION_ITEM_LINK_MAX_LENGTH}
                         />
                     </div>
                     {itemLinks.map((_, index) => {
@@ -162,6 +170,7 @@ const ListItemForm: React.FC<Props> = ({
                                         placeholder='none'
                                         value={itemLinks[index]}
                                         onChange={(e) => onChangeLinks(e, index)}
+                                        maxLength={VALIDATION_ITEM_LINK_MAX_LENGTH}
                                     />
                                     <i className='fas fa-minus btn-simple' onClick={() => removeLink(index)}></i>
                                 </div>

@@ -5,6 +5,7 @@ import { loginActionCreator, TloginActionCreator } from '../../../redux/actions/
 import { IrootState } from '../../../redux/reducers/root/rootReducer';
 import axios, { AxiosError, AxiosResponse } from 'axios';
 import ForgottenPassOverlay from './ForgottenPassOverlay';
+import { VALIDATION_USER_EMAIL_MAX_LENGTH, VALIDATION_USER_PASSWORD_MAX_LENGTH } from '../../../misc/validation';
 
 interface Props {
     loginActionCreator: TloginActionCreator;
@@ -97,6 +98,7 @@ const Login: React.FC<Props> = ({ loginActionCreator, isAuthenticated }) => {
                             name='email'
                             value={email}
                             onChange={onChange}
+                            maxLength={VALIDATION_USER_EMAIL_MAX_LENGTH}
                             required
                         />
                     </label>
@@ -112,6 +114,7 @@ const Login: React.FC<Props> = ({ loginActionCreator, isAuthenticated }) => {
                             minLength={8}
                             value={password}
                             onChange={onChange}
+                            maxLength={VALIDATION_USER_PASSWORD_MAX_LENGTH}
                             required
                         />
                     </label>

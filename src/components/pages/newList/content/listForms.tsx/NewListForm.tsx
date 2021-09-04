@@ -5,6 +5,7 @@ import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import { FormSubmissionStatus } from './FormSubmissionStatus';
 import InviteFormInput from '../../../lists/miscShared/InviteFormInput';
+import { VALIDATION_GROUP_NAME_MAX_LENGTH } from '../../../../../misc/validation';
 
 interface Props {
     controllerState: TYPE_LIST_GROUP_ALL_TOP_LEVEL_VARIANTS;
@@ -95,6 +96,7 @@ const NewListForm: React.FC<Props> = ({ controllerState }) => {
                                 value={listName}
                                 onChange={onChange}
                                 onKeyDown={nextInput}
+                                maxLength={VALIDATION_GROUP_NAME_MAX_LENGTH}
                             />
                         </label>
                         {emptylistName && <div className='form-error-message'>You must provide a name</div>}

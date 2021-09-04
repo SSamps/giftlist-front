@@ -4,6 +4,12 @@ import { connect } from 'react-redux';
 import { registerActionCreator, TregisterActionCreator } from '../../../redux/actions/authActions';
 import { IrootState } from '../../../redux/reducers/root/rootReducer';
 import axios, { AxiosError, AxiosResponse } from 'axios';
+import {
+    VALIDATION_USER_DISPLAY_NAME_MAX_LENGTH,
+    VALIDATION_USER_EMAIL_MAX_LENGTH,
+    VALIDATION_USER_PASSWORD_MAX_LENGTH,
+} from '../../../misc/validation';
+import { isPasswordValid } from '../../../misc/helperFunctions';
 
 interface Props {
     registerActionCreator: TregisterActionCreator;
@@ -33,10 +39,10 @@ const Register: React.FC<Props> = ({ registerActionCreator, isAuthenticated }) =
     const { registerErrorMessage, emailErrorHighlight, emailErrorMessage } = formServerErrorData;
 
     const passwordsMatch: boolean = password === password2;
+    const passwordValid = isPasswordValid(password);
 
     const formHasErrors = (): boolean => {
-        let errors: boolean[] = [!passwordsMatch];
-        return errors.every((v) => v);
+        return !passwordsMatch || !passwordValid;
     };
 
     const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -54,20 +60,19 @@ const Register: React.FC<Props> = ({ registerActionCreator, isAuthenticated }) =
 
     const handleRequestError = (err: AxiosResponse<AxiosError<any> | Error>) => {
         if (axios.isAxiosError(err) && err.response) {
-            let status = err.response.status;
-            switch (status) {
-                case 400:
-                    setFormServerErrorData((prevFormServerErrorData) => ({
-                        ...prevFormServerErrorData,
-                        emailErrorMessage: 'An account already exists with that email address.',
-                        emailErrorHighlight: true,
-                    }));
-                    break;
-                default:
-                    setFormServerErrorData((prevFormServerErrorData) => ({
-                        ...prevFormServerErrorData,
-                        registerErrorMessage: 'Server error: Code ' + status,
-                    }));
+            const status = err.response.status;
+            const response: string = err.response.data;
+            if (response.includes('An account already exists with that email address')) {
+                setFormServerErrorData((prevFormServerErrorData) => ({
+                    ...prevFormServerErrorData,
+                    emailErrorMessage: 'An account already exists with that email address.',
+                    emailErrorHighlight: true,
+                }));
+            } else {
+                setFormServerErrorData((prevFormServerErrorData) => ({
+                    ...prevFormServerErrorData,
+                    registerErrorMessage: status + ' ' + response,
+                }));
             }
         } else {
             setFormServerErrorData((prevFormServerErrorData) => ({
@@ -103,6 +108,7 @@ const Register: React.FC<Props> = ({ registerActionCreator, isAuthenticated }) =
                             name='displayName'
                             value={displayName}
                             onChange={onChange}
+                            maxLength={VALIDATION_USER_DISPLAY_NAME_MAX_LENGTH}
                             required
                         />
                     </label>
@@ -117,6 +123,7 @@ const Register: React.FC<Props> = ({ registerActionCreator, isAuthenticated }) =
                             name='email'
                             value={email}
                             onChange={onChange}
+                            maxLength={VALIDATION_USER_EMAIL_MAX_LENGTH}
                             required
                         />
                     </label>
@@ -133,10 +140,17 @@ const Register: React.FC<Props> = ({ registerActionCreator, isAuthenticated }) =
                             minLength={8}
                             value={password}
                             onChange={onChange}
+                            maxLength={VALIDATION_USER_PASSWORD_MAX_LENGTH}
                             required
                         />
+                        {password.length > 0 && !passwordValid && (
+                            <p className='form-error-message'>
+                                Password must be at least 8 characters with one uppercase, lowercase and number.{' '}
+                            </p>
+                        )}
                     </label>
                 </div>
+
                 <div className='form-group'>
                     <label>
                         Confirm Password
@@ -148,11 +162,13 @@ const Register: React.FC<Props> = ({ registerActionCreator, isAuthenticated }) =
                             minLength={8}
                             value={password2}
                             onChange={onChange}
+                            maxLength={VALIDATION_USER_PASSWORD_MAX_LENGTH}
                             required
                         />
+                        {!passwordsMatch && <p className='form-error-message'>Passwords do not match</p>}
                     </label>
                 </div>
-                {!passwordsMatch && <p className='form-error-message'>Passwords do not match</p>}
+
                 <input type='submit' className='btn-block' value='Register' />
                 {registerErrorMessage && <p className='form-error-message'>{registerErrorMessage}</p>}
             </form>

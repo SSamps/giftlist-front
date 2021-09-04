@@ -1,5 +1,7 @@
 import axios from 'axios';
 import React, { Fragment, useState } from 'react';
+import { isPasswordValid } from '../../misc/helperFunctions';
+import { VALIDATION_USER_PASSWORD_MAX_LENGTH } from '../../misc/validation';
 import Spinner from '../misc/spinner';
 
 interface Props {
@@ -22,7 +24,7 @@ const ResetPassword: React.FC<Props> = ({
 
     const { password, password2 } = formState;
     const dontMatch = password !== password2;
-    const tooShort = password.length < 8;
+    const passwordValid = isPasswordValid(password);
 
     const { submitError, waiting, complete } = submitState;
 
@@ -56,27 +58,33 @@ const ResetPassword: React.FC<Props> = ({
                     <label>
                         Password
                         <input
-                            className={tooShort || dontMatch ? 'form-error-field' : ''}
+                            className={!passwordValid || dontMatch ? 'form-error-field' : ''}
                             type='password'
                             name='password'
                             minLength={8}
                             value={password}
                             onChange={onChange}
+                            maxLength={VALIDATION_USER_PASSWORD_MAX_LENGTH}
                             required
                         />
-                        {tooShort && <p className='form-error-message'>Password must be at least 8 characters</p>}
+                        {password.length > 0 && !passwordValid && (
+                            <p className='form-error-message'>
+                                Password must be at least 8 characters with one uppercase, lowercase and number.
+                            </p>
+                        )}
                     </label>
                 </div>
                 <div className='form-group'>
                     <label>
                         Confirm Password
                         <input
-                            className={tooShort || dontMatch ? 'form-error-field' : ''}
+                            className={!passwordValid || dontMatch ? 'form-error-field' : ''}
                             type='password'
                             name='password2'
                             minLength={8}
                             value={password2}
                             onChange={onChange}
+                            maxLength={VALIDATION_USER_PASSWORD_MAX_LENGTH}
                             required
                         />
                         {dontMatch && <p className='form-error-message'>Passwords do not match</p>}
@@ -94,7 +102,7 @@ const ResetPassword: React.FC<Props> = ({
                     )}
                 </div>
                 <div className='form-error-container'>
-                    {submitError && <p className='form-error-message'>Error: {submitError}</p>}
+                    {submitError && <p className='form-error-message'>{submitError}</p>}
                 </div>
             </div>
         </Fragment>

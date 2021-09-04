@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { VALIDATION_MESSAGE_MAX_LENGTH } from '../../../../misc/validation';
 
 interface props {
     submitForm: (body: string) => void;
@@ -22,7 +23,13 @@ const ListChatForm: React.FC<props> = ({ submitForm }) => {
     return (
         <div className='listChatControlsContainer'>
             <form className='form form-singleInput' onSubmit={onSubmit}>
-                <input type='text' value={newMessage} onChange={onChange} placeholder='Type a message'></input>
+                <input
+                    type='text'
+                    value={newMessage}
+                    onChange={onChange}
+                    placeholder='Type a message'
+                    maxLength={VALIDATION_MESSAGE_MAX_LENGTH}
+                ></input>
                 <span className='btn-simple' onClick={() => onSubmit()}>
                     Send
                 </span>
