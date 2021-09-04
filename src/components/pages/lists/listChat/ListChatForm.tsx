@@ -8,7 +8,7 @@ interface props {
 const ListChatForm: React.FC<props> = ({ submitForm }) => {
     const [newMessage, setNewMessage] = useState('');
 
-    const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const onChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
         setNewMessage(e.target.value);
     };
 
@@ -23,13 +23,13 @@ const ListChatForm: React.FC<props> = ({ submitForm }) => {
     return (
         <div className='listChatControlsContainer'>
             <form className='form form-singleInput' onSubmit={onSubmit}>
-                <input
-                    type='text'
+                <textarea
+                    className='growingTextInput'
                     value={newMessage}
                     onChange={onChange}
                     placeholder='Type a message'
                     maxLength={VALIDATION_MESSAGE_MAX_LENGTH}
-                ></input>
+                ></textarea>
                 <span className='btn-simple' onClick={() => onSubmit()}>
                     Send
                 </span>

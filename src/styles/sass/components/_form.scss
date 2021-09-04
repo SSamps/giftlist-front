@@ -48,11 +48,6 @@
         }
     }
 
-    // input[type='submit'],
-    // button {
-    //     font: inherit;
-    // }
-
     &-label {
         align-self: flex-start;
 
@@ -90,5 +85,23 @@
 
     &-inputButtonBelow {
         margin-top: 0.5rem;
+    }
+}
+
+.growingTextInput {
+    border: 1px solid $color-border;
+    border-radius: 4px;
+    resize: none;
+    width: 400px;
+    padding: 5px;
+    overflow: hidden;
+    box-sizing: border-box;
+
+    &:active {
+        border-color: $color-border-hover;
+    }
+
+    &:focus-visible {
+        outline-color: $color-border-hover !important;
     }
 }
