@@ -41,7 +41,7 @@ const GiftListChat: React.FC<Props> = ({ ownerName, token, currentList, checkFor
         });
 
         socket.on('connect_error', (err) => {
-            console.log(err.message);
+            console.error(err.message);
         });
 
         socket.emit('giftListChat:joinRoom');

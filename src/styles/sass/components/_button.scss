@@ -3,14 +3,16 @@
     color: $color-text-light;
     border-radius: 4px;
     cursor: pointer;
-    padding: 0.3rem;
+    padding: 0.3rem 0.5rem;
 
     &:hover {
         background: $color-interactive-hover;
+        color: $color-text-light;
     }
 
     &:active {
         background: $color-interactive-active;
+        color: $color-text-light;
     }
 }
 
@@ -58,4 +60,8 @@
     &:active {
         color: $color-interactive-danger-active;
     }
+}
+
+.btn-spaced {
+    margin: 5rem 0.5rem;
 }

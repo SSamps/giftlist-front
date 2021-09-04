@@ -30,7 +30,7 @@ const ExampleListItem: React.FC<props> = ({
         ) : (
             <div className='listItem-selected'>
                 <span>
-                    Shared by <span className='btn-simple'>{selectedBy.length} people</span>
+                    Shared by <span className='btn-simple-disabled'>{selectedBy.length} people</span>
                 </span>
             </div>
         );
