@@ -32,7 +32,8 @@ const ResetPassword: React.FC<Props> = ({
         setFormState({ ...formState, [e.target.name]: e.target.value });
     };
 
-    const onSubmit = async () => {
+    const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
         setSubmitState({ submitError: '', waiting: true, complete: false });
 
         try {
@@ -53,7 +54,7 @@ const ResetPassword: React.FC<Props> = ({
     return (
         <Fragment>
             <div className='lead'>Set a new password</div>
-            <div className='form'>
+            <form className='form' onSubmit={onSubmit}>
                 <div className='form-group'>
                     <label>
                         Password
@@ -96,15 +97,13 @@ const ResetPassword: React.FC<Props> = ({
                     ) : complete ? (
                         <div>Password successfully updated</div>
                     ) : (
-                        <div onClick={onSubmit} className='btn-simple'>
-                            Submit
-                        </div>
+                        <input type='submit' className='btn-block' value='Submit'></input>
                     )}
                 </div>
                 <div className='form-error-container'>
                     {submitError && <p className='form-error-message'>{submitError}</p>}
                 </div>
-            </div>
+            </form>
         </Fragment>
     );
 };

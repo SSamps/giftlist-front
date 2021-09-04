@@ -150,7 +150,6 @@ const Register: React.FC<Props> = ({ registerActionCreator, isAuthenticated }) =
                         )}
                     </label>
                 </div>
-
                 <div className='form-group'>
                     <label>
                         Confirm Password
@@ -168,7 +167,6 @@ const Register: React.FC<Props> = ({ registerActionCreator, isAuthenticated }) =
                         {!passwordsMatch && <p className='form-error-message'>Passwords do not match</p>}
                     </label>
                 </div>
-
                 <input type='submit' className='btn-block' value='Register' />
                 {registerErrorMessage && <p className='form-error-message'>{registerErrorMessage}</p>}
             </form>
