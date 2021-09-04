@@ -16,7 +16,7 @@ import {
 } from '../../../../types/models/listGroups';
 import { IbasicListItem, IgiftListItemCensored } from '../../../../types/models/listItems';
 import { IUser } from '../../../../types/models/User';
-import { findUserInGroup } from '../../../../utils/helperFunctions';
+import { findUserInGroup } from '../../../../misc/helperFunctions';
 import Spinner from '../../../misc/spinner';
 import ModifyListItem from './ModifyListItem';
 import SelectedByOverlay from './SelectedByOverlay';

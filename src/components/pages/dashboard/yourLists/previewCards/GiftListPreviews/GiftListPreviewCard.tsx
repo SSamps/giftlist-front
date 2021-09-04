@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { IrootStateAuthed } from '../../../../../../redux/reducers/root/rootReducer';
 import { TgiftGroupChildFieldsCensored, TgiftListFieldsCensored } from '../../../../../../types/models/listGroups';
 import { IUser } from '../../../../../../types/models/User';
-import { findOwnerInGroup } from '../../../../../../utils/helperFunctions';
+import { findOwnerInGroup } from '../../../../../../misc/helperFunctions';
 import PreviewCardFooter from '../shared/PreviewCardFooter';
 import PreviewCardHeader from '../shared/PreviewCardHeader';
 import GiftListMemberPreviewCardItem from './GiftListMemberPreviewCardItem';

@@ -12,7 +12,7 @@ import store from './redux/reducers/root/reducerStore';
 import { loadUserActionCreator } from './redux/actions/authActions';
 //Axios
 import axios from 'axios';
-import setAuthToken from './utils/setAuthToken';
+import setAuthToken from './misc/setAuthToken';
 import { LOGOUT } from './redux/actions/actionTypes';
 
 import Footer from './components/layout/Footer';

@@ -9,7 +9,7 @@ import {
 import { IrootStateAuthedGiftListLoaded } from '../../../../redux/reducers/root/rootReducer';
 import { TgiftListFieldsCensored } from '../../../../types/models/listGroups';
 import { TmessageAny } from '../../../../types/models/messages';
-import { findUserInGroup } from '../../../../utils/helperFunctions';
+import { findUserInGroup } from '../../../../misc/helperFunctions';
 import ListChatForm from './ListChatForm';
 import ListChatMessage from './ListChatMessage';
 import ListChatReturnToBottomButton from './ListChatReturnToBottomButton';

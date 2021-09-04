@@ -4,7 +4,7 @@ import { addAlertThunkActionCreator } from '../../../../../redux/actions/alertAc
 import { IrootStateAuthedGiftGroupLoaded } from '../../../../../redux/reducers/root/rootReducer';
 import { IgiftGroupMember, TgiftGroupFields } from '../../../../../types/models/listGroups';
 import { IUser } from '../../../../../types/models/User';
-import { findUserInGroup } from '../../../../../utils/helperFunctions';
+import { findUserInGroup } from '../../../../../misc/helperFunctions';
 import GiftListPreviewCard from '../../../dashboard/yourLists/previewCards/GiftListPreviews/GiftListPreviewCard';
 import ListTitleBar from '../../miscShared/titleBar/ListTitleBar';
 import AddChildGroupOverlay from './AddChildGroupOverlay';

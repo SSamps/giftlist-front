@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { deleteAccountActionCreator, TdeleteAccountActionCreator } from '../../../redux/actions/authActions';
 import { IrootStateAuthed } from '../../../redux/reducers/root/rootReducer';
 import { IUser } from '../../../types/models/User';
-import { formatJoinDate } from '../../../utils/helperFunctions';
+import { formatJoinDate } from '../../../misc/helperFunctions';
 import ConfirmationOverlay from '../../misc/overlays/ConfirmationOverlay';
 import ProfileRow from './ProfileRow';
 import RenameUserOverlay from './RenameUserOverlay';

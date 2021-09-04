@@ -14,7 +14,7 @@ import {
 import { Dispatch } from 'redux';
 import axios, { AxiosResponse } from 'axios';
 import { TListGroupAnyFields } from '../../types/models/listGroups';
-import { findUserInGroup } from '../../utils/helperFunctions';
+import { findUserInGroup } from '../../misc/helperFunctions';
 import { addAlertActionCreator } from './alertActions';
 
 interface IgetListActionSuccess {

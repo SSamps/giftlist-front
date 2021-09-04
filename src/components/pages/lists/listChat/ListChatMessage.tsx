@@ -5,7 +5,7 @@ import { IrootStateAuthedGiftListLoaded } from '../../../../redux/reducers/root/
 import { TgiftListFieldsCensored } from '../../../../types/models/listGroups';
 import { TmessageAny } from '../../../../types/models/messages';
 import { IUser } from '../../../../types/models/User';
-import { findUserInGroup, formatMessageDateTag } from '../../../../utils/helperFunctions';
+import { findUserInGroup, formatMessageDateTag } from '../../../../misc/helperFunctions';
 
 interface props {
     message: TmessageAny;

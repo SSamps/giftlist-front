@@ -2,7 +2,7 @@ import { DASHBAORD_DATA_ERROR, DASHBOARD_LISTS_GET, DASHBOARD_SET_FILTERS } from
 import { Dispatch } from 'redux';
 import axios from 'axios';
 import { TgroupMemberAny, TListGroupAnyFields, TProcessedListGroupAnyFields } from '../../types/models/listGroups';
-import { findUserInGroup } from '../../utils/helperFunctions';
+import { findUserInGroup } from '../../misc/helperFunctions';
 
 // Common
 interface IGetListsError {
