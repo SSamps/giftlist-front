@@ -113,7 +113,7 @@ export type TnewListItemActionCreator = (
 ) => Promise<boolean>;
 
 export const newListItemActionCreator =
-    (body: string, links: string[], itemType: 'listItem' | 'secretListItem', groupId: string) =>
+    (body: string, links: string[], type: 'listItem' | 'secretListItem', groupId: string) =>
     async (dispatch: Dispatch<InewListItemActionSuccess>) => {
         const config = {
             headers: {
@@ -121,7 +121,7 @@ export const newListItemActionCreator =
             },
         };
 
-        const reqBody = JSON.stringify({ [itemType]: { body, links } });
+        const reqBody = JSON.stringify({ type, body, links });
 
         try {
             const res = await axios.post(`/api/groups/${groupId}/items`, reqBody, config);
