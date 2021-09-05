@@ -2,8 +2,9 @@
     margin: 1rem auto;
     display: flex;
     flex-direction: column;
+    align-items: center;
     gap: 1rem;
-    width: 95%;
+    width: calc(min(80%, 25rem));
 
     &-singleInput {
         margin: 1rem 0;
@@ -34,7 +35,6 @@
     input[type='email'],
     input[type='password'],
     input[type='date'],
-    input[type='button'],
     select,
     textarea {
         display: block;
@@ -67,8 +67,10 @@
 .form-group {
     display: flex;
     flex-direction: column;
+    width: 100%;
 
     &WithSideControls {
+        width: 100%;
         display: flex;
         flex-direction: column;
         margin-left: 1.5rem;
