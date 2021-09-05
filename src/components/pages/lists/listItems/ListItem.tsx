@@ -46,7 +46,6 @@ const ListItem: React.FC<Props> = ({
     deleteListItemActionCreator,
     selectListItemActionCreator,
 }) => {
-    console.log(longLinks, longBody);
     const [removalStatus, setRemovalStatus] = useState({
         waitingRemoval: false,
     });

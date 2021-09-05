@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { VALIDATION_MESSAGE_MAX_LENGTH } from '../../../../misc/validation';
+import AutoGrowTextField from '../../../misc/AutoGrowTextField';
 
 interface props {
     submitForm: (body: string) => void;
@@ -23,13 +24,12 @@ const ListChatForm: React.FC<props> = ({ submitForm }) => {
     return (
         <div className='listChatControlsContainer'>
             <form className='form form-singleInput' onSubmit={onSubmit}>
-                <textarea
-                    className='growingTextInput'
-                    value={newMessage}
+                <AutoGrowTextField
+                    maxLength={VALIDATION_MESSAGE_MAX_LENGTH}
                     onChange={onChange}
                     placeholder='Type a message'
-                    maxLength={VALIDATION_MESSAGE_MAX_LENGTH}
-                ></textarea>
+                    value={newMessage}
+                ></AutoGrowTextField>
                 <span className='btn-simple' onClick={() => onSubmit()}>
                     Send
                 </span>

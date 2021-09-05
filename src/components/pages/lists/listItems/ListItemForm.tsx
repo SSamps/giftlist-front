@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { VALIDATION_ITEM_BODY_MAX_LENGTH, VALIDATION_ITEM_LINK_MAX_LENGTH } from '../../../../misc/validation';
 import { newListItemActionCreator } from '../../../../redux/actions/listGroupActions';
+import AutoGrowTextField from '../../../misc/AutoGrowTextField';
+
 import Spinner from '../../../misc/spinner';
 
 interface Props {
@@ -53,7 +55,7 @@ const ListItemForm: React.FC<Props> = ({
     const { itemBody, itemLinks, waiting } = itemFormState;
     const { itemError } = formErrorState;
 
-    const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const onChange = (e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>) => {
         setItemFormState({ ...itemFormState, [e.target.name]: e.target.value });
     };
 
@@ -82,7 +84,7 @@ const ListItemForm: React.FC<Props> = ({
     };
 
     const isValidFormInput = () => {
-        // revisit this later. Not handled well atm.
+        // TODO revisit this later. Not handled well atm.
 
         if (itemBody.length <= 0) {
             setFormErrorState({ ...formErrorState, itemError: 'You must provide an item description' });
@@ -137,13 +139,13 @@ const ListItemForm: React.FC<Props> = ({
                 <div className='form-groupWithSideControls'>
                     <label className='form-label'>Item</label>
                     <div className='form-group-inputContainerWithSideControls'>
-                        <input
-                            type='text'
+                        <AutoGrowTextField
+                            maxLength={VALIDATION_ITEM_BODY_MAX_LENGTH}
+                            onChange={onChange}
+                            placeholder='Type a message'
                             name='itemBody'
                             value={itemBody}
-                            onChange={onChange}
-                            maxLength={VALIDATION_ITEM_BODY_MAX_LENGTH}
-                        />
+                        ></AutoGrowTextField>
                     </div>
                     {itemError && <p className='form-error-message'>{itemError}</p>}
                 </div>
