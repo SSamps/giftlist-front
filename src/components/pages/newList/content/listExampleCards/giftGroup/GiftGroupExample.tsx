@@ -1,7 +1,7 @@
 import React from 'react';
 import ListExampleToolbar from '../shared/ListExampleToolbar';
 import GiftGroupMiniExampleCard from './GiftGroupMiniExampleCard';
-import { GiftGroupMiniExampleCardSimple } from './GiftGroupMiniExampleCardSimple';
+import { GiftGroupMiniExampleCardHidden } from './GiftGroupMiniExampleCardHidden';
 
 interface props {}
 
@@ -12,10 +12,10 @@ const GiftGroupExample: React.FC<props> = ({}) => {
             <div className='giftGroupExampleCardContainer-outer'>
                 <div className='giftGroupExampleCardContainer-inner'>
                     <div className='giftGroupExampleCardContainer-back'>
-                        <GiftGroupMiniExampleCardSimple ownerName='Alice'></GiftGroupMiniExampleCardSimple>
+                        <GiftGroupMiniExampleCardHidden ownerName='Alice'></GiftGroupMiniExampleCardHidden>
                     </div>
                     <div className='giftGroupExampleCardContainer-mid'>
-                        <GiftGroupMiniExampleCardSimple ownerName='Mum'></GiftGroupMiniExampleCardSimple>
+                        <GiftGroupMiniExampleCardHidden ownerName='Mum'></GiftGroupMiniExampleCardHidden>
                     </div>
                     <div className='giftGroupExampleCardContainer-front'>
                         <GiftGroupMiniExampleCard ownerName='Dad'></GiftGroupMiniExampleCard>

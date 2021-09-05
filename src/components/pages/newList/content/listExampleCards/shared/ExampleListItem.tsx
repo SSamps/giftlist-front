@@ -19,6 +19,7 @@ const ExampleListItem: React.FC<props> = ({
     selectedBy,
     longBody,
     longLinks,
+    size,
 }) => {
     const renderSelectedBy = () => {
         if (!selectedBy || selectedBy.length < 1) {
@@ -26,10 +27,10 @@ const ExampleListItem: React.FC<props> = ({
         }
 
         return selectedBy.length === 1 ? (
-            <div className='listItem-selected'>Selected by {selectedBy[0]}</div>
+            <div className={`exampleListItem-selected ${size}`}>Selected by {selectedBy[0]}</div>
         ) : (
-            <div className='listItem-selected'>
-                <span>
+            <div className='exampleListItem-selected'>
+                <span className={`${size}`}>
                     Shared by <span className='btn-simple-disabled'>{selectedBy.length} people</span>
                 </span>
             </div>
@@ -46,7 +47,9 @@ const ExampleListItem: React.FC<props> = ({
                         <i className='far fa-square btn-simple-disabled'></i>
                     )}
                 </span>
-                <span className={`exampleItem-main-body ${longBody ? 'exampleItem-main-body-long' : ''}`}>{body}</span>
+                <span className={`exampleItem-main-body ${longBody ? 'exampleItem-main-body-long' : ''} ${size}`}>
+                    {body}
+                </span>
                 {showControls && (
                     <span className='exampleItem-main-controlsContainer'>
                         <span className='exampleItem-main-controlsContainer-controls'>
@@ -62,7 +65,7 @@ const ExampleListItem: React.FC<props> = ({
                         <span
                             className={`exampleItem-links-link ${
                                 longLinks ? 'exampleItem-links-link-long' : ''
-                            } btn-simple-disabled`}
+                            } btn-simple-disabled ${size}`}
                         >
                             {link}
                         </span>

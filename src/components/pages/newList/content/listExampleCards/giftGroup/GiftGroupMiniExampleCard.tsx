@@ -13,7 +13,6 @@ export const GiftGroupMiniExampleCard: React.FC<props> = ({ ownerName }) => {
             <div className='basicListExample-items'>
                 <div className='exampleListItemContainer'>
                     <div className='exampleListLabel'>
-                        <div className='systemMessage tiny '>{ownerName}'s list</div>
                         <div className='systemMessage '>
                             <i className='fas fa-eye-slash tiny'></i>{' '}
                             <span className='tiny'>
@@ -26,6 +25,7 @@ export const GiftGroupMiniExampleCard: React.FC<props> = ({ ownerName }) => {
                         selectedBy={['Mum']}
                         body="Chef's knife"
                         showControls={false}
+                        size='tiny'
                         longBody={true}
                         longLinks={true}
                     ></ExampleListItem>
@@ -43,6 +43,7 @@ export const GiftGroupMiniExampleCard: React.FC<props> = ({ ownerName }) => {
                         body='Hugs!'
                         selectedBy={['Sarah', 'Charlie']}
                         showControls={false}
+                        size='tiny'
                         longBody={true}
                         longLinks={true}
                     ></ExampleListItem>

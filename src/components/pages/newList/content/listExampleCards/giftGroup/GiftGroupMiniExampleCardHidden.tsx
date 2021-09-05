@@ -5,13 +5,13 @@ interface props {
     ownerName: string;
 }
 
-export const GiftGroupMiniExampleCardSimple: React.FC<props> = ({ ownerName }) => {
+export const GiftGroupMiniExampleCardHidden: React.FC<props> = ({ ownerName }) => {
     return (
         <div className='giftGroupMiniExampleCard'>
             <ListExampleToolbar title={`${ownerName}'s List`} size='small'></ListExampleToolbar>
-            <div>Some stuff</div>
+            <div></div>
         </div>
     );
 };
 
-export default GiftGroupMiniExampleCardSimple;
+export default GiftGroupMiniExampleCardHidden;

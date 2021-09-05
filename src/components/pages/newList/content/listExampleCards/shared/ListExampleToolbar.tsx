@@ -2,12 +2,12 @@ import React from 'react';
 
 interface props {
     title: string;
-    size?: string;
+    size?: 'small';
 }
 
 const ListExampleToolbar: React.FC<props> = ({ title, size }) => {
     return (
-        <ul className='exampleTitleBar'>
+        <ul className={`exampleTitleBar ${size && 'exampleTitleBar-' + size}`}>
             <li className={`exampleTitleBar-title groupName ${size ? size : ''}`}>{title}</li>
             <hr className='exampleTitleBar-hr'></hr>
         </ul>
