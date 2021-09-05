@@ -64,7 +64,13 @@ const ListTitleBarMenuButton: React.FC<Props> = ({
                 <RenameListOverlay setOpen={setRenameGroupOverlayStatus} currentList={currentList}></RenameListOverlay>
             );
         } else if (inviteMembersOverlayStatus) {
-            return <MembersOverlay setOpen={setInviteMembersOverlayStatus} currentList={currentList}></MembersOverlay>;
+            return (
+                <MembersOverlay
+                    setOpen={setInviteMembersOverlayStatus}
+                    currentList={currentList}
+                    currentListUser={currentListUser}
+                ></MembersOverlay>
+            );
         } else if (deleteGroupOverlayStatus) {
             return (
                 <ConfirmationOverlay

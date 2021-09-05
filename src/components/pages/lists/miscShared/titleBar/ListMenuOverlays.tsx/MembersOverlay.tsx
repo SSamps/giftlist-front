@@ -3,6 +3,9 @@ import React, { Fragment, useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { addAlertThunkActionCreator, TaddAlertThunkActionCreator } from '../../../../../../redux/actions/alertActions';
 import {
+    IbasicListMember,
+    IgiftGroupMember,
+    IgiftListMember,
     TbasicListFields,
     TgiftGroupChildFieldsCensored,
     TgiftGroupFields,
@@ -17,9 +20,10 @@ interface Props {
     setOpen: React.Dispatch<React.SetStateAction<boolean>>;
     currentList: TgiftListFieldsCensored | TbasicListFields | TgiftGroupFields | TgiftGroupChildFieldsCensored;
     addAlertThunkActionCreator: TaddAlertThunkActionCreator;
+    currentListUser: IbasicListMember | IgiftListMember | IgiftGroupMember;
 }
 
-const MembersOverlay: React.FC<Props> = ({ setOpen, currentList, addAlertThunkActionCreator }) => {
+const MembersOverlay: React.FC<Props> = ({ setOpen, currentList, addAlertThunkActionCreator, currentListUser }) => {
     const [inviteArray, setInviteArray] = useState<string[]>([]);
     const [inviteArrayError, setInviteArrayError] = useState('');
     const [submitState, setSubmitState] = useState({ loading: false, completed: false });
@@ -65,15 +69,22 @@ const MembersOverlay: React.FC<Props> = ({ setOpen, currentList, addAlertThunkAc
                 <div className='overlayContainer'>
                     <span className='lead'>Members</span>
                     <div className='memberList'>{renderCurrentMembers()}</div>
-                    <InviteFormInput inviteArray={inviteArray} setInviteArray={setInviteArray}></InviteFormInput>
-                    {loading ? (
-                        <Spinner className='spinner-tiny'></Spinner>
-                    ) : completed ? (
-                        <div>Invite sent</div>
-                    ) : (
-                        <OverlayButtons setOpen={setOpen} submitForm={submitForm}></OverlayButtons>
+                    {currentListUser.permissions.includes('GROUP_INVITE') && (
+                        <Fragment>
+                            <InviteFormInput
+                                inviteArray={inviteArray}
+                                setInviteArray={setInviteArray}
+                            ></InviteFormInput>
+                            {loading ? (
+                                <Spinner className='spinner-tiny'></Spinner>
+                            ) : completed ? (
+                                <div>Invite sent</div>
+                            ) : (
+                                <OverlayButtons setOpen={setOpen} submitForm={submitForm}></OverlayButtons>
+                            )}
+                            {inviteArrayError && <div className='form-error-message'>{inviteArrayError}</div>}
+                        </Fragment>
                     )}
-                    {inviteArrayError && <div className='form-error-message'>{inviteArrayError}</div>}
                 </div>
             </div>
             <DropdownUnderlay setOpen={setOpen} extraClasses={'underlay-focus'}></DropdownUnderlay>
