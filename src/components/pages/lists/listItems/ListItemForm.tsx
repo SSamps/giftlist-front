@@ -84,8 +84,6 @@ const ListItemForm: React.FC<Props> = ({
     };
 
     const isValidFormInput = () => {
-        // TODO revisit this later. Not handled well atm.
-
         if (itemBody.length <= 0) {
             setFormErrorState({ ...formErrorState, itemError: 'You must provide an item description' });
             return false;
@@ -122,7 +120,6 @@ const ListItemForm: React.FC<Props> = ({
                 setItemFormState({ ...itemFormState, waiting: false, error: '' });
             }
         } catch (err) {
-            console.log('error: ', err);
             setItemFormState({
                 ...itemFormState,
                 itemLinks: updatedItemLinks,

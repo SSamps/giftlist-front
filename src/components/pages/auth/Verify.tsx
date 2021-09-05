@@ -30,7 +30,6 @@ const Verify: React.FC<Props> = ({
             await loadUserActionCreator(store.dispatch);
             history.push(`/dashboard`);
         } catch (err) {
-            console.log(err);
             setVerifyError('Error: ' + err.response.status + ' ' + err.response.statusText);
         }
     };
