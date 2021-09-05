@@ -36,9 +36,9 @@ const ListTypeDrop: React.FC<Props> = ({ setOpen, listVariantFilter, setFiltersA
                 >
                     <span className='dropDownItem-name'>Basic List</span>{' '}
                     {basicListSelected ? (
-                        <i className='far fa-check-square btn-simple dropDownItem-icon'></i>
+                        <i className='far fa-check-square dropDownItem-icon'></i>
                     ) : (
-                        <i className='far fa-square btn-simple dropDownItem-icon'></i>
+                        <i className='far fa-square dropDownItem-icon'></i>
                     )}
                 </div>
                 <div
@@ -47,9 +47,9 @@ const ListTypeDrop: React.FC<Props> = ({ setOpen, listVariantFilter, setFiltersA
                 >
                     <span className='dropDownItem-name'>Gift List</span>{' '}
                     {giftListSelected ? (
-                        <i className='far fa-check-square btn-simple dropDownItem-icon'></i>
+                        <i className='far fa-check-square dropDownItem-icon'></i>
                     ) : (
-                        <i className='far fa-square btn-simple dropDownItem-icon'></i>
+                        <i className='far fa-square dropDownItem-icon'></i>
                     )}
                 </div>
                 <div
@@ -58,9 +58,9 @@ const ListTypeDrop: React.FC<Props> = ({ setOpen, listVariantFilter, setFiltersA
                 >
                     <span className='dropDownItem-name'>Gift Group</span>{' '}
                     {giftGroupSelected ? (
-                        <i className='far fa-check-square btn-simple dropDownItem-icon'></i>
+                        <i className='far fa-check-square dropDownItem-icon'></i>
                     ) : (
-                        <i className='far fa-square btn-simple dropDownItem-icon'></i>
+                        <i className='far fa-square dropDownItem-icon'></i>
                     )}
                 </div>
             </div>
