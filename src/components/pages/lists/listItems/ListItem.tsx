@@ -8,12 +8,7 @@ import {
     TselectListItemActionCreator,
 } from '../../../../redux/actions/listGroupActions';
 import { IrootStateAuthedUnknownListLoaded } from '../../../../redux/reducers/root/rootReducer';
-import {
-    TbasicListFields,
-    TgiftGroupFields,
-    TgiftListFieldsCensored,
-    TgroupMemberAny,
-} from '../../../../types/models/listGroups';
+import { TbasicListFields, TgiftGroupFields, TgiftListFieldsCensored } from '../../../../types/models/listGroups';
 import { IbasicListItem, IgiftListItemCensored } from '../../../../types/models/listItems';
 import { IUser } from '../../../../types/models/User';
 import { findUserInGroup } from '../../../../misc/helperFunctions';
@@ -134,25 +129,48 @@ const ListItem: React.FC<Props> = ({
         }
 
         const numSelected = listItem.selectedBy.length;
+        if (numSelected < 1) {
+            return '';
+        }
+
+        let currentUserSelected: boolean = false;
+        let otherSelectedNames: string[] = [];
+
+        for (let i = 0; i < listItem.selectedBy.length; i++) {
+            if (listItem.selectedBy[i] === user._id) {
+                currentUserSelected = true;
+            } else {
+                const userName = findUserInGroup(currentList, listItem.selectedBy[i])?.displayName;
+                if (userName) {
+                    otherSelectedNames.push(userName);
+                }
+            }
+        }
 
         if (numSelected === 1) {
-            const selectedUserId = listItem.selectedBy[0];
-
-            const selectedUserDisplayname = findUserInGroup(currentList, selectedUserId)?.displayName;
+            let selectedUserDisplayname;
+            if (currentUserSelected) {
+                selectedUserDisplayname = 'You';
+            } else {
+                selectedUserDisplayname = otherSelectedNames[0];
+            }
 
             return <div className='listItem-selected'>Selected by {selectedUserDisplayname}</div>;
         } else if (numSelected > 1) {
-            let selectedByNames = listItem.selectedBy.map((userId) => {
-                return (findUserInGroup(currentList, userId) as TgroupMemberAny).displayName;
-            });
+            if (currentUserSelected && otherSelectedNames.length === 1) {
+                return <div className='listItem-selected'>Shared by you and {otherSelectedNames[0]}</div>;
+            }
+
+            const selectedByNames = ['You'].concat(otherSelectedNames);
 
             return (
                 <Fragment>
                     <div className='listItem-selected'>
-                        <span>Shared by</span>{' '}
+                        <span>Shared by {currentUserSelected ? 'You and' : ''}</span>
+                        <pre> </pre>
                         {
                             <span className='btn-simple' onClick={() => setSelectedByOverlayStatus(true)}>
-                                {numSelected} people
+                                {currentUserSelected ? numSelected - 1 : numSelected} people
                             </span>
                         }
                     </div>
@@ -166,6 +184,7 @@ const ListItem: React.FC<Props> = ({
             );
         }
     };
+
     const renderLinks = () => {
         return (
             <div className='listItem-links'>

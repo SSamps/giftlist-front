@@ -50,7 +50,7 @@ export const GiftGroupMiniExampleCard: React.FC<props> = ({ ownerName }) => {
                     <ExampleListItem
                         isSelected={false}
                         body='One of these jumpers'
-                        links={['link1', 'link2']}
+                        links={['imaginaryjumpers.com/fancyshmancyjumper', 'imaginaryjumpers.com/schmancyfancyjumper']}
                         showControls={false}
                         size='tiny'
                         longBody={true}
