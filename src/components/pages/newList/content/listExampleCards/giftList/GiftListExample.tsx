@@ -23,7 +23,7 @@ const GiftListExample: React.FC = () => {
                         selectedBy={['You']}
                         body='These climbing shoes'
                         showControls={false}
-                        link={'yeoldeclimbingshoppe.com/reallyniceshoes'}
+                        links={['yeoldeclimbingshoppe.com/reallyniceshoes']}
                         longBody={true}
                         longLinks={true}
                     ></ExampleListItem>

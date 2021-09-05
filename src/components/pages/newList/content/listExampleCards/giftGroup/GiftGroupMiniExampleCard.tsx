@@ -33,7 +33,7 @@ export const GiftGroupMiniExampleCard: React.FC<props> = ({ ownerName }) => {
                         isSelected={false}
                         body='Replacement for my old watch'
                         showControls={false}
-                        link={'yeoldeclimbingshoppe.com/reallyniceshoes'}
+                        links={['yeoldeclimbingshoppe.com/reallyniceshoes']}
                         size='tiny'
                         longBody={true}
                         longLinks={true}
@@ -47,8 +47,18 @@ export const GiftGroupMiniExampleCard: React.FC<props> = ({ ownerName }) => {
                         longBody={true}
                         longLinks={true}
                     ></ExampleListItem>
+                    <ExampleListItem
+                        isSelected={false}
+                        body='One of these jumpers'
+                        links={['link1', 'link2']}
+                        showControls={false}
+                        size='tiny'
+                        longBody={true}
+                        longLinks={true}
+                    ></ExampleListItem>
                 </div>
             </div>
+            <div className='newListExampleCard-fade'></div>
         </div>
     );
 };

@@ -4,7 +4,7 @@ interface props {
     isSelected: boolean;
     selectedBy?: string[];
     body: string;
-    link?: string;
+    links?: string[];
     showControls: boolean;
     size?: 'small' | 'tiny';
     longBody?: boolean;
@@ -14,7 +14,7 @@ interface props {
 const ExampleListItem: React.FC<props> = ({
     isSelected,
     body,
-    link,
+    links,
     showControls,
     selectedBy,
     longBody,
@@ -59,17 +59,21 @@ const ExampleListItem: React.FC<props> = ({
                     </span>
                 )}
             </div>
-            {link && (
+            {links && (
                 <div className='exampleItem-links'>
-                    <span className='exampleItem-links-linkContainer'>
-                        <span
-                            className={`exampleItem-links-link ${
-                                longLinks ? 'exampleItem-links-link-long' : ''
-                            } btn-simple-disabled ${size}`}
-                        >
-                            {link}
-                        </span>
-                    </span>
+                    {links.map((link) => {
+                        return (
+                            <span className='exampleItem-links-linkContainer'>
+                                <span
+                                    className={`exampleItem-links-link ${
+                                        longLinks ? 'exampleItem-links-link-long' : ''
+                                    } btn-simple-disabled ${size}`}
+                                >
+                                    {link}
+                                </span>
+                            </span>
+                        );
+                    })}{' '}
                 </div>
             )}
             {renderSelectedBy()}
