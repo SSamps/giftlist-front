@@ -2,6 +2,7 @@ import React, { Fragment, useState } from 'react';
 import { connect } from 'react-redux';
 import { VALIDATION_GROUP_NAME_MAX_LENGTH } from '../../../../../../misc/validation';
 import { renameListActionCreator, TrenameListActionCreator } from '../../../../../../redux/actions/listGroupActions';
+import { LIST_GROUP_PARENT_VARIANTS } from '../../../../../../types/listVariants';
 import {
     TbasicListFields,
     TgiftGroupChildFieldsCensored,
@@ -42,7 +43,9 @@ const RenameListOverlay: React.FC<Props> = ({ setOpen, currentList, renameListAc
         <Fragment>
             <div className='overlay'>
                 <div className='overlayContainer'>
-                    <span className='lead'>Rename list</span>
+                    <span className='lead'>
+                        {LIST_GROUP_PARENT_VARIANTS.includes(currentList.groupVariant) ? 'Rename Group' : 'Rename List'}
+                    </span>
                     <form className='form' onSubmit={submitForm}>
                         <input
                             type='text'

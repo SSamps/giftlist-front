@@ -2,7 +2,7 @@ import { Fragment } from 'react';
 import { connect } from 'react-redux';
 import { IrootStateAuthedUnknownListLoaded } from '../../../../../redux/reducers/root/rootReducer';
 import { PERM_GROUP_DELETE, PERM_GROUP_OWNER, PERM_GROUP_RENAME } from '../../../../../types/listGroupPermissions';
-import { LIST_GROUP_ALL_TOP_LEVEL_VARIANTS } from '../../../../../types/listVariants';
+import { LIST_GROUP_ALL_TOP_LEVEL_VARIANTS, LIST_GROUP_PARENT_VARIANTS } from '../../../../../types/listVariants';
 import { IbasicListMember, IgiftGroupMember, IgiftListMember } from '../../../../../types/models/listGroups';
 import DropdownUnderlay from '../../../dashboard/yourLists/controlBar/filters/DropdownUnderlay';
 
@@ -71,7 +71,7 @@ const ListTitleBarMenuDropdown: React.FC<Props> = ({
             <div className='listMenuDropDown listMenuDropDown-leftCover '>
                 {currentListUser.permissions.includes(PERM_GROUP_RENAME) && (
                     <div className={`dropDownItem`} onClick={showRenameGroupOverlay}>
-                        Rename Group
+                        {LIST_GROUP_PARENT_VARIANTS.includes(currentListVariant) ? 'Rename Group' : 'Rename List'}
                     </div>
                 )}
                 <div className={`dropDownItem`} onClick={showInviteMembersOverlay}>
