@@ -71,10 +71,12 @@ const MembersOverlay: React.FC<Props> = ({ setOpen, currentList, addAlertThunkAc
                     <div className='memberList'>{renderCurrentMembers()}</div>
                     {currentListUser.permissions.includes('GROUP_INVITE') && (
                         <Fragment>
-                            <InviteFormInput
-                                inviteArray={inviteArray}
-                                setInviteArray={setInviteArray}
-                            ></InviteFormInput>
+                            <form className='form'>
+                                <InviteFormInput
+                                    inviteArray={inviteArray}
+                                    setInviteArray={setInviteArray}
+                                ></InviteFormInput>
+                            </form>
                             {loading ? (
                                 <Spinner className='spinner-tiny'></Spinner>
                             ) : completed ? (

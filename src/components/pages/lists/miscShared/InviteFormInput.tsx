@@ -60,41 +60,39 @@ const InviteFormInput: React.FC<Props> = ({ inviteArray, setInviteArray }) => {
 
     return (
         <Fragment>
-            <div className='form'>
-                <div className='form-group'>
-                    <label>
-                        Invite others to your group
-                        <div className='newListFormInviteeContainer'>
-                            {inviteArray.length > 0 ? (
-                                inviteArray.map((email, index) => {
-                                    return (
-                                        <InviteElement
-                                            key={index}
-                                            index={index}
-                                            removeInvitee={removeInvitee}
-                                            email={email}
-                                        ></InviteElement>
-                                    );
-                                })
-                            ) : (
-                                <span className='system'>Enter emails below</span>
-                            )}
-                        </div>
-                        <div className='form-group-inputContainerWithSideControls'>
-                            <input
-                                type='text'
-                                placeholder='Email'
-                                name='invitee'
-                                value={invitee}
-                                onChange={onChange}
-                                onKeyDown={handleSpecialInput}
-                            />
-                            <i className='fas fa-plus btn-simple' onClick={addInvitee}></i>
-                        </div>
-                    </label>
-                    {invalidEmail && <div className='form-error-message'>Please supply a valid email</div>}
-                    {duplicateEmail && <div className='form-error-message'>You have already added this person</div>}
-                </div>
+            <div className='form-group'>
+                <label>
+                    Invite others to your group
+                    <div className='newListFormInviteeContainer'>
+                        {inviteArray.length > 0 ? (
+                            inviteArray.map((email, index) => {
+                                return (
+                                    <InviteElement
+                                        key={index}
+                                        index={index}
+                                        removeInvitee={removeInvitee}
+                                        email={email}
+                                    ></InviteElement>
+                                );
+                            })
+                        ) : (
+                            <span className='system'>Enter emails below</span>
+                        )}
+                    </div>
+                    <div className='form-group-inputContainerWithSideControls'>
+                        <input
+                            type='text'
+                            placeholder='Email'
+                            name='invitee'
+                            value={invitee}
+                            onChange={onChange}
+                            onKeyDown={handleSpecialInput}
+                        />
+                        <i className='fas fa-plus btn-simple' onClick={addInvitee}></i>
+                    </div>
+                </label>
+                {invalidEmail && <div className='form-error-message'>Please supply a valid email</div>}
+                {duplicateEmail && <div className='form-error-message'>You have already added this person</div>}
             </div>
         </Fragment>
     );

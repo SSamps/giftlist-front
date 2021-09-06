@@ -9,12 +9,12 @@ interface Props {
 export const InviteElement: React.FC<Props> = ({ index, removeInvitee, email }) => {
     return (
         <Fragment>
-            <span className='inviteeElement'>
+            <div className='inviteeElement'>
+                <span className='inviteeElement-email'>{email} </span>
                 <span className='inviteeElement-remove'>
                     <i className='fas fa-times' onClick={() => removeInvitee(index)}></i>
                 </span>
-                <span className='inviteeElement-email'>{email} </span>
-            </span>
+            </div>
         </Fragment>
     );
 };
