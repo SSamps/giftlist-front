@@ -139,6 +139,7 @@ const ListItemForm: React.FC<Props> = ({
                         <AutoGrowTextField
                             maxLength={VALIDATION_ITEM_BODY_MAX_LENGTH}
                             onChange={onChange}
+                            onSubmit={submitForm}
                             placeholder='Type a message'
                             name='itemBody'
                             value={itemBody}

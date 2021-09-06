@@ -13,7 +13,7 @@ const ListChatForm: React.FC<props> = ({ submitForm }) => {
         setNewMessage(e.target.value);
     };
 
-    const onSubmit = (e?: React.FormEvent<HTMLFormElement>) => {
+    const onSubmit = (e?: React.FormEvent<HTMLFormElement | HTMLTextAreaElement>) => {
         e?.preventDefault();
         if (newMessage.length > 0) {
             submitForm(newMessage);
@@ -27,6 +27,7 @@ const ListChatForm: React.FC<props> = ({ submitForm }) => {
                 <AutoGrowTextField
                     maxLength={VALIDATION_MESSAGE_MAX_LENGTH}
                     onChange={onChange}
+                    onSubmit={onSubmit}
                     placeholder='Type a message'
                     value={newMessage}
                 ></AutoGrowTextField>
