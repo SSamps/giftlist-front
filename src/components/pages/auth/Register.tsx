@@ -10,6 +10,7 @@ import {
     VALIDATION_USER_PASSWORD_MAX_LENGTH,
 } from '../../../misc/validation';
 import { isPasswordValid } from '../../../misc/helperFunctions';
+import DevWarning from './DevWarning';
 
 interface Props {
     registerActionCreator: TregisterActionCreator;
@@ -95,6 +96,7 @@ const Register: React.FC<Props> = ({ registerActionCreator, isAuthenticated }) =
 
     return (
         <Fragment>
+            <DevWarning></DevWarning>
             <p className='lead'>
                 <i className='fas fa-user'></i> Create Your Account
             </p>

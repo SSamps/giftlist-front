@@ -7,3 +7,18 @@
     padding-top: 1rem;
     border-top: thin solid $color-border;
 }
+
+.registerDevWarning {
+    width: calc(min(100%, 40rem));
+    background-color: $color-background-danger;
+    color: $color-text-error;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+    padding: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    gap: 0.5rem;
+}
