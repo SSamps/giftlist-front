@@ -84,7 +84,7 @@ const Login: React.FC<Props> = ({ loginActionCreator, isAuthenticated }) => {
 
     return (
         <Fragment>
-            <p className='lead'>
+            <p className='text-header'>
                 <i className='fas fa-user'></i> Sign in to your account
             </p>
             <form className='form' onSubmit={onSubmit}>

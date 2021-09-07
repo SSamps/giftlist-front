@@ -131,7 +131,7 @@ const ListItemForm: React.FC<Props> = ({
 
     return (
         <div className='newListItemFormContainer'>
-            {header && <span className='lead'>{header}</span>}
+            {header && <span className='text-header'>{header}</span>}
             <form className='form'>
                 <div className='form-groupWithSideControls'>
                     <label className='form-label'>Item</label>

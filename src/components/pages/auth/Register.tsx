@@ -97,7 +97,7 @@ const Register: React.FC<Props> = ({ registerActionCreator, isAuthenticated }) =
     return (
         <Fragment>
             <DevWarning></DevWarning>
-            <p className='lead'>
+            <p className='text-header'>
                 <i className='fas fa-user'></i> Create Your Account
             </p>
             <form className='form' onSubmit={onSubmit}>

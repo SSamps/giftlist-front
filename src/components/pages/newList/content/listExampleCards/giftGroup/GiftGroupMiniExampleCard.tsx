@@ -14,8 +14,8 @@ export const GiftGroupMiniExampleCard: React.FC<props> = ({ ownerName }) => {
                 <div className='exampleListItemContainer'>
                     <div className='exampleListLabel'>
                         <div className='systemMessage '>
-                            <i className='fas fa-eye-slash tiny'></i>{' '}
-                            <span className='tiny'>
+                            <i className='fas fa-eye-slash text-tiny'></i>{' '}
+                            <span className='text-tiny'>
                                 {ownerName} <strong>can't</strong> see your selection
                             </span>
                         </div>

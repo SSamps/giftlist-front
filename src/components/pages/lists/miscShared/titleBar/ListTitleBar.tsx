@@ -23,7 +23,7 @@ const ListTitleBar: React.FC<Props> = ({ currentList }) => {
                     </li>
                 )}
 
-                <li className='ListTitleBar-title groupName'>{currentList.groupName}</li>
+                <li className='ListTitleBar-title text-groupName'>{currentList.groupName}</li>
                 <ListTitleBarMenuButton currentList={currentList}></ListTitleBarMenuButton>
                 <hr className='ListTitleBar-hr'></hr>
             </ul>

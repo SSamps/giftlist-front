@@ -24,7 +24,7 @@ const ListFormContainer: React.FC<Props> = ({ controllerState }) => {
 
     return (
         <div className='newListFormContainer'>
-            <div className='lead'>Create your {getListType()}</div>
+            <div className='text-header'>Create your {getListType()}</div>
             <NewListForm controllerState={controllerState}></NewListForm>
         </div>
     );

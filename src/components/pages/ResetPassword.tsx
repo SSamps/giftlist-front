@@ -53,7 +53,7 @@ const ResetPassword: React.FC<Props> = ({
 
     return (
         <Fragment>
-            <div className='lead'>Set a new password</div>
+            <div className='text-header'>Set a new password</div>
             <form className='form' onSubmit={onSubmit}>
                 <div className='form-group'>
                     <label>

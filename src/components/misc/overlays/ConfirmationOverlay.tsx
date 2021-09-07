@@ -14,7 +14,7 @@ const ConfirmationOverlay: React.FC<Props> = ({ setOpen, submitForm, description
         <Fragment>
             <div className={`overlay ${danger ? 'overlay-danger' : ''}`}>
                 <div className='overlayContainer'>
-                    <div className='lead'>{description}</div>
+                    <div className='text-header'>{description}</div>
                     <OverlayButtons submitForm={submitForm} setOpen={setOpen} danger={danger}></OverlayButtons>
                 </div>
             </div>

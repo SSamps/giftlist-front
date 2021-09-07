@@ -41,7 +41,7 @@ const ForgottenPassOverlay: React.FC<Props> = ({ setOpen }) => {
         <Fragment>
             <div className='overlay'>
                 <div className='overlayContainer'>
-                    <span className='lead'>Recover your password</span>
+                    <span className='text-header'>Recover your password</span>
                     <form className='form' onSubmit={submitForm}>
                         <label>
                             Email

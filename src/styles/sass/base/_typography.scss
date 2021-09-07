@@ -27,55 +27,63 @@ body {
     }
 }
 
-.title {
-    font-size: 4rem;
-    line-height: 4rem;
-    color: $color-text-header;
-}
+.text {
+    &-tiny {
+        font-size: 0.8rem;
+        line-height: 1.3rem;
+    }
 
-.lead {
-    font-size: 1.5rem;
-    line-height: 2rem;
-    color: $color-text-header;
-}
+    &-small {
+        font-size: 0.9rem;
+        line-height: 1.4rem;
+    }
 
-.danger {
-    color: $color-background-danger;
-}
+    &-large {
+        font-size: 1.5rem;
+        line-height: 2rem;
+    }
 
-.success {
-    color: $color-background-success;
-}
+    &-huge {
+        font-size: 4rem;
+        line-height: 4rem;
+    }
 
-.system {
-    color: $color-text-system;
-}
+    &-system {
+        color: $color-text-system;
+    }
 
-.name {
-    color: $color-text-name;
-}
+    &-danger {
+        color: $color-background-danger;
+    }
 
-.groupName {
-    font-size: 1.5rem;
-    color: $color-text-name;
-}
+    &-success {
+        color: $color-background-success;
+    }
 
-.tiny {
-    font-size: 0.8rem;
-    line-height: 1.3rem;
-}
+    &-name {
+        color: $color-text-name;
+    }
 
-.small {
-    font-size: 0.9rem;
-    line-height: 1.4rem;
-}
+    &-groupName {
+        font-size: 1.5rem;
+        color: $color-text-name;
+    }
 
-.large {
-    font-size: 1.5rem;
-    line-height: 2rem;
-}
+    &-header {
+        font-size: 1.5rem;
+        line-height: 2rem;
+        color: $color-text-header;
+    }
 
-.huge {
-    font-size: 4rem;
-    line-height: 4rem;
+    &-lead {
+        font-size: 2rem;
+        line-height: 2.5rem;
+        color: $color-text-header;
+    }
+
+    &-title {
+        font-size: 4rem;
+        line-height: 4rem;
+        color: $color-text-header;
+    }
 }

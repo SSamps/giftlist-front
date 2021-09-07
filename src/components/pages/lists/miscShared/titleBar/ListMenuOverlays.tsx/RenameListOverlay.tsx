@@ -43,7 +43,7 @@ const RenameListOverlay: React.FC<Props> = ({ setOpen, currentList, renameListAc
         <Fragment>
             <div className='overlay'>
                 <div className='overlayContainer'>
-                    <span className='lead'>
+                    <span className='text-header'>
                         {LIST_GROUP_PARENT_VARIANTS.includes(currentList.groupVariant) ? 'Rename Group' : 'Rename List'}
                     </span>
                     <form className='form' onSubmit={submitForm}>

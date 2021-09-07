@@ -38,7 +38,7 @@ const RenameUserOverlay: React.FC<Props> = ({ setOpen, renameUserActionCreator, 
         <Fragment>
             <div className='overlay'>
                 <div className='overlayContainer'>
-                    <span className='lead'>Choose a new name</span>
+                    <span className='text-header'>Choose a new name</span>
                     <form className='form' onSubmit={submitForm}>
                         <input
                             type='text'

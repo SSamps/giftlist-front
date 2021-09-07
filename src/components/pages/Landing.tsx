@@ -18,8 +18,8 @@ const landing: React.FC<Props> = ({ isAuthenticated }) => {
             <div className='landingContentContainer'>
                 <div className='landingHeadlineContainer'>
                     <div>
-                        <h1 className='title'>Gift List</h1>
-                        <p className='lead'>Make gifting easy</p>
+                        <h1 className='text-title'>Gift List</h1>
+                        <p className='text-header'>Make gifting easy</p>
                     </div>
                     <div className=''>
                         <Link to='/register' className='btn-block btn-spaced'>

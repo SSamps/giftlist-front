@@ -67,7 +67,7 @@ const MembersOverlay: React.FC<Props> = ({ setOpen, currentList, addAlertThunkAc
         <Fragment>
             <div className='overlay'>
                 <div className='overlayContainer'>
-                    <span className='lead'>Members</span>
+                    <span className='text-header'>Members</span>
                     <div className='memberList'>{renderCurrentMembers()}</div>
                     {currentListUser.permissions.includes('GROUP_INVITE') && (
                         <Fragment>

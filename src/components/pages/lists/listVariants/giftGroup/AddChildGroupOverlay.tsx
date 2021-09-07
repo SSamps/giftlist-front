@@ -58,7 +58,7 @@ const AddChildGroupOverlay: React.FC<Props> = ({ setOpen, currentList, user, add
         <Fragment>
             <div className='overlay'>
                 <div className='overlayContainer'>
-                    <span className='lead'>Give your new list a name</span>
+                    <span className='text-header'>Give your new list a name</span>
                     <form className='form' onSubmit={submitForm}>
                         <input
                             type='text'

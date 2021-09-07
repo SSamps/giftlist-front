@@ -20,7 +20,7 @@ const VerifyNotification = () => {
     return (
         <div className='dashboardVerifyContainer'>
             <div className='dashboardVerifyBody'>
-                <div className='lead'>Verify your email</div>
+                <div className='text-header'>Verify your email</div>
                 <div>Please follow the instructions in your welcome email</div>
             </div>
             {sending ? (

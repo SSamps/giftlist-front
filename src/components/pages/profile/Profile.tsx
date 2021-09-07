@@ -41,16 +41,16 @@ const Profile: React.FC<props> = ({ user, deleteAccountActionCreator }) => {
     return (
         <div className='profileContainer'>
             {renderOverlays()}
-            <div className='profileNameContainer title'>{user.displayName}</div>
+            <div className='profileNameContainer text-lead'>{user.displayName}</div>
             <div className='profileBodyContainer'>
                 <div className='profileSection-container'>
-                    <div className='profileSection-label lead'>Info</div>
+                    <div className='profileSection-label text-header'>Info</div>
                     <div className='profileSection-body'>
                         <ProfileRow label='Member since' body={joinedDate}></ProfileRow>
                     </div>
                 </div>
                 <div className='profileSection-container'>
-                    <div className='profileSection-label lead'>Settings</div>
+                    <div className='profileSection-label text-header'>Settings</div>
                     <div className='profileSection-body'>
                         <ProfileRow
                             label='Display name'
@@ -61,7 +61,7 @@ const Profile: React.FC<props> = ({ user, deleteAccountActionCreator }) => {
                     </div>
                 </div>
                 <div className='profileSection-container'>
-                    <div className='profileSection-label lead'>Danger</div>
+                    <div className='profileSection-label text-header'>Danger</div>
                     <div className='profileSection-body profileSection-body-danger'>
                         <ProfileRow
                             label='Delete account'
