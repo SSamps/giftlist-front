@@ -9,7 +9,12 @@ import { BASIC_LIST, GIFT_GROUP, GIFT_GROUP_CHILD, GIFT_LIST } from '../listVari
 import { IbasicListItem, IgiftListItem, IgiftListItemCensored } from './listItems';
 
 // Shared
-type TlistGroupBaseFields = { groupName: string; creationDate?: Date; groupVariant: string; _id: string };
+interface IlistGroupBaseFields {
+    groupName: string;
+    creationDate: Date;
+    groupVariant: string;
+    _id: string;
+}
 
 interface IgroupMemberBase {
     userId: string;
@@ -17,6 +22,7 @@ interface IgroupMemberBase {
     oldestReadMessage?: Date | undefined;
     permissions: TYPE_PERM_ALL_LIST_GROUP[];
 }
+
 // Singular Groups
 // Basic Lists
 
@@ -24,21 +30,21 @@ export interface IbasicListMember extends IgroupMemberBase {
     permissions: TYPE_PERM_BASIC_LIST_ALL[];
 }
 
-type TbasicListExtraFields = {
+interface IbasicListExtraFields {
     members: IbasicListMember[];
     maxListItems: Number;
     listItems: IbasicListItem[];
     groupVariant: typeof BASIC_LIST;
-};
+}
 
-export type TbasicListFields = TlistGroupBaseFields & TbasicListExtraFields;
+export type TbasicListFields = IlistGroupBaseFields & IbasicListExtraFields;
 
 // Gift Lists
 export interface IgiftListMember extends IgroupMemberBase {
     permissions: TYPE_PERM_GIFT_LIST_ALL[];
 }
 
-type TgiftListExtraFields = {
+interface IgiftListExtraFields {
     members: IgiftListMember[];
     maxListItems: Number;
     listItems: IgiftListItem[];
@@ -46,9 +52,9 @@ type TgiftListExtraFields = {
     secretListItems: IgiftListItem[];
     parentGroupId: string;
     groupVariant: typeof GIFT_LIST;
-};
+}
 
-type TgiftListExtraFieldsCensored = {
+interface IgiftListExtraFieldsCensored {
     members: IgiftListMember[];
     maxListItems: Number;
     listItems: IgiftListItemCensored[];
@@ -56,10 +62,10 @@ type TgiftListExtraFieldsCensored = {
     secretListItems: IgiftListItemCensored[] | undefined;
     parentGroupId: string;
     groupVariant: typeof GIFT_LIST;
-};
+}
 
-export type TgiftListFields = TlistGroupBaseFields & TgiftListExtraFields;
-export type TgiftListFieldsCensored = TlistGroupBaseFields & TgiftListExtraFieldsCensored;
+export type TgiftListFields = IlistGroupBaseFields & IgiftListExtraFields;
+export type TgiftListFieldsCensored = IlistGroupBaseFields & IgiftListExtraFieldsCensored;
 
 // Parent Groups
 // Gift Groups
@@ -67,20 +73,20 @@ export interface IgiftGroupMember extends IgroupMemberBase {
     permissions: TYPE_PERM_GIFT_GROUP_ALL[];
 }
 
-type TgiftGroupExtraFields = {
+interface IgiftGroupExtraFields {
     members: IgiftGroupMember[];
     children: TgiftListFieldsCensored[];
     groupVariant: typeof GIFT_GROUP;
-};
+}
 
-export type TgiftGroupFields = TlistGroupBaseFields & TgiftGroupExtraFields;
+export type TgiftGroupFields = IlistGroupBaseFields & IgiftGroupExtraFields;
 
 // Child Groups
 export interface IgiftGroupChildMember extends IgroupMemberBase {
     permissions: TYPE_PERM_GIFT_GROUP_CHILD_ALL[];
 }
 
-type TgiftGroupChildExtraFields = {
+interface IgiftGroupChildExtraFields {
     members: IgiftGroupChildMember[];
     parentGroupId: string;
     maxListItems: Number;
@@ -88,9 +94,9 @@ type TgiftGroupChildExtraFields = {
     maxSecretListItemsEach: Number;
     secretListItems: IgiftListItem[];
     groupVariant: typeof GIFT_GROUP_CHILD;
-};
+}
 
-type TgiftGroupChildExtraFieldsCensored = {
+interface IgiftGroupChildExtraFieldsCensored {
     members: IgiftGroupChildMember[];
     parentGroupId: string;
     maxListItems: Number;
@@ -98,10 +104,10 @@ type TgiftGroupChildExtraFieldsCensored = {
     maxSecretListItemsEach: Number;
     secretListItems: IgiftListItemCensored[] | undefined;
     groupVariant: typeof GIFT_GROUP_CHILD;
-};
+}
 
-export type TgiftGroupChildFields = TlistGroupBaseFields & TgiftGroupChildExtraFields;
-export type TgiftGroupChildFieldsCensored = TlistGroupBaseFields & TgiftGroupChildExtraFieldsCensored;
+export type TgiftGroupChildFields = IlistGroupBaseFields & IgiftGroupChildExtraFields;
+export type TgiftGroupChildFieldsCensored = IlistGroupBaseFields & IgiftGroupChildExtraFieldsCensored;
 
 // Aggregate
 
