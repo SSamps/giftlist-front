@@ -52,12 +52,12 @@ const ListTitleBarMenuDropdown: React.FC<Props> = ({
                 <div className='dropDownItem-danger'>
                     {renderDelete ? (
                         <div className='dropDownItem ' onClick={showDeleteGroupOverlay}>
-                            Delete Group
+                            {LIST_GROUP_PARENT_VARIANTS.includes(currentListVariant) ? 'Delete Group' : 'Delete List'}
                         </div>
                     ) : (
                         renderLeave && (
                             <div className='dropDownItem ' onClick={showLeaveGroupOverlay}>
-                                Leave Group
+                                {LIST_GROUP_PARENT_VARIANTS.includes(currentListVariant) ? 'Leave Group' : 'Leave List'}
                             </div>
                         )
                     )}

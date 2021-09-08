@@ -1,5 +1,4 @@
 // Groups
-//TODO add a PERM_GROUP_OWNER role which prevents the user from leaving the group
 export const PERM_CHILD_GROUP_CREATE = 'CHILD_GROUP_CREATE'; // Allowed to create child groups in this parent group
 export const PERM_GROUP_DELETE = 'GROUP_DELETE'; // Allowed to delete the group
 export const PERM_GROUP_INVITE = 'GROUP_INVITE'; // Allowed to invite others to the group
@@ -18,7 +17,7 @@ export const PERM_GROUP_RW_SECRET_LIST_ITEMS = 'GROUP_RW_SECRET_LIST_ITEMS'; // 
 export const PERM_GROUP_SELECT_SECRET_LIST_ITEMS = 'GROUP_SELECT_SECRET_LIST_ITEMS'; // Allowed to select and unselect list items and see when others do so.
 
 // Messages
-export const PERM_GROUP_RW_MESSAGES = 'GROUP_RW_MESSAGES'; // Allowed to read an write messages in the group
+export const PERM_GROUP_RW_MESSAGES = 'GROUP_RW_MESSAGES'; // Allowed to read and write messages in the group
 
 // Permission Modifiers
 export const PERM_MODIFIER_ADD = 'PERM_MODIFIER_ADD';
