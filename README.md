@@ -36,3 +36,7 @@ You can also use madge to generate a dependency graph using the following comman
 #CSS
 After adding new files scss often fails to import them in to main.scss correctly and requires a restart of WSL for it to do so.
 It can also on occasion just stop compiling out of the blue, again requiring a WSL restart to fix.
+
+## Licence
+
+No licence - all rights reserved
