@@ -19,7 +19,8 @@
         "declaration": true,
         "noUnusedLocals": true,
         "noUnusedParameters": true,
-        "incremental": true
+        "incremental": true,
+        "useUnknownInCatchVariables": false
     },
 
     "include": ["src"],

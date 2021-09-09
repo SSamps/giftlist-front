@@ -1,0 +1,89 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    line-height: 1.6rem;
+}
+
+.systemMessage {
+    padding: 0 0.5rem;
+    font-size: 1rem;
+    color: $color-text-system;
+    text-align: center;
+
+    &-dark {
+        font-size: 1rem;
+        color: darken($color-text-system, 5%);
+    }
+
+    &-tag {
+        font-size: 0.8rem;
+        color: $color-text-system;
+    }
+
+    &-tag-small {
+        font-size: 0.8rem;
+        color: $color-text-system;
+        height: 0.8rem;
+    }
+}
+
+.text {
+    &-tiny {
+        font-size: 0.8rem;
+        line-height: 1.3rem;
+    }
+
+    &-small {
+        font-size: 0.9rem;
+        line-height: 1.4rem;
+    }
+
+    &-large {
+        font-size: 1.5rem;
+        line-height: 2rem;
+    }
+
+    &-huge {
+        font-size: 4rem;
+        line-height: 4rem;
+    }
+
+    &-system {
+        color: $color-text-system;
+    }
+
+    &-danger {
+        color: $color-background-danger;
+    }
+
+    &-success {
+        color: $color-background-success;
+    }
+
+    &-name {
+        color: $color-text-name;
+    }
+
+    &-groupName {
+        font-size: 1.5rem;
+        color: $color-text-name;
+    }
+
+    &-header {
+        font-size: 1.5rem;
+        line-height: 2rem;
+        color: $color-text-header;
+    }
+
+    &-lead {
+        font-size: 2rem;
+        line-height: 2.5rem;
+        color: $color-text-header;
+    }
+
+    &-title {
+        font-size: 4rem;
+        line-height: 4rem;
+        color: $color-text-header;
+    }
+}

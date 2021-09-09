@@ -1,0 +1,11 @@
+.basicListDeleteItemsContainer {
+    margin-top: 2rem;
+    width: calc(min(24rem, 80%));
+    display: flex;
+    justify-content: space-between;
+
+    &-button {
+        width: 7rem;
+        text-align: center;
+    }
+}

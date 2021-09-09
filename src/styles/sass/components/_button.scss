@@ -1,0 +1,67 @@
+.btn-block {
+    background: $color-interactive;
+    color: $color-text-light;
+    border-radius: 4px;
+    cursor: pointer;
+    padding: 0.3rem 0.5rem;
+
+    &:hover {
+        background: $color-interactive-hover;
+        color: $color-text-light;
+    }
+
+    &:active {
+        background: $color-interactive-active;
+        color: $color-text-light;
+    }
+}
+
+.btn-block-danger {
+    background: $color-interactive-danger;
+    color: $color-text-light;
+    border-radius: 4px;
+    cursor: pointer;
+    padding: 0.3rem;
+
+    &:hover {
+        background: $color-interactive-danger-hover;
+    }
+
+    &:active {
+        background: $color-interactive-danger-active;
+    }
+}
+
+.btn-simple {
+    color: $color-interactive;
+    cursor: pointer;
+
+    &:hover {
+        color: $color-interactive-hover;
+    }
+
+    &:active {
+        color: $color-interactive-active;
+    }
+}
+
+.btn-simple-disabled {
+    color: $color-interactive;
+}
+
+.btn-simple-danger {
+    color: $color-interactive-danger;
+    cursor: pointer;
+
+    &:hover {
+        color: $color-interactive-danger-hover;
+    }
+
+    &:active {
+        color: $color-interactive-danger-active;
+    }
+}
+
+.btn-spaced {
+    margin: 5rem 0.5rem;
+}

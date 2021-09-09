@@ -1,0 +1,55 @@
+*,
+*::before,
+*::after {
+    box-sizing: inherit;
+    margin: 0;
+    padding: 0;
+    border: none;
+}
+
+textarea {
+    font: inherit;
+}
+
+html {
+    box-sizing: border-box;
+    min-height: 100%;
+}
+
+body {
+    min-height: 100%;
+}
+
+#root {
+    background-color: $color-background-secondary;
+    min-height: 100%;
+}
+
+a {
+    text-decoration: none;
+    color: $color-interactive;
+    cursor: pointer;
+
+    &:hover {
+        color: $color-interactive-hover;
+    }
+
+    &:active {
+        color: $color-interactive-active;
+    }
+}
+
+ul,
+ol {
+    list-style: none;
+}
+
+h1,
+h2,
+h3 {
+    color: $color-text-header;
+}
+
+::placeholder {
+    color: $color-text-system-light;
+}

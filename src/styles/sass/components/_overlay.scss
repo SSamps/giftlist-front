@@ -1,0 +1,62 @@
+.overlay {
+    position: fixed;
+    z-index: 2;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: calc(min(28rem, 95%));
+    background-color: $color-background-primary;
+    border: $color-border;
+    border-radius: 4px;
+    border-style: solid;
+    border-width: thin;
+    padding: 0.5rem;
+}
+
+.overlay-danger {
+    border: $color-border-danger;
+    border-style: solid;
+}
+
+.overlayContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem 1rem;
+    gap: 1rem;
+    text-align: center;
+
+    &-buttons {
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+        width: 100%;
+    }
+}
+
+.underlay {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    z-index: 1;
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    cursor: default;
+    // The below only works on firefox but it's so much simpler than other implementations it makes the most sense for now
+
+    &-focus {
+        backdrop-filter: blur(0.2rem);
+        background-color: adjust-color($color-highlight, $alpha: -0.2);
+    }
+}
+
+.memberList {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: $color-text-name;
+}

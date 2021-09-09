@@ -1,0 +1,78 @@
+.dropDown {
+    position: absolute;
+    background-color: $color-background-secondary;
+    border: $color-border-hover;
+    border-style: solid;
+    border-width: thin;
+    border-top-style: none;
+    overflow: visible;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    width: max-content;
+    padding: 0.5rem 0;
+    right: 0;
+    bottom: -1px;
+    transform: translateY(100%);
+    border-bottom-left-radius: 2px;
+    border-bottom-right-radius: 2px;
+}
+
+.listMenuDropDown {
+    position: absolute;
+    background-color: $color-background-secondary;
+    border: $color-border-hover;
+    border-style: solid;
+    border-bottom-left-radius: 2px;
+    border-bottom-right-radius: 2px;
+    border-top-left-radius: 2px;
+    overflow: visible;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    width: max-content;
+    padding: 0.5rem 0;
+
+    &-leftCover {
+        width: 9.5rem;
+        transform: translate(-8.8rem, -2.1rem);
+    }
+}
+
+.dropDownItem {
+    color: $color-interactive;
+    cursor: pointer;
+    padding: 0rem 0.5rem;
+
+    &:hover {
+        background-color: $color-interactive-hover;
+        color: $color-text-light;
+    }
+
+    &-selected {
+        background-color: $color-interactive-active;
+        color: $color-text-light;
+    }
+
+    &-checkbox {
+        display: flex;
+        align-items: center;
+    }
+
+    &-name {
+        margin-right: auto;
+    }
+
+    &-icon {
+        margin-left: 0.5rem;
+    }
+
+    &-danger {
+        width: 100%;
+        color: $color-background-danger;
+        border-top-style: dashed;
+        border-top-width: thin;
+        margin-top: 0.5rem;
+        padding-top: 0.5rem;
+    }
+}

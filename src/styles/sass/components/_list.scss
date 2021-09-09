@@ -1,0 +1,222 @@
+.listContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.listSectionContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    margin-bottom: 2.5rem;
+    margin-top: 0.5rem;
+}
+
+.listSectionContentContainer {
+    width: calc(min(100%, 50rem));
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 0.5rem;
+}
+
+.listItemContainer {
+    width: 100%;
+    gap: 0.25rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.listItem {
+    width: 95%;
+    padding: 0.25rem 0.5rem 0.25rem 0.5rem;
+    border-radius: 4px;
+    background-color: $color-background-secondary;
+    display: flex;
+    flex-direction: column;
+}
+
+.listItem-main {
+    display: grid;
+    grid-template-columns: 2rem auto 3.2rem;
+    grid-template-rows: 1fr;
+
+    &-select {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        grid-column: 1;
+    }
+
+    &-body {
+        overflow: hidden;
+        word-wrap: break-word;
+        hyphens: auto;
+        grid-column: 2;
+        color: $color-text-body;
+    }
+
+    &-body-long {
+        grid-column: 2/4;
+    }
+
+    &-controlsContainer {
+        display: flex;
+        justify-content: center;
+        grid-column: 3;
+
+        &-controls {
+            font-size: 1.2rem;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+    }
+}
+
+.listItem-Empty {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    grid-column: 1/4;
+}
+
+.listItem-links {
+    display: flex;
+    flex-direction: column;
+    margin-left: 2rem;
+
+    &-linkContainer {
+        display: grid;
+        grid-template-rows: 1;
+        grid-template-columns: 1fr 3.5rem;
+
+        color: $color-interactive;
+        &:hover {
+            color: $color-interactive-hover;
+        }
+
+        &:active {
+            color: $color-interactive-active;
+        }
+    }
+
+    &-link {
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+
+        &-long {
+            grid-column: 1/3;
+        }
+    }
+}
+
+.listItem-selected {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 0.5rem;
+    color: $color-text-system;
+}
+
+.listNewItemContainer {
+    margin: 2rem 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.newListItemFormContainer {
+    width: calc(min(38rem, 100%));
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+}
+
+.ListTitleBar {
+    width: 100%;
+    display: grid;
+    grid-template-columns: calc(min(10%, 3rem)) 1fr calc(min(10%, 3rem));
+    grid-template-rows: 1fr 1px;
+    align-items: center;
+    margin-top: 0.5rem;
+    row-gap: 0.5rem;
+
+    &-title {
+        justify-self: center;
+        text-align: center;
+        grid-column: 2/3;
+        width: 100%;
+    }
+
+    &-controls {
+        color: $color-interactive;
+        font-size: 1.2rem;
+        justify-self: center;
+        grid-column: 3;
+        position: relative;
+        padding: 0 0.3rem;
+        border-radius: 10px;
+        cursor: pointer;
+
+        &:hover {
+            color: darken($color-interactive, 5%);
+            background-color: $color-background-secondary;
+        }
+
+        &:active {
+            color: darken($color-interactive, 10%);
+            background-color: $color-background-secondary;
+        }
+
+        &-active {
+            color: darken($color-interactive, 10%);
+            background-color: $color-background-secondary;
+        }
+    }
+
+    &-back {
+        color: $color-interactive;
+        font-size: 1.2rem;
+        justify-self: center;
+        grid-column: 1;
+        position: relative;
+        padding: 0 0.3rem;
+        border-radius: 10px;
+        cursor: pointer;
+
+        &:hover {
+            color: darken($color-interactive, 5%);
+            background-color: $color-background-secondary;
+        }
+
+        &:active {
+            color: darken($color-interactive, 10%);
+            background-color: $color-background-secondary;
+        }
+    }
+
+    &-hr {
+        border: 0;
+        border-top: 1px solid $color-border;
+        grid-column: 1 / 4;
+        grid-row: 2;
+    }
+}
+
+.giftListLabel {
+    width: 100%;
+    padding: 0 0.5rem;
+    text-align: left;
+}

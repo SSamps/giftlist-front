@@ -1,0 +1,20 @@
+.navbar {
+    padding: 0.4rem 1rem;
+    z-index: 1;
+    width: 100%;
+    background: $color-background-dark;
+
+    ul {
+        width: 100%;
+        display: flex;
+        gap: 1rem;
+    }
+
+    a {
+        color: $color-text-light;
+    }
+}
+
+.navLogo {
+    margin-right: auto;
+}

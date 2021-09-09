@@ -1,14 +1,10 @@
-import { Fragment, useEffect } from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import './styles/App.css';
+import { useEffect, useState } from 'react';
+import { ErrorBoundary } from 'react-error-boundary';
+import { BrowserRouter as Router } from 'react-router-dom';
+import './styles/css/App.css';
+
 // Components
 import Navbar from './components/layout/Navbar';
-import Landing from './components/layout/Landing';
-import Login from './components/auth/Login';
-import Register from './components/auth/Register';
-import Dashboard from './components/dashboard/Dashboard';
-import PrivateRoute from './components/routing/PrivateRoute';
-//Utils
 
 //Redux
 import { Provider } from 'react-redux';
@@ -16,41 +12,68 @@ import store from './redux/reducers/root/reducerStore';
 import { loadUserActionCreator } from './redux/actions/authActions';
 //Axios
 import axios from 'axios';
-import setAuthToken from './utils/setAuthToken';
+import setAuthToken from './misc/setAuthToken';
 import { LOGOUT } from './redux/actions/actionTypes';
+
+import Footer from './components/layout/Footer';
+import Body from './components/layout/Body';
+import UncaughtError from './components/pages/UncaughtError';
 
 // Defaults to localhost if not set. This is set in the prod container and is proxied using the proxy field in package.json when running the react dev server.
 axios.defaults.baseURL = process.env.REACT_APP_BACKEND_BASE_URL;
 
 const App = () => {
-    useEffect(() => {
-        if (localStorage.token) {
-            setAuthToken(localStorage.token);
-        }
-        loadUserActionCreator(store.dispatch);
+    const [loaded, setLoaded] = useState(false);
 
-        // log user out from all tabs if they log out in one tab
-        window.addEventListener('storage', () => {
-            if (!localStorage.token) store.dispatch({ type: LOGOUT });
-        });
+    useEffect(() => {
+        const init = async () => {
+            if (localStorage.token) {
+                setAuthToken(localStorage.token);
+            }
+
+            await loadUserActionCreator(store.dispatch);
+
+            window.addEventListener('storage', () => {
+                if (!localStorage.token) store.dispatch({ type: LOGOUT });
+            });
+            setLoaded(true);
+        };
+        init();
     }, []);
 
+    const errorFallback = async (error: Error, info: { componentStack: string }) => {
+        const { name, stack, message } = error;
+
+        const config = {
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        };
+
+        const body = JSON.stringify({
+            name: name,
+            stack: stack,
+            message: message,
+            componentStack: info.componentStack,
+            date: new Date().toLocaleString(),
+        });
+        await axios.post(`/api/admin/error`, body, config);
+    };
+
     return (
-        <Provider store={store}>
-            <Router>
-                <Fragment>
-                    <Navbar />
-                    <Route exact path='/' component={Landing} />
-                    <section className='container'>
-                        <Switch>
-                            <Route exact path='/register' component={Register} />
-                            <Route exact path='/login' component={Login} />
-                            <PrivateRoute exact path='/dashboard' component={Dashboard} />
-                        </Switch>
-                    </section>
-                </Fragment>
-            </Router>
-        </Provider>
+        <ErrorBoundary FallbackComponent={UncaughtError} onError={errorFallback}>
+            <Provider store={store}>
+                <Router>
+                    {loaded && (
+                        <div className='pageContainer'>
+                            <Navbar />
+                            <Body></Body>
+                            <Footer></Footer>
+                        </div>
+                    )}
+                </Router>
+            </Provider>
+        </ErrorBoundary>
     );
 };
 

@@ -1,0 +1,108 @@
+.form {
+    margin: 1rem auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    width: calc(min(85%, 25rem));
+
+    &-singleInput {
+        margin: 1rem 0;
+        display: flex;
+        flex-direction: row;
+        gap: 1rem;
+        width: 80%;
+        align-items: center;
+        border-style: none;
+    }
+
+    &-error-message {
+        color: $color-background-danger;
+        margin-top: 0.5rem;
+    }
+
+    &-error-field {
+        border-color: $color-background-danger;
+    }
+
+    &-error-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    input[type='text'],
+    input[type='email'],
+    input[type='password'],
+    input[type='date'],
+    select,
+    textarea {
+        display: block;
+        width: 100%;
+        padding: 0.4rem;
+        font-size: 1.2rem;
+        border: 1px solid $color-border;
+        border-radius: 4px;
+        &:focus-visible {
+            outline-color: $color-border-hover;
+        }
+    }
+
+    &-label {
+        align-self: flex-start;
+
+        &-offset {
+            margin-left: 0.5rem;
+        }
+    }
+
+    &-controls {
+        margin-top: 0.5rem;
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+    }
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+    &WithSideControls {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        margin-left: 1.5rem;
+    }
+
+    &-inputContainerWithSideControls {
+        display: grid;
+        grid-template-rows: 1fr;
+        grid-template-columns: 1fr 1.5rem;
+        align-items: center;
+        justify-items: center;
+        margin-top: 0.5rem;
+    }
+
+    &-inputButtonBelow {
+        margin-top: 0.5rem;
+    }
+}
+
+.growingTextInput {
+    border: 1px solid $color-border;
+    border-radius: 4px;
+    resize: none;
+    max-width: 100%;
+    overflow: hidden;
+    line-height: normal;
+
+    &:active {
+        border-color: $color-border-hover;
+    }
+
+    &:focus-visible {
+        outline-color: $color-border-hover;
+    }
+}

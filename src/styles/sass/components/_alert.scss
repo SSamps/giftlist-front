@@ -1,0 +1,35 @@
+.alert-container {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    z-index: 3;
+    left: 50%;
+    transform: translate(-50%, 0%);
+    gap: 0.5rem;
+    width: calc(min(35rem, 90%));
+}
+
+.alert {
+    text-align: center;
+    width: 100%;
+    padding: 0.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    visibility: visible;
+    border-radius: 4px;
+
+    &-error {
+        background-color: $color-background-danger;
+        color: $color-text-error;
+    }
+
+    &-placeholder {
+        position: relative;
+        visibility: hidden;
+        width: 100%;
+    }
+}

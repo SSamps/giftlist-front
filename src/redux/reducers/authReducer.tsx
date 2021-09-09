@@ -6,12 +6,14 @@ import {
     LOGIN_SUCCESS,
     LOGIN_FAIL,
     LOGOUT,
+    DELETE_ACCOUNT,
+    RENAME_USER,
 } from '../actions/actionTypes';
 import { IUser } from '../../types/models/User';
 import { AnyAction } from 'redux';
 
 export interface IauthStateAuthed {
-    token: string | null;
+    token: string;
     isAuthenticated: boolean;
     loading: boolean;
     user: IUser;
@@ -50,6 +52,14 @@ export default function reducer(state: IauthState = initialState, action: AnyAct
                 isAuthenticated: true,
                 loading: false,
             };
+        case RENAME_USER:
+            return {
+                ...state,
+                user: payload,
+                isAuthenticated: true,
+                loading: false,
+            };
+        case DELETE_ACCOUNT:
         case LOGIN_FAIL:
         case REGISTER_FAIL:
         case AUTH_ERROR:

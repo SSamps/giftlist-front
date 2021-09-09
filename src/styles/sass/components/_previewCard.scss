@@ -1,0 +1,153 @@
+.listPreviewCard {
+    box-sizing: border-box;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 4rem 18rem 4rem;
+    align-items: center;
+    justify-content: center;
+    border-color: $color-border;
+    border-style: solid;
+    border-radius: 4px;
+    cursor: pointer;
+    background-color: $color-background-secondary;
+    color: $color-text-system;
+
+    &:hover {
+        color: $color-text-body;
+        opacity: 1;
+        border-color: $color-border-hover;
+    }
+
+    &-header {
+        height: 100%;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        border-color: $color-text-system-light;
+        border-bottom-style: solid;
+        border-width: thin;
+        border-bottom-style: solid;
+
+        &-variant {
+            color: $color-text-system;
+        }
+
+        &-name {
+            font-size: 1.3rem;
+        }
+    }
+
+    &-bodyContainer {
+        position: relative;
+        height: 100%;
+        width: 100%;
+    }
+
+    &-body {
+        height: 100%;
+        width: 100%;
+        display: grid;
+        grid-template-rows: repeat(6, 3rem);
+        grid-template-columns: 100%;
+        justify-content: center;
+        align-items: center;
+        padding: 0 1rem;
+
+        &-basicItem {
+            position: relative;
+            height: 100%;
+            display: grid;
+            grid-template-rows: 1;
+            grid-template-columns: 1.5rem 1fr;
+            overflow: hidden;
+
+            &-text {
+                grid-column: 2;
+                margin: auto 0;
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                min-width: 0;
+            }
+
+            &-icon {
+                grid-column: 1;
+                margin: auto;
+            }
+        }
+
+        &-giftListItem {
+            &-member {
+                overflow: hidden;
+                position: relative;
+                height: 100%;
+                display: grid;
+                grid-template-rows: 1;
+                grid-template-columns: 1fr 4.375rem;
+                gap: 0.1rem;
+            }
+
+            &-owner {
+                display: flex;
+                position: relative;
+                height: 100%;
+                overflow: hidden;
+            }
+
+            &-text {
+                margin: auto 0;
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                min-width: 0;
+            }
+
+            &-selection {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: $color-text-system;
+            }
+        }
+    }
+
+    &-fade {
+        z-index: 1;
+        width: 100%;
+        height: 8rem;
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        background: linear-gradient(180deg, transparent, $color-background-secondary);
+    }
+
+    &-footer {
+        position: relative;
+        height: 4rem;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 0 1rem;
+        border-color: $color-text-system-light;
+        border-top-style: solid;
+        border-width: thin;
+        border-bottom-style: solid;
+
+        &-row {
+            display: grid;
+            grid-template-columns: 1.5rem 1fr;
+            grid-template-rows: 1;
+            align-items: center;
+            gap: 0.2rem;
+            color: $color-text-system;
+
+            &-icon {
+                margin: auto;
+            }
+        }
+    }
+}
