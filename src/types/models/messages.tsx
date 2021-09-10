@@ -9,7 +9,8 @@ export interface TuserMessageFields {
     creationDate: string;
     messageVariant: 'USER_MESSAGE';
     _id: string;
-    author: string;
+    authorId: string;
+    authorName: string;
 }
 
 // System messages

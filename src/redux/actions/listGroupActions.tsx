@@ -42,26 +42,6 @@ export const getListActionCreator =
         }
     };
 
-export type TcheckForNewUserActionCreator = (listId: string, userId: string) => void;
-
-export const checkForNewUserActionCreator =
-    (listId: string, userId: string) => async (dispatch: Dispatch<IgetListActionSuccess>) => {
-        try {
-            const res: AxiosResponse<TListGroupAnyFields> = await axios.get(`/api/groups/${listId}`);
-
-            if (!findUserInGroup(res.data, userId)) {
-                addAlertActionCreator('error', `Error: A required userId was not found`);
-            } else {
-                dispatch({
-                    type: CURRENT_LIST_GET,
-                    payload: res.data,
-                });
-            }
-        } catch (err) {
-            addAlertActionCreator('error', `${err.response.status} ${err.response.data}`);
-        }
-    };
-
 interface IdeleteListItemActionSuccess {
     type: typeof DELETE_LIST_ITEM;
     payload?: TListGroupAnyFields;
@@ -260,7 +240,7 @@ export type TleaveListActionCreator = (groupId: string) => Promise<boolean>;
 
 export const leaveListActionCreator = (groupId: string) => async (dispatch: Dispatch<IleaveListSuccess>) => {
     try {
-        const res = await axios.put(`/api/groups/${groupId}/leave`).then();
+        const res = await axios.put(`/api/groups/${groupId}/leave`);
 
         dispatch({
             type: LEAVE_LIST,
