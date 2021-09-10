@@ -114,7 +114,8 @@ const GiftListChat: React.FC<Props> = ({ ownerName, token, currentList, checkFor
         }
     };
 
-    // Hacky solution due to socket.io functionality being tacked on. Required in case a new user joins as that logic currently all uses rest not sockets.
+    // Hacky solution due to socket.io functionality being tacked on. Required in case a new user joins and posts messages when other users have the component loaded.
+    // If other users don't refresh they won't have the new users in their state and we can't find the message author's name.
     const verifyMessageAuthorsLoaded = () => {
         let foundMessageAuthorIds: string[] = [];
         for (let i = 0; i < messages.length; i++) {
