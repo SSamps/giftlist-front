@@ -39,7 +39,9 @@ const ListChatMessage: React.FC<props> = ({ user, message }) => {
                 <div className='messageContainerInner'>
                     <div className={`message message-${messageType}`}>
                         <span className='systemMessage-tag-small'>{formatMessageDateTag(message.creationDate)}</span>
-                        <span>{message.body}</span>
+                        <span>
+                            {message.userName ? message.body.replace('{userName}', message.userName) : message.body}
+                        </span>
                     </div>
                 </div>
             )}

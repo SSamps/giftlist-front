@@ -21,6 +21,8 @@ export interface TsystemMessageFields {
     creationDate: string;
     messageVariant: 'SYSTEM_MESSAGE';
     _id: string;
+    userName?: string;
+    userId?: string;
 }
 
 // Aggregate
