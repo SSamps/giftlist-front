@@ -2,14 +2,9 @@ import React, { Fragment, useEffect, useRef, useState } from 'react';
 import { connect } from 'react-redux';
 import io, { Socket } from 'socket.io-client';
 import { DefaultEventsMap } from 'socket.io-client/build/typed-events';
-import {
-    checkForNewUserActionCreator,
-    TcheckForNewUserActionCreator,
-} from '../../../../redux/actions/listGroupActions';
 import { IrootStateAuthedGiftListLoaded } from '../../../../redux/reducers/root/rootReducer';
 import { TgiftListFieldsCensored } from '../../../../types/models/listGroups';
 import { TmessageAny } from '../../../../types/models/messages';
-import { findUserInGroup } from '../../../../misc/helperFunctions';
 import ListChatForm from './ListChatForm';
 import ListChatMessage from './ListChatMessage';
 import ListChatReturnToBottomButton from './ListChatReturnToBottomButton';
@@ -18,10 +13,9 @@ interface Props {
     ownerName: string;
     token: string;
     currentList: TgiftListFieldsCensored;
-    checkForNewUserActionCreator: TcheckForNewUserActionCreator;
 }
 
-const GiftListChat: React.FC<Props> = ({ ownerName, token, currentList, checkForNewUserActionCreator }) => {
+const GiftListChat: React.FC<Props> = ({ ownerName, token, currentList }) => {
     const [socket, setSocket] = useState<undefined | Socket<DefaultEventsMap, DefaultEventsMap>>(undefined);
     const [messagesState, setMessagesState] = useState<{ messages: TmessageAny[]; firstUpdate: boolean }>({
         messages: [],
@@ -114,25 +108,6 @@ const GiftListChat: React.FC<Props> = ({ ownerName, token, currentList, checkFor
         }
     };
 
-    // Hacky solution due to socket.io functionality being tacked on. Required in case a new user joins as that logic currently all uses rest not sockets.
-    const verifyMessageAuthorsLoaded = () => {
-        let foundMessageAuthorIds: string[] = [];
-        for (let i = 0; i < messages.length; i++) {
-            const message = messages[i];
-            if ('author' in message && !foundMessageAuthorIds.includes(message.author)) {
-                foundMessageAuthorIds.push(message.author);
-            }
-        }
-
-        for (let i = 0; i < foundMessageAuthorIds.length; i++) {
-            if (!findUserInGroup(currentList, foundMessageAuthorIds[i])) {
-                checkForNewUserActionCreator(currentList._id, foundMessageAuthorIds[i]);
-                break;
-            }
-        }
-    };
-    verifyMessageAuthorsLoaded();
-
     return (
         <div className='listSectionContainer listChatContainerBorder'>
             <div className='listSectionContentContainer'>
@@ -164,4 +139,4 @@ const mapStateToProps = (state: IrootStateAuthedGiftListLoaded) => ({
     currentList: state.listGroupReducer.currentList,
 });
 
-export default connect(mapStateToProps, { checkForNewUserActionCreator })(GiftListChat);
+export default connect(mapStateToProps)(GiftListChat);

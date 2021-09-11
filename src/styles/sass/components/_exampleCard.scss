@@ -40,7 +40,7 @@
         overflow: visible;
         left: 0;
         bottom: 0;
-        background: linear-gradient(180deg, transparent, $color-background-primary);
+        background: linear-gradient(180deg, $color-transparent, $color-background-primary);
     }
 }
 

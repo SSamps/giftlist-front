@@ -43,7 +43,7 @@ const Invite: React.FC<Props> = ({
             const res = await axios.post(`/api/groups/invite/accept/${token}`);
             history.push(`/list/${res.data._id}`);
         } catch (err) {
-            setInviteError(err.response.status + ' Error: ' + err.response.data);
+            setInviteError(err.response.status + err.response.data);
         }
     };
 

@@ -9,7 +9,8 @@ export interface TuserMessageFields {
     creationDate: string;
     messageVariant: 'USER_MESSAGE';
     _id: string;
-    author: string;
+    authorId: string;
+    authorName: string;
 }
 
 // System messages
@@ -20,6 +21,8 @@ export interface TsystemMessageFields {
     creationDate: string;
     messageVariant: 'SYSTEM_MESSAGE';
     _id: string;
+    userName?: string;
+    userId?: string;
 }
 
 // Aggregate

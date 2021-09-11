@@ -2,21 +2,19 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { IrootStateAuthedGiftListLoaded } from '../../../../redux/reducers/root/rootReducer';
 
-import { TgiftListFieldsCensored } from '../../../../types/models/listGroups';
 import { TmessageAny } from '../../../../types/models/messages';
 import { IUser } from '../../../../types/models/User';
-import { findUserInGroup, formatMessageDateTag } from '../../../../misc/helperFunctions';
+import { formatMessageDateTag } from '../../../../misc/helperFunctions';
 
 interface props {
     message: TmessageAny;
     user: IUser;
-    currentList: TgiftListFieldsCensored;
 }
 
-const ListChatMessage: React.FC<props> = ({ user, message, currentList }) => {
+const ListChatMessage: React.FC<props> = ({ user, message }) => {
     const getMessageType = () => {
         if (message.messageVariant === 'USER_MESSAGE') {
-            if (message.author === user._id) {
+            if (message.authorId === user._id) {
                 return 'currentUser';
             }
             return 'otherUser';
@@ -27,20 +25,12 @@ const ListChatMessage: React.FC<props> = ({ user, message, currentList }) => {
 
     const messageType = getMessageType();
 
-    const getAuthorName = () => {
-        if (message.messageVariant === 'USER_MESSAGE') {
-            return findUserInGroup(currentList, message.author)?.displayName;
-        }
-    };
-
-    const authorName = getAuthorName();
-
     return (
         <div className={`messageContainerOuter messageContainerOuter-${messageType}`}>
-            {authorName ? (
+            {'authorName' in message ? (
                 <div className='messageContainerInner'>
                     <div className='message-label'>
-                        {messageType === 'currentUser' ? 'You' : authorName}{' '}
+                        {messageType === 'currentUser' ? 'You' : message.authorName}{' '}
                         <span className='systemMessage-tag'>{formatMessageDateTag(message.creationDate)}</span>
                     </div>
                     <div className={`message message-${messageType}`}>{message.body}</div>
@@ -49,7 +39,9 @@ const ListChatMessage: React.FC<props> = ({ user, message, currentList }) => {
                 <div className='messageContainerInner'>
                     <div className={`message message-${messageType}`}>
                         <span className='systemMessage-tag-small'>{formatMessageDateTag(message.creationDate)}</span>
-                        <span>{message.body}</span>
+                        <span>
+                            {message.userName ? message.body.replace('{userName}', message.userName) : message.body}
+                        </span>
                     </div>
                 </div>
             )}
@@ -59,7 +51,6 @@ const ListChatMessage: React.FC<props> = ({ user, message, currentList }) => {
 
 const mapStateToProps = (state: IrootStateAuthedGiftListLoaded) => ({
     user: state.authReducer.user,
-    currentList: state.listGroupReducer.currentList,
 });
 
 export default connect(mapStateToProps)(ListChatMessage);

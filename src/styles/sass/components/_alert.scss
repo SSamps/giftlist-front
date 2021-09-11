@@ -28,7 +28,9 @@
     }
 
     &-placeholder {
-        position: relative;
+        position: fixed;
+        z-index: 3;
+        top: 2rem;
         visibility: hidden;
         width: 100%;
     }
