@@ -25,7 +25,7 @@ const InviteFormInput: React.FC<Props> = ({ inviteArray, setInviteArray }) => {
     }
 
     const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setinvitee(e.target.value);
+        setinvitee(e.target.value.trim());
     };
 
     const removeInvitee = (removalIndex: number) => {
