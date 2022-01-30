@@ -73,5 +73,6 @@
             "last 1 safari version"
         ]
     },
-    "proxy": "http://listapp-backend:5000"
+    "proxy": "http://listapp-backend:5000",
+    "nothing": "testvalue"
 }
