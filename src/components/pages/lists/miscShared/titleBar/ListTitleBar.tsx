@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { useHistory } from 'react-router';
+import { useNavigate } from 'react-router';
 import { TbasicListFields, TgiftGroupFields, TgiftListFieldsCensored } from '../../../../../types/models/listGroups';
 import ListTitleBarMenuButton from './ListTitleBarMenuButton';
 
@@ -8,10 +8,10 @@ interface Props {
 }
 
 const ListTitleBar: React.FC<Props> = ({ currentList }) => {
-    const history = useHistory();
+    const navigate = useNavigate();
 
     const returnToParent = (parentGroupId: string) => {
-        history.push(`/list/${parentGroupId}`);
+        navigate(`/list/${parentGroupId}`);
     };
 
     return (

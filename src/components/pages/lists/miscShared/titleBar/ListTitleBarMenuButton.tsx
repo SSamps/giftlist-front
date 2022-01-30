@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import MembersOverlay from './ListMenuOverlays.tsx/MembersOverlay';
 import ListTitleBarMenuDropdown from './ListTitleBarMenuDropdown';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import {
     IbasicListMember,
     IgiftGroupMember,
@@ -36,7 +36,7 @@ const ListTitleBarMenuButton: React.FC<Props> = ({
     currentList,
     currentListUser,
 }) => {
-    const history = useHistory();
+    const navigate = useNavigate();
     const [openDropdown, setOpenDropdown] = useState(false);
     const [renameGroupOverlayStatus, setRenameGroupOverlayStatus] = useState(false);
     const [inviteMembersOverlayStatus, setInviteMembersOverlayStatus] = useState(false);
@@ -50,12 +50,12 @@ const ListTitleBarMenuButton: React.FC<Props> = ({
 
     const deleteList = async () => {
         const success = await deleteListActionCreator(currentList._id.toString());
-        success && history.push(`/dashboard`);
+        success && navigate(`/dashboard`);
     };
 
     const leaveList = async () => {
         const success = await leaveListActionCreator(currentList._id.toString());
-        success && history.push(`/dashboard`);
+        success && navigate(`/dashboard`);
     };
 
     const renderOverlay = () => {

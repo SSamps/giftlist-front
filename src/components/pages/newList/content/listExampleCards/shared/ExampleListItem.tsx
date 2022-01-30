@@ -61,9 +61,9 @@ const ExampleListItem: React.FC<props> = ({
             </div>
             {links && (
                 <div className='exampleItem-links'>
-                    {links.map((link) => {
+                    {links.map((link, index) => {
                         return (
-                            <span className='exampleItem-links-linkContainer'>
+                            <span key={index} className='exampleItem-links-linkContainer'>
                                 <span
                                     className={`exampleItem-links-link ${
                                         longLinks ? 'exampleItem-links-link-long' : ''

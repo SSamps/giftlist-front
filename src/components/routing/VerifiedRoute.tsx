@@ -1,7 +1,6 @@
 import { Fragment } from 'react';
 import { connect } from 'react-redux';
-import { StaticContext } from 'react-router';
-import { Route, Redirect, RouteProps, RouteComponentProps } from 'react-router-dom';
+import { Navigate, RouteProps } from 'react-router-dom';
 import { IrootState } from '../../redux/reducers/root/rootReducer';
 
 type TprotectedRouteProps = {
@@ -18,27 +17,15 @@ const VerifiedRoute: React.FC<TprotectedRouteProps> = ({
     loading,
     ...routeProps
 }) => {
-    const renderContent = (
-        props: RouteComponentProps<
-            {
-                [x: string]: string | undefined;
-            },
-            StaticContext,
-            unknown
-        >
-    ) => {
-        if (loading) {
-            return <Fragment></Fragment>;
-        } else if (!isAuthenticated) {
-            return <Redirect to='/login'></Redirect>;
-        } else if (!isVerified) {
-            return <Redirect to='/dashboard'></Redirect>;
-        } else {
-            return <Component {...props} />;
-        }
-    };
-
-    return <Route {...routeProps} render={(props) => renderContent(props)} />;
+    if (loading) {
+        return <Fragment></Fragment>;
+    } else if (!isAuthenticated) {
+        return <Navigate to='/login'></Navigate>;
+    } else if (!isVerified) {
+        return <Navigate to='/dashboard'></Navigate>;
+    } else {
+        return <Component {...routeProps} />;
+    }
 };
 
 const mapStateToProps = (state: IrootState) => ({

@@ -1,6 +1,6 @@
 import { Fragment, useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import validator from 'validator';
 import { IrootState } from '../../../redux/reducers/root/rootReducer';
 import { IUser } from '../../../types/models/User';
@@ -16,7 +16,7 @@ interface Props {
 }
 
 const Dashboard: React.FC<Props> = ({ user, authLoading }): JSX.Element => {
-    const history = useHistory();
+    const navigate = useNavigate();
     const [inviteError, setInviteError] = useState<undefined | string>(undefined);
 
     useEffect(() => {
@@ -34,7 +34,7 @@ const Dashboard: React.FC<Props> = ({ user, authLoading }): JSX.Element => {
                         try {
                             const res = await axios.post(`/api/groups/invite/accept/${pendingInviteToken}`);
                             localStorage.removeItem('pendingInviteToken');
-                            history.push(`/list/${res.data._id}`);
+                            navigate(`/list/${res.data._id}`);
                             return;
                         } catch (err) {
                             setInviteError(

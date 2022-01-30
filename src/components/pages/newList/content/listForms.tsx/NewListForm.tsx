@@ -2,7 +2,7 @@ import React from 'react';
 import { useState } from 'react';
 import { TYPE_LIST_GROUP_ALL_TOP_LEVEL_VARIANTS } from '../../../../../types/listVariants';
 import axios from 'axios';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { FormSubmissionStatus } from './FormSubmissionStatus';
 import InviteFormInput from '../../../lists/miscShared/InviteFormInput';
 import { VALIDATION_GROUP_NAME_MAX_LENGTH } from '../../../../../misc/validation';
@@ -28,7 +28,7 @@ const NewListForm: React.FC<Props> = ({ controllerState }) => {
         submitError: undefined,
     });
 
-    const history = useHistory();
+    const navigate = useNavigate();
 
     let { listName } = formData;
     let { emptylistName } = formErrorData;
@@ -72,7 +72,7 @@ const NewListForm: React.FC<Props> = ({ controllerState }) => {
                 setFormSubmitStatus({ creatingList: false, invitingMembers: true, submitError: undefined });
                 await axios.post(`/api/groups/${newListId}/invite/send`, inviteBody, config);
             }
-            history.push(`/list/${newListId}`);
+            navigate(`/list/${newListId}`);
         } catch (err) {
             setFormSubmitStatus({ creatingList: false, invitingMembers: false, submitError: err.response.status });
         }
