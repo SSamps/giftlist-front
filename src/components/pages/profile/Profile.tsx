@@ -61,7 +61,7 @@ const Profile: React.FC<props> = ({ user, deleteAccountActionCreator }) => {
                     </div>
                 </div>
                 <div className='profileSection-container'>
-                    <div className='profileSection-label text-header'>Danger</div>
+                    <div className='profileSection-label text-header'>Danger Zone</div>
                     <div className='profileSection-body profileSection-body-danger'>
                         <ProfileRow
                             label='Delete account'
