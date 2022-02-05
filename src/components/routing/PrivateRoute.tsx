@@ -1,5 +1,6 @@
+import { Fragment } from 'react';
 import { connect } from 'react-redux';
-import { Route, Redirect, RouteProps } from 'react-router-dom';
+import { Navigate, RouteProps } from 'react-router-dom';
 import { IrootState } from '../../redux/reducers/root/rootReducer';
 
 type TprotectedRouteProps = {
@@ -14,14 +15,12 @@ const PrivateRoute: React.FC<TprotectedRouteProps> = ({
     loading,
     ...routeProps
 }) => {
-    return (
-        <Route
-            {...routeProps}
-            render={(props) =>
-                !loading && !isAuthenticated ? <Redirect to='/login'></Redirect> : <Component {...props} />
-            }
-        />
-    );
+    if (loading) {
+        return <Fragment></Fragment>;
+    } else if (!loading && !isAuthenticated) {
+        return <Navigate to='/login'></Navigate>;
+    }
+    return <Component {...routeProps} />;
 };
 
 const mapStateToProps = (state: IrootState) => ({

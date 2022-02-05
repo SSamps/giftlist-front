@@ -2,27 +2,19 @@ import Spinner from '../misc/spinner';
 import validator from 'validator';
 import { Fragment, useEffect, useState } from 'react';
 import axios from 'axios';
-import { useHistory } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { IrootState } from '../../redux/reducers/root/rootReducer';
 import { connect } from 'react-redux';
 
 interface Props {
-    match: {
-        params: { token: string };
-    };
     isAuthenticated: boolean;
     authLoading: boolean;
 }
 
-const Invite: React.FC<Props> = ({
-    match: {
-        params: { token },
-    },
-    authLoading,
-    isAuthenticated,
-}) => {
+const Invite: React.FC<Props> = ({ authLoading, isAuthenticated }) => {
     const [inviteError, setInviteError] = useState<undefined | string>(undefined);
-    const history = useHistory();
+    const navigate = useNavigate();
+    const { token } = useParams();
 
     useEffect(() => {
         if (!authLoading) {
@@ -35,27 +27,27 @@ const Invite: React.FC<Props> = ({
     }, [authLoading]);
 
     const tryVerify = async () => {
-        if (!validator.isJWT(token)) {
+        if (token === undefined || token === '' || !validator.isJWT(token)) {
             setInviteError('Invalid invite token');
             return;
         }
         try {
             const res = await axios.post(`/api/groups/invite/accept/${token}`);
-            history.push(`/list/${res.data._id}`);
+            navigate(`/list/${res.data._id}`);
         } catch (err) {
             setInviteError(err.response.status + err.response.data);
         }
     };
 
     const setPendingInvite = () => {
-        localStorage.setItem('pendingInviteToken', token);
-        history.push(`/login`);
+        localStorage.setItem('pendingInviteToken', token as string);
+        navigate(`/login`);
     };
 
     return (
         <Fragment>
             <div className='verifyContainer'>
-                {!validator.isJWT(token) ? (
+                {!validator.isJWT(token as string) ? (
                     <div className='form-error-message'>Invalid invite</div>
                 ) : inviteError ? (
                     <div className='form-error-message'>{inviteError}</div>

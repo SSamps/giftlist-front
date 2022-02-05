@@ -2,23 +2,14 @@ import Spinner from '../../misc/spinner';
 import validator from 'validator';
 import { Fragment, useEffect, useState } from 'react';
 import axios from 'axios';
-import { useHistory } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { loadUserActionCreator } from '../../../redux/actions/authActions';
 import store from '../../../redux/reducers/root/reducerStore';
 
-interface Props {
-    match: {
-        params: { token: string };
-    };
-}
-
-const Verify: React.FC<Props> = ({
-    match: {
-        params: { token },
-    },
-}) => {
+const Verify: React.FC = () => {
+    const { token } = useParams();
     const [verifyError, setVerifyError] = useState<undefined | string>(undefined);
-    const history = useHistory();
+    const navigate = useNavigate();
 
     useEffect(() => {
         tryVerify();
@@ -28,7 +19,7 @@ const Verify: React.FC<Props> = ({
         try {
             await axios.post(`/api/users/verify/${token}`);
             await loadUserActionCreator(store.dispatch);
-            history.push(`/dashboard`);
+            navigate(`/dashboard`);
         } catch (err) {
             setVerifyError('Error: ' + err.response.status + ' ' + err.response.statusText);
         }
@@ -37,7 +28,7 @@ const Verify: React.FC<Props> = ({
     return (
         <Fragment>
             <div className='verifyContainer'>
-                {!validator.isJWT(token) ? (
+                {!validator.isJWT(token as string) ? (
                     <div className='form-error-message'>Invalid token</div>
                 ) : verifyError ? (
                     <div className='form-error-message'>{verifyError}</div>

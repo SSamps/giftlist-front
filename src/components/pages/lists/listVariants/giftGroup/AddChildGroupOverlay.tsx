@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { Fragment, useState } from 'react';
 import { connect } from 'react-redux';
-import { useHistory } from 'react-router';
+import { useNavigate } from 'react-router';
 import { addAlertThunkActionCreator, TaddAlertThunkActionCreator } from '../../../../../redux/actions/alertActions';
 import { IrootStateAuthedGiftGroupLoaded } from '../../../../../redux/reducers/root/rootReducer';
 import { TgiftGroupFields } from '../../../../../types/models/listGroups';
@@ -18,7 +18,7 @@ interface Props {
 }
 
 const AddChildGroupOverlay: React.FC<Props> = ({ setOpen, currentList, user, addAlertThunkActionCreator }) => {
-    const history = useHistory();
+    const navigate = useNavigate();
     const [formState, setFormState] = useState({ value: '', waiting: false });
 
     const { value, waiting } = formState;
@@ -41,7 +41,7 @@ const AddChildGroupOverlay: React.FC<Props> = ({ setOpen, currentList, user, add
         try {
             const res = await axios.post('/api/groups', reqBody, reqConfig);
             const newListId = res.data._id;
-            history.push(`/list/${newListId}`);
+            navigate(`/list/${newListId}`);
         } catch (err) {
             addAlertThunkActionCreator('error', `${err.response.status} ${err.response.data}`);
             setFormState({ ...formState, waiting: false });

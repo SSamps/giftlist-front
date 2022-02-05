@@ -1,29 +1,25 @@
 import { Fragment } from 'react';
 import { connect } from 'react-redux';
+import { useParams } from 'react-router-dom';
 import { IrootState } from '../../../redux/reducers/root/rootReducer';
 import Spinner from '../../misc/spinner';
 import ListLoader from './ListLoader';
 
 interface Props {
     authLoading: boolean;
-    match: {
-        params: { listid: string };
-    };
 }
 
-const ListPage: React.FC<Props> = ({
-    match: {
-        params: { listid },
-    },
-    authLoading,
-}): JSX.Element => {
+const ListPage: React.FC<Props> = ({ authLoading }): JSX.Element => {
+    const params = useParams();
+    const listid = params.listid;
+
     return (
         <Fragment>
             {authLoading ? (
                 <Spinner className='spinner-tiny'></Spinner>
             ) : (
                 <Fragment>
-                    <ListLoader listid={listid}></ListLoader>
+                    <ListLoader listid={listid as string}></ListLoader>
                 </Fragment>
             )}
         </Fragment>

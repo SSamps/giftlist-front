@@ -1,24 +1,17 @@
 import axios from 'axios';
 import React, { Fragment, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import { isPasswordValid } from '../../misc/helperFunctions';
 import { VALIDATION_USER_PASSWORD_MAX_LENGTH } from '../../misc/validation';
 import Spinner from '../misc/spinner';
 
-interface Props {
-    match: {
-        params: { token: string };
-    };
-}
-
-const ResetPassword: React.FC<Props> = ({
-    match: {
-        params: { token },
-    },
-}) => {
+const ResetPassword: React.FC = () => {
     interface IformState {
         password: string;
         password2: string;
     }
+    const { token } = useParams();
+
     const [formState, setFormState] = useState<IformState>({ password: '', password2: '' });
     const [submitState, setSubmitState] = useState({ submitError: '', waiting: false, complete: false });
 

@@ -1,4 +1,4 @@
-import { Link, Redirect } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { IrootState } from '../../redux/reducers/root/rootReducer';
 import GiftListExample from './newList/content/listExampleCards/giftList/GiftListExample';
@@ -10,7 +10,7 @@ interface Props {
 
 const landing: React.FC<Props> = ({ isAuthenticated }) => {
     if (isAuthenticated) {
-        return <Redirect to='/dashboard' />;
+        return <Navigate to='/dashboard' />;
     }
 
     return (

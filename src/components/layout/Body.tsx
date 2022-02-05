@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import Invite from '../pages/Invite';
 import Login from '../pages/auth/Login';
 import Register from '../pages/auth/Register';
@@ -19,19 +19,19 @@ const Body: React.FC = () => {
         <div className='mainBodyContainer'>
             <div className='mainContentContainerOuter'>
                 <div className='mainContentContainerInner'>
-                    <Switch>
-                        <Route exact path='/' component={Landing} />
-                        <Route exact path='/register' component={Register} />
-                        <Route exact path='/login' component={Login} />
-                        <Route exact path='/invite/:token' component={Invite} />
-                        <Route exact path='/resetpassword/:token' component={ResetPassword} />
-                        <PrivateRoute exact path='/verify/:token' component={Verify} />
-                        <PrivateRoute exact path='/dashboard' component={Dashboard} />
-                        <PrivateRoute exact path='/profile' component={Profile} />
-                        <VerifiedRoute exact path='/list/newlist' component={NewListPage} />
-                        <VerifiedRoute exact path='/list/:listid' component={ListPage} />
-                        <Route component={NotFound} />
-                    </Switch>
+                    <Routes>
+                        <Route path='/' element={<Landing />} />
+                        <Route path='/register' element={<Register />} />
+                        <Route path='/login' element={<Login />} />
+                        <Route path='/invite/:token' element={<Invite />} />
+                        <Route path='/resetpassword/:token' element={<ResetPassword />} />
+                        <Route path='/verify/:token' element={<PrivateRoute component={Verify} />} />
+                        <Route path='/dashboard' element={<PrivateRoute component={Dashboard} />} />
+                        <Route path='/profile' element={<PrivateRoute component={Profile} />} />
+                        <Route path='/list/newlist' element={<VerifiedRoute component={NewListPage} />} />
+                        <Route path='/list/:listid' element={<VerifiedRoute component={ListPage} />} />
+                        <Route path='*' element={<NotFound />} />
+                    </Routes>
                 </div>
             </div>
         </div>

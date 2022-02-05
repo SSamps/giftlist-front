@@ -1,7 +1,7 @@
 import React, { Fragment, useEffect, useRef, useState } from 'react';
 import { connect } from 'react-redux';
 import io, { Socket } from 'socket.io-client';
-import { DefaultEventsMap } from 'socket.io-client/build/typed-events';
+import type { DefaultEventsMap } from '@socket.io/component-emitter';
 import { IrootStateAuthedGiftListLoaded } from '../../../../redux/reducers/root/rootReducer';
 import { TgiftListFieldsCensored } from '../../../../types/models/listGroups';
 import { TmessageAny } from '../../../../types/models/messages';

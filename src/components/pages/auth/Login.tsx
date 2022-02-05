@@ -1,5 +1,5 @@
 import React, { Fragment, useState } from 'react';
-import { Link, Redirect } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { loginActionCreator, TloginActionCreator } from '../../../redux/actions/authActions';
 import { IrootState } from '../../../redux/reducers/root/rootReducer';
@@ -28,7 +28,7 @@ const Login: React.FC<Props> = ({ loginActionCreator, isAuthenticated }) => {
     const [showForgottenPassOverlay, setShowForgottenPassOverlay] = useState(false);
 
     if (isAuthenticated) {
-        return <Redirect to='/dashboard' />;
+        return <Navigate to='/dashboard' />;
     }
 
     const { email, password } = formData;

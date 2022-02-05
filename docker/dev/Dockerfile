@@ -1,4 +1,4 @@
-FROM node:current-alpine3.14
+FROM node:lts-alpine3.15
 WORKDIR /app
 COPY package*.json ./
 RUN apk --no-cache --virtual build-dependencies add \
