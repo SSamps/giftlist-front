@@ -48,9 +48,9 @@
         "dockerRemoveImage": "docker image rm listapp-frontend-prod:latest --force",
         "dockerBuildImage": "docker build --build-arg REACT_APP_BACKEND_BASE_URL=http://localhost:5000 -t listapp-frontend-prod:latest --file docker/prod/Dockerfile .",
         "dockerBuildContainer": "docker run --name listapp-frontend-prod -d -p 3100:3100 -e PORT=3100 --network gift-list listapp-frontend-prod:latest",
-        "dockerRemoveImageGcp": "docker image rm eu.gcr.io/gift-list-2021/listapp-frontend --force",
-        "dockerBuildImageGcp": "docker build --build-arg REACT_APP_BACKEND_BASE_URL=https://gift-list-back-lxl73kqsia-ew.a.run.app/ -t eu.gcr.io/gift-list-2021/listapp-frontend --file docker/prod/Dockerfile .",
-        "dockerPushGcp": "docker push eu.gcr.io/gift-list-2021/listapp-frontend",
+        "dockerRemoveImageGcp": "docker image rm europe-docker.pkg.dev/gift-list-2021/giftlist/giftlist-front --force",
+        "dockerBuildImageGcp": "docker build --build-arg REACT_APP_BACKEND_BASE_URL=https://gift-list-back-lxl73kqsia-ew.a.run.app/ -t europe-docker.pkg.dev/gift-list-2021/giftlist/giftlist-front --file docker/prod/Dockerfile .",
+        "dockerPushGcp": "docker push europe-docker.pkg.dev/gift-list-2021/giftlist/giftlist-front",
         "exportDev": "npm run dockerRemoveContainerDev && npm run dockerRemoveImageDev && npm run dockerBuildImageDev && npm run dockerBuildContainerDev",
         "export": "npm run dockerRemoveContainer && npm run dockerRemoveImage && npm run dockerBuildImage && npm run dockerBuildContainer",
         "push": "npm run dockerRemoveImageGcp && npm run dockerBuildImageGcp && npm run dockerPushGcp"
