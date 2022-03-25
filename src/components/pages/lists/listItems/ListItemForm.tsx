@@ -140,7 +140,7 @@ const ListItemForm: React.FC<Props> = ({
                             maxLength={VALIDATION_ITEM_BODY_MAX_LENGTH}
                             onChange={onChange}
                             onSubmit={submitForm}
-                            placeholder='Type a message'
+                            placeholder='Item description'
                             name='itemBody'
                             value={itemBody}
                         ></AutoGrowTextField>

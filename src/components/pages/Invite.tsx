@@ -35,7 +35,7 @@ const Invite: React.FC<Props> = ({ authLoading, isAuthenticated }) => {
             const res = await axios.post(`/api/groups/invite/accept/${token}`);
             navigate(`/list/${res.data._id}`);
         } catch (err) {
-            setInviteError(err.response.status + err.response.data);
+            setInviteError(`${err.response.status}: ${err.response.data}`);
         }
     };
 
