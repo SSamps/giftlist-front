@@ -7,6 +7,7 @@ import { formatJoinDate } from '../../../misc/helperFunctions';
 import ConfirmationOverlay from '../../misc/overlays/ConfirmationOverlay';
 import ProfileRow from './ProfileRow';
 import RenameUserOverlay from './RenameUserOverlay';
+import axios from 'axios';
 
 interface props {
     user: IUser;
@@ -16,6 +17,7 @@ interface props {
 const Profile: React.FC<props> = ({ user, deleteAccountActionCreator }) => {
     const [changeNameOverlayStatus, setChangeNameOverlayStatus] = useState(false);
     const [deleteAccountOverlayStatus, setDeleteAccountOverlayStatus] = useState(false);
+    const [testMessage, setTestMessage] = useState('default');
 
     const joinedDate = formatJoinDate(user.registrationDate);
 
@@ -36,6 +38,16 @@ const Profile: React.FC<props> = ({ user, deleteAccountActionCreator }) => {
                 ></ConfirmationOverlay>
             );
         }
+    };
+
+    const resetButton = async () => {
+        setTestMessage('default');
+    };
+
+    const getButton = async () => {
+        const result = (await axios.get('/api/users/test')).data;
+        console.log(result);
+        setTestMessage(result.message);
     };
 
     return (
@@ -72,6 +84,13 @@ const Profile: React.FC<props> = ({ user, deleteAccountActionCreator }) => {
                         ></ProfileRow>
                     </div>
                 </div>
+                <div className={`profileRow-controls btn-block`} onClick={() => resetButton()}>
+                    Reset Message
+                </div>
+                <div className={`profileRow-controls btn-block`} onClick={() => getButton()}>
+                    Get Message
+                </div>
+                <div>{testMessage}</div>
             </div>
         </div>
     );
