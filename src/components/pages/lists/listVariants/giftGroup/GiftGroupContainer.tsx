@@ -18,14 +18,22 @@ interface Props {
 export const GiftGroupContainer: React.FC<Props> = ({ user, currentList, currentListUser }) => {
     const [addListOverlayStatus, setAddListOverlayStatus] = useState(false);
 
-    const userOwnsChild = () => {
-        for (let i = 0; i < currentList.children.length; i++) {
-            const foundUser = findUserInGroup(currentList.children[i], user._id);
+    // could later refactor to be a var stored on the parent group, allow group owner to set.
+    const maxChildListsPerUser = 5;
+
+    const userCanCreateMoreLists = (): boolean => {
+        let existingChildListsOwnerByUser = countExistingChildListsOwnerByUser();
+        return existingChildListsOwnerByUser >= maxChildListsPerUser ? false : true;
+    };
+
+    let countExistingChildListsOwnerByUser = (): number => {
+        return currentList.children.reduce((acc, curr) => {
+            const foundUser = findUserInGroup(curr, user._id);
             if (foundUser?.permissions.includes('GROUP_OWNER')) {
-                return true;
+                acc += 1;
             }
-        }
-        return false;
+            return acc;
+        }, 0);
     };
 
     return (
@@ -39,7 +47,7 @@ export const GiftGroupContainer: React.FC<Props> = ({ user, currentList, current
             <ListTitleBar currentList={currentList}></ListTitleBar>
             <div className='parentListContentContainer'>
                 <div className='parentListAddListButton'>
-                    {currentListUser.permissions.includes('CHILD_GROUP_CREATE') && !userOwnsChild() && (
+                    {currentListUser.permissions.includes('CHILD_GROUP_CREATE') && userCanCreateMoreLists() && (
                         <span className='btn-simple' onClick={() => setAddListOverlayStatus(true)}>
                             <i className='fas fa-plus'></i> Add your list
                         </span>
