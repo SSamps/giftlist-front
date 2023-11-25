@@ -18,7 +18,7 @@ const BasicListPreviewCard: React.FC<Props> = ({ list }) => {
     const owner = findOwnerInGroup(list);
 
     return (
-        <Link to={`list/${list._id}`} className='listPreviewCard'>
+        <Link to={`/list/${list._id}`} className='listPreviewCard'>
             <PreviewCardHeader listVariant='Basic list' list={list}></PreviewCardHeader>
             <div className='listPreviewCard-bodyContainer'>
                 <ul className='listPreviewCard-body'>
