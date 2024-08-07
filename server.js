@@ -1,16 +1,18 @@
 const express = require('express');
 const path = require('path');
-const fs = require('fs'); // Import the fs module
+const fs = require('fs');
 const app = express();
 
 const PORT = process.env.PORT;
 
 const root = path.join(__dirname, 'build');
 
+// Serve static files directly. Note if index.html exists it will serve that instead of hitting the /* route below.
 app.use(express.static(root));
 
 app.get('/*', (_req, res) => {
-    const indexFile = path.join(root, 'index.html');
+    console.log('hit the route');
+    const indexFile = path.join(root, 'main.html');
     fs.readFile(indexFile, 'utf8', (err, data) => {
         if (err) {
             console.error('Error reading index.html', err);
