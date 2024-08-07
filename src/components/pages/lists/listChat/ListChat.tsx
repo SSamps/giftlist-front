@@ -27,8 +27,10 @@ const GiftListChat: React.FC<Props> = ({ ownerName, token, currentList }) => {
 
     const { messages, firstUpdate } = messagesState;
 
+    const backendUrl = import.meta.env.VITE_BACKEND_BASE_URL || window.env.VITE_BACKEND_BASE_URL;
+
     useEffect(() => {
-        const socket = io(import.meta.env.VITE_REACT_APP_BACKEND_BASE_URL, {
+        const socket = io(backendUrl, {
             auth: { token: token },
             query: { groupId: currentList._id },
             transports: ['websocket'],
