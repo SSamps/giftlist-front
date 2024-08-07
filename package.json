@@ -1,49 +1,20 @@
 {
-    "name": "template-frontend-react-typescript",
-    "version": "0.1.0",
+    "name": "vite-project",
     "private": true,
-    "dependencies": {
-        "@socket.io/component-emitter": "~3.0.0",
-        "@types/jest": "^27.4.0",
-        "@types/jsonwebtoken": "^8.5.8",
-        "@types/node": "^17.0.13",
-        "@types/react": "^17.0.38",
-        "@types/react-dom": "^17.0.11",
-        "@types/react-router-dom": "^5.3.3",
-        "@types/uuid": "^8.3.4",
-        "@types/validator": "^13.7.1",
-        "axios": "^0.25.0",
-        "jsonwebtoken": "^8.5.1",
-        "node-sass": "^7.0.1",
-        "react": "^17.0.2",
-        "react-dom": "^17.0.2",
-        "react-error-boundary": "^3.1.4",
-        "react-redux": "^7.2.6",
-        "react-router-dom": "^6.2.1",
-        "react-scripts": "4.0.3",
-        "redux": "^4.1.2",
-        "redux-devtools-extension": "^2.13.9",
-        "redux-thunk": "^2.4.1",
-        "socket.io-client": "^4.4.1",
-        "typescript": "^4.5.5",
-        "uuid": "^8.3.2",
-        "validator": "^13.7.0"
-    },
-    "devDependencies": {
-        "concurrently": "^7.0.0"
-    },
+    "version": "0.0.0",
+    "type": "module",
     "scripts": {
-        "devLocal": "react-scripts start",
+        "devLocal": "vite",
+        "test": "vite test",
+        "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+        "build": "tsc -b && vite build",
         "watchScss": "node-sass src/styles/sass/main.scss src/styles/css/App.css -w",
         "compileScss": "node-sass ./src/styles/sass/main.scss ./src/styles/css/App.css",
-        "dev": "concurrently \"npm run watchScss\" \"nodemon -e '*' -w docker/dev -w package.json --exec npm run exportDev\"",
-        "build": "react-scripts build",
-        "test": "react-scripts test",
-        "eject": "react-scripts eject",
+        "dev": "concurrently \"npm run watchScss\" \"nodemon -e '*' -w docker/dev -w package.json -w package.json -w tsconfig.json -w tsconfig.node.json -w tsconfig.app.json -w vite.config.ts --exec npm run exportDev\"",
         "dockerRemoveContainerDev": "docker rm listapp-frontend-dev -f",
         "dockerRemoveImageDev": "docker rmi listapp-frontend:dev -f",
         "dockerBuildImageDev": "docker build -t listapp-frontend:dev -f docker/dev/Dockerfile .",
-        "dockerBuildContainerDev": "docker run --name listapp-frontend-dev -v $(pwd)/src:/app/src -v $(pwd)/public:/app/public -v $(pwd)/tsconfig.json:/app/tsconfig.json -d -p 3000:3000 --network gift-list listapp-frontend:dev",
+        "dockerBuildContainerDev": "docker run --name listapp-frontend-dev -v $(pwd)/src:/app/src -v $(pwd)/public:/app/public -v $(pwd)/tsconfig.json:/app/tsconfig.json -v $(pwd)/tsconfig.app.json:/app/tsconfig.app.json -v $(pwd)/tsconfig.node.json:/app/tsconfig.node.json -v $(pwd)/vite.config.ts:/app/vite.config.ts -v $(pwd)/server.js:/app/server.js -v $(pwd)/index.html:/app/index.html -d -p 3000:3000 --network gift-list listapp-frontend:dev",
         "dockerRemoveContainer": "docker rm listapp-frontend-prod --force",
         "dockerRemoveImage": "docker image rm listapp-frontend-prod:latest --force",
         "dockerBuildImage": "docker build --build-arg REACT_APP_BACKEND_BASE_URL=http://localhost:5000 -t listapp-frontend-prod:latest --file docker/prod/Dockerfile .",
@@ -55,23 +26,37 @@
         "export": "npm run dockerRemoveContainer && npm run dockerRemoveImage && npm run dockerBuildImage && npm run dockerBuildContainer",
         "push": "npm run dockerRemoveImageGcp && npm run dockerBuildImageGcp && npm run dockerPushGcp"
     },
-    "eslintConfig": {
-        "extends": [
-            "react-app",
-            "react-app/jest"
-        ]
+    "dependencies": {
+        "axios": "^1.7.3",
+        "concurrently": "^8.2.2",
+        "eslint-plugin-react": "^7.35.0",
+        "jwt-decode": "^4.0.0",
+        "node-sass": "^9.0.0",
+        "react": "^18.3.1",
+        "react-dom": "^18.3.1",
+        "react-error-boundary": "^3.1.4",
+        "react-redux": "^7.2.6",
+        "react-router-dom": "^6.26.0",
+        "redux": "^4.1.2",
+        "redux-thunk": "^2.4.1",
+        "socket.io-client": "^4.7.5",
+        "uuid": "^10.0.0",
+        "validator": "^13.12.0"
     },
-    "browserslist": {
-        "production": [
-            ">0.2%",
-            "not dead",
-            "not op_mini all"
-        ],
-        "development": [
-            "last 1 chrome version",
-            "last 1 firefox version",
-            "last 1 safari version"
-        ]
+    "devDependencies": {
+        "@types/react": "^18.3.3",
+        "@types/react-dom": "^18.3.0",
+        "@types/uuid": "^10.0.0",
+        "@types/validator": "^13.12.0",
+        "@typescript-eslint/eslint-plugin": "^7.15.0",
+        "@typescript-eslint/parser": "^7.15.0",
+        "@vitejs/plugin-react": "^4.3.1",
+        "eslint": "^8.57.0",
+        "eslint-plugin-react-hooks": "^4.6.2",
+        "eslint-plugin-react-refresh": "^0.4.7",
+        "redux-devtools-extension": "^2.13.9",
+        "typescript": "^5.2.2",
+        "vite": "^5.3.4"
     },
     "proxy": "http://listapp-backend:5000"
 }

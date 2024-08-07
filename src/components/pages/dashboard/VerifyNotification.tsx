@@ -1,26 +1,35 @@
 import axios from 'axios';
 import { useState } from 'react';
 import Spinner from '../../misc/spinner';
+import { isAxiosError } from '../../../misc/helperFunctions';
 
 const VerifyNotification = () => {
-    const [submitState, setSubmitState] = useState({ sending: false, sendingError: undefined, sent: false });
+    const [submitState, setSubmitState] = useState({ sending: false, sendingError: '', sent: false });
 
     const { sending, sendingError, sent } = submitState;
 
     const onClick = () => {
-        setSubmitState({ sending: true, sendingError: undefined, sent: false });
+        setSubmitState({ sending: true, sendingError: '', sent: false });
         try {
             axios.post('api/users/sendverification');
-            setSubmitState({ sending: false, sendingError: undefined, sent: true });
+            setSubmitState({ sending: false, sendingError: '', sent: true });
         } catch (err) {
-            setSubmitState({ sending: false, sendingError: err.response.status, sent: false });
+            if (isAxiosError(err)) {
+                setSubmitState({
+                    sending: false,
+                    sendingError: `Error: ${err.response!.status} ${err.response!.statusText}`,
+                    sent: false,
+                });
+            } else {
+                setSubmitState({ sending: false, sendingError: `Error: Unknown error`, sent: false });
+            }
         }
     };
 
     return (
         <div className='dashboardVerifyContainer'>
             <div className='dashboardVerifyBody'>
-                <div className='text-header'>Verify your email</div>
+                <div className='text-header'>Verify your email mum</div>
                 <div>Please follow the instructions in your welcome email</div>
             </div>
             {sending ? (

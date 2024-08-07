@@ -15,6 +15,7 @@ import OverlayButtons from '../../../../../misc/overlays/OverlayButtons';
 import Spinner from '../../../../../misc/spinner';
 import DropdownUnderlay from '../../../../dashboard/yourLists/controlBar/filters/DropdownUnderlay';
 import InviteFormInput from '../../InviteFormInput';
+import { isAxiosError } from '../../../../../../misc/helperFunctions';
 
 interface Props {
     setOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -52,7 +53,11 @@ const MembersOverlay: React.FC<Props> = ({ setOpen, currentList, addAlertThunkAc
             await axios.post(`/api/groups/${currentList._id}/invite/send`, inviteBody, config);
             setSubmitState({ loading: false, completed: true });
         } catch (err) {
-            addAlertThunkActionCreator('error', `${err.response.status} ${err.response.data}`);
+            if (isAxiosError(err)) {
+                addAlertThunkActionCreator('error', `${err.response!.status} ${err.response!.data}`);
+            } else {
+                addAlertThunkActionCreator('error', `Unknown error`);
+            }
             setSubmitState({ loading: false, completed: false });
         }
     };

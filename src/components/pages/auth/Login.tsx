@@ -139,4 +139,5 @@ const mapStateToProps = (state: IrootState) => ({
     isAuthenticated: state.authReducer.isAuthenticated,
 });
 
+// @ts-ignore - causing issues but planning to remove redux
 export default connect(mapStateToProps, { loginActionCreator })(Login);

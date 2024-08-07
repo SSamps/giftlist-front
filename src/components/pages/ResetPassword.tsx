@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { Fragment, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { isPasswordValid } from '../../misc/helperFunctions';
+import { isAxiosError, isPasswordValid } from '../../misc/helperFunctions';
 import { VALIDATION_USER_PASSWORD_MAX_LENGTH } from '../../misc/validation';
 import Spinner from '../misc/spinner';
 
@@ -40,7 +40,17 @@ const ResetPassword: React.FC = () => {
             await axios.post(`/api/users/resetpassword/${token}`, body, config);
             setSubmitState({ submitError: '', waiting: false, complete: true });
         } catch (err) {
-            setSubmitState({ submitError: err.response.data, waiting: false, complete: false });
+            if (isAxiosError(err)) {
+                const errorMessage = err.response?.data
+                    ? typeof err.response.data === 'string'
+                        ? err.response.data
+                        : JSON.stringify(err.response.data)
+                    : 'Unknown error';
+
+                setSubmitState({ submitError: errorMessage, waiting: false, complete: false });
+            } else {
+                setSubmitState({ submitError: 'Unknown error', waiting: false, complete: false });
+            }
         }
     };
 

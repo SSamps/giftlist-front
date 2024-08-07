@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import OverlayButtons from '../../misc/overlays/OverlayButtons';
 import Spinner from '../../misc/spinner';
 import DropdownUnderlay from '../dashboard/yourLists/controlBar/filters/DropdownUnderlay';
+import { isAxiosError } from '../../../misc/helperFunctions';
 
 interface Props {
     setOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -33,7 +34,17 @@ const ForgottenPassOverlay: React.FC<Props> = ({ setOpen }) => {
             await axios.post(`/api/users/resetpassword`, body, config);
             setSubmitState({ error: '', waiting: false, complete: true });
         } catch (err) {
-            setSubmitState({ ...submitState, waiting: false, error: err.response.data });
+            if (isAxiosError(err)) {
+                const errorMessage = err.response?.data
+                    ? typeof err.response.data === 'string'
+                        ? err.response.data
+                        : JSON.stringify(err.response.data)
+                    : 'Unknown error';
+
+                setSubmitState({ ...submitState, waiting: false, error: errorMessage });
+            } else {
+                setSubmitState({ ...submitState, waiting: false, error: 'An unexpected error occurred' });
+            }
         }
     };
 

@@ -16,6 +16,8 @@ import {
     VALIDATION_USER_PASSWORD_MIN_SYMBOL,
     VALIDATION_USER_PASSWORD_MIN_UPPERCASE,
 } from './validation';
+import axios, { AxiosError } from 'axios';
+import { addAlertActionCreator } from '../redux/actions/alertActions';
 
 export const findUserInGroup = (
     group: TbasicListFields | TgiftListFieldsCensored | TgiftGroupFields | TgiftGroupChildFieldsCensored,
@@ -72,4 +74,16 @@ export const isPasswordValid = (password: string) => {
         minNumbers: VALIDATION_USER_PASSWORD_MIN_NUMBER,
         minSymbols: VALIDATION_USER_PASSWORD_MIN_SYMBOL,
     });
+};
+
+export const isAxiosError = (error: unknown): error is AxiosError => {
+    return axios.isAxiosError(error);
+};
+
+export const handleActionError = (err: unknown) => {
+    if (isAxiosError(err)) {
+        addAlertActionCreator('error', `${err.response!.status} ${err.response!.data}`);
+    } else {
+        addAlertActionCreator('error', `500 Unknown error`);
+    }
 };

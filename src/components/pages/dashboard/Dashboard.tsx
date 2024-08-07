@@ -7,12 +7,17 @@ import { IUser } from '../../../types/models/User';
 import ErrorMessage from '../../misc/ErrorMessage';
 import VerifyNotification from './VerifyNotification';
 import YourLists from './yourLists/YourLists';
-import jwt from 'jsonwebtoken';
+import { jwtDecode, JwtPayload } from 'jwt-decode';
 import axios from 'axios';
+import { isAxiosError } from '../../../misc/helperFunctions';
 
 interface Props {
     user: IUser | null;
     authLoading: boolean;
+}
+
+interface AppJwtPayload extends JwtPayload {
+    groupName: String;
 }
 
 const Dashboard: React.FC<Props> = ({ user, authLoading }): JSX.Element => {
@@ -25,7 +30,8 @@ const Dashboard: React.FC<Props> = ({ user, authLoading }): JSX.Element => {
                 const pendingInviteToken = localStorage.getItem('pendingInviteToken');
                 if (pendingInviteToken) {
                     if (validator.isJWT(pendingInviteToken)) {
-                        const decodedToken = jwt.decode(pendingInviteToken) as jwt.JwtPayload;
+                        const decodedToken = jwtDecode<AppJwtPayload>(pendingInviteToken, {});
+
                         if (!decodedToken?.groupName) {
                             setInviteError('Invalid invite token');
                             localStorage.removeItem('pendingInviteToken');
@@ -37,9 +43,13 @@ const Dashboard: React.FC<Props> = ({ user, authLoading }): JSX.Element => {
                             navigate(`/list/${res.data._id}`);
                             return;
                         } catch (err) {
-                            setInviteError(
-                                'Error processing invite: ' + err.response.status + ' ' + err.response.statusText
-                            );
+                            if (isAxiosError(err)) {
+                                setInviteError(
+                                    'Error processing invite: ' + err.response!.status + ' ' + err.response!.statusText
+                                );
+                            } else {
+                                setInviteError('Error processing invite: Unknown error');
+                            }
                             localStorage.removeItem('pendingInviteToken');
                         }
                     }
@@ -55,12 +65,12 @@ const Dashboard: React.FC<Props> = ({ user, authLoading }): JSX.Element => {
                 <div>Loading</div>
             ) : user && user.verified ? (
                 <Fragment>
-                    {inviteError && <ErrorMessage>{inviteError}</ErrorMessage>}
+                    {inviteError && <ErrorMessage errorText={inviteError}></ErrorMessage>}
                     <YourLists></YourLists>
                 </Fragment>
             ) : (
                 <Fragment>
-                    {inviteError && <ErrorMessage>{inviteError}</ErrorMessage>}
+                    {inviteError && <ErrorMessage errorText={inviteError}></ErrorMessage>}
                     <VerifyNotification></VerifyNotification>
                 </Fragment>
             )}

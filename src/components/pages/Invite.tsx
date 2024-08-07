@@ -5,6 +5,7 @@ import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
 import { IrootState } from '../../redux/reducers/root/rootReducer';
 import { connect } from 'react-redux';
+import { isAxiosError } from '../../misc/helperFunctions';
 
 interface Props {
     isAuthenticated: boolean;
@@ -35,7 +36,11 @@ const Invite: React.FC<Props> = ({ authLoading, isAuthenticated }) => {
             const res = await axios.post(`/api/groups/invite/accept/${token}`);
             navigate(`/list/${res.data._id}`);
         } catch (err) {
-            setInviteError(`${err.response.status}: ${err.response.data}`);
+            if (isAxiosError(err)) {
+                setInviteError(`${err.response!.status}: ${err.response!.data}`);
+            } else {
+                setInviteError(`Unknown error accepting invite`);
+            }
         }
     };
 

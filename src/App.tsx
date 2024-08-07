@@ -19,8 +19,7 @@ import Footer from './components/layout/Footer';
 import Body from './components/layout/Body';
 import UncaughtError from './components/pages/UncaughtError';
 
-// Defaults to localhost if not set. This is set in the prod container and is proxied using the proxy field in package.json when running the react dev server.
-axios.defaults.baseURL = process.env.REACT_APP_BACKEND_BASE_URL;
+axios.defaults.baseURL = import.meta.env.REACT_APP_BACKEND_BASE_URL;
 
 const App = () => {
     const [loaded, setLoaded] = useState(false);

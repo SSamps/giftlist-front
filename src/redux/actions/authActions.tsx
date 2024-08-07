@@ -13,7 +13,7 @@ import {
 } from './actionTypes';
 import { IUser } from '../../types/models/User';
 import store from '../reducers/root/reducerStore';
-import { addAlertActionCreator } from './alertActions';
+import { handleActionError } from '../../misc/helperFunctions';
 
 export interface IloadUserAction {
     type: typeof USER_LOADED | typeof AUTH_ERROR;
@@ -25,6 +25,8 @@ export type TloadUserActionCreator = () => void;
 export const loadUserActionCreator = async (dispatch: Dispatch<IloadUserAction>) => {
     try {
         const res = await axios.get('/api/auth');
+
+        console.log('loaded user with response: ' + res.data);
         dispatch({
             type: USER_LOADED,
             payload: res.data,
@@ -134,7 +136,7 @@ export const renameUserActionCreator = (newName: string) => async (dispatch: Dis
         });
         return true;
     } catch (err) {
-        addAlertActionCreator('error', `${err.response.status} ${err.response.data}`);
+        handleActionError(err);
         return false;
     }
 };
@@ -154,7 +156,7 @@ export const deleteAccountActionCreator = () => async (dispatch: Dispatch<Idelet
         });
         return true;
     } catch (err) {
-        addAlertActionCreator('error', `${err.response.status} ${err.response.data}`);
+        handleActionError(err);
         return false;
     }
 };

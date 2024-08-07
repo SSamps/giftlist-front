@@ -5,6 +5,7 @@ import { newListItemActionCreator } from '../../../../redux/actions/listGroupAct
 import AutoGrowTextField from '../../../misc/AutoGrowTextField';
 
 import Spinner from '../../../misc/spinner';
+import { isAxiosError } from '../../../../misc/helperFunctions';
 
 interface Props {
     header?: string;
@@ -120,12 +121,21 @@ const ListItemForm: React.FC<Props> = ({
                 setItemFormState({ ...itemFormState, waiting: false, error: '' });
             }
         } catch (err) {
-            setItemFormState({
-                ...itemFormState,
-                itemLinks: updatedItemLinks,
-                waiting: false,
-                error: err.response.status,
-            });
+            if (isAxiosError(err)) {
+                setItemFormState({
+                    ...itemFormState,
+                    itemLinks: updatedItemLinks,
+                    waiting: false,
+                    error: `Error: ${err.response!.status} ${err.response!.data}`,
+                });
+            } else {
+                setItemFormState({
+                    ...itemFormState,
+                    itemLinks: updatedItemLinks,
+                    waiting: false,
+                    error: `Error: Unknown error`,
+                });
+            }
         }
     };
 

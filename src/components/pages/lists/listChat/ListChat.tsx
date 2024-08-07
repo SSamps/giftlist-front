@@ -28,7 +28,7 @@ const GiftListChat: React.FC<Props> = ({ ownerName, token, currentList }) => {
     const { messages, firstUpdate } = messagesState;
 
     useEffect(() => {
-        const socket = io(process.env.REACT_APP_BACKEND_BASE_URL || 'http://localhost:5000', {
+        const socket = io(import.meta.env.REACT_APP_BACKEND_BASE_URL, {
             auth: { token: token },
             query: { groupId: currentList._id },
             transports: ['websocket'],

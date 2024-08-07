@@ -14,8 +14,7 @@ import {
 import { Dispatch } from 'redux';
 import axios, { AxiosResponse } from 'axios';
 import { TListGroupAnyFields } from '../../types/models/listGroups';
-import { findUserInGroup } from '../../misc/helperFunctions';
-import { addAlertActionCreator } from './alertActions';
+import { findUserInGroup, handleActionError } from '../../misc/helperFunctions';
 
 interface IgetListActionSuccess {
     type: typeof CURRENT_LIST_GET;
@@ -38,7 +37,7 @@ export const getListActionCreator =
                 payload: res.data,
             });
         } catch (err) {
-            addAlertActionCreator('error', `${err.response.status} ${err.response.data}`);
+            handleActionError(err);
         }
     };
 
@@ -66,7 +65,7 @@ export const deleteListItemActionCreator =
             });
             return true;
         } catch (err) {
-            addAlertActionCreator('error', `${err.response.status} ${err.response.data}`);
+            handleActionError(err);
             return false;
         }
     };
@@ -112,7 +111,7 @@ export const newListItemActionCreator =
             });
             return true;
         } catch (err) {
-            addAlertActionCreator('error', `${err.response.status} ${err.response.data}`);
+            handleActionError(err);
             return false;
         }
     };
@@ -148,7 +147,7 @@ export const modifyListItemActionCreator =
             });
             return true;
         } catch (err) {
-            addAlertActionCreator('error', `${err.response.status} ${err.response.data}`);
+            handleActionError(err);
             return false;
         }
     };
@@ -177,7 +176,7 @@ export const selectListItemActionCreator: TselectListItemActionCreator =
                 payload: res.data,
             });
         } catch (err) {
-            addAlertActionCreator('error', `${err.response.status} ${err.response.data}`);
+            handleActionError(err);
         }
     };
 
@@ -196,7 +195,7 @@ export const deleteListActionCreator = (groupId: string) => async (dispatch: Dis
         });
         return true;
     } catch (err) {
-        addAlertActionCreator('error', `${err.response.status} ${err.response.data}`);
+        handleActionError(err);
         return false;
     }
 };
@@ -227,7 +226,7 @@ export const renameListActionCreator =
 
             return true;
         } catch (err) {
-            addAlertActionCreator('error', `${err.response.status} ${err.response.data}`);
+            handleActionError(err);
             return false;
         }
     };
@@ -248,7 +247,7 @@ export const leaveListActionCreator = (groupId: string) => async (dispatch: Disp
         });
         return true;
     } catch (err) {
-        addAlertActionCreator('error', `${err.response.status} ${err.response.data}`);
+        handleActionError(err);
         return false;
     }
 };

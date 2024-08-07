@@ -9,6 +9,7 @@ import { IUser } from '../../../../../types/models/User';
 import OverlayButtons from '../../../../misc/overlays/OverlayButtons';
 import Spinner from '../../../../misc/spinner';
 import DropdownUnderlay from '../../../dashboard/yourLists/controlBar/filters/DropdownUnderlay';
+import { isAxiosError } from '../../../../../misc/helperFunctions';
 
 interface Props {
     setOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -43,7 +44,11 @@ const AddChildGroupOverlay: React.FC<Props> = ({ setOpen, currentList, user, add
             const newListId = res.data._id;
             navigate(`/list/${newListId}`);
         } catch (err) {
-            addAlertThunkActionCreator('error', `${err.response.status} ${err.response.data}`);
+            if (isAxiosError(err)) {
+                addAlertThunkActionCreator('error', `${err.response!.status} ${err.response!.data}`);
+            } else {
+                addAlertThunkActionCreator('error', `Unknown error`);
+            }
             setFormState({ ...formState, waiting: false });
         }
     };

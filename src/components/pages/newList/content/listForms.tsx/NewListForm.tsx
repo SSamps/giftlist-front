@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { FormSubmissionStatus } from './FormSubmissionStatus';
 import InviteFormInput from '../../../lists/miscShared/InviteFormInput';
 import { VALIDATION_GROUP_NAME_MAX_LENGTH } from '../../../../../misc/validation';
+import { isAxiosError } from '../../../../../misc/helperFunctions';
 
 interface Props {
     controllerState: TYPE_LIST_GROUP_ALL_TOP_LEVEL_VARIANTS;
@@ -25,7 +26,7 @@ const NewListForm: React.FC<Props> = ({ controllerState }) => {
     const [formSubmitStatus, setFormSubmitStatus] = useState({
         creatingList: false,
         invitingMembers: false,
-        submitError: undefined,
+        submitError: '',
     });
 
     const navigate = useNavigate();
@@ -63,18 +64,30 @@ const NewListForm: React.FC<Props> = ({ controllerState }) => {
         const createListBody = JSON.stringify({ groupVariant: controllerState, groupName: listName });
 
         try {
-            setFormSubmitStatus({ creatingList: true, invitingMembers: false, submitError: undefined });
+            setFormSubmitStatus({ creatingList: true, invitingMembers: false, submitError: '' });
             const listCreationRes = await axios.post('/api/groups', createListBody, config);
             const newListId = listCreationRes.data._id;
             if (inviteArray.length > 0) {
                 const inviteBody = JSON.stringify({ invitedEmails: inviteArray });
 
-                setFormSubmitStatus({ creatingList: false, invitingMembers: true, submitError: undefined });
+                setFormSubmitStatus({ creatingList: false, invitingMembers: true, submitError: '' });
                 await axios.post(`/api/groups/${newListId}/invite/send`, inviteBody, config);
             }
             navigate(`/list/${newListId}`);
         } catch (err) {
-            setFormSubmitStatus({ creatingList: false, invitingMembers: false, submitError: err.response.status });
+            if (isAxiosError(err)) {
+                setFormSubmitStatus({
+                    creatingList: false,
+                    invitingMembers: false,
+                    submitError: `Error: ${err.response!.status} ${err.response!.data}`,
+                });
+            } else {
+                setFormSubmitStatus({
+                    creatingList: false,
+                    invitingMembers: false,
+                    submitError: `Error: Unknown error`,
+                });
+            }
         }
     };
 

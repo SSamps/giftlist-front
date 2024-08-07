@@ -5,6 +5,7 @@ import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
 import { loadUserActionCreator } from '../../../redux/actions/authActions';
 import store from '../../../redux/reducers/root/reducerStore';
+import { isAxiosError } from '../../../misc/helperFunctions';
 
 const Verify: React.FC = () => {
     const { token } = useParams();
@@ -21,7 +22,11 @@ const Verify: React.FC = () => {
             await loadUserActionCreator(store.dispatch);
             navigate(`/dashboard`);
         } catch (err) {
-            setVerifyError('Error: ' + err.response.status + ' ' + err.response.statusText);
+            if (isAxiosError(err)) {
+                setVerifyError('Error: ' + err.response?.status + ' ' + err.response?.statusText);
+            } else {
+                setVerifyError('Error: ' + `500 Unknown error`);
+            }
         }
     };
 

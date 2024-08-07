@@ -1,4 +1,4 @@
-FROM node:lts-alpine3.15
+FROM node:20.16-alpine3.19
 WORKDIR /app
 COPY package*.json ./
 RUN apk --no-cache --virtual build-dependencies add \
@@ -7,4 +7,5 @@ RUN apk --no-cache --virtual build-dependencies add \
     g++ \
     && npm install \
     && apk del build-dependencies
-CMD npm run devLocal
+
+CMD ["npm", "run", "devLocal"]

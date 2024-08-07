@@ -32,7 +32,7 @@ export interface IbasicListMember extends IgroupMemberBase {
 
 interface IbasicListExtraFields {
     members: IbasicListMember[];
-    maxListItems: Number;
+    maxListItems: number;
     listItems: IbasicListItem[];
     groupVariant: typeof BASIC_LIST;
 }
@@ -56,9 +56,9 @@ interface IgiftListExtraFields {
 
 interface IgiftListExtraFieldsCensored {
     members: IgiftListMember[];
-    maxListItems: Number;
+    maxListItems: number;
     listItems: IgiftListItemCensored[];
-    maxSecretListItemsEach: Number;
+    maxSecretListItemsEach: number;
     secretListItems: IgiftListItemCensored[] | undefined;
     parentGroupId: string;
     groupVariant: typeof GIFT_LIST;
