@@ -19,12 +19,10 @@ import Footer from './components/layout/Footer';
 import Body from './components/layout/Body';
 import UncaughtError from './components/pages/UncaughtError';
 
-const backendUrl = import.meta.env.VITE_REACT_APP_BACKEND_BASE_URL;
-
+const backendUrl = import.meta.env.VITE_BACKEND_BASE_URL || window.env.VITE_BACKEND_BASE_URL;
 axios.defaults.baseURL = backendUrl;
 
 const App = () => {
-    console.log('BE url: ' + backendUrl);
     const [loaded, setLoaded] = useState(false);
 
     useEffect(() => {
