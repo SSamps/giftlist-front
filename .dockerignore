@@ -1,4 +1,9 @@
 node_modules
-.git/
+.git
 .gitignore
-build/
+.vscode
+build
+docker
+documentation
+CODEOWNERS
+README
