@@ -1,16 +1,19 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
+import path from 'path';
 
-// https://vitejs.dev/config/
 export default defineConfig({
     plugins: [react()],
     server: {
-        open: false, // Opens the browser automatically
+        open: false,
         port: 3000,
-        host: '0.0.0.0',
+        host: true,
         strictPort: true,
     },
     build: {
-        outDir: 'build', // CRA uses `build` as the output directory
+        outDir: 'build',
+        rollupOptions: {
+            input: path.resolve(__dirname, 'main.html'), // Specify main.html as the entry point
+        },
     },
 });

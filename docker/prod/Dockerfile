@@ -1,23 +1,22 @@
 # State 1
-FROM node:lts-alpine3.15 AS build
+FROM node:20.16-alpine3.19 AS build
 WORKDIR /app
-RUN npm install npm@7.12.0 -g
+RUN npm install -g npm@10.8.1
 RUN apk --no-cache --virtual build-dependencies add \
     python3 \
     make \
     g++
 COPY package*.json ./
-RUN npm install --production
+RUN npm install 
 COPY . .
+RUN mv /app/index.html /app/main.html
 RUN npm run compileScss
-ARG REACT_APP_BACKEND_BASE_URL
-RUN REACT_APP_BACKEND_BASE_URL=$REACT_APP_BACKEND_BASE_URL npm run build
+RUN npm run build
 
 # Stage 2
-FROM node:lts-alpine3.15
+FROM node:20.16-alpine3.19
 WORKDIR /app
-RUN npm install express
-RUN npm install path
+RUN npm install express path
 COPY --from=build /app/build ./build
 COPY server.js .
-CMD node server.js
+CMD ["node", "server.js"]
