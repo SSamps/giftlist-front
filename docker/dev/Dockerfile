@@ -8,4 +8,4 @@ RUN apk --no-cache --virtual build-dependencies add \
     && npm install \
     && apk del build-dependencies
 
-CMD ["npm", "run", "devLocal"]
+CMD ["npm", "run", "runDevServer"]

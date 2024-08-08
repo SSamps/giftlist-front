@@ -10,13 +10,13 @@ COPY package*.json ./
 RUN npm install 
 COPY . .
 RUN mv /app/index.html /app/main.html
-RUN npm run compileScss
-RUN npm run build
+RUN npm run buildScss
+RUN npm run buildApp
+RUN npm run buildServer
 
 # Stage 2
 FROM node:20.16-alpine3.19
 WORKDIR /app
-RUN npm install express path
 COPY --from=build /app/build ./build
-COPY server.js .
-CMD ["node", "server.js"]
+COPY --from=build /app/server.cjs .
+CMD ["node", "server.cjs"]

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, ErrorInfo } from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
 import { BrowserRouter as Router } from 'react-router-dom';
 import './styles/css/App.css';
@@ -41,7 +41,7 @@ const App = () => {
         init();
     }, []);
 
-    const errorFallback = async (error: Error, info: { componentStack: string }) => {
+    const errorFallback = async (error: Error, info: ErrorInfo) => {
         const { name, stack, message } = error;
 
         const config = {
