@@ -53,7 +53,11 @@ const GiftListChat: React.FC<Props> = ({ ownerName, token, currentList }) => {
         });
 
         setSocket(socket);
-    }, []);
+
+        return () => {
+            socket.disconnect();
+        };
+    }, [backendUrl, token, currentList._id]);
 
     useEffect(() => {
         if (!firstUpdate) {
