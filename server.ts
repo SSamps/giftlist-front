@@ -1,6 +1,7 @@
-const express = require('express');
-const path = require('path');
-const fs = require('fs');
+import express from 'express';
+import path from 'path';
+import fs from 'fs';
+
 const app = express();
 
 const PORT = process.env.PORT;
@@ -11,7 +12,6 @@ const root = path.join(__dirname, 'build');
 app.use(express.static(root));
 
 app.get('/*', (_req, res) => {
-    console.log('hit the route');
     const indexFile = path.join(root, 'main.html');
     fs.readFile(indexFile, 'utf8', (err, data) => {
         if (err) {
