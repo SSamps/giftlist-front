@@ -9,7 +9,7 @@ RUN apk --no-cache --virtual build-dependencies add \
 COPY package*.json ./
 RUN npm install 
 COPY . .
-RUN rm -f /app/index.html
+RUN mv /app/index.html /app/main.html
 RUN npm run compileScss
 RUN npm run build
 
