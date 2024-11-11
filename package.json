@@ -6,7 +6,7 @@
         "dev": "npm run dev:compileScssChangesAndRebuildDevContainerWhenConfigUpdated",
         "dev:compileScssChangesAndRebuildDevContainerWhenConfigUpdated": "concurrently \"npm run dev:watchScss\" \"nodemon -e '*' -w docker/dev -w package.json -w package.json -w tsconfig.json -w tsconfig.node.json -w tsconfig.app.json -w vite.config.ts --exec npm run dev:rebuildContainer\"",
         "dev:watchScss": "sass src/styles/sass/main.scss src/styles/css/App.css -w",
-        "dev:rebuildContainer": "npm run dev:dockerRemoveContainer && npm run dev:dockerRemoveImage && npm run dev:dockerBuildImage && npm run dev:dockerRunContainer",
+        "dev:rebuildContainer": "npm run dev:dockerRemoveContainer && npm run dev:dockerRemoveContainer && npm run dev:dockerBuildImage && npm run dev:dockerRunContainer",
         "dev:dockerRemoveContainer": "docker rm listapp-frontend-dev -f",
         "dev:dockerRemoveImage": "docker rmi listapp-frontend:dev -f",
         "dev:dockerBuildImage": "docker build -t listapp-frontend:dev -f docker/dev/Dockerfile .",
