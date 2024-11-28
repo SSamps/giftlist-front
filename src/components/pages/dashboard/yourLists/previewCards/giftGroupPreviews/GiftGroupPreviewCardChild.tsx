@@ -1,6 +1,4 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { IrootStateAuthed } from '../../../../../../redux/reducers/root/rootReducer';
 import { TgiftListFieldsCensored } from '../../../../../../types/models/listGroups';
 import { IUser } from '../../../../../../types/models/User';
 
@@ -35,8 +33,4 @@ const GiftGroupPreviewCardChild: React.FC<props> = ({ child, user }) => {
     );
 };
 
-const mapStateToProps = (state: IrootStateAuthed) => ({
-    user: state.authReducer.user,
-});
-
-export default connect(mapStateToProps)(GiftGroupPreviewCardChild);
+export default GiftGroupPreviewCardChild;

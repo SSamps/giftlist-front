@@ -12,8 +12,8 @@ interface Props {
     isAuthenticated: boolean | null;
 }
 
-const Navbar: React.FC<Props> = ({ logoutActionCreator, loading, isAuthenticated }) => {
-    const { user, setUser } = useAuth();
+const Navbar: React.FC<Props> = () => {
+    const { user, setUser, userLoading: loading } = useAuth();
 
     const logout = () => {
         updateToken(null);

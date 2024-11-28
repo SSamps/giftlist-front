@@ -1,7 +1,5 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { IrootStateAuthed } from '../../../../../../redux/reducers/root/rootReducer';
 import { TgiftGroupChildFieldsCensored, TgiftListFieldsCensored } from '../../../../../../types/models/listGroups';
 import { IUser } from '../../../../../../types/models/User';
 import { findOwnerInGroup } from '../../../../../../misc/helperFunctions';
@@ -61,13 +59,9 @@ const GiftListPreviewCard: React.FC<Props> = ({ list, user }) => {
                 {user._id === owner?.userId ? renderOwnerPreview() : renderMemberPreview()}
                 <div className='listPreviewCard-fade'></div>
             </div>
-            <PreviewCardFooter list={list} owner={owner}></PreviewCardFooter>
+            <PreviewCardFooter list={list} owner={owner} user={user}></PreviewCardFooter>
         </Link>
     );
 };
 
-const mapStateToProps = (state: IrootStateAuthed) => ({
-    user: state.authReducer.user,
-});
-
-export default connect(mapStateToProps)(GiftListPreviewCard);
+export default GiftListPreviewCard;

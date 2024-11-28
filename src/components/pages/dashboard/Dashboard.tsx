@@ -1,26 +1,21 @@
 import { Fragment, useEffect, useState } from 'react';
-import { connect } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import validator from 'validator';
-import { IrootState } from '../../../redux/reducers/root/rootReducer';
-import { IUser } from '../../../types/models/User';
 import ErrorMessage from '../../misc/ErrorMessage';
 import VerifyNotification from './VerifyNotification';
 import YourLists from './yourLists/YourLists';
 import { jwtDecode, JwtPayload } from 'jwt-decode';
 import axios from 'axios';
 import { isAxiosError } from '../../../misc/helperFunctions';
-
-interface Props {
-    user: IUser | null;
-    authLoading: boolean;
-}
+import { useAuth } from '../../../context/authContext';
 
 interface AppJwtPayload extends JwtPayload {
     groupName: String;
 }
 
-const Dashboard: React.FC<Props> = ({ user, authLoading }): JSX.Element => {
+const Dashboard: React.FC = (): JSX.Element => {
+    const { user, userLoading } = useAuth();
+
     const navigate = useNavigate();
     const [inviteError, setInviteError] = useState<undefined | string>(undefined);
 
@@ -61,12 +56,12 @@ const Dashboard: React.FC<Props> = ({ user, authLoading }): JSX.Element => {
 
     return (
         <Fragment>
-            {authLoading ? (
+            {userLoading ? (
                 <div>Loading</div>
             ) : user && user.verified ? (
                 <Fragment>
                     {inviteError && <ErrorMessage errorText={inviteError}></ErrorMessage>}
-                    <YourLists></YourLists>
+                    <YourLists user={user}></YourLists>
                 </Fragment>
             ) : (
                 <Fragment>
@@ -78,9 +73,4 @@ const Dashboard: React.FC<Props> = ({ user, authLoading }): JSX.Element => {
     );
 };
 
-const mapStateToProps = (state: IrootState) => ({
-    user: state.authReducer.user,
-    authLoading: state.authReducer.loading,
-});
-
-export default connect(mapStateToProps)(Dashboard);
+export default Dashboard;

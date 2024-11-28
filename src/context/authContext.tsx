@@ -7,14 +7,21 @@ import { IUser } from '../types/models/User';
 interface AuthContextType {
     user: IUser | null;
     setUser: (user: IUser | null) => void;
+    userLoading: boolean;
+    setLoading: (loading: boolean) => void;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     const [user, setUser] = useState<IUser | null>(null);
+    const [loading, setLoading] = useState<boolean>(false);
 
-    return <AuthContext.Provider value={{ user, setUser }}>{children}</AuthContext.Provider>;
+    return (
+        <AuthContext.Provider value={{ user, setUser, userLoading: loading, setLoading }}>
+            {children}
+        </AuthContext.Provider>
+    );
 };
 
 // Hooks
@@ -33,16 +40,18 @@ export const useLogout = () => {
 
 // Requests
 
-export const sendLoginRequest = async (email: string, password: string) => {
+export const sendLoginRequestMut = async ({ email, password }: { email: string; password: string }) => {
     const config = {
         headers: {
             'Content-Type': 'application/json',
         },
     };
     const body = JSON.stringify({ email, password });
-    const res = await axios.post('/api/auth', body, config);
-    console.log('res: ', res);
-    return res;
+    return axios.post('/api/auth', body, config).then((res) => res.data);
+};
+
+export const getUserRequest = async () => {
+    return axios.get('/api/auth').then((res) => res.data);
 };
 
 // Update tokens

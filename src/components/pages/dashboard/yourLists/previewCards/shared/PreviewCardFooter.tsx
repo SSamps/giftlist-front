@@ -1,6 +1,4 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { IrootStateAuthedUnknownListLoaded } from '../../../../../../redux/reducers/root/rootReducer';
 import {
     IbasicListMember,
     IgiftGroupChildMember,
@@ -43,8 +41,4 @@ const PreviewCardFooter: React.FC<props> = ({ owner, user, list }) => {
     );
 };
 
-const mapStateToProps = (state: IrootStateAuthedUnknownListLoaded) => ({
-    user: state.authReducer.user,
-});
-
-export default connect(mapStateToProps)(PreviewCardFooter);
+export default PreviewCardFooter;

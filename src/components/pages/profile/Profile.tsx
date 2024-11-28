@@ -2,20 +2,27 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { deleteAccountActionCreator, TdeleteAccountActionCreator } from '../../../redux/actions/authActions';
 import { IrootStateAuthed } from '../../../redux/reducers/root/rootReducer';
-import { IUser } from '../../../types/models/User';
 import { formatJoinDate } from '../../../misc/helperFunctions';
 import ConfirmationOverlay from '../../misc/overlays/ConfirmationOverlay';
 import ProfileRow from './ProfileRow';
 import RenameUserOverlay from './RenameUserOverlay';
+import { useAuth } from '../../../context/authContext';
+import { Navigate } from 'react-router-dom';
 
 interface props {
-    user: IUser;
     deleteAccountActionCreator: TdeleteAccountActionCreator;
 }
 
-const Profile: React.FC<props> = ({ user, deleteAccountActionCreator }) => {
+const Profile: React.FC<props> = ({ deleteAccountActionCreator }) => {
     const [changeNameOverlayStatus, setChangeNameOverlayStatus] = useState(false);
     const [deleteAccountOverlayStatus, setDeleteAccountOverlayStatus] = useState(false);
+    const { user } = useAuth();
+
+    // Should be caught by PrivateRoute
+    if (!user) {
+        console.error('Accessed profile page without a user');
+        return <Navigate to='/login'></Navigate>;
+    }
 
     const joinedDate = formatJoinDate(user.registrationDate);
 
@@ -77,8 +84,6 @@ const Profile: React.FC<props> = ({ user, deleteAccountActionCreator }) => {
     );
 };
 
-const mapStateToProps = (state: IrootStateAuthed) => ({
-    user: state.authReducer.user,
-});
+const mapStateToProps = (state: IrootStateAuthed) => ({});
 
 export default connect(mapStateToProps, { deleteAccountActionCreator })(Profile);

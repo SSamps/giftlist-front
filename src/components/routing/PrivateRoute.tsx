@@ -1,22 +1,13 @@
 import { Fragment } from 'react';
-import { connect } from 'react-redux';
 import { Navigate, RouteProps } from 'react-router-dom';
-import { IrootState } from '../../redux/reducers/root/rootReducer';
 import { useAuth } from '../../context/authContext';
 
 type TprotectedRouteProps = {
-    isAuthenticated: boolean | null;
-    loading: boolean;
     component: React.ComponentType<any>;
 } & RouteProps;
 
-const PrivateRoute: React.FC<TprotectedRouteProps> = ({
-    component: Component,
-    isAuthenticated,
-    loading,
-    ...routeProps
-}) => {
-    const { user } = useAuth();
+const PrivateRoute: React.FC<TprotectedRouteProps> = ({ component: Component, ...routeProps }) => {
+    const { user, userLoading: loading } = useAuth();
 
     if (loading) {
         return <Fragment></Fragment>;
@@ -27,9 +18,4 @@ const PrivateRoute: React.FC<TprotectedRouteProps> = ({
     return <Component {...routeProps} />;
 };
 
-const mapStateToProps = (state: IrootState) => ({
-    isAuthenticated: state.authReducer.isAuthenticated,
-    loading: state.authReducer.loading,
-});
-
-export default connect(mapStateToProps)(PrivateRoute);
+export default PrivateRoute;

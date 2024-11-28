@@ -91,13 +91,19 @@ export const YourLists: React.FC<Props> = ({
                     {filteredListGroups.map((list) => {
                         switch (list.groupVariant) {
                             case BASIC_LIST: {
-                                return <BasicListPreviewCard key={list._id} list={list}></BasicListPreviewCard>;
+                                return (
+                                    <BasicListPreviewCard key={list._id} list={list} user={user}></BasicListPreviewCard>
+                                );
                             }
                             case GIFT_LIST: {
-                                return <GiftListPreviewCard key={list._id} list={list}></GiftListPreviewCard>;
+                                return (
+                                    <GiftListPreviewCard key={list._id} list={list} user={user}></GiftListPreviewCard>
+                                );
                             }
                             case GIFT_GROUP: {
-                                return <GiftGroupPreviewCard key={list._id} list={list}></GiftGroupPreviewCard>;
+                                return (
+                                    <GiftGroupPreviewCard key={list._id} list={list} user={user}></GiftGroupPreviewCard>
+                                );
                             }
                         }
                     })}
@@ -113,7 +119,6 @@ const mapStateToProps = (state: IrootStateAuthed) => ({
     error: state.dashboardReducer.error,
     listOwnershipFilter: state.dashboardReducer.listOwnershipFilter,
     listVariantFilter: state.dashboardReducer.listVariantFilter,
-    user: state.authReducer.user,
 });
 
 export default connect(mapStateToProps, { getDashboardListDataActionCreator })(YourLists);

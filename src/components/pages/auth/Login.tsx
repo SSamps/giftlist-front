@@ -1,19 +1,12 @@
 import React, { Fragment, useState } from 'react';
 import { Link, Navigate } from 'react-router-dom';
-import { connect } from 'react-redux';
-import { loginActionCreator, TloginActionCreator } from '../../../redux/actions/authActions';
-import { IrootState } from '../../../redux/reducers/root/rootReducer';
 import axios, { AxiosError, AxiosResponse } from 'axios';
 import ForgottenPassOverlay from './ForgottenPassOverlay';
 import { VALIDATION_USER_EMAIL_MAX_LENGTH, VALIDATION_USER_PASSWORD_MAX_LENGTH } from '../../../misc/validation';
-import { sendLoginRequest, updateToken, useAuth } from '../../../context/authContext';
+import { sendLoginRequestMut, updateToken, useAuth } from '../../../context/authContext';
+import { useMutation } from '@tanstack/react-query';
 
-interface Props {
-    loginActionCreator: TloginActionCreator;
-    isAuthenticated: boolean | null;
-}
-
-const Login: React.FC<Props> = ({ loginActionCreator, isAuthenticated }) => {
+const Login: React.FC = () => {
     const [formData, setFormData] = useState({
         email: '',
         password: '',
@@ -28,7 +21,23 @@ const Login: React.FC<Props> = ({ loginActionCreator, isAuthenticated }) => {
 
     const [showForgottenPassOverlay, setShowForgottenPassOverlay] = useState(false);
 
-    const { user, setUser } = useAuth();
+    const { user, setUser, setLoading } = useAuth();
+
+    const loginMutation = useMutation({
+        mutationFn: sendLoginRequestMut,
+        onMutate: () => {
+            setLoading(true);
+        },
+        onSuccess: (data: any) => {
+            updateToken(data.token);
+            setUser(data.user);
+            setLoading(false);
+        },
+        onError: (err: any) => {
+            handleRequestError(err);
+            setLoading(false);
+        },
+    });
 
     if (user) {
         return <Navigate to='/dashboard' />;
@@ -78,15 +87,7 @@ const Login: React.FC<Props> = ({ loginActionCreator, isAuthenticated }) => {
     const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         resetServerErrorState();
-
-        const res = await sendLoginRequest(email, password);
-        updateToken(res.data.token);
-        setUser(res.data.user);
-
-        var err = await loginActionCreator(email, password);
-        if (err) {
-            handleRequestError(err);
-        }
+        loginMutation.mutate({ email, password });
     };
 
     return (
@@ -142,9 +143,5 @@ const Login: React.FC<Props> = ({ loginActionCreator, isAuthenticated }) => {
     );
 };
 
-const mapStateToProps = (state: IrootState) => ({
-    isAuthenticated: state.authReducer.isAuthenticated,
-});
-
 // @ts-ignore - causing issues but planning to remove redux
-export default connect(mapStateToProps, { loginActionCreator })(Login);
+export default Login;

@@ -1,7 +1,6 @@
 import { useEffect, useState, ErrorInfo } from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
 import { BrowserRouter as Router } from 'react-router-dom';
-import { testQuery } from './tanstack/testQueries';
 import './styles/css/App.css';
 
 // Components
@@ -10,47 +9,48 @@ import Navbar from './components/layout/Navbar';
 //Redux
 import { Provider } from 'react-redux';
 import store from './redux/reducers/root/reducerStore';
-import { loadUserActionCreator } from './redux/actions/authActions';
 //Axios
 import axios from 'axios';
-
-import { LOGOUT } from './redux/actions/actionTypes';
-
-//Tanstack
-// import {useQuery} from '@tanstack/react-query';
 
 import Footer from './components/layout/Footer';
 import Body from './components/layout/Body';
 import UncaughtError from './components/pages/UncaughtError';
-import { updateAxiosAuthHeader } from './context/authContext';
+import { getUserRequest, updateAxiosAuthHeader, useAuth } from './context/authContext';
+import { useQuery } from '@tanstack/react-query';
 
 const backendUrl = import.meta.env.VITE_BACKEND_BASE_URL || window.env.VITE_BACKEND_BASE_URL;
 axios.defaults.baseURL = backendUrl;
 
 const App = () => {
-    const [loaded, setLoaded] = useState(false);
+    const [loadedApp, setLoaded] = useState(false);
+
+    const { setUser, setLoading } = useAuth();
+
+    const userQuery = useQuery({ queryKey: ['user'], queryFn: getUserRequest, enabled: false });
 
     useEffect(() => {
         const init = async () => {
             if (localStorage.token) {
                 updateAxiosAuthHeader(localStorage.token);
+                const data = await userQuery.refetch();
+                if (data.isSuccess) {
+                    setUser(data.data);
+                } else {
+                    setUser(null);
+                    setLoading(false);
+                }
             }
 
-            await loadUserActionCreator(store.dispatch);
-
             window.addEventListener('storage', () => {
-                if (!localStorage.token) store.dispatch({ type: LOGOUT });
+                if (!localStorage.token) {
+                    setUser(null);
+                    setLoading(false);
+                }
             });
             setLoaded(true);
         };
         init();
     }, []);
-
-    // tanstack
-
-    // const query = useQuery({ queryKey: ['testdata'], queryFn: () => testQuery })
-
-    // end tanstack
 
     const errorFallback = async (error: Error, info: ErrorInfo) => {
         const { name, stack, message } = error;
@@ -75,7 +75,7 @@ const App = () => {
         <ErrorBoundary FallbackComponent={UncaughtError} onError={errorFallback}>
             <Provider store={store}>
                 <Router>
-                    {loaded && (
+                    {loadedApp && (
                         <div className='pageContainer'>
                             <Navbar />
                             <Body></Body>
