@@ -1,6 +1,7 @@
 import { useEffect, useState, ErrorInfo } from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
 import { BrowserRouter as Router } from 'react-router-dom';
+import {testQuery} from './tanstack/testQueries';
 import './styles/css/App.css';
 
 // Components
@@ -14,6 +15,9 @@ import { loadUserActionCreator } from './redux/actions/authActions';
 import axios from 'axios';
 import setAuthToken from './misc/setAuthToken';
 import { LOGOUT } from './redux/actions/actionTypes';
+
+//Tanstack
+import {useQuery} from '@tanstack/react-query';
 
 import Footer from './components/layout/Footer';
 import Body from './components/layout/Body';
@@ -40,6 +44,12 @@ const App = () => {
         };
         init();
     }, []);
+
+    // tanstack
+
+    // const query = useQuery({ queryKey: ['testdata'], queryFn: () => testQuery })
+
+    // end tanstack
 
     const errorFallback = async (error: Error, info: ErrorInfo) => {
         const { name, stack, message } = error;
@@ -77,4 +87,4 @@ const App = () => {
     );
 };
 
-export default App;
+export default App; 

@@ -14,6 +14,11 @@ interface Props {
 const Navbar: React.FC<Props> = ({ logoutActionCreator, loading, isAuthenticated }) => {
     const authedLinks = (
         <Fragment>
+                        <li>
+                <Link to='/test'>
+                    <span className=''>Test</span>
+                </Link>
+            </li>
             <li>
                 <Link to='/dashboard'>
                     <span className=''>Your Lists</span>

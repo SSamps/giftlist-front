@@ -13,6 +13,7 @@ import VerifiedRoute from '../routing/VerifiedRoute';
 import Verify from '../pages/auth/Verify';
 import ResetPassword from '../pages/ResetPassword';
 import Profile from '../pages/profile/Profile';
+import Test from '../pages/Test'
 
 const Body: React.FC = () => {
     return (
@@ -30,6 +31,7 @@ const Body: React.FC = () => {
                         <Route path='/profile' element={<PrivateRoute component={Profile} />} />
                         <Route path='/list/newlist' element={<VerifiedRoute component={NewListPage} />} />
                         <Route path='/list/:listid' element={<VerifiedRoute component={ListPage} />} />
+                        <Route path='/test' element={<Test />} />
                         <Route path='*' element={<NotFound />} />
                     </Routes>
                 </div>
