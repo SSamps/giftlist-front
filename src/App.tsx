@@ -1,7 +1,7 @@
 import { useEffect, useState, ErrorInfo } from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
 import { BrowserRouter as Router } from 'react-router-dom';
-import {testQuery} from './tanstack/testQueries';
+import { testQuery } from './tanstack/testQueries';
 import './styles/css/App.css';
 
 // Components
@@ -13,15 +13,16 @@ import store from './redux/reducers/root/reducerStore';
 import { loadUserActionCreator } from './redux/actions/authActions';
 //Axios
 import axios from 'axios';
-import setAuthToken from './misc/setAuthToken';
+
 import { LOGOUT } from './redux/actions/actionTypes';
 
 //Tanstack
-import {useQuery} from '@tanstack/react-query';
+// import {useQuery} from '@tanstack/react-query';
 
 import Footer from './components/layout/Footer';
 import Body from './components/layout/Body';
 import UncaughtError from './components/pages/UncaughtError';
+import { updateAxiosAuthHeader } from './context/authContext';
 
 const backendUrl = import.meta.env.VITE_BACKEND_BASE_URL || window.env.VITE_BACKEND_BASE_URL;
 axios.defaults.baseURL = backendUrl;
@@ -32,7 +33,7 @@ const App = () => {
     useEffect(() => {
         const init = async () => {
             if (localStorage.token) {
-                setAuthToken(localStorage.token);
+                updateAxiosAuthHeader(localStorage.token);
             }
 
             await loadUserActionCreator(store.dispatch);
@@ -87,4 +88,4 @@ const App = () => {
     );
 };
 
-export default App; 
+export default App;

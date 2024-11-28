@@ -16,15 +16,15 @@ const store = createStore(rootReducer, initialState, composeWithDevTools(applyMi
 // preventing undefined error
 let currentState = store.getState();
 
-store.subscribe(() => {
-    // keep track of the previous and current state to compare changes
-    let previousState = currentState;
-    currentState = store.getState();
-    // if the token changes set the value in localStorage and axios headers
-    if (previousState.authReducer.token !== currentState.authReducer.token) {
-        const token = currentState.authReducer.token;
-        setAuthToken(token);
-    }
-});
+// store.subscribe(() => {
+//     // keep track of the previous and current state to compare changes
+//     let previousState = currentState;
+//     currentState = store.getState();
+//     // if the token changes set the value in localStorage and axios headers
+//     if (previousState.authReducer.token !== currentState.authReducer.token) {
+//         const token = currentState.authReducer.token;
+//         setAuthToken(token);
+//     }
+// });
 
 export default store;

@@ -4,6 +4,7 @@ import { logoutActionCreator, TlogoutActionCreator } from '../../redux/actions/a
 import { Fragment } from 'react';
 import { IrootState } from '../../redux/reducers/root/rootReducer';
 import Alerts from '../misc/Alerts';
+import { updateToken, useAuth } from '../../context/authContext';
 
 interface Props {
     logoutActionCreator: TlogoutActionCreator;
@@ -12,9 +13,16 @@ interface Props {
 }
 
 const Navbar: React.FC<Props> = ({ logoutActionCreator, loading, isAuthenticated }) => {
+    const { user, setUser } = useAuth();
+
+    const logout = () => {
+        updateToken(null);
+        setUser(null);
+    };
+
     const authedLinks = (
         <Fragment>
-                        <li>
+            <li>
                 <Link to='/test'>
                     <span className=''>Test</span>
                 </Link>
@@ -31,7 +39,7 @@ const Navbar: React.FC<Props> = ({ logoutActionCreator, loading, isAuthenticated
             </li>
 
             <li>
-                <Link to='/' onClick={() => logoutActionCreator()}>
+                <Link to='/' onClick={() => logout()}>
                     <span className=''>Logout</span>
                 </Link>
             </li>
@@ -58,7 +66,7 @@ const Navbar: React.FC<Props> = ({ logoutActionCreator, loading, isAuthenticated
                             <span>Gift List</span>
                         </Link>
                     </li>
-                    {!loading && <Fragment>{isAuthenticated ? authedLinks : guestLinks}</Fragment>}
+                    {!loading && <Fragment>{user ? authedLinks : guestLinks}</Fragment>}
                 </ul>
             </nav>
             <div className='alert-placeholder'>

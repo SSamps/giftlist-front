@@ -6,6 +6,7 @@ import { IrootState } from '../../../redux/reducers/root/rootReducer';
 import axios, { AxiosError, AxiosResponse } from 'axios';
 import ForgottenPassOverlay from './ForgottenPassOverlay';
 import { VALIDATION_USER_EMAIL_MAX_LENGTH, VALIDATION_USER_PASSWORD_MAX_LENGTH } from '../../../misc/validation';
+import { sendLoginRequest, updateToken, useAuth } from '../../../context/authContext';
 
 interface Props {
     loginActionCreator: TloginActionCreator;
@@ -27,7 +28,9 @@ const Login: React.FC<Props> = ({ loginActionCreator, isAuthenticated }) => {
 
     const [showForgottenPassOverlay, setShowForgottenPassOverlay] = useState(false);
 
-    if (isAuthenticated) {
+    const { user, setUser } = useAuth();
+
+    if (user) {
         return <Navigate to='/dashboard' />;
     }
 
@@ -40,7 +43,6 @@ const Login: React.FC<Props> = ({ loginActionCreator, isAuthenticated }) => {
 
     const resetServerErrorState = () => {
         setFormServerErrorData({
-            ...formServerErrorData,
             loginErrorMessage: '',
             passwordErrorHighlight: false,
             emailErrorHighlight: false,
@@ -76,6 +78,11 @@ const Login: React.FC<Props> = ({ loginActionCreator, isAuthenticated }) => {
     const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         resetServerErrorState();
+
+        const res = await sendLoginRequest(email, password);
+        updateToken(res.data.token);
+        setUser(res.data.user);
+
         var err = await loginActionCreator(email, password);
         if (err) {
             handleRequestError(err);
