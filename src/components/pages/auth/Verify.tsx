@@ -3,7 +3,6 @@ import validator from 'validator';
 import { Fragment, useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
-import store from '../../../redux/reducers/root/reducerStore';
 import { isAxiosError } from '../../../misc/helperFunctions';
 import { useAuth, useUserQuery } from '../../../context/authContext';
 
@@ -22,12 +21,14 @@ const Verify: React.FC = () => {
     const tryVerify = async () => {
         try {
             await axios.post(`/api/users/verify/${token}`);
-            const data = await userQuery.refetch();
-            if (data.isSuccess) {
-                setUser(data.data);
+            const res = await userQuery.refetch();
+            if (res.isSuccess) {
+                console.log('res.data', JSON.stringify(res.data));
+                setUser(res.data);
                 navigate(`/dashboard`);
             } else {
-                throw new Error('500 Unknown error: ' + data.error);
+                // TODO handle errors
+                throw new Error('500 Unknown error: ' + res.data.error);
             }
             navigate(`/dashboard`);
         } catch (err) {

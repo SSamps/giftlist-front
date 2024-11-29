@@ -18,15 +18,15 @@ import {
     LIST_GROUP_PARENT_VARIANTS,
 } from '../../../types/listVariants';
 import { TListGroupAnyFields } from '../../../types/models/listGroups';
-import { IUser } from '../../../types/models/User';
 import Spinner from '../../misc/spinner';
 import BasicListContainer from './listVariants/basicList/BasicListContainer';
 import GiftGroupContainer from './listVariants/giftGroup/GiftGroupContainer';
 import GiftListContainer from './listVariants/giftList/GiftListContainer';
+import { useAuth } from '../../../context/authContext';
+import { IUser } from '../../../types/models/User';
 
 interface Props extends IlistGroupData {
     listid: string;
-    user: IUser;
     getListActionCreator: TgetListActionCreator;
     resetListActionCreator: TresetListActionCreator;
     loadListUserActionCreator: TloadListUserActionCreator;
@@ -40,8 +40,10 @@ const ListLoader: React.FC<Props> = ({
     resetListActionCreator,
     loadListUserActionCreator,
     currentListUser,
-    user,
 }): JSX.Element => {
+    const { user: maybeUser } = useAuth();
+    const user = maybeUser as IUser; // User will be loaded here
+
     useEffect(() => {
         let init = () => {
             resetListActionCreator();
@@ -60,13 +62,13 @@ const ListLoader: React.FC<Props> = ({
     function listSwitch(currentList: TListGroupAnyFields) {
         switch (currentList.groupVariant) {
             case BASIC_LIST: {
-                return <BasicListContainer key={currentList._id}></BasicListContainer>;
+                return <BasicListContainer key={currentList._id} user={user}></BasicListContainer>;
             }
             case GIFT_LIST: {
-                return <GiftListContainer key={currentList._id}></GiftListContainer>;
+                return <GiftListContainer key={currentList._id} user={user}></GiftListContainer>;
             }
             case GIFT_GROUP_CHILD: {
-                return <GiftListContainer key={currentList._id}></GiftListContainer>;
+                return <GiftListContainer key={currentList._id} user={user}></GiftListContainer>;
             }
         }
     }
@@ -74,7 +76,7 @@ const ListLoader: React.FC<Props> = ({
     function parentListSwitch(currentList: TListGroupAnyFields) {
         switch (currentList.groupVariant) {
             case GIFT_GROUP: {
-                return <GiftGroupContainer key={currentList._id}></GiftGroupContainer>;
+                return <GiftGroupContainer key={currentList._id} user={user}></GiftGroupContainer>;
             }
         }
     }
@@ -96,7 +98,6 @@ const ListLoader: React.FC<Props> = ({
 };
 
 const mapStateToProps = (state: IrootStateAuthed) => ({
-    user: state.authReducer.user,
     listLoading: state.listGroupReducer.listLoading,
     currentList: state.listGroupReducer.currentList,
     currentListUser: state.listGroupReducer.currentListUser,

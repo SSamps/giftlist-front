@@ -55,7 +55,7 @@ export const GiftGroupContainer: React.FC<Props> = ({ user, currentList, current
                 </div>
                 <div className={'dashboardListContainer'}>
                     {currentList.children.map((list) => {
-                        return <GiftListPreviewCard key={list._id} list={list}></GiftListPreviewCard>;
+                        return <GiftListPreviewCard key={list._id} list={list} user={user}></GiftListPreviewCard>;
                     })}
                 </div>
             </div>
@@ -64,7 +64,6 @@ export const GiftGroupContainer: React.FC<Props> = ({ user, currentList, current
 };
 
 const mapStateToProps = (state: IrootStateAuthedGiftGroupLoaded) => ({
-    user: state.authReducer.user,
     currentList: state.listGroupReducer.currentList,
     currentListUser: state.listGroupReducer.currentListUser,
 });

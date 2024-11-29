@@ -2,14 +2,12 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { IrootStateAuthedGiftListLoaded } from '../../../../../redux/reducers/root/rootReducer';
 import { IgiftListMember, TgiftListFieldsCensored } from '../../../../../types/models/listGroups';
-import { IUser } from '../../../../../types/models/User';
 import EmptyListItem from '../../listItems/EmptyListItem';
 import ListItem from '../../listItems/ListItem';
 import NewListItem from '../../listItems/NewListItem';
 
 interface Props {
     currentList: TgiftListFieldsCensored;
-    user: IUser;
     currentListUser: IgiftListMember;
     ownerName: string;
     currentUserIsOwner: boolean;
@@ -89,7 +87,6 @@ const GiftListOwnerList: React.FC<Props> = ({ currentList, currentListUser, owne
 };
 
 const mapStateToProps = (state: IrootStateAuthedGiftListLoaded) => ({
-    user: state.authReducer.user,
     currentList: state.listGroupReducer.currentList,
     currentListUser: state.listGroupReducer.currentListUser,
 });

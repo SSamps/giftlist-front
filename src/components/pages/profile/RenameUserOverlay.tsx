@@ -1,21 +1,34 @@
 import React, { Fragment, useState } from 'react';
-import { connect } from 'react-redux';
 import { VALIDATION_USER_DISPLAY_NAME_MAX_LENGTH } from '../../../misc/validation';
-import { renameUserActionCreator, TrenameUserActionCreator } from '../../../redux/actions/authActions';
-import { IrootStateAuthed } from '../../../redux/reducers/root/rootReducer';
 import { IUser } from '../../../types/models/User';
 import OverlayButtons from '../../misc/overlays/OverlayButtons';
 import Spinner from '../../misc/spinner';
 import DropdownUnderlay from '../dashboard/yourLists/controlBar/filters/DropdownUnderlay';
+import { useMutation } from '@tanstack/react-query';
+import { sendRenameUserRequestMut, useAuth } from '../../../context/authContext';
 
 interface Props {
     setOpen: React.Dispatch<React.SetStateAction<boolean>>;
-    renameUserActionCreator: TrenameUserActionCreator;
     user: IUser;
 }
 
-const RenameUserOverlay: React.FC<Props> = ({ setOpen, renameUserActionCreator, user }) => {
+const RenameUserOverlay: React.FC<Props> = ({ setOpen, user }) => {
     const [formState, setFormState] = useState({ value: user.displayName, waiting: false });
+
+    const { setUser } = useAuth();
+
+    const renameUserMutation = useMutation({
+        mutationFn: sendRenameUserRequestMut,
+        onSuccess: (res: any) => {
+            console.log(`renamed user - response: ${JSON.stringify(res.data)}`);
+            setUser(res.data);
+            setOpen(false);
+        },
+        onError: (err: any) => {
+            //TODO handle error - previously action caused a error modal
+            setFormState({ ...formState, waiting: false });
+        },
+    });
 
     const { value, waiting } = formState;
 
@@ -26,12 +39,8 @@ const RenameUserOverlay: React.FC<Props> = ({ setOpen, renameUserActionCreator, 
     const submitForm = async (e?: React.FormEvent<HTMLFormElement>) => {
         setFormState({ ...formState, waiting: true });
         e?.preventDefault();
-        const success = await renameUserActionCreator(value);
-        if (success) {
-            setOpen(false);
-        } else {
-            setFormState({ ...formState, waiting: false });
-        }
+
+        renameUserMutation.mutate({ newName: value });
     };
 
     return (
@@ -56,8 +65,4 @@ const RenameUserOverlay: React.FC<Props> = ({ setOpen, renameUserActionCreator, 
     );
 };
 
-const mapStateToProps = (state: IrootStateAuthed) => ({
-    user: state.authReducer.user,
-});
-
-export default connect(mapStateToProps, { renameUserActionCreator })(RenameUserOverlay);
+export default RenameUserOverlay;

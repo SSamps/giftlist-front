@@ -101,7 +101,6 @@ const GiftListSecretList: React.FC<Props> = ({ currentList, currentListUser, use
 };
 
 const mapStateToProps = (state: IrootStateAuthedGiftListLoaded) => ({
-    user: state.authReducer.user,
     currentList: state.listGroupReducer.currentList,
     currentListUser: state.listGroupReducer.currentListUser,
 });

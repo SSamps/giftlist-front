@@ -41,7 +41,7 @@ export const useLogout = () => {
 
 export const useUserQuery = () => {
     return useQuery({ queryKey: ['user'], queryFn: getUserRequest, enabled: false });
-}
+};
 
 // Requests
 
@@ -55,7 +55,15 @@ export const sendLoginRequestMut = async ({ email, password }: { email: string; 
     return axios.post('/api/auth', body, config).then((res) => res.data);
 };
 
-export const sendRegisterRequestMut = async ({ displayName, email, password }: { displayName: string, email: string; password: string }) => {
+export const sendRegisterRequestMut = async ({
+    displayName,
+    email,
+    password,
+}: {
+    displayName: string;
+    email: string;
+    password: string;
+}) => {
     const config = {
         headers: {
             'Content-Type': 'application/json',
@@ -63,6 +71,22 @@ export const sendRegisterRequestMut = async ({ displayName, email, password }: {
     };
     const body = JSON.stringify({ displayName, email, password });
     return await axios.post('/api/users', body, config);
+};
+
+export const sendRenameUserRequestMut = async ({ newName }: { newName: string }) => {
+    const config = {
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    };
+    const body = JSON.stringify({ displayName: newName });
+
+    console.log(`rename user request: ${body}`);
+    return await axios.put(`/api/users`, body, config);
+};
+
+export const sendDeleteUserRequestMut = async () => {
+    return await axios.delete(`/api/users`);
 };
 
 export const getUserRequest = async () => {

@@ -15,8 +15,7 @@ import axios from 'axios';
 import Footer from './components/layout/Footer';
 import Body from './components/layout/Body';
 import UncaughtError from './components/pages/UncaughtError';
-import { updateAxiosAuthHeader, useAuth, useUserQuery } from './context/authContext';
-
+import { updateAxiosAuthHeader, updateToken, useAuth, useUserQuery } from './context/authContext';
 
 const backendUrl = import.meta.env.VITE_BACKEND_BASE_URL || window.env.VITE_BACKEND_BASE_URL;
 axios.defaults.baseURL = backendUrl;
@@ -37,6 +36,7 @@ const App = () => {
                     setUser(data.data);
                 } else {
                     setUser(null);
+                    updateToken(null);
                     setLoading(false);
                 }
             }

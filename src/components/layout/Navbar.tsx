@@ -1,18 +1,9 @@
 import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
-import { logoutActionCreator, TlogoutActionCreator } from '../../redux/actions/authActions';
 import { Fragment } from 'react';
-import { IrootState } from '../../redux/reducers/root/rootReducer';
 import Alerts from '../misc/Alerts';
 import { updateToken, useAuth } from '../../context/authContext';
 
-interface Props {
-    logoutActionCreator: TlogoutActionCreator;
-    loading: boolean;
-    isAuthenticated: boolean | null;
-}
-
-const Navbar: React.FC<Props> = () => {
+const Navbar: React.FC = () => {
     const { user, setUser, userLoading: loading } = useAuth();
 
     const logout = () => {
@@ -76,9 +67,4 @@ const Navbar: React.FC<Props> = () => {
     );
 };
 
-const mapStateToProps = (state: IrootState) => ({
-    loading: state.authReducer.loading,
-    isAuthenticated: state.authReducer.isAuthenticated,
-});
-
-export default connect(mapStateToProps, { logoutActionCreator })(Navbar);
+export default Navbar;

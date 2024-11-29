@@ -6,13 +6,15 @@ import GiftListChat from '../../listChat/ListChat';
 import GiftListOwnerList from './GiftListOwnerList';
 import GiftListSecretList from './GiftListSecretList';
 import { IrootStateAuthedGiftListLoaded } from '../../../../../redux/reducers/root/rootReducer';
+import { IUser } from '../../../../../types/models/User';
 
 interface Props {
+    user: IUser;
     currentList: TgiftListFieldsCensored;
     currentListUser: IgiftListMember;
 }
 
-export const GiftListContainer: React.FC<Props> = ({ currentList, currentListUser }) => {
+export const GiftListContainer: React.FC<Props> = ({ user, currentList, currentListUser }) => {
     const ownerName = (
         currentList.members.find((member) => member.permissions.includes('GROUP_OWNER')) as IgiftListMember
     ).displayName;
@@ -26,7 +28,7 @@ export const GiftListContainer: React.FC<Props> = ({ currentList, currentListUse
                 <GiftListOwnerList ownerName={ownerName} currentUserIsOwner={currentUserIsOwner}></GiftListOwnerList>
                 {!currentUserIsOwner && (
                     <Fragment>
-                        <GiftListSecretList ownerName={ownerName}></GiftListSecretList>
+                        <GiftListSecretList ownerName={ownerName} user={user}></GiftListSecretList>
                         <GiftListChat ownerName={ownerName}></GiftListChat>
                     </Fragment>
                 )}

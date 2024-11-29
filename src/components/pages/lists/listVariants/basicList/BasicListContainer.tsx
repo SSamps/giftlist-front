@@ -52,7 +52,6 @@ const BasicListContainer: React.FC<Props> = ({ currentList, currentListUser }) =
 };
 
 const mapStateToProps = (state: IrootStateAuthedBasicListLoaded) => ({
-    user: state.authReducer.user,
     currentList: state.listGroupReducer.currentList,
     currentListUser: state.listGroupReducer.currentListUser,
 });

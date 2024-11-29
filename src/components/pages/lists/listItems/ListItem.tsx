@@ -15,9 +15,9 @@ import { findUserInGroup } from '../../../../misc/helperFunctions';
 import Spinner from '../../../misc/spinner';
 import ModifyListItem from './ModifyListItem';
 import SelectedByOverlay from './SelectedByOverlay';
+import { useAuth } from '../../../../context/authContext';
 
 interface Props {
-    user: IUser;
     listItem: IbasicListItem | IgiftListItemCensored;
     currentList: TbasicListFields | TgiftListFieldsCensored | TgiftGroupFields;
     allowSelection: boolean;
@@ -30,7 +30,6 @@ interface Props {
 }
 
 const ListItem: React.FC<Props> = ({
-    user,
     listItem,
     currentList,
     allowSelection,
@@ -41,6 +40,9 @@ const ListItem: React.FC<Props> = ({
     deleteListItemActionCreator,
     selectListItemActionCreator,
 }) => {
+    const { user: maybeUser } = useAuth();
+    const user = maybeUser as IUser;
+
     const [removalStatus, setRemovalStatus] = useState({
         waitingRemoval: false,
     });
@@ -255,7 +257,6 @@ const ListItem: React.FC<Props> = ({
 };
 
 const mapStateToProps = (state: IrootStateAuthedUnknownListLoaded) => ({
-    user: state.authReducer.user,
     currentList: state.listGroupReducer.currentList,
 });
 

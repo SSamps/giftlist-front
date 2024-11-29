@@ -32,9 +32,9 @@ const Register: React.FC = () => {
         onMutate: () => {
             setLoading(true);
         },
-        onSuccess: (data: any) => {
-            updateToken(data.token);
-            setUser(data.user);
+        onSuccess: (res: any) => {
+            updateToken(res.data.token);
+            setUser(res.data.user);
             setLoading(false);
         },
         onError: (err: any) => {

@@ -1,22 +1,27 @@
 import React, { useState } from 'react';
-import { connect } from 'react-redux';
-import { deleteAccountActionCreator, TdeleteAccountActionCreator } from '../../../redux/actions/authActions';
-import { IrootStateAuthed } from '../../../redux/reducers/root/rootReducer';
 import { formatJoinDate } from '../../../misc/helperFunctions';
 import ConfirmationOverlay from '../../misc/overlays/ConfirmationOverlay';
 import ProfileRow from './ProfileRow';
 import RenameUserOverlay from './RenameUserOverlay';
-import { useAuth } from '../../../context/authContext';
+import { sendDeleteUserRequestMut, updateToken, useAuth } from '../../../context/authContext';
 import { Navigate } from 'react-router-dom';
+import { useMutation } from '@tanstack/react-query';
 
-interface props {
-    deleteAccountActionCreator: TdeleteAccountActionCreator;
-}
-
-const Profile: React.FC<props> = ({ deleteAccountActionCreator }) => {
+const Profile: React.FC = () => {
     const [changeNameOverlayStatus, setChangeNameOverlayStatus] = useState(false);
     const [deleteAccountOverlayStatus, setDeleteAccountOverlayStatus] = useState(false);
-    const { user } = useAuth();
+    const { user, setUser } = useAuth();
+
+    const deleteAccountMutation = useMutation({
+        mutationFn: sendDeleteUserRequestMut,
+        onSuccess: () => {
+            updateToken(null);
+            setUser(null);
+        },
+        onError: (err: any) => {
+            // TODO handle error
+        },
+    });
 
     // Should be caught by PrivateRoute
     if (!user) {
@@ -27,12 +32,12 @@ const Profile: React.FC<props> = ({ deleteAccountActionCreator }) => {
     const joinedDate = formatJoinDate(user.registrationDate);
 
     const deleteAccount = async () => {
-        return await deleteAccountActionCreator();
+        deleteAccountMutation.mutate();
     };
 
     const renderOverlays = () => {
         if (changeNameOverlayStatus) {
-            return <RenameUserOverlay setOpen={setChangeNameOverlayStatus}></RenameUserOverlay>;
+            return <RenameUserOverlay setOpen={setChangeNameOverlayStatus} user={user}></RenameUserOverlay>;
         } else if (deleteAccountOverlayStatus) {
             return (
                 <ConfirmationOverlay
@@ -84,6 +89,4 @@ const Profile: React.FC<props> = ({ deleteAccountActionCreator }) => {
     );
 };
 
-const mapStateToProps = (state: IrootStateAuthed) => ({});
-
-export default connect(mapStateToProps, { deleteAccountActionCreator })(Profile);
+export default Profile;

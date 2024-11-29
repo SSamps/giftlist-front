@@ -1,14 +1,3 @@
-// Auth
-export const REGISTER_SUCCESS = 'REGISTER_SUCCESS';
-export const REGISTER_FAIL = 'REGISTER_FAIL';
-export const USER_LOADED = 'USER_LOADED';
-export const AUTH_ERROR = 'AUTH_ERROR';
-export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
-export const LOGIN_FAIL = 'LOGIN_FAIL';
-export const LOGOUT = 'LOGOUT';
-export const RENAME_USER = 'RENAME_USER';
-export const DELETE_ACCOUNT = 'DELETE_ACCOUNT';
-
 // Dashboard
 export const DASHBOARD_LISTS_GET = 'DASHBOARD_LISTS_GET';
 export const DASHBAORD_DATA_ERROR = 'DASHBAORD_DATA_ERROR';

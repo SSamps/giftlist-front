@@ -141,7 +141,6 @@ const GiftListChat: React.FC<Props> = ({ ownerName, token, currentList }) => {
 };
 
 const mapStateToProps = (state: IrootStateAuthedGiftListLoaded) => ({
-    token: state.authReducer.token,
     currentList: state.listGroupReducer.currentList,
 });
 
