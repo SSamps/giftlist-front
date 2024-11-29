@@ -1,8 +1,5 @@
 import React, { Fragment, useState } from 'react';
 import { Link, Navigate } from 'react-router-dom';
-import { connect } from 'react-redux';
-import { registerActionCreator, TregisterActionCreator } from '../../../redux/actions/authActions';
-import { IrootState } from '../../../redux/reducers/root/rootReducer';
 import axios, { AxiosError, AxiosResponse } from 'axios';
 import {
     VALIDATION_USER_DISPLAY_NAME_MAX_LENGTH,
@@ -11,13 +8,10 @@ import {
 } from '../../../misc/validation';
 import { isPasswordValid } from '../../../misc/helperFunctions';
 import DevWarning from './DevWarning';
+import { sendRegisterRequestMut, updateToken, useAuth } from '../../../context/authContext';
+import { useMutation } from '@tanstack/react-query';
 
-interface Props {
-    registerActionCreator: TregisterActionCreator;
-    isAuthenticated: boolean | null;
-}
-
-const Register: React.FC<Props> = ({ registerActionCreator, isAuthenticated }) => {
+const Register: React.FC = () => {
     const [formData, setFormData] = useState({
         displayName: '',
         email: '',
@@ -31,7 +25,26 @@ const Register: React.FC<Props> = ({ registerActionCreator, isAuthenticated }) =
         registerErrorMessage: '',
     });
 
-    if (isAuthenticated) {
+    const { user, setUser, setLoading } = useAuth();
+
+    const registerMutation = useMutation({
+        mutationFn: sendRegisterRequestMut,
+        onMutate: () => {
+            setLoading(true);
+        },
+        onSuccess: (data: any) => {
+            updateToken(data.token);
+            setUser(data.user);
+            setLoading(false);
+        },
+        onError: (err: any) => {
+            handleRequestError(err);
+            setUser(null);
+            setLoading(false);
+        },
+    });
+
+    if (user) {
         return <Navigate to='/dashboard' />;
     }
 
@@ -87,10 +100,7 @@ const Register: React.FC<Props> = ({ registerActionCreator, isAuthenticated }) =
         e.preventDefault();
         if (!formHasErrors()) {
             resetServerErrorState();
-            var err = await registerActionCreator(displayName, email, password);
-            if (err) {
-                handleRequestError(err);
-            }
+            registerMutation.mutate({ displayName, email, password });
         }
     };
 
@@ -179,9 +189,4 @@ const Register: React.FC<Props> = ({ registerActionCreator, isAuthenticated }) =
     );
 };
 
-const mapStateToProps = (state: IrootState) => ({
-    isAuthenticated: state.authReducer.isAuthenticated,
-});
-
-// @ts-ignore - causing issues but planning to remove redux
-export default connect(mapStateToProps, { registerActionCreator })(Register);
+export default Register;

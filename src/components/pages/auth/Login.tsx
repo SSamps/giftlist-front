@@ -35,6 +35,7 @@ const Login: React.FC = () => {
         },
         onError: (err: any) => {
             handleRequestError(err);
+            setUser(null);
             setLoading(false);
         },
     });

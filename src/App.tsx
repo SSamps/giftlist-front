@@ -15,8 +15,8 @@ import axios from 'axios';
 import Footer from './components/layout/Footer';
 import Body from './components/layout/Body';
 import UncaughtError from './components/pages/UncaughtError';
-import { getUserRequest, updateAxiosAuthHeader, useAuth } from './context/authContext';
-import { useQuery } from '@tanstack/react-query';
+import { updateAxiosAuthHeader, useAuth, useUserQuery } from './context/authContext';
+
 
 const backendUrl = import.meta.env.VITE_BACKEND_BASE_URL || window.env.VITE_BACKEND_BASE_URL;
 axios.defaults.baseURL = backendUrl;
@@ -26,7 +26,7 @@ const App = () => {
 
     const { setUser, setLoading } = useAuth();
 
-    const userQuery = useQuery({ queryKey: ['user'], queryFn: getUserRequest, enabled: false });
+    const userQuery = useUserQuery();
 
     useEffect(() => {
         const init = async () => {

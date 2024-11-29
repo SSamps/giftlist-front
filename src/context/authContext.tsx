@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { createContext, useContext, useState } from 'react';
 import { IUser } from '../types/models/User';
+import { useQuery } from '@tanstack/react-query';
 
 // Context
 
@@ -38,6 +39,10 @@ export const useLogout = () => {
     updateToken(null);
 };
 
+export const useUserQuery = () => {
+    return useQuery({ queryKey: ['user'], queryFn: getUserRequest, enabled: false });
+}
+
 // Requests
 
 export const sendLoginRequestMut = async ({ email, password }: { email: string; password: string }) => {
@@ -48,6 +53,16 @@ export const sendLoginRequestMut = async ({ email, password }: { email: string; 
     };
     const body = JSON.stringify({ email, password });
     return axios.post('/api/auth', body, config).then((res) => res.data);
+};
+
+export const sendRegisterRequestMut = async ({ displayName, email, password }: { displayName: string, email: string; password: string }) => {
+    const config = {
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    };
+    const body = JSON.stringify({ displayName, email, password });
+    return await axios.post('/api/users', body, config);
 };
 
 export const getUserRequest = async () => {
