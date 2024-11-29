@@ -1,7 +1,7 @@
 import { Link, Navigate } from 'react-router-dom';
 import GiftListExample from './newList/content/listExampleCards/giftList/GiftListExample';
 import GiftListDescription from './newList/content/listDescriptions/GiftListDescription';
-import { useAuth } from '../../context/authContext';
+import { useAuth } from '../../state/AuthState';
 
 const Landing: React.FC = () => {
     const { user } = useAuth();

@@ -2,7 +2,7 @@ import { Fragment } from 'react';
 import { useParams } from 'react-router-dom';
 import Spinner from '../../misc/spinner';
 import ListLoader from './ListLoader';
-import { useAuth } from '../../../context/authContext';
+import { useAuth } from '../../../state/AuthState';
 
 const ListPage: React.FC = (): JSX.Element => {
     const { userLoading } = useAuth();

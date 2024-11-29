@@ -7,7 +7,7 @@ import YourLists from './yourLists/YourLists';
 import { jwtDecode, JwtPayload } from 'jwt-decode';
 import axios from 'axios';
 import { isAxiosError } from '../../../misc/helperFunctions';
-import { useAuth } from '../../../context/authContext';
+import { useAuth } from '../../../state/AuthState';
 
 interface AppJwtPayload extends JwtPayload {
     groupName: String;

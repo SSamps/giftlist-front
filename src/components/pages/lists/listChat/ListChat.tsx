@@ -8,7 +8,7 @@ import { TmessageAny } from '../../../../types/models/messages';
 import ListChatForm from './ListChatForm';
 import ListChatMessage from './ListChatMessage';
 import ListChatReturnToBottomButton from './ListChatReturnToBottomButton';
-import { useAuth } from '../../../../context/authContext';
+import { useAuth } from '../../../../state/AuthState';
 
 interface Props {
     ownerName: string;

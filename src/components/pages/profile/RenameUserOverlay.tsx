@@ -5,7 +5,7 @@ import OverlayButtons from '../../misc/overlays/OverlayButtons';
 import Spinner from '../../misc/spinner';
 import DropdownUnderlay from '../dashboard/yourLists/controlBar/filters/DropdownUnderlay';
 import { useMutation } from '@tanstack/react-query';
-import { sendRenameUserRequestMut, useAuth } from '../../../context/authContext';
+import { sendRenameUserRequest, useAuth } from '../../../state/AuthState';
 
 interface Props {
     setOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -18,10 +18,9 @@ const RenameUserOverlay: React.FC<Props> = ({ setOpen, user }) => {
     const { setUser } = useAuth();
 
     const renameUserMutation = useMutation({
-        mutationFn: sendRenameUserRequestMut,
-        onSuccess: (res: any) => {
-            console.log(`renamed user - response: ${JSON.stringify(res.data)}`);
-            setUser(res.data);
+        mutationFn: sendRenameUserRequest,
+        onSuccess: (data: any) => {
+            setUser(data);
             setOpen(false);
         },
         onError: (err: any) => {

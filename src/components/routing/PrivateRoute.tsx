@@ -1,6 +1,6 @@
 import { Fragment } from 'react';
 import { Navigate, RouteProps } from 'react-router-dom';
-import { useAuth } from '../../context/authContext';
+import { useAuth } from '../../state/AuthState';
 
 type TprotectedRouteProps = {
     component: React.ComponentType<any>;
@@ -12,7 +12,6 @@ const PrivateRoute: React.FC<TprotectedRouteProps> = ({ component: Component, ..
     if (loading) {
         return <Fragment></Fragment>;
     } else if (!loading && !user) {
-        console.log('PrivateRoute: user is not authenticated');
         return <Navigate to='/login'></Navigate>;
     }
     return <Component {...routeProps} />;

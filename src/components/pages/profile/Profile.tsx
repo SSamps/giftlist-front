@@ -3,7 +3,7 @@ import { formatJoinDate } from '../../../misc/helperFunctions';
 import ConfirmationOverlay from '../../misc/overlays/ConfirmationOverlay';
 import ProfileRow from './ProfileRow';
 import RenameUserOverlay from './RenameUserOverlay';
-import { sendDeleteUserRequestMut, useAuth } from '../../../context/authContext';
+import { sendDeleteUserRequest, useAuth } from '../../../state/AuthState';
 import { Navigate } from 'react-router-dom';
 import { useMutation } from '@tanstack/react-query';
 
@@ -13,7 +13,7 @@ const Profile: React.FC = () => {
     const { user, setUser, setToken } = useAuth();
 
     const deleteAccountMutation = useMutation({
-        mutationFn: sendDeleteUserRequestMut,
+        mutationFn: sendDeleteUserRequest,
         onSuccess: () => {
             setToken(null);
             setUser(null);

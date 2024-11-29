@@ -22,7 +22,7 @@ import Spinner from '../../misc/spinner';
 import BasicListContainer from './listVariants/basicList/BasicListContainer';
 import GiftGroupContainer from './listVariants/giftGroup/GiftGroupContainer';
 import GiftListContainer from './listVariants/giftList/GiftListContainer';
-import { useAuth } from '../../../context/authContext';
+import { useAuth } from '../../../state/AuthState';
 import { IUser } from '../../../types/models/User';
 
 interface Props extends IlistGroupData {

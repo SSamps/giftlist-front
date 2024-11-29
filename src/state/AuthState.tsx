@@ -38,6 +38,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
                 setUser(null);
                 setToken(null);
             }
+            setLoading(false);
         };
 
         // Doesn't need to run on first render, only when token changes
@@ -51,6 +52,13 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     // Sync token with other tabs via local storage.
     useEffect(() => {
         const init = async () => {
+            // Get token from local storage
+            const initToken = localStorage.getItem('token');
+            if (initToken) {
+                setTokenInContext(initToken);
+                updateTokenInAxios(initToken);
+            }
+
             // Will only apply to other tabs
             window.addEventListener('storage', (event: StorageEvent) => {
                 if (event.key === 'token') {
@@ -66,7 +74,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
             });
         };
         init();
-        setLoading(false);
     }, []);
 
     // Update token everywhere
@@ -99,17 +106,17 @@ export const useUserQuery = () => {
 
 // Requests
 
-export const sendLoginRequestMut = async ({ email, password }: { email: string; password: string }) => {
+export const sendLoginRequest = async ({ email, password }: { email: string; password: string }) => {
     const config = {
         headers: {
             'Content-Type': 'application/json',
         },
     };
     const body = JSON.stringify({ email, password });
-    return axios.post('/api/auth', body, config).then((res) => res.data);
+    return await axios.post('/api/auth', body, config).then((res) => res.data);
 };
 
-export const sendRegisterRequestMut = async ({
+export const sendRegisterRequest = async ({
     displayName,
     email,
     password,
@@ -124,27 +131,25 @@ export const sendRegisterRequestMut = async ({
         },
     };
     const body = JSON.stringify({ displayName, email, password });
-    return await axios.post('/api/users', body, config);
+    return await axios.post('/api/users', body, config).then((res) => res.data);
 };
 
-export const sendRenameUserRequestMut = async ({ newName }: { newName: string }) => {
+export const sendRenameUserRequest = async ({ newName }: { newName: string }) => {
     const config = {
         headers: {
             'Content-Type': 'application/json',
         },
     };
     const body = JSON.stringify({ displayName: newName });
-
-    console.log(`rename user request: ${body}`);
-    return await axios.put(`/api/users`, body, config);
+    return await axios.put(`/api/users`, body, config).then((res) => res.data);
 };
 
-export const sendDeleteUserRequestMut = async () => {
-    return await axios.delete(`/api/users`);
+export const sendDeleteUserRequest = async () => {
+    return await axios.delete(`/api/users`).then((res) => res.data);
 };
 
 export const getUserRequest = async () => {
-    return axios.get('/api/auth').then((res) => res.data);
+    return await axios.get('/api/auth').then((res) => res.data);
 };
 
 // Update tokens

@@ -15,7 +15,7 @@ import { findUserInGroup } from '../../../../misc/helperFunctions';
 import Spinner from '../../../misc/spinner';
 import ModifyListItem from './ModifyListItem';
 import SelectedByOverlay from './SelectedByOverlay';
-import { useAuth } from '../../../../context/authContext';
+import { useAuth } from '../../../../state/AuthState';
 
 interface Props {
     listItem: IbasicListItem | IgiftListItemCensored;

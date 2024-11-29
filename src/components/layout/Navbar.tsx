@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { Fragment } from 'react';
 import Alerts from '../misc/Alerts';
-import { useAuth } from '../../context/authContext';
+import { useAuth } from '../../state/AuthState';
 
 const Navbar: React.FC = () => {
     const { user, setUser, userLoading: loading, setToken } = useAuth();

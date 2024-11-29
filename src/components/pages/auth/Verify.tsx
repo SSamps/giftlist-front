@@ -4,7 +4,7 @@ import { Fragment, useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
 import { isAxiosError } from '../../../misc/helperFunctions';
-import { useAuth, useUserQuery } from '../../../context/authContext';
+import { useAuth, useUserQuery } from '../../../state/AuthState';
 
 const Verify: React.FC = () => {
     const { token } = useParams();
@@ -23,12 +23,11 @@ const Verify: React.FC = () => {
             await axios.post(`/api/users/verify/${token}`);
             const res = await userQuery.refetch();
             if (res.isSuccess) {
-                console.log('res.data', JSON.stringify(res.data));
                 setUser(res.data);
                 navigate(`/dashboard`);
             } else {
                 // TODO handle errors
-                throw new Error('500 Unknown error: ' + res.data.error);
+                throw new Error('500 Unknown error: ' + res.error);
             }
             navigate(`/dashboard`);
         } catch (err) {
