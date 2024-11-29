@@ -8,14 +8,14 @@ import { TmessageAny } from '../../../../types/models/messages';
 import ListChatForm from './ListChatForm';
 import ListChatMessage from './ListChatMessage';
 import ListChatReturnToBottomButton from './ListChatReturnToBottomButton';
+import { useAuth } from '../../../../context/authContext';
 
 interface Props {
     ownerName: string;
-    token: string;
     currentList: TgiftListFieldsCensored;
 }
 
-const GiftListChat: React.FC<Props> = ({ ownerName, token, currentList }) => {
+const GiftListChat: React.FC<Props> = ({ ownerName, currentList }) => {
     const [socket, setSocket] = useState<undefined | Socket<DefaultEventsMap, DefaultEventsMap>>(undefined);
     const [messagesState, setMessagesState] = useState<{ messages: TmessageAny[]; firstUpdate: boolean }>({
         messages: [],
@@ -24,6 +24,8 @@ const GiftListChat: React.FC<Props> = ({ ownerName, token, currentList }) => {
     const [returnToBottomNotification, setreturnToBottomNotification] = useState('');
     const latestMessageRef = useRef<HTMLDivElement>(null);
     const chatContainerRef = useRef<HTMLDivElement>(null);
+
+    const { token } = useAuth();
 
     const { messages, firstUpdate } = messagesState;
 

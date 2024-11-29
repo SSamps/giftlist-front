@@ -1,14 +1,14 @@
 import { Link } from 'react-router-dom';
 import { Fragment } from 'react';
 import Alerts from '../misc/Alerts';
-import { updateToken, useAuth } from '../../context/authContext';
+import { useAuth } from '../../context/authContext';
 
 const Navbar: React.FC = () => {
-    const { user, setUser, userLoading: loading } = useAuth();
+    const { user, setUser, userLoading: loading, setToken } = useAuth();
 
     const logout = () => {
-        updateToken(null);
-        setUser(null);
+        setToken(null);
+        // setUser(null);
     };
 
     const authedLinks = (

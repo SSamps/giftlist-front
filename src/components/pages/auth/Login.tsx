@@ -3,7 +3,7 @@ import { Link, Navigate } from 'react-router-dom';
 import axios, { AxiosError, AxiosResponse } from 'axios';
 import ForgottenPassOverlay from './ForgottenPassOverlay';
 import { VALIDATION_USER_EMAIL_MAX_LENGTH, VALIDATION_USER_PASSWORD_MAX_LENGTH } from '../../../misc/validation';
-import { sendLoginRequestMut, updateToken, useAuth } from '../../../context/authContext';
+import { sendLoginRequestMut, useAuth } from '../../../context/authContext';
 import { useMutation } from '@tanstack/react-query';
 
 const Login: React.FC = () => {
@@ -21,7 +21,7 @@ const Login: React.FC = () => {
 
     const [showForgottenPassOverlay, setShowForgottenPassOverlay] = useState(false);
 
-    const { user, setUser, setLoading } = useAuth();
+    const { user, setUser, setLoading, setToken } = useAuth();
 
     const loginMutation = useMutation({
         mutationFn: sendLoginRequestMut,
@@ -29,8 +29,7 @@ const Login: React.FC = () => {
             setLoading(true);
         },
         onSuccess: (data: any) => {
-            updateToken(data.token);
-            setUser(data.user);
+            setToken(data.token);
             setLoading(false);
         },
         onError: (err: any) => {

@@ -1,11 +1,13 @@
 import axios from 'axios';
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useEffect, useRef, useState } from 'react';
 import { IUser } from '../types/models/User';
 import { useQuery } from '@tanstack/react-query';
 
 // Context
 
 interface AuthContextType {
+    token: string | null;
+    setToken: (token: string | null) => void;
     user: IUser | null;
     setUser: (user: IUser | null) => void;
     userLoading: boolean;
@@ -15,11 +17,67 @@ interface AuthContextType {
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+    const [token, setTokenInContext] = useState<string | null>(null);
     const [user, setUser] = useState<IUser | null>(null);
-    const [loading, setLoading] = useState<boolean>(false);
+    const [loading, setLoading] = useState<boolean>(true);
+    const userQuery = useUserQuery();
+
+    const isInit = useRef(true);
+    // If the token changes refetch the user
+    useEffect(() => {
+        const updateUser = async () => {
+            if (!token) {
+                setUser(null);
+                return;
+            }
+
+            const res = await userQuery.refetch();
+            if (res.isSuccess) {
+                setUser(res.data);
+            } else {
+                setUser(null);
+                setToken(null);
+            }
+        };
+
+        // Doesn't need to run on first render, only when token changes
+        if (isInit.current) {
+            isInit.current = false;
+            return;
+        }
+        updateUser();
+    }, [token]);
+
+    // Sync token with other tabs via local storage.
+    useEffect(() => {
+        const init = async () => {
+            // Will only apply to other tabs
+            window.addEventListener('storage', (event: StorageEvent) => {
+                if (event.key === 'token') {
+                    const newToken = event.newValue;
+                    if (!newToken) {
+                        setTokenInContext(null);
+                        updateTokenInAxios(null);
+                    } else if (newToken !== token) {
+                        setTokenInContext(newToken);
+                        updateTokenInAxios(newToken);
+                    }
+                }
+            });
+        };
+        init();
+        setLoading(false);
+    }, []);
+
+    // Update token everywhere
+    const setToken = (token: string | null) => {
+        setTokenInContext(token);
+        updateTokenInAxios(token);
+        updateTokenInStorage(token);
+    };
 
     return (
-        <AuthContext.Provider value={{ user, setUser, userLoading: loading, setLoading }}>
+        <AuthContext.Provider value={{ token, setToken, user, setUser, userLoading: loading, setLoading }}>
             {children}
         </AuthContext.Provider>
     );
@@ -33,10 +91,6 @@ export const useAuth = () => {
         throw new Error('useAuth must be used within an AuthProvider');
     }
     return context;
-};
-
-export const useLogout = () => {
-    updateToken(null);
 };
 
 export const useUserQuery = () => {
@@ -95,13 +149,19 @@ export const getUserRequest = async () => {
 
 // Update tokens
 
-export const updateToken = (token: string | null) => {
+const updateTokenInStorage = (token: string | null) => {
     if (token) {
-        axios.defaults.headers.common['x-auth-token'] = token;
         localStorage.setItem('token', token);
     } else {
-        delete axios.defaults.headers.common['x-auth-token'];
         localStorage.removeItem('token');
+    }
+};
+
+const updateTokenInAxios = (token: string | null) => {
+    if (token) {
+        axios.defaults.headers.common['x-auth-token'] = token;
+    } else {
+        delete axios.defaults.headers.common['x-auth-token'];
     }
 };
 

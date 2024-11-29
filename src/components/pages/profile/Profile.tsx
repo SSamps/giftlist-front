@@ -3,19 +3,19 @@ import { formatJoinDate } from '../../../misc/helperFunctions';
 import ConfirmationOverlay from '../../misc/overlays/ConfirmationOverlay';
 import ProfileRow from './ProfileRow';
 import RenameUserOverlay from './RenameUserOverlay';
-import { sendDeleteUserRequestMut, updateToken, useAuth } from '../../../context/authContext';
+import { sendDeleteUserRequestMut, useAuth } from '../../../context/authContext';
 import { Navigate } from 'react-router-dom';
 import { useMutation } from '@tanstack/react-query';
 
 const Profile: React.FC = () => {
     const [changeNameOverlayStatus, setChangeNameOverlayStatus] = useState(false);
     const [deleteAccountOverlayStatus, setDeleteAccountOverlayStatus] = useState(false);
-    const { user, setUser } = useAuth();
+    const { user, setUser, setToken } = useAuth();
 
     const deleteAccountMutation = useMutation({
         mutationFn: sendDeleteUserRequestMut,
         onSuccess: () => {
-            updateToken(null);
+            setToken(null);
             setUser(null);
         },
         onError: (err: any) => {

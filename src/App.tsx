@@ -1,4 +1,4 @@
-import { useEffect, useState, ErrorInfo } from 'react';
+import { ErrorInfo } from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
 import { BrowserRouter as Router } from 'react-router-dom';
 import './styles/css/App.css';
@@ -15,42 +15,13 @@ import axios from 'axios';
 import Footer from './components/layout/Footer';
 import Body from './components/layout/Body';
 import UncaughtError from './components/pages/UncaughtError';
-import { updateAxiosAuthHeader, updateToken, useAuth, useUserQuery } from './context/authContext';
+import { useAuth } from './context/authContext';
 
 const backendUrl = import.meta.env.VITE_BACKEND_BASE_URL || window.env.VITE_BACKEND_BASE_URL;
 axios.defaults.baseURL = backendUrl;
 
 const App = () => {
-    const [loadedApp, setLoaded] = useState(false);
-
-    const { setUser, setLoading } = useAuth();
-
-    const userQuery = useUserQuery();
-
-    useEffect(() => {
-        const init = async () => {
-            if (localStorage.token) {
-                updateAxiosAuthHeader(localStorage.token);
-                const data = await userQuery.refetch();
-                if (data.isSuccess) {
-                    setUser(data.data);
-                } else {
-                    setUser(null);
-                    updateToken(null);
-                    setLoading(false);
-                }
-            }
-
-            window.addEventListener('storage', () => {
-                if (!localStorage.token) {
-                    setUser(null);
-                    setLoading(false);
-                }
-            });
-            setLoaded(true);
-        };
-        init();
-    }, []);
+    const { userLoading } = useAuth();
 
     const errorFallback = async (error: Error, info: ErrorInfo) => {
         const { name, stack, message } = error;
@@ -75,7 +46,7 @@ const App = () => {
         <ErrorBoundary FallbackComponent={UncaughtError} onError={errorFallback}>
             <Provider store={store}>
                 <Router>
-                    {loadedApp && (
+                    {!userLoading && (
                         <div className='pageContainer'>
                             <Navbar />
                             <Body></Body>

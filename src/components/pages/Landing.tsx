@@ -1,15 +1,12 @@
 import { Link, Navigate } from 'react-router-dom';
-import { connect } from 'react-redux';
-import { IrootState } from '../../redux/reducers/root/rootReducer';
 import GiftListExample from './newList/content/listExampleCards/giftList/GiftListExample';
 import GiftListDescription from './newList/content/listDescriptions/GiftListDescription';
+import { useAuth } from '../../context/authContext';
 
-interface Props {
-    isAuthenticated: boolean | null;
-}
+const Landing: React.FC = () => {
+    const { user } = useAuth();
 
-const landing: React.FC<Props> = ({ isAuthenticated }) => {
-    if (isAuthenticated) {
+    if (user) {
         return <Navigate to='/dashboard' />;
     }
 
@@ -45,8 +42,4 @@ const landing: React.FC<Props> = ({ isAuthenticated }) => {
     );
 };
 
-const mapStateToProps = (state: IrootState) => ({
-    isAuthenticated: state.authReducer.isAuthenticated,
-});
-
-export default connect(mapStateToProps)(landing);
+export default Landing;

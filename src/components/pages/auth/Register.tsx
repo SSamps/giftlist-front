@@ -8,7 +8,7 @@ import {
 } from '../../../misc/validation';
 import { isPasswordValid } from '../../../misc/helperFunctions';
 import DevWarning from './DevWarning';
-import { sendRegisterRequestMut, updateToken, useAuth } from '../../../context/authContext';
+import { sendRegisterRequestMut, useAuth } from '../../../context/authContext';
 import { useMutation } from '@tanstack/react-query';
 
 const Register: React.FC = () => {
@@ -25,7 +25,7 @@ const Register: React.FC = () => {
         registerErrorMessage: '',
     });
 
-    const { user, setUser, setLoading } = useAuth();
+    const { user, setUser, setLoading, setToken } = useAuth();
 
     const registerMutation = useMutation({
         mutationFn: sendRegisterRequestMut,
@@ -33,7 +33,7 @@ const Register: React.FC = () => {
             setLoading(true);
         },
         onSuccess: (res: any) => {
-            updateToken(res.data.token);
+            setToken(res.data.token);
             setUser(res.data.user);
             setLoading(false);
         },

@@ -9,12 +9,12 @@ const root = createRoot(document.getElementById('root')!);
 const queryClient = new QueryClient();
 
 root.render(
-    <React.StrictMode>
-        <QueryClientProvider client={queryClient}>
-            <ReactQueryDevtools initialIsOpen={true} />
-            <AuthProvider>
-                <App />
-            </AuthProvider>
-        </QueryClientProvider>
-    </React.StrictMode>
+    // <React.StrictMode>
+    <QueryClientProvider client={queryClient}>
+        <ReactQueryDevtools initialIsOpen={true} />
+        <AuthProvider>
+            <App />
+        </AuthProvider>
+    </QueryClientProvider>
+    // </React.StrictMode>
 );
