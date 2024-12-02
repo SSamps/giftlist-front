@@ -57,6 +57,10 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
             if (initToken) {
                 setTokenInContext(initToken);
                 updateTokenInAxios(initToken);
+            } else {
+                setTokenInContext(null);
+                updateTokenInAxios(null);
+                setLoading(false)
             }
 
             // Will only apply to other tabs
