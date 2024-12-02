@@ -45,6 +45,7 @@ const GiftListPreviewCard: React.FC<Props> = ({ list, user }) => {
                         <GiftListMemberPreviewCardItem
                             key={`previewItem${item._id}`}
                             item={item}
+                            user={user}
                         ></GiftListMemberPreviewCardItem>
                     );
                 })}

@@ -1,12 +1,10 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { IrootStateAuthed } from '../../../../../../redux/reducers/root/rootReducer';
 import { IgiftListItemCensored } from '../../../../../../types/models/listItems';
 import { IUser } from '../../../../../../types/models/User';
 
 interface props {
     item: IgiftListItemCensored;
-    user: IUser;
+    user: IUser
 }
 
 const GiftListMemberPreviewCardItem: React.FC<props> = ({ item, user }) => {
@@ -20,8 +18,5 @@ const GiftListMemberPreviewCardItem: React.FC<props> = ({ item, user }) => {
     );
 };
 
-const mapStateToProps = (state: IrootStateAuthed) => ({
-    user: state.authReducer.user,
-});
 
-export default connect(mapStateToProps)(GiftListMemberPreviewCardItem);
+export default GiftListMemberPreviewCardItem;

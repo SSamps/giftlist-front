@@ -85,7 +85,6 @@ const ListTitleBarMenuDropdown: React.FC<Props> = ({
 };
 
 const mapStateToProps = (state: IrootStateAuthedUnknownListLoaded) => ({
-    user: state.authReducer.user,
     currentListUser: state.listGroupReducer.currentListUser,
 });
 

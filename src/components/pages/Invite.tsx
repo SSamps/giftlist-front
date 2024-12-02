@@ -6,26 +6,26 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { IrootState } from '../../redux/reducers/root/rootReducer';
 import { connect } from 'react-redux';
 import { isAxiosError } from '../../misc/helperFunctions';
+import { useAuth } from '../../state/AuthState';
 
-interface Props {
-    isAuthenticated: boolean;
-    authLoading: boolean;
-}
+const Invite: React.FC = () => {
 
-const Invite: React.FC<Props> = ({ authLoading, isAuthenticated }) => {
+    const {user, userLoading} = useAuth();
+
+
     const [inviteError, setInviteError] = useState<undefined | string>(undefined);
     const navigate = useNavigate();
     const { token } = useParams();
 
     useEffect(() => {
-        if (!authLoading) {
-            if (!isAuthenticated) {
+        if (!userLoading) {
+            if (!user) {
                 setPendingInvite();
             } else {
                 tryVerify();
             }
         }
-    }, [authLoading]);
+    }, [userLoading]);
 
     const tryVerify = async () => {
         if (token === undefined || token === '' || !validator.isJWT(token)) {
@@ -64,9 +64,4 @@ const Invite: React.FC<Props> = ({ authLoading, isAuthenticated }) => {
     );
 };
 
-const mapStateToProps = (state: IrootState) => ({
-    authLoading: state.authReducer.loading,
-    isAuthenticated: state.authReducer.isAuthenticated,
-});
-
-export default connect(mapStateToProps)(Invite);
+export default Invite;

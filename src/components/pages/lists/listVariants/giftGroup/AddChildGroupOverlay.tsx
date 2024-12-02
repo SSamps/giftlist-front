@@ -10,15 +10,17 @@ import OverlayButtons from '../../../../misc/overlays/OverlayButtons';
 import Spinner from '../../../../misc/spinner';
 import DropdownUnderlay from '../../../dashboard/yourLists/controlBar/filters/DropdownUnderlay';
 import { isAxiosError } from '../../../../../misc/helperFunctions';
+import { useAuth } from '../../../../../state/AuthState';
 
 interface Props {
     setOpen: React.Dispatch<React.SetStateAction<boolean>>;
     currentList: TgiftGroupFields;
-    user: IUser;
     addAlertThunkActionCreator: TaddAlertThunkActionCreator;
 }
 
-const AddChildGroupOverlay: React.FC<Props> = ({ setOpen, currentList, user, addAlertThunkActionCreator }) => {
+const AddChildGroupOverlay: React.FC<Props> = ({ setOpen, currentList, addAlertThunkActionCreator }) => {
+    const {user: maybeUser} = useAuth()
+    const user = maybeUser as IUser
     const navigate = useNavigate();
     const [formState, setFormState] = useState({ value: '', waiting: false });
 
@@ -82,7 +84,6 @@ const AddChildGroupOverlay: React.FC<Props> = ({ setOpen, currentList, user, add
 };
 
 const mapStateToProps = (state: IrootStateAuthedGiftGroupLoaded) => ({
-    user: state.authReducer.user,
 });
 
 export default connect(mapStateToProps, { addAlertThunkActionCreator })(AddChildGroupOverlay);
