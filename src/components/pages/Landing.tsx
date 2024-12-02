@@ -4,9 +4,9 @@ import GiftListDescription from './newList/content/listDescriptions/GiftListDesc
 import { useAuth } from '../../state/AuthState';
 
 const Landing: React.FC = () => {
-    const { user } = useAuth();
+    const { maybeUser } = useAuth();
 
-    if (user) {
+    if (maybeUser) {
         return <Navigate to='/dashboard' />;
     }
 

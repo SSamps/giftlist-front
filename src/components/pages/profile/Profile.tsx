@@ -10,7 +10,8 @@ import { useMutation } from '@tanstack/react-query';
 const Profile: React.FC = () => {
     const [changeNameOverlayStatus, setChangeNameOverlayStatus] = useState(false);
     const [deleteAccountOverlayStatus, setDeleteAccountOverlayStatus] = useState(false);
-    const { user, setUser, setToken } = useAuth();
+    const { getAuthedUser, setUser, setToken } = useAuth();
+    const user = getAuthedUser();
 
     const deleteAccountMutation = useMutation({
         mutationFn: sendDeleteUserRequest,

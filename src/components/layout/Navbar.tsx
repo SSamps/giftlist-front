@@ -4,11 +4,10 @@ import Alerts from '../misc/Alerts';
 import { useAuth } from '../../state/AuthState';
 
 const Navbar: React.FC = () => {
-    const { user, setUser, userLoading: loading, setToken } = useAuth();
+    const { maybeUser, setUser, userLoading: loading, setToken } = useAuth();
 
     const logout = () => {
         setToken(null);
-        // setUser(null);
     };
 
     const authedLinks = (
@@ -57,7 +56,7 @@ const Navbar: React.FC = () => {
                             <span>Gift List</span>
                         </Link>
                     </li>
-                    {!loading && <Fragment>{user ? authedLinks : guestLinks}</Fragment>}
+                    {!loading && <Fragment>{maybeUser ? authedLinks : guestLinks}</Fragment>}
                 </ul>
             </nav>
             <div className='alert-placeholder'>

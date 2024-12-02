@@ -21,7 +21,7 @@ const Login: React.FC = () => {
 
     const [showForgottenPassOverlay, setShowForgottenPassOverlay] = useState(false);
 
-    const { user, setUser, setLoading, setToken } = useAuth();
+    const { maybeUser, setUser, setLoading, setToken } = useAuth();
 
     const loginMutation = useMutation({
         mutationFn: sendLoginRequest,
@@ -39,7 +39,7 @@ const Login: React.FC = () => {
         },
     });
 
-    if (user) {
+    if ( maybeUser) {
         return <Navigate to='/dashboard' />;
     }
 

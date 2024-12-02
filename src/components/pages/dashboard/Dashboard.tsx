@@ -14,7 +14,8 @@ interface AppJwtPayload extends JwtPayload {
 }
 
 const Dashboard: React.FC = (): JSX.Element => {
-    const { user, userLoading } = useAuth();
+    const { getAuthedUser, userLoading } = useAuth();
+    const user = getAuthedUser();
 
     const navigate = useNavigate();
     const [inviteError, setInviteError] = useState<undefined | string>(undefined);

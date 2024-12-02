@@ -3,7 +3,6 @@ import React from 'react';
 import { TmessageAny } from '../../../../types/models/messages';
 import { formatMessageDateTag } from '../../../../misc/helperFunctions';
 import { useAuth } from '../../../../state/AuthState';
-import { IUser } from '../../../../types/models/User';
 
 interface props {
     message: TmessageAny;
@@ -11,9 +10,7 @@ interface props {
 
 const ListChatMessage: React.FC<props> = ({ message }) => {
 
-    const {user: maybeUser} = useAuth();
-
-    const user = maybeUser as IUser;
+    const user = useAuth().getAuthedUser();
 
     const getMessageType = () => {
         if (message.messageVariant === 'USER_MESSAGE') {

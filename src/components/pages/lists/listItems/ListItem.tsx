@@ -10,7 +10,6 @@ import {
 import { IrootStateAuthedUnknownListLoaded } from '../../../../redux/reducers/root/rootReducer';
 import { TbasicListFields, TgiftGroupFields, TgiftListFieldsCensored } from '../../../../types/models/listGroups';
 import { IbasicListItem, IgiftListItemCensored } from '../../../../types/models/listItems';
-import { IUser } from '../../../../types/models/User';
 import { findUserInGroup } from '../../../../misc/helperFunctions';
 import Spinner from '../../../misc/spinner';
 import ModifyListItem from './ModifyListItem';
@@ -40,8 +39,7 @@ const ListItem: React.FC<Props> = ({
     deleteListItemActionCreator,
     selectListItemActionCreator,
 }) => {
-    const { user: maybeUser } = useAuth();
-    const user = maybeUser as IUser;
+    const user = useAuth().getAuthedUser();
 
     const [removalStatus, setRemovalStatus] = useState({
         waitingRemoval: false,

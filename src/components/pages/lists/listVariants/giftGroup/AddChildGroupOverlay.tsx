@@ -5,7 +5,6 @@ import { useNavigate } from 'react-router';
 import { addAlertThunkActionCreator, TaddAlertThunkActionCreator } from '../../../../../redux/actions/alertActions';
 import { IrootStateAuthedGiftGroupLoaded } from '../../../../../redux/reducers/root/rootReducer';
 import { TgiftGroupFields } from '../../../../../types/models/listGroups';
-import { IUser } from '../../../../../types/models/User';
 import OverlayButtons from '../../../../misc/overlays/OverlayButtons';
 import Spinner from '../../../../misc/spinner';
 import DropdownUnderlay from '../../../dashboard/yourLists/controlBar/filters/DropdownUnderlay';
@@ -19,8 +18,7 @@ interface Props {
 }
 
 const AddChildGroupOverlay: React.FC<Props> = ({ setOpen, currentList, addAlertThunkActionCreator }) => {
-    const {user: maybeUser} = useAuth()
-    const user = maybeUser as IUser
+    const user = useAuth().getAuthedUser();
     const navigate = useNavigate();
     const [formState, setFormState] = useState({ value: '', waiting: false });
 

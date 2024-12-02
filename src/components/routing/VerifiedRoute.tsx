@@ -7,13 +7,13 @@ type TprotectedRouteProps = {
 } & RouteProps;
 
 const VerifiedRoute: React.FC<TprotectedRouteProps> = ({ component: Component, ...routeProps }) => {
-    const { user, userLoading: loading } = useAuth();
+    const { maybeUser, userLoading: loading } = useAuth();
 
     if (loading) {
         return <Fragment></Fragment>;
-    } else if (!user) {
+    } else if (!maybeUser) {
         return <Navigate to='/login'></Navigate>;
-    } else if (!user.verified) {
+    } else if (!maybeUser.verified) {
         return <Navigate to='/dashboard'></Navigate>;
     } else {
         return <Component {...routeProps} />;

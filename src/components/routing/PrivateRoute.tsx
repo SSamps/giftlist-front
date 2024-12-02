@@ -7,11 +7,11 @@ type TprotectedRouteProps = {
 } & RouteProps;
 
 const PrivateRoute: React.FC<TprotectedRouteProps> = ({ component: Component, ...routeProps }) => {
-    const { user, userLoading: loading } = useAuth();
+    const { maybeUser, userLoading: loading } = useAuth();
 
     if (loading) {
         return <Fragment></Fragment>;
-    } else if (!loading && !user) {
+    } else if (!loading && !maybeUser) {
         return <Navigate to='/login'></Navigate>;
     }
     return <Component {...routeProps} />;

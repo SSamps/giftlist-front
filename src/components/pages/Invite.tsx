@@ -3,14 +3,12 @@ import validator from 'validator';
 import { Fragment, useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
-import { IrootState } from '../../redux/reducers/root/rootReducer';
-import { connect } from 'react-redux';
 import { isAxiosError } from '../../misc/helperFunctions';
 import { useAuth } from '../../state/AuthState';
 
 const Invite: React.FC = () => {
 
-    const {user, userLoading} = useAuth();
+    const {maybeUser, userLoading} = useAuth();
 
 
     const [inviteError, setInviteError] = useState<undefined | string>(undefined);
@@ -19,7 +17,7 @@ const Invite: React.FC = () => {
 
     useEffect(() => {
         if (!userLoading) {
-            if (!user) {
+            if (!maybeUser) {
                 setPendingInvite();
             } else {
                 tryVerify();

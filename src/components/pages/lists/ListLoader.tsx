@@ -23,7 +23,6 @@ import BasicListContainer from './listVariants/basicList/BasicListContainer';
 import GiftGroupContainer from './listVariants/giftGroup/GiftGroupContainer';
 import GiftListContainer from './listVariants/giftList/GiftListContainer';
 import { useAuth } from '../../../state/AuthState';
-import { IUser } from '../../../types/models/User';
 
 interface Props extends IlistGroupData {
     listid: string;
@@ -41,8 +40,7 @@ const ListLoader: React.FC<Props> = ({
     loadListUserActionCreator,
     currentListUser,
 }): JSX.Element => {
-    const { user: maybeUser } = useAuth();
-    const user = maybeUser as IUser; // User will be loaded here
+    const user = useAuth().getAuthedUser();
 
     useEffect(() => {
         let init = () => {

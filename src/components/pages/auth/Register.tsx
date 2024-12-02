@@ -25,7 +25,7 @@ const Register: React.FC = () => {
         registerErrorMessage: '',
     });
 
-    const { user, setUser, setLoading, setToken } = useAuth();
+    const { maybeUser: user, setUser, setLoading, setToken } = useAuth();
 
     const registerMutation = useMutation({
         mutationFn: sendRegisterRequest,
